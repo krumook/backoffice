@@ -52,6 +52,9 @@
 | link_sent | **enum 2 ค่า** | `no` · `yes` | `yes` = บอทส่งลิงก์แล้ว |
 | approved_at | ISO 8601 หรือ `""` | | |
 | note | Text | | เหตุผลตอน reject |
+| reviewed_by / reviewed_at | Text / ISO | | ใครกดอนุมัติ–ปฏิเสธ เมื่อไหร่ |
+| discord_username | Text | | ชื่อบัญชี Discord เช่น `mook_sy` (บอทส่งมาให้) |
+| discord_avatar | URL | | รูปโปรไฟล์ Discord — บอทอัปเดตค่าล่าสุดทุกครั้งที่นักเรียนลงทะเบียน/เพิ่มเล่ม |
 
 **State machine ของ 1 รายการขาย:**
 ```
@@ -224,9 +227,12 @@ reject มีผลข้างเคียงสำคัญ: **คืนรห
 ```
 `youtube_link` เว้นว่างตอนสร้างได้ แล้วค่อยเติมทีหลังด้วย `updateProduct` — แต่ต้องเติมก่อนเปิดขาย
 
-### 3.10 `listProducts` — รายการสินค้าทั้งหมด *(เว็บครูเรียก — ใช้ทำ dropdown)*
+### 3.10 `listProducts` — รายการสินค้า + ค้นหา/กรองวันที่สร้าง *(เว็บครูเรียก)*
 ```jsonc
-{ "key": "...", "action": "listProducts" }
+// ตัวกรองทุกตัว optional: search (ชื่อ/รหัสสินค้า), created_from, created_to
+// วันที่รับได้ 2 แบบ: "2026-07-01" (= ทั้งวันตามเวลาไทย) หรือ ISO เต็ม
+{ "key": "...", "action": "listProducts",
+  "search": "คณิต", "created_from": "2026-07-01", "created_to": "2026-07-31" }
 → { "ok": true, "items": [
     { "row": 2, "product": "MATH1", "product_name": "เฉลยคณิต ม.4 เล่ม 1",
       "youtube_link": "https://youtu.be/AbCdEf" } ] }
@@ -250,14 +256,16 @@ reject มีผลข้างเคียงสำคัญ: **คืนรห
 ```
 ข้อจำกัด: `amount` 1–500 ต่อครั้ง (ล็อตใหญ่กว่านั้นให้สั่งหลายรอบ)
 
-### 3.13 `listCodes` — ดู/กรองรายการรหัส *(เว็บครูเรียก — ไว้ทำหน้าสถิติ + export ซ้ำ)*
+### 3.13 `listCodes` — ค้นหา/กรองรายการรหัส *(เว็บครูเรียก)*
 ```jsonc
-{ "key": "...", "action": "listCodes", "product": "MATH1", "status": "unused" }
-→ { "ok": true, "count": 87, "items": [
-    { "code": "MATH1-X7K2-9PQR", "product": "MATH1", "status": "unused",
-      "used_by_discord": "", "used_at": "" } ] }
+// ตัวกรองทุกตัว optional: product, status, search (ค้นบางส่วนของรหัส),
+// created_from, created_to (ช่วงวันที่สร้างรหัส — รับ "2026-07-01" หรือ ISO)
+{ "key": "...", "action": "listCodes", "product": "MATH1", "status": "unused",
+  "search": "X7K2", "created_from": "2026-07-01", "created_to": "2026-07-31" }
+→ { "ok": true, "count": 3, "items": [ { "code": "MATH1-X7K2-9PQR",
+    "product": "MATH1", "status": "unused", "used_by_discord": "", "used_at": "",
+    "created_at": "2026-07-05T10:15:00.000Z", "created_by": "ครูมุก" } ] }
 ```
-`product` และ `status` ใส่หรือไม่ใส่ก็ได้ (ไม่ใส่ = เอาทั้งหมด)
 
 ### 3.14 `getCodeInfo` — เช็คว่ารหัสนี้ใครใช้ *(เว็บครูเรียก)*
 ```jsonc
@@ -300,6 +308,65 @@ reject มีผลข้างเคียงสำคัญ: **คืนรห
 
 { "key": "...", "action": "approveSlip", "row": 3 }
 → { "ok": true }   // ผลข้างเคียง: qa_quota เพิ่มแถว premium_until = สิ้นเดือนนี้ 23:59:59
+```
+
+### 3.21 `listRegistrations` — ค้นหารายชื่อนักเรียน + กรองช่วงเวลาอนุมัติ *(เว็บครูเรียก)*
+```jsonc
+// ตัวกรองทุกตัว optional:
+//   search       — ค้นบางส่วนจาก ชื่อ/ชื่อเล่น/โรงเรียน/อีเมล/รหัส/discord_id
+//   status       — pending | approved | rejected
+//   approved_from, approved_to — ช่วงเวลาที่กดอนุมัติ (ใส่แล้วผลลัพธ์เหลือเฉพาะ approved)
+{ "key": "...", "action": "listRegistrations",
+  "search": "มุก", "approved_from": "2026-07-01", "approved_to": "2026-07-31" }
+→ { "ok": true, "count": 2, "items": [
+    { "row": 7, "timestamp": "...", "discord_id": "1122...",
+      "name": "สมหญิง ใจดี", "nickname": "มุก", "school": "สาธิตฯ",
+      "email": "mook@gmail.com", "code": "MATH1-X7K2-9PQR", "product": "MATH1",
+      "status": "approved", "link_sent": "yes",
+      "approved_at": "2026-07-05T11:20:00.000Z", "reviewed_by": "ครูมุก" } ] }
+// ผลลัพธ์ตัดที่ 500 แถวแรก (count = จำนวนจริงทั้งหมดก่อนตัด)
+```
+
+### 3.22 `listStudents` — รายชื่อนักเรียนแบบรวมคนละแถว *(เว็บครูเรียก)*
+มุมมอง "ตัวคนเป็นหลัก": นักเรียน 1 คน = 1 แถว ไม่ว่าถือกี่เล่ม พร้อมตัวนับสรุป
+```jsonc
+{ "key": "...", "action": "listStudents", "search": "Mook" }   // search optional
+→ { "ok": true, "count": 1, "items": [
+    { "discord_id": "111111111111111111",
+      "name": "Somying Jaidee", "nickname": "Mook",
+      "school": "Satit School", "email": "mook@gmail.com",
+      "first_registered": "2026-07-04T15:00:00.000Z",   // เริ่มสมัครครั้งแรก
+      "last_activity": "2026-07-05T09:10:00.000Z",
+      "products_total": 2, "approved": 2, "pending": 0, "rejected": 0 } ] }
+// เรียงตามความเคลื่อนไหวล่าสุดก่อน · ตัดที่ 500 แถว
+```
+
+### 3.23 `getStudent` — โปรไฟล์เต็มของนักเรียน 1 คน *(เว็บครูเรียก)*
+ทุกเล่มที่ถือ + สถานะอนุมัติรายเล่ม + วันสมัคร/วันอนุมัติ + สถานะโควต้าถาม–ตอบ
+```jsonc
+{ "key": "...", "action": "getStudent", "discord_id": "111111111111111111" }
+→ { "ok": true, "student": {
+    "discord_id": "111111111111111111",
+    "name": "Somying Jaidee", "nickname": "Mook", "age": "16",
+    "school": "Satit School", "email": "mook@gmail.com",
+    "first_registered": "2026-07-04T15:00:00.000Z",
+    "products_total": 2,
+    "products": [
+      { "row": 2, "code": "MATH1-X7K2-9PQR", "product": "MATH1",
+        "status": "approved", "link_sent": "yes",
+        "registered_at": "2026-07-04T15:00:00.000Z",
+        "approved_at": "2026-07-04T16:05:00.000Z",
+        "reviewed_by": "Teacher Mook", "note": "" },
+      { "row": 5, "code": "MATH2-B7CD-3EFG", "product": "MATH2",
+        "status": "approved", "link_sent": "no",
+        "registered_at": "2026-07-05T09:10:00.000Z",
+        "approved_at": "2026-07-05T09:40:00.000Z",
+        "reviewed_by": "Teacher Mook", "note": "" }
+    ],
+    "quota_today": 2, "quota_limit": 2,
+    "premium": false, "premium_until": "" } }
+→ { "ok": false, "reason": "notfound" }      // ไม่เคยลงทะเบียน
+→ { "ok": false, "reason": "bad_request" }   // ไม่ส่ง discord_id
 ```
 
 ---

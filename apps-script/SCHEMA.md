@@ -18,7 +18,7 @@
 - `unused → used` ตอนลงทะเบียนผ่าน · `used → unused` เมื่อครูกด reject (ระบบคืนให้)
 
 ### `registrations` — คิวลงทะเบียน (หัวใจ)
-| timestamp | discord_id | name | nickname | age | school | email | code | product | status | link_sent | approved_at | note |
+| timestamp | discord_id | name | nickname | age | school | email | code | product | status | link_sent | approved_at | note | reviewed_by | reviewed_at | discord_username | discord_avatar |
 - `status`: `pending` · `approved` · `rejected`
 - `link_sent`: `no` · `yes`
 
@@ -56,6 +56,9 @@
 | `pollApproved` | บอท | ดึง approved ที่ยังไม่ส่งลิงก์ (แนบ youtube_link) |
 | `markSent` | บอท | ปิด `link_sent = yes` |
 | `listPending` | เว็บ | คิวรออนุมัติ |
+| `listRegistrations` | เว็บ | ธุรกรรมรายแถว + กรอง |
+| `listStudents` | เว็บ | รายชื่อนักเรียนรวมคนละแถว |
+| `getStudent` | เว็บ | โปรไฟล์เต็ม + ทุกเล่ม + โควต้า Q&A |
 | `getRegistration` | เว็บ | รายละเอียด 1 รายการ (`row`) + product_name/youtube_link |
 | `approve` / `reject` | เว็บ | อนุมัติ / ปฏิเสธ (reject คืนรหัส unused) |
 | `listProducts` | เว็บ | รายการสินค้า (ใช้ทดสอบรหัสตอน login ด้วย) |

@@ -61,6 +61,7 @@ function route_(action, body) {
 
     // ฝั่งเว็บ: คิว/อนุมัติ
     case 'listPending':      return listPending_();
+    case 'listRegistrations': return listRegistrations_(body);
     case 'getRegistration':  return getRegistration_(body);
     case 'approve':          return approve_(body);
     case 'reject':           return reject_(body);
@@ -100,6 +101,46 @@ function listPending_() {
     };
   });
   return { ok: true, items: items };
+}
+
+function listRegistrations_(body) {
+  var search = String(body.search || '').trim().toLowerCase();
+  var status = body.status || '';
+  var approvedFrom = body.approved_from || '';
+  var approvedTo = body.approved_to || '';
+
+  var productNames = {};
+  readTable_('products').forEach(function (p) { productNames[p.product] = p.product_name; });
+
+  var rows = readTable_('registrations').filter(function (r) { return r.timestamp !== '' || r.code !== ''; });
+  if (status) rows = rows.filter(function (r) { return r.status === status; });
+  if (approvedFrom || approvedTo) {
+    rows = rows.filter(function (r) {
+      if (!r.approved_at) return false;
+      var d = String(r.approved_at).slice(0, 10);
+      if (approvedFrom && d < approvedFrom) return false;
+      if (approvedTo && d > approvedTo) return false;
+      return true;
+    });
+  }
+  if (search) {
+    rows = rows.filter(function (r) {
+      var hay = [r.name, r.nickname, r.email, r.code, r.discord_id, r.school, r.product].join(' ').toLowerCase();
+      return hay.indexOf(search) !== -1;
+    });
+  }
+
+  var items = rows.map(function (r) {
+    return {
+      row: r._row, timestamp: r.timestamp, discord_id: r.discord_id,
+      name: r.name, nickname: r.nickname, age: r.age, school: r.school,
+      email: r.email, code: r.code, product: r.product,
+      product_name: productNames[r.product] || '',
+      status: r.status, link_sent: r.link_sent, approved_at: r.approved_at, note: r.note,
+    };
+  });
+  items.sort(function (a, b) { return String(b.timestamp).localeCompare(String(a.timestamp)); });
+  return { ok: true, count: items.length, items: items };
 }
 
 function getRegistration_(body) {

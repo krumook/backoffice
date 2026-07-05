@@ -12,33 +12,37 @@
   // ใส่ URL ของ Apps Script Web App (ลงท้าย /exec) ตรงนี้ได้เลย (ไม่ลับ)
   // ถ้าเว้นว่าง หน้า Login จะมีช่องให้กรอก URL เอง
   var CONFIG = {
-    API_URL: "https://script.google.com/macros/s/AKfycbxpRGCmMBEx6_e_Ra6IZ8qI3wGBIOWYMWlIe2Nu06YpTpg5XJfOc1x5C4cyZDehR8fF/exec",
+    API_URL: "https://script.google.com/macros/s/AKfycbwFn7kxKgA-BeZiZQBt8YRWyzxeKNf7j8Q62GQ9RcyKTFgroodPIc-qc60OPJpM6m9b/exec",
   };
 
-  var SS = { secret: "krumook_secret", url: "krumook_url", demo: "krumook_demo" };
+  var SS = { secret: "krumook_secret", url: "krumook_url" };
 
   // ====== state ======
   var state = {
-    demo: false,
     page: "pending",
     row: null,
+    detailReturn: null,
     cache: { products: null },
     counts: { pending: 0, slips: 0 },
+    codesCache: {},   // product → { items, filter, page, loading }
+    genFlash: null,   // ผลลัพธ์ล่าสุดหลังสร้างรหัส
   };
+
+  var CODE_PAGE_SIZE = 50;
 
   // ====== reason → ข้อความไทย ======
   var REASON = {
-    unauthorized: "รหัสลับไม่ถูกต้อง",
-    unknown_action: "คำสั่งไม่ถูกต้อง (unknown_action)",
-    notfound: "ไม่พบข้อมูลนี้ในระบบ",
-    used: "รหัสนี้ถูกใช้ไปแล้ว",
-    no_profile: "ยังไม่เคยลงทะเบียน — ให้ลงทะเบียนก่อน",
-    duplicate: "มีรหัสสินค้านี้อยู่แล้ว",
-    product_notfound: "ยังไม่มีสินค้านี้ — สร้างที่หน้าสินค้าก่อน",
-    bad_request: "ข้อมูลไม่ครบ ลองตรวจอีกครั้ง",
-    server_error: "ระบบขัดข้อง ลองใหม่อีกครั้ง",
+    unauthorized: "Invalid secret",
+    unknown_action: "Unknown action (unknown_action)",
+    notfound: "Not found in the system",
+    used: "This code has already been used",
+    no_profile: "Not registered yet — register first",
+    duplicate: "This product code already exists",
+    product_notfound: "Product not found — create it on Products first",
+    bad_request: "Incomplete data — please check again",
+    server_error: "Server error — try again",
   };
-  function reasonText(r) { return REASON[r] || ("เกิดข้อผิดพลาด: " + (r || "ไม่ทราบสาเหตุ")); }
+  function reasonText(r) { return REASON[r] || ("Error: " + (r || "unknown")); }
 
   // ====== DOM helpers ======
   function $(id) { return document.getElementById(id); }
@@ -54,6 +58,8 @@
     });
   }
   function attr(s) { return esc(s).replace(/`/g, "&#96;"); }
+  // Phosphor icon helper — ic("house") → <i class="ph ph-house"></i>
+  function ic(name, extra) { return '<i class="ph ph-' + name + (extra ? " " + extra : "") + '"></i>'; }
 
   // ====== เวลา ======
   function timeAgo(ts) {
@@ -61,32 +67,290 @@
     var t = new Date(ts).getTime();
     if (isNaN(t)) return String(ts);
     var s = Math.floor((Date.now() - t) / 1000);
-    if (s < 60) return "เมื่อสักครู่";
+    if (s < 45) return "Just now";
     var m = Math.floor(s / 60);
-    if (m < 60) return m + " นาทีที่แล้ว";
+    if (m < 60) return m + (m === 1 ? " minute ago" : " minutes ago");
     var h = Math.floor(m / 60);
-    if (h < 24) return h + " ชั่วโมงที่แล้ว";
+    if (h < 24) return h + (h === 1 ? " hour ago" : " hours ago");
     var d = Math.floor(h / 24);
-    if (d < 7) return d + " วันที่แล้ว";
-    return new Date(t).toLocaleDateString("th-TH", { day: "numeric", month: "short" });
+    if (d < 7) return d + (d === 1 ? " day ago" : " days ago");
+    var w = Math.floor(d / 7);
+    if (w < 5) return w + (w === 1 ? " week ago" : " weeks ago");
+    return fmtDateTime(ts);
+  }
+  function timeDisplayHtml(ts, label) {
+    if (!ts) return "";
+    return '<div class="time-display">' +
+      '<span class="time-display-label">' + esc(label || "Submitted") + "</span>" +
+      '<span class="time-ago">' + esc(timeAgo(ts)) + "</span>" +
+      '<span class="time-exact">' + esc(fmtDateTime(ts)) + "</span></div>";
+  }
+  function kvRow(key, valHtml) {
+    return '<div class="kv-item"><div class="kv-key">' + esc(key) + '</div><div class="kv-val">' + valHtml + "</div></div>";
   }
   function fmtDateTime(ts) {
     if (!ts) return "—";
     var d = new Date(ts);
     if (isNaN(d.getTime())) return String(ts);
-    return d.toLocaleString("th-TH", { day: "numeric", month: "short", year: "2-digit", hour: "2-digit", minute: "2-digit" });
+    return d.toLocaleString("en-US", { day: "numeric", month: "short", year: "2-digit", hour: "2-digit", minute: "2-digit" });
   }
   function fmtBaht(n) {
     var v = Number(n);
     if (isNaN(v)) return String(n || "—");
     return v.toLocaleString("th-TH", { maximumFractionDigits: 2 });
   }
+  function regStatusChip(status) {
+    var s = String(status || "");
+    if (s === "approved") return '<span class="chip ok">' + ic("check-circle") + " Approved</span>";
+    if (s === "rejected") return '<span class="chip bad">' + ic("x-circle") + " Rejected</span>";
+    if (s === "pending") return '<span class="chip warn">' + ic("clock") + " Pending</span>";
+    return '<span class="chip mute">' + esc(s || "-") + "</span>";
+  }
+  function readDateRange(id, fromKey, toKey, payload) {
+    var from = $(id + "-from");
+    var to = $(id + "-to");
+    if (from && from.value) payload[fromKey] = from.value;
+    if (to && to.value) payload[toKey] = to.value;
+    return payload;
+  }
+
+  // ====== date range picker (ช่วงวันที่เดียว + preset) ======
+  var dateRangePickers = {};
+  var DR_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var DR_DOW = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+
+  function pad2(n) { return n < 10 ? "0" + n : String(n); }
+  function bangkokYmd(d) {
+    return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Bangkok", year: "numeric", month: "2-digit", day: "2-digit" }).format(d);
+  }
+  function bangkokToday() { return bangkokYmd(new Date()); }
+  function bangkokDaysAgo(n) {
+    var d = new Date();
+    d.setDate(d.getDate() - n);
+    return bangkokYmd(d);
+  }
+  function bangkokMonthAgo() {
+    var d = new Date();
+    d.setMonth(d.getMonth() - 1);
+    return bangkokYmd(d);
+  }
+  function fmtDateShort(ymd) {
+    if (!ymd) return "";
+    var p = ymd.split("-");
+    var d = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+    return d.toLocaleDateString("en-US", { day: "numeric", month: "short", year: "2-digit" });
+  }
+  function fmtDateRangeLabel(from, to) {
+    if (!from && !to) return "Any date";
+    if (from && to && from === to) return fmtDateShort(from);
+    if (from && to) return fmtDateShort(from) + " – " + fmtDateShort(to);
+    if (from) return fmtDateShort(from) + " – …";
+    return "… – " + fmtDateShort(to);
+  }
+  function dateRangeFieldHtml(id, label) {
+    return '<div class="field dr-field"><label>' + esc(label) + "</label>" +
+      '<button type="button" class="dr-trigger" id="' + id + '-trigger">' +
+        ic("calendar-blank") + ' <span class="dr-text" id="' + id + '-text">Any date</span>' +
+        ic("caret-down", "dr-caret") +
+      "</button>" +
+      '<input type="hidden" id="' + id + '-from" value="" />' +
+      '<input type="hidden" id="' + id + '-to" value="" /></div>';
+  }
+  function updateDateRangeDisplay(id) {
+    var st = dateRangePickers[id];
+    if (!st) return;
+    var text = $(id + "-text");
+    var trigger = $(id + "-trigger");
+    if (text) text.textContent = fmtDateRangeLabel(st.from, st.to);
+    if (trigger) trigger.classList.toggle("has-value", !!(st.from || st.to));
+  }
+  function applyDateRange(id, from, to, close) {
+    var st = dateRangePickers[id];
+    if (!st) return;
+    st.from = from || "";
+    st.to = to || "";
+    var fromEl = $(id + "-from");
+    var toEl = $(id + "-to");
+    if (fromEl) fromEl.value = st.from;
+    if (toEl) toEl.value = st.to;
+    updateDateRangeDisplay(id);
+    if (close) closeDateRangePopover();
+  }
+  function closeDateRangePopover() {
+    var pop = $("drPopover");
+    if (pop) pop.remove();
+    document.removeEventListener("click", onDrOutsideClick);
+    document.removeEventListener("keydown", onDrEsc);
+  }
+  function onDrOutsideClick(e) {
+    var pop = $("drPopover");
+    if (!pop || pop.contains(e.target)) return;
+    if (e.target.closest && e.target.closest(".dr-trigger")) return;
+    closeDateRangePopover();
+  }
+  function onDrEsc(e) { if (e.key === "Escape") closeDateRangePopover(); }
+  function positionDrPopover(pop, anchor) {
+    var r = anchor.getBoundingClientRect();
+    var top = r.bottom + 6;
+    var left = r.left;
+    var w = Math.max(r.width, 280);
+    if (left + w > window.innerWidth - 12) left = window.innerWidth - w - 12;
+    if (left < 12) left = 12;
+    if (top + 360 > window.innerHeight - 12) top = Math.max(12, r.top - 360 - 6);
+    pop.style.top = top + "px";
+    pop.style.left = left + "px";
+    pop.style.width = w + "px";
+  }
+  function updateDrHint(id) {
+    var hint = document.querySelector("#drPopover .dr-hint");
+    if (!hint) return;
+    var st = dateRangePickers[id];
+    if (!st.tempFrom) hint.textContent = "Click start date, then end date";
+    else if (!st.tempTo) hint.textContent = "Pick end date (from " + fmtDateShort(st.tempFrom) + ")";
+    else hint.textContent = fmtDateShort(st.tempFrom) + " – " + fmtDateShort(st.tempTo);
+  }
+  function renderDrCalendar(id) {
+    var wrap = $(id + "-cal");
+    if (!wrap) return;
+    var st = dateRangePickers[id];
+    var vy = st.viewY;
+    var vm = st.viewM;
+    var first = new Date(vy, vm, 1);
+    var startDow = first.getDay();
+    var daysInMonth = new Date(vy, vm + 1, 0).getDate();
+    var today = bangkokToday();
+    var html = '<div class="dr-cal-head">' +
+      '<button type="button" class="dr-nav" data-nav="-1">' + ic("caret-left") + "</button>" +
+      "<span>" + DR_MONTHS[vm] + " " + vy + "</span>" +
+      '<button type="button" class="dr-nav" data-nav="1">' + ic("caret-right") + "</button></div>" +
+      '<div class="dr-dow">' + DR_DOW.map(function (d) { return "<span>" + d + "</span>"; }).join("") + "</div>" +
+      '<div class="dr-days">';
+    var i;
+    for (i = 0; i < startDow; i++) html += '<span class="dr-day empty"></span>';
+    for (var day = 1; day <= daysInMonth; day++) {
+      var ymd = vy + "-" + pad2(vm + 1) + "-" + pad2(day);
+      var cls = "dr-day";
+      if (ymd === today) cls += " today";
+      if (st.tempFrom && ymd === st.tempFrom) cls += " sel-start";
+      if (st.tempTo && ymd === st.tempTo) cls += " sel-end";
+      if (st.tempFrom && st.tempTo && ymd > st.tempFrom && ymd < st.tempTo) cls += " in-range";
+      html += '<button type="button" class="' + cls + '" data-ymd="' + ymd + '">' + day + "</button>";
+    }
+    html += "</div>";
+    wrap.innerHTML = html;
+    wrap.querySelectorAll(".dr-nav").forEach(function (btn) {
+      btn.onclick = function (e) {
+        e.stopPropagation();
+        var n = Number(btn.getAttribute("data-nav"));
+        st.viewM += n;
+        if (st.viewM < 0) { st.viewM = 11; st.viewY--; }
+        if (st.viewM > 11) { st.viewM = 0; st.viewY++; }
+        renderDrCalendar(id);
+      };
+    });
+    wrap.querySelectorAll(".dr-day[data-ymd]").forEach(function (btn) {
+      btn.onclick = function (e) {
+        e.stopPropagation();
+        var ymd = btn.getAttribute("data-ymd");
+        if (!st.tempFrom || (st.tempFrom && st.tempTo)) {
+          st.tempFrom = ymd;
+          st.tempTo = "";
+        } else if (ymd < st.tempFrom) {
+          st.tempTo = st.tempFrom;
+          st.tempFrom = ymd;
+        } else {
+          st.tempTo = ymd;
+        }
+        updateDrHint(id);
+        renderDrCalendar(id);
+      };
+    });
+  }
+  function openDateRangePopover(id, anchor) {
+    closeDateRangePopover();
+    var st = dateRangePickers[id];
+    st.tempFrom = st.from || "";
+    st.tempTo = st.to || "";
+    if (st.tempFrom) {
+      var p = st.tempFrom.split("-");
+      st.viewY = Number(p[0]);
+      st.viewM = Number(p[1]) - 1;
+    } else {
+      var now = new Date();
+      st.viewY = now.getFullYear();
+      st.viewM = now.getMonth();
+    }
+    var pop = el("div", "dr-popover");
+    pop.id = "drPopover";
+    pop.innerHTML =
+      '<div class="dr-presets">' +
+        '<button type="button" data-preset="today">Today</button>' +
+        '<button type="button" data-preset="week">Last 7 days</button>' +
+        '<button type="button" data-preset="month">Last month</button>' +
+      "</div>" +
+      '<div class="dr-hint">Click start date, then end date</div>' +
+      '<div class="dr-cal" id="' + id + '-cal"></div>' +
+      '<div class="dr-actions">' +
+        '<button type="button" class="btn btn-ghost btn-sm" data-act="clear">Any date</button>' +
+        '<button type="button" class="btn btn-primary btn-sm" data-act="apply">Apply</button>' +
+      "</div>";
+    document.body.appendChild(pop);
+    positionDrPopover(pop, anchor);
+    updateDrHint(id);
+    renderDrCalendar(id);
+    pop.querySelectorAll("[data-preset]").forEach(function (btn) {
+      btn.onclick = function (e) {
+        e.stopPropagation();
+        var today = bangkokToday();
+        var from = today;
+        var to = today;
+        if (btn.getAttribute("data-preset") === "week") from = bangkokDaysAgo(6);
+        if (btn.getAttribute("data-preset") === "month") from = bangkokMonthAgo();
+        applyDateRange(id, from, to, true);
+      };
+    });
+    pop.querySelector('[data-act="clear"]').onclick = function (e) {
+      e.stopPropagation();
+      applyDateRange(id, "", "", true);
+    };
+    pop.querySelector('[data-act="apply"]').onclick = function (e) {
+      e.stopPropagation();
+      if (st.tempFrom && !st.tempTo) applyDateRange(id, st.tempFrom, st.tempFrom, true);
+      else if (st.tempFrom && st.tempTo) applyDateRange(id, st.tempFrom, st.tempTo, true);
+      else closeDateRangePopover();
+    };
+    pop.onclick = function (e) { e.stopPropagation(); };
+    setTimeout(function () {
+      document.addEventListener("click", onDrOutsideClick);
+      document.addEventListener("keydown", onDrEsc);
+    }, 0);
+  }
+  function initDateRangePicker(id) {
+    var trigger = $(id + "-trigger");
+    if (!trigger) return;
+    var now = new Date();
+    dateRangePickers[id] = { from: "", to: "", viewY: now.getFullYear(), viewM: now.getMonth() };
+    var fromEl = $(id + "-from");
+    var toEl = $(id + "-to");
+    if (fromEl && fromEl.value) dateRangePickers[id].from = fromEl.value;
+    if (toEl && toEl.value) dateRangePickers[id].to = toEl.value;
+    updateDateRangeDisplay(id);
+    trigger.onclick = function (e) {
+      e.stopPropagation();
+      openDateRangePopover(id, trigger);
+    };
+  }
+  function countNote(d, items) {
+    var total = d.count != null ? d.count : items.length;
+    if (total > items.length) return " · showing " + items.length + " of " + total;
+    return total ? " · " + total + " items" : "";
+  }
 
   // ====== toast ======
   function toast(msg, kind) {
     var wrap = $("toastWrap");
     var t = el("div", "toast" + (kind ? " " + kind : ""));
-    var icon = kind === "ok" ? "✅" : kind === "err" ? "⚠️" : "ℹ️";
+    var icon = kind === "ok" ? ic("check-circle") : kind === "err" ? ic("warning-circle") : ic("info");
     t.innerHTML = "<span>" + icon + "</span><span>" + esc(msg) + "</span>";
     wrap.appendChild(t);
     setTimeout(function () {
@@ -109,8 +373,8 @@
         "<h3>" + esc(opts.title) + "</h3>" +
         (opts.bodyHtml || "") +
         '<div class="modal-actions">' +
-        '<button type="button" class="btn btn-ghost" data-act="cancel">' + esc(opts.cancelLabel || "ยกเลิก") + "</button>" +
-        '<button type="button" class="btn ' + (opts.okClass || "btn-primary") + '" data-act="ok">' + esc(opts.okLabel || "ตกลง") + "</button>" +
+        '<button type="button" class="btn btn-ghost" data-act="cancel">' + (opts.cancelLabel || "Cancel") + "</button>" +
+        '<button type="button" class="btn ' + (opts.okClass || "btn-primary") + '" data-act="ok">' + (opts.okLabel || "OK") + "</button>" +
         "</div>";
       overlay.appendChild(modal);
       root.appendChild(overlay);
@@ -130,12 +394,23 @@
     });
   }
 
+  function openLoadingModal(msg) {
+    closeLoadingModal();
+    var overlay = el("div", "modal-overlay modal-loading");
+    overlay.id = "loadingModal";
+    overlay.innerHTML = '<div class="modal modal-loading-box"><div class="spinner"></div><p>' + esc(msg || "Working...") + "</p></div>";
+    $("modalRoot").appendChild(overlay);
+  }
+  function closeLoadingModal() {
+    var m = $("loadingModal");
+    if (m) m.remove();
+  }
+
   // ====== API helper กลาง ======
   function apiUrl() { return CONFIG.API_URL || sessionStorage.getItem(SS.url) || ""; }
   function secret() { return sessionStorage.getItem(SS.secret) || ""; }
 
   function api(action, payload) {
-    if (state.demo) return demoApi(action, payload || {});
     var body = Object.assign({ key: secret(), action: action }, payload || {});
     return fetch(apiUrl(), {
       method: "POST",
@@ -147,7 +422,7 @@
       .then(function (text) {
         var data;
         try { data = JSON.parse(text); }
-        catch (e) { throw { reason: "server_error", message: "ตอบกลับไม่ใช่ JSON — ตรวจการ Deploy Web App (Anyone)" }; }
+        catch (e) { throw { reason: "server_error", message: "Response is not JSON — check Web App deploy (Anyone)" }; }
         if (data && data.ok === false) {
           if (data.reason === "unauthorized") { forceLogout(); }
           throw { reason: data.reason, message: data.message };
@@ -156,17 +431,17 @@
       })
       .catch(function (err) {
         if (err && err.reason) throw err;
-        throw { reason: "server_error", message: (err && err.message) || "เชื่อมต่อไม่สำเร็จ" };
+        throw { reason: "server_error", message: (err && err.message) || "Connection failed" };
       });
   }
   function errText(err) {
-    if (!err) return "เกิดข้อผิดพลาด";
+    if (!err) return "Something went wrong";
     if (err.reason) return reasonText(err.reason) + (err.message ? " (" + err.message + ")" : "");
     return err.message || String(err);
   }
 
   // ====== auth / session ======
-  function isLoggedIn() { return state.demo || (!!secret() && !!apiUrl()); }
+  function isLoggedIn() { return !!secret() && !!apiUrl(); }
 
   function showLogin() {
     $("loginScreen").classList.remove("hidden");
@@ -176,23 +451,15 @@
   function showApp() {
     $("loginScreen").classList.add("hidden");
     $("appShell").classList.remove("hidden");
-    var label = state.demo ? "โหมดตัวอย่าง" : "เชื่อมต่อแล้ว";
-    [$("modePill"), $("modePillDesk")].forEach(function (p) {
-      if (!p) return;
-      p.textContent = label;
-      p.classList.toggle("demo", state.demo);
-    });
   }
   function forceLogout() {
     sessionStorage.removeItem(SS.secret);
     if (!isLoggedIn()) return;
-    toast("เซสชันหมดอายุ กรุณาเข้าใช้งานใหม่", "err");
+    toast("Session expired — please sign in again", "err");
     doLogout();
   }
   function doLogout() {
     sessionStorage.removeItem(SS.secret);
-    sessionStorage.removeItem(SS.demo);
-    state.demo = false;
     var f = $("apiSecret"); if (f) f.value = "";
     showLogin();
   }
@@ -204,31 +471,23 @@
     $("loginError").classList.add("hidden");
     var url = CONFIG.API_URL || ($("apiUrl").value || "").trim();
     var sec = ($("apiSecret").value || "").trim();
-    if (!url) return loginError("กรุณากรอกลิงก์ API");
-    if (!sec) return loginError("กรุณากรอกรหัสลับของครู");
-    if (!/^https:\/\/script\.google\.com\//.test(url)) return loginError("ลิงก์ API ควรขึ้นต้นด้วย https://script.google.com/");
+    if (!url) return loginError("Please enter the API URL");
+    if (!sec) return loginError("Please enter the teacher secret");
+    if (!/^https:\/\/script\.google\.com\//.test(url)) return loginError("API URL should start with https://script.google.com/");
 
     var btn = $("loginBtn");
     setLoading(btn, true);
-    state.demo = false;
     sessionStorage.setItem(SS.url, url);
     sessionStorage.setItem(SS.secret, sec);
 
-    // ทดสอบรหัสด้วย listProducts (ตามบรีฟ)
+    // ตรวจรหัสด้วย listProducts (ผ่าน = รหัสถูกต้อง)
     api("listProducts", {})
       .then(function () { enterApp(); })
       .catch(function (err) {
         sessionStorage.removeItem(SS.secret);
-        loginError("เข้าใช้งานไม่สำเร็จ: " + errText(err));
+        loginError("Sign in failed: " + errText(err));
       })
       .finally(function () { setLoading(btn, false); });
-  }
-
-  function doDemo() {
-    state.demo = true;
-    sessionStorage.setItem(SS.demo, "1");
-    enterApp();
-    toast("โหมดตัวอย่าง — ปุ่มใช้ได้ แต่ไม่เขียนข้อมูลจริง", "");
   }
 
   function enterApp() {
@@ -246,12 +505,15 @@
   // ====== ROUTING (query-based: ?page=..&row=..) ======
   function parseLoc() {
     var q = new URLSearchParams(location.search);
-    return { page: q.get("page") || "pending", row: q.get("row") };
+    return { page: q.get("page") || "pending", row: q.get("row"), discord_id: q.get("discord_id") };
   }
   function navigate(page, params, replace) {
     var q = new URLSearchParams();
     if (page && page !== "pending") q.set("page", page);
-    if (params && params.row != null) q.set("row", params.row);
+    if (params) {
+      if (params.row != null) q.set("row", params.row);
+      if (params.discord_id) q.set("discord_id", params.discord_id);
+    }
     var url = location.pathname + (q.toString() ? "?" + q.toString() : "");
     if (replace) history.replaceState({}, "", url); else history.pushState({}, "", url);
     route();
@@ -260,21 +522,32 @@
     if (!isLoggedIn()) { showLogin(); return; }
     showApp();
     var loc = parseLoc();
-    // ลิงก์จาก Discord: ?row=N → หน้ารายละเอียด
-    if (loc.row) { state.page = "detail"; state.row = loc.row; renderDetail(loc.row); highlightNav("pending"); setTopTitle("รายละเอียด"); return; }
+    // ลิงก์จาก Discord: ?row=N → หน้ารายละเอียด registration
+    if (loc.row) {
+      state.page = "detail";
+      state.row = loc.row;
+      renderDetail(loc.row);
+      highlightNav(state.detailReturn && state.detailReturn.page === "students" ? "students" : "pending");
+      return;
+    }
+    if (loc.discord_id && (loc.page === "students" || loc.page === "search")) {
+      state.page = "students";
+      renderStudentDetail(loc.discord_id);
+      highlightNav("students");
+      return;
+    }
     state.page = loc.page; state.row = null;
     highlightNav(loc.page);
-    var titles = { pending: "คิวรออนุมัติ", products: "สินค้า", generate: "สร้างรหัส", search: "ค้นหารหัส", slips: "สลิปรอตรวจ" };
-    setTopTitle(titles[loc.page] || "หลังบ้าน");
     switch (loc.page) {
       case "products": renderProducts(); break;
-      case "generate": renderGenerate(); break;
-      case "search": renderSearch(); break;
+      case "codes":
+      case "generate": renderCodes(); break;
+      case "students":
+      case "search": renderStudents(); break;
       case "slips": renderSlips(); break;
       default: renderPending();
     }
   }
-  function setTopTitle(t) { var e = $("topTitle"); if (e) e.textContent = t; }
   function highlightNav(page) {
     document.querySelectorAll(".nav-item").forEach(function (n) {
       n.classList.toggle("active", n.getAttribute("data-nav") === page);
@@ -296,13 +569,13 @@
   // ====== state renders ======
   function view() { return $("view"); }
   function setView(html) { view().innerHTML = html; }
-  function loadingState(msg) { return '<div class="state"><div class="spinner"></div><p>' + esc(msg || "กำลังโหลด...") + "</p></div>"; }
-  function emptyState(emoji, title, msg, actionHtml) {
-    return '<div class="state"><span class="emoji">' + emoji + '</span><h3>' + esc(title) + "</h3><p>" + esc(msg || "") + "</p>" + (actionHtml || "") + "</div>";
+  function loadingState(msg) { return '<div class="state"><div class="spinner"></div><p>' + esc(msg || "Loading...") + "</p></div>"; }
+  function emptyState(icon, title, msg, actionHtml) {
+    return '<div class="state">' + ic(icon, "emoji") + "<h3>" + esc(title) + "</h3><p>" + esc(msg || "") + "</p>" + (actionHtml || "") + "</div>";
   }
   function errorState(msg, retryPage) {
-    return '<div class="state error"><span class="emoji">⚠️</span><h3>โหลดข้อมูลไม่สำเร็จ</h3><p>' + esc(msg) + "</p>" +
-      '<button class="btn btn-ghost" onclick="__retry()">ลองใหม่</button></div>';
+    return '<div class="state error">' + ic("warning-circle", "emoji") + "<h3>Failed to load</h3><p>" + esc(msg) + "</p>" +
+      '<button class="btn btn-ghost" onclick="__retry()">Retry</button></div>';
   }
   window.__retry = function () { route(); };
 
@@ -313,10 +586,11 @@
   // ======================================================================
   var autoTimer = null;
   function renderPending() {
+    setMainWide(false);
     setView(
-      '<div class="page-head"><h2>🏠 คิวรออนุมัติ <span class="count-inline" id="pendCount"></span></h2>' +
+      '<div class="page-head"><h2>' + ic("list-checks") + ' Approval queue <span class="count-inline" id="pendCount"></span></h2>' +
       '<div class="spacer"></div></div>' +
-      '<div id="pendBody">' + loadingState("กำลังโหลดคิว...") + "</div>"
+      '<div id="pendBody">' + loadingState("Loading queue...") + "</div>"
     );
     loadPending();
     startAutoRefresh();
@@ -327,7 +601,7 @@
         var items = listOf(d);
         setBadge("pending", items.length);
         var c = $("pendCount"); if (c) c.textContent = "(" + items.length + ")";
-        if (!items.length) { $("pendBody").innerHTML = emptyState("🎉", "ไม่มีรายการค้าง", "อนุมัติครบทุกรายการแล้ว"); return; }
+        if (!items.length) { $("pendBody").innerHTML = emptyState("confetti", "All clear", "No pending items"); return; }
         var wrap = el("div", "queue");
         items.forEach(function (it) { wrap.appendChild(pendingCard(it)); });
         var body = $("pendBody"); body.innerHTML = ""; body.appendChild(wrap);
@@ -337,12 +611,17 @@
   function pendingCard(it) {
     var a = el("a", "q-card");
     a.href = "?row=" + encodeURIComponent(it.row);
-    a.onclick = function (e) { e.preventDefault(); navigate("detail", { row: it.row }); };
+    a.onclick = function (e) { e.preventDefault(); state.detailReturn = null; navigate("pending", { row: it.row }); };
+    var av = it.discord_avatar
+      ? '<img class="q-avatar" src="' + attr(it.discord_avatar) + '" alt="" />'
+      : '<span class="q-avatar q-avatar-ph">' + ic("user") + "</span>";
     a.innerHTML =
-      '<div class="q-top"><span class="q-name">🧑 ' + esc(it.nickname || it.name || "-") + "</span>" +
+      '<div class="q-top">' + av +
+      '<span class="q-name">' + esc(it.nickname || it.name || "-") +
+      (it.discord_username ? ' <span class="q-discord">@' + esc(it.discord_username) + "</span>" : "") + "</span>" +
       (it.school ? '<span class="q-school">· ' + esc(it.school) + "</span>" : "") + "</div>" +
-      '<div class="q-line"><span class="chip book">📕 ' + esc(it.product || "-") + '</span><span class="q-email">' + esc(it.email || "-") + "</span></div>" +
-      '<div class="q-foot"><span class="q-time">🕐 ' + esc(timeAgo(it.timestamp)) + '</span><span class="q-go">จัดการ ▸</span></div>';
+      '<div class="q-line"><span class="chip book">' + ic("book-bookmark") + " " + esc(it.product || "-") + '</span><span class="q-email">' + esc(it.email || "-") + "</span></div>" +
+      '<div class="q-foot"><span class="q-time">' + ic("clock") + " " + esc(timeAgo(it.timestamp)) + '</span><span class="q-go">Review ' + ic("caret-right") + "</span></div>";
     return a;
   }
   function startAutoRefresh() {
@@ -357,56 +636,101 @@
   //  หน้า 2 — รายละเอียดรายการ (สำคัญสุด)
   // ======================================================================
   function renderDetail(row) {
+    setMainWide(true);
     stopAutoRefresh();
-    setView('<a class="back-link" onclick="__back()">◀ กลับไปคิว</a><div class="detail-wrap" id="detailBody">' + loadingState("กำลังโหลดรายการ...") + "</div>");
+    var backLabel = state.detailReturn && state.detailReturn.page === "students" ? "◀ Back to student" : "◀ Back to queue";
+    setView('<a class="back-link" onclick="__back()">' + backLabel + '</a><div class="detail-wrap detail-page-wrap" id="detailBody">' + loadingState("Loading...") + "</div>");
     api("getRegistration", { row: Number(row) })
       .then(function (d) { drawDetail(d.item || d); })
       .catch(function (err) { $("detailBody").innerHTML = errorState(errText(err)); });
   }
-  window.__back = function () { navigate("pending"); };
+  window.__back = function () {
+    if (state.detailReturn) {
+      var r = state.detailReturn;
+      state.detailReturn = null;
+      navigate(r.page, r.discord_id ? { discord_id: r.discord_id } : null);
+    } else {
+      navigate("pending");
+    }
+  };
+  window.__backStudent = function () { state.detailReturn = null; navigate("students"); };
+
+  function studentAvatarHtml(s, cls) {
+    cls = cls || "student-avatar";
+    if (s && s.discord_avatar) {
+      return '<img class="' + cls + '" src="' + attr(s.discord_avatar) + '" alt="" loading="lazy" />';
+    }
+    return '<span class="' + cls + ' ' + cls + '-ph">' + ic("user") + "</span>";
+  }
 
   function drawDetail(it) {
-    if (!it) { $("detailBody").innerHTML = errorState("ไม่พบรายการนี้"); return; }
+    if (!it) { $("detailBody").innerHTML = errorState("Item not found"); return; }
     var isPending = String(it.status) === "pending";
     var statusMap = {
-      pending: '<span class="st-dot">🟡</span> รออนุมัติ',
-      approved: '<span class="st-dot">🟢</span> อนุมัติแล้ว' + (String(it.link_sent) === "yes" ? " · ส่งลิงก์แล้ว ✅" : " · รอบอทส่งลิงก์"),
-      rejected: '<span class="st-dot">🔴</span> ปฏิเสธแล้ว',
+      pending: '<span class="st-dot" style="color:var(--amber)">' + ic("hourglass-medium") + "</span> Pending approval",
+      approved: '<span class="st-dot" style="color:var(--green)">' + ic("check-circle") + "</span> Approved" + (String(it.link_sent) === "yes" ? " · Link sent" : " · Waiting for bot"),
+      rejected: '<span class="st-dot" style="color:var(--redpen)">' + ic("x-circle") + "</span> Rejected",
     };
     var hasLink = it.youtube_link && String(it.youtube_link).trim();
 
     var actions;
     if (isPending) {
       actions =
-        '<div class="steps-hint"><b>ทำ 2 ขั้นให้ครบก่อนกดอนุมัติ</b>' +
-        "<ol><li>คัดลอกอีเมล → เชิญเข้าวิดีโอใน YouTube</li><li>กลับมากดปุ่มด้านล่าง</li></ol></div>" +
-        '<div class="detail-actions"><button class="btn btn-approve btn-lg" id="btnApprove">✅ อนุมัติ</button>' +
-        '<button class="btn btn-reject" id="btnReject">❌ ปฏิเสธ</button></div>';
+        '<div class="steps-hint"><b>Before you approve</b>' +
+        "<ol><li>Copy the email and invite them in YouTube</li><li>Come back and tap Approve</li></ol></div>" +
+        '<div class="detail-actions">' +
+          '<button class="btn btn-approve btn-lg" id="btnApprove">' + ic("check-circle") + ' Approve</button>' +
+          '<button class="btn btn-reject btn-sm" id="btnReject">' + ic("x-circle") + ' Reject</button>' +
+        "</div>";
     } else {
-      actions = '<div class="done-note">รายการนี้จัดการแล้ว (สถานะ: ' + esc(it.status) + ") — กดอนุมัติซ้ำไม่ได้</div>";
+      actions = '<div class="done-note">Already handled (status: ' + esc(it.status) + ") — cannot approve again</div>";
     }
 
     $("detailBody").innerHTML =
       '<div class="detail-card">' +
-        '<div class="detail-status">สถานะ: ' + (statusMap[it.status] || esc(it.status)) + "</div>" +
-        '<div class="detail-sec">' +
-          '<div class="detail-person">' + esc(it.nickname || it.name || "-") +
-            (it.name && it.nickname ? " <span style=\"font-weight:400;font-size:15px;color:var(--muted)\">(" + esc(it.name) + ")</span>" : "") + "</div>" +
-          '<div class="detail-meta">' + (it.age ? esc(it.age) + " ปี · " : "") + esc(it.school || "-") + "</div>" +
-          '<div class="detail-prod">' +
-            '<span class="chip book lg">📕 ' + esc(it.product_name || it.product || "-") + (it.product_name ? " (" + esc(it.product) + ")" : "") + "</span>" +
-            '<span class="detail-code">🎟️ ' + esc(it.code || "-") + "</span>" +
+        '<div class="detail-status">' + (statusMap[it.status] || esc(it.status)) + "</div>" +
+        '<div class="detail-sec detail-sec-profile">' +
+          '<div class="detail-profile-hero">' +
+            studentAvatarHtml(it, "detail-avatar lg") +
+            '<div class="detail-profile-main">' +
+              '<div class="detail-person">' + esc(it.nickname || it.name || "—") +
+                (it.name && it.nickname ? ' <span class="detail-name-full">(' + esc(it.name) + ")</span>" : "") +
+              "</div>" +
+              (it.discord_username ? '<div class="detail-discord">@' + esc(it.discord_username) + "</div>" : "") +
+            "</div>" +
+            timeDisplayHtml(it.timestamp, "Submitted") +
+          "</div>" +
+          '<div class="detail-kv-grid">' +
+            kvRow("Full name", esc(it.name || "—")) +
+            kvRow("Nickname", esc(it.nickname || "—")) +
+            kvRow("Age", esc(it.age ? it.age + " yrs" : "—")) +
+            kvRow("School", esc(it.school || "—")) +
+            kvRow("Email", '<span class="mono-val">' + esc(it.email || "—") + "</span>") +
+            (it.approved_at
+              ? kvRow("Approved", esc(timeAgo(it.approved_at)) + ' <span class="kv-sub">' + esc(fmtDateTime(it.approved_at)) +
+                  (it.reviewed_by ? " · " + esc(it.reviewed_by) : "") + "</span>")
+              : "") +
           "</div>" +
         "</div>" +
         '<div class="detail-sec">' +
-          '<div class="email-label">✉️ อีเมลที่ต้องเชิญใน YouTube</div>' +
-          '<div class="email-row"><span class="em">' + esc(it.email || "-") + '</span>' +
-            '<button class="btn btn-primary btn-sm" id="btnCopy">📋 คัดลอก</button></div>' +
-          (hasLink
-            ? '<a class="btn btn-block" style="margin-top:12px" href="' + attr(it.youtube_link) + '" target="_blank" rel="noopener">▶ เปิดวิดีโอเล่มนี้ใน YouTube</a>'
-            : '<div class="warn-box">⚠️ เล่มนี้ยังไม่ใส่ลิงก์วิดีโอ <a onclick="__go(\'products\')">ไปที่หน้าสินค้าก่อน ▸</a></div>') +
+          '<div class="detail-kicker">Book &amp; code</div>' +
+          '<div class="detail-kv-grid detail-kv-grid-book">' +
+            kvRow("Book", esc(it.product_name || it.product || "—") +
+              (it.product_name && it.product ? ' <span class="kv-sub">(' + esc(it.product) + ")</span>" : "")) +
+            kvRow("Code", '<span class="detail-code">' + esc(it.code || "—") + "</span>") +
+          "</div>" +
         "</div>" +
-        '<div class="detail-sec">' + actions + "</div>" +
+        '<div class="detail-sec detail-sec-youtube">' +
+          '<div class="detail-kicker">YouTube invite</div>' +
+          '<div class="detail-kv-grid detail-kv-grid-yt">' +
+            kvRow("Email to invite", '<div class="email-row email-row-inline"><span class="em">' + esc(it.email || "—") + '</span>' +
+              '<button class="btn btn-primary btn-sm" id="btnCopy">' + ic("copy") + " Copy</button></div>") +
+            kvRow("Video", hasLink
+              ? '<a class="btn btn-ghost detail-yt-btn" href="' + attr(it.youtube_link) + '" target="_blank" rel="noopener">' + ic("play-circle") + " Open video on YouTube</a>"
+              : '<div class="warn-box warn-box-inline">' + ic("warning") + ' No video link — <a onclick="__go(\'products\')">add in Products ' + ic("caret-right") + "</a></div>") +
+          "</div>" +
+        "</div>" +
+        '<div class="detail-sec detail-sec-actions">' + actions + "</div>" +
       "</div>";
 
     var copyBtn = $("btnCopy");
@@ -420,15 +744,18 @@
 
   function onApprove(it) {
     openModal({
-      title: "ยืนยันการอนุมัติ",
-      bodyHtml: "<p>เพิ่มอีเมล <b>" + esc(it.email) + "</b> เข้าวิดีโอใน YouTube เรียบร้อยแล้วใช่ไหม?</p>",
-      okLabel: "✅ อนุมัติเลย", okClass: "btn-approve",
+      title: "Added to YouTube?",
+      bodyHtml:
+        "<p>Have you added this email to the video's private access list in YouTube Studio?</p>" +
+        '<div class="email-row" style="margin-top:12px"><span class="em">' + esc(it.email || "-") + "</span></div>",
+      okLabel: ic("check-circle") + " Yes, approve", okClass: "btn-approve",
+      cancelLabel: "Not yet",
     }).then(function (ok) {
       if (!ok) return;
       var btn = $("btnApprove"); setLoading(btn, true);
       api("approve", { row: Number(it.row) })
         .then(function () {
-          toast("อนุมัติแล้ว — บอทจะส่งลิงก์ให้นักเรียนภายใน ~1 นาที", "ok");
+          toast("Approved — bot will send the link within ~1 min", "ok");
           renderDetail(it.row);
           refreshBadges();
         })
@@ -437,16 +764,16 @@
   }
   function onReject(it) {
     openModal({
-      title: "ยืนยันการปฏิเสธ",
-      bodyHtml: '<p>ระบุเหตุผล (ไม่บังคับ) — รหัสจะถูกคืนสถานะให้ลงทะเบียนใหม่ได้</p>' +
-        '<div class="field"><textarea data-field="reason" placeholder="เช่น อีเมลผิด / รหัสไม่ตรงเล่ม"></textarea></div>',
-      okLabel: "❌ ปฏิเสธ", okClass: "btn-danger",
+      title: "Confirm rejection",
+      bodyHtml: '<p>Reason (optional) — the code will be reset for re-registration</p>' +
+        '<div class="field"><textarea data-field="reason" placeholder="e.g. wrong email / wrong book"></textarea></div>',
+      okLabel: ic("x-circle") + " Reject", okClass: "btn-danger",
     }).then(function (vals) {
       if (!vals) return;
       var btn = $("btnReject"); setLoading(btn, true);
       api("reject", { row: Number(it.row), reason: vals.reason || "" })
         .then(function () {
-          toast("ปฏิเสธแล้ว — รหัสถูกคืนสถานะ ใช้ลงทะเบียนใหม่ได้", "");
+          toast("Rejected — code reset for re-registration", "");
           renderDetail(it.row);
           refreshBadges();
         })
@@ -454,121 +781,470 @@
     });
   }
 
+  // ====== layout helpers (split page) ======
+  function setMainWide(on) {
+    var m = $("view");
+    if (m) m.classList.toggle("main-wide", !!on);
+  }
+  function splitPage(mainHtml, asideHtml) {
+    return '<div class="page-split"><div class="split-main">' + mainHtml + '</div><div class="split-aside">' + asideHtml + "</div></div>";
+  }
+  function productFormHtml() {
+    return '<div class="form-panel form-panel-accent"><h3>' + ic("plus-circle") + ' Add product</h3>' +
+      '<div class="field"><label>Product code</label><input class="mono" id="npProduct" placeholder="MATH1" /></div>' +
+      '<div class="field"><label>Book title</label><input id="npName" placeholder="Math answer key Vol.1" /></div>' +
+      '<div class="field"><label>YouTube <span style="font-weight:400;color:var(--muted)">(optional)</span></label><input class="mono" id="npLink" placeholder="https://youtu.be/..." /></div>' +
+      '<button class="btn btn-primary btn-block" id="btnAddProd">' + ic("floppy-disk") + ' Save</button></div>';
+  }
+  function genFormHtml(products, opts) {
+    opts = opts || {};
+    var pOpts = products.map(function (p) {
+      return '<option value="' + attr(p.product) + '"' + (opts.selected === p.product ? " selected" : "") + ">" +
+        esc(p.product) + (p.product_name ? " · " + esc(p.product_name) : "") + "</option>";
+    }).join("");
+    var flash = "";
+    if (state.genFlash) {
+      var g = state.genFlash;
+      flash = '<div class="gen-flash">' + ic("check-circle") + " Created " + g.codes.length + " codes (" + esc(g.product) + ")" +
+        '<div class="gf-actions">' +
+          '<button class="btn btn-ghost btn-sm btn-block" id="btnCopyFlash">' + ic("copy") + ' Copy all</button>' +
+        "</div></div>";
+    }
+    return '<div class="form-panel"><h3>' + ic("dice-five") + ' Generate codes</h3>' +
+      '<div class="field"><label>Product</label><select id="genProduct">' + pOpts + "</select></div>" +
+      '<div class="field"><label>Amount (1–500)</label><input type="number" id="genAmount" min="1" max="500" value="' + (opts.amount || 100) + '" inputmode="numeric" /></div>' +
+      '<button class="btn btn-primary btn-block" id="btnGen">' + ic("dice-five") + ' Generate</button>' +
+      flash + "</div>";
+  }
+  function bindProductForm() {
+    var btn = $("btnAddProd");
+    if (btn) btn.onclick = addProduct;
+  }
+  function bindGenForm() {
+    var btn = $("btnGen");
+    if (btn) btn.onclick = doGenerate;
+    if (state.genFlash) {
+      var g = state.genFlash;
+      var cp = $("btnCopyFlash");
+      if (cp) cp.onclick = function () { copyText(g.codes.join("\n"), cp); };
+    }
+  }
+
+  // ====== code clusters (lazy + paginated) ======
+  function clusterKey(product, filter) { return product + "|" + (filter || ""); }
+
+  function loadCluster(product, filter, page, force) {
+    filter = filter || "";
+    page = page || 1;
+    var baseKey = clusterKey(product, "");
+    if (!force && state.codesCache[baseKey] && state.codesCache[baseKey].items) {
+      state.codesCache[baseKey].filter = filter;
+      state.codesCache[baseKey].page = page;
+      renderClusterBody(product);
+      return Promise.resolve(state.codesCache[baseKey]);
+    }
+    state.codesCache[baseKey] = { items: null, filter: filter, page: page, loading: true };
+    renderClusterBody(product);
+    return api("listCodes", { product: product })
+      .then(function (d) {
+        state.codesCache[baseKey] = {
+          items: listOf(d),
+          filter: filter,
+          page: page,
+          loading: false,
+          total: d.count != null ? d.count : listOf(d).length,
+        };
+        renderClusterBody(product);
+        return state.codesCache[baseKey];
+      })
+      .catch(function (err) {
+        state.codesCache[baseKey] = { items: [], filter: filter, page: 1, loading: false, error: errText(err) };
+        renderClusterBody(product);
+      });
+  }
+
+  function getFilteredItems(cache) {
+    var items = cache.items || [];
+    if (cache.filter === "unused") return items.filter(function (i) { return i.status === "unused"; });
+    if (cache.filter === "used") return items.filter(function (i) { return i.status === "used"; });
+    return items;
+  }
+
+  function toggleCluster(product) {
+    var el = document.querySelector('.cluster[data-product="' + CSS.escape(product) + '"]');
+    if (!el) return;
+    var opening = !el.classList.contains("open");
+    el.classList.toggle("open", opening);
+    if (opening) {
+      var key = clusterKey(product, "");
+      if (!state.codesCache[key] || !state.codesCache[key].items) loadCluster(product, "", 1);
+      else renderClusterBody(product);
+    }
+  }
+
+  function renderClusterBody(product) {
+    var cluster = document.querySelector('.cluster[data-product="' + CSS.escape(product) + '"]');
+    if (!cluster) return;
+    var body = cluster.querySelector(".cluster-body");
+    if (!body) return;
+
+    var key = clusterKey(product, "");
+    var cache = state.codesCache[key];
+
+    if (!cache || cache.loading) {
+      body.innerHTML = '<div class="cluster-toolbar">' +
+        '<select class="cluster-filter" disabled><option>Loading...</option></select></div>' +
+        loadingState("Loading codes...");
+      return;
+    }
+    if (cache.error) {
+      body.innerHTML = errorState(cache.error);
+      return;
+    }
+
+    var allItems = cache.items || [];
+    var unused = allItems.filter(function (i) { return i.status === "unused"; }).length;
+    var used = allItems.length - unused;
+    var filter = cache.filter || "";
+    var items = getFilteredItems(cache);
+    var page = cache.page || 1;
+    var totalPages = Math.max(1, Math.ceil(items.length / CODE_PAGE_SIZE));
+    if (page > totalPages) page = totalPages;
+    cache.page = page;
+    var start = (page - 1) * CODE_PAGE_SIZE;
+    var slice = items.slice(start, start + CODE_PAGE_SIZE);
+
+    var rows = slice.map(function (i) {
+      return '<div class="code-row"><span class="code">' + esc(i.code) + "</span>" +
+        (i.status === "used" ? '<span class="chip mute">used</span>' : '<span class="chip ok">unused</span>') +
+        '<span class="code-row-end">' +
+          '<button type="button" class="btn btn-ghost btn-sm code-copy" data-code="' + attr(i.code) + '" title="Copy">' + ic("copy") + "</button>" +
+          (i.created_at ? '<span class="code-meta">' + fmtDateTime(i.created_at) + "</span>" : "") +
+        "</span></div>";
+    }).join("");
+
+    body.innerHTML =
+      '<div class="cluster-toolbar">' +
+        '<select class="cluster-filter" data-product="' + attr(product) + '">' +
+          '<option value=""' + (filter === "" ? " selected" : "") + ">All (" + allItems.length + ")</option>" +
+          '<option value="unused"' + (filter === "unused" ? " selected" : "") + ">unused (" + unused + ")</option>" +
+          '<option value="used"' + (filter === "used" ? " selected" : "") + ">used (" + used + ")</option>" +
+        "</select>" +
+        '<button class="btn btn-ghost btn-sm cluster-export" data-product="' + attr(product) + '">' +
+          ic("download-simple") + " CSV</button>" +
+      "</div>" +
+      '<div class="cluster-codes">' + (rows || '<span style="color:var(--muted)">No codes</span>') + "</div>" +
+      (items.length > CODE_PAGE_SIZE
+        ? '<div class="cluster-pager">' +
+            '<button class="btn btn-ghost btn-sm cluster-prev"' + (page <= 1 ? " disabled" : "") + ">" + ic("caret-left") + " Prev</button>" +
+            '<span>Page ' + page + " / " + totalPages + " · " + items.length + " codes</span>" +
+            '<button class="btn btn-ghost btn-sm cluster-next"' + (page >= totalPages ? " disabled" : "") + ">Next " + ic("caret-right") + "</button>" +
+          "</div>"
+        : (items.length ? '<div class="cluster-pager"><span>' + items.length + " codes total</span></div>" : ""));
+
+    body.querySelector(".cluster-filter").onchange = function (e) {
+      cache.filter = e.target.value;
+      cache.page = 1;
+      renderClusterBody(product);
+    };
+    var exp = body.querySelector(".cluster-export");
+    if (exp) exp.onclick = function () { exportCodesCsv(product, getFilteredItems(cache)); };
+    var prev = body.querySelector(".cluster-prev");
+    var next = body.querySelector(".cluster-next");
+    if (prev) prev.onclick = function () { if (cache.page > 1) { cache.page--; renderClusterBody(product); } };
+    if (next) next.onclick = function () {
+      if (cache.page < totalPages) { cache.page++; renderClusterBody(product); }
+    };
+    body.querySelectorAll(".code-copy").forEach(function (btn) {
+      btn.onclick = function (e) {
+        e.stopPropagation();
+        copyText(btn.getAttribute("data-code"), btn);
+      };
+    });
+
+    // อัปเดต badge บนหัว cluster
+    var headStats = cluster.querySelector(".c-stats");
+    if (headStats) headStats.innerHTML = '<span class="chip ok">unused ' + unused + "</span>" +
+      '<span class="chip mute">used ' + used + "</span>";
+  }
+
+  function buildClusterList(products) {
+    if (!products.length) return emptyState("books", "No products yet", "Add your first book in the sidebar");
+    var html = '<div class="cluster-list">';
+    products.forEach(function (p) {
+      html += '<div class="cluster" data-product="' + attr(p.product) + '">' +
+        '<button type="button" class="cluster-head" data-toggle="' + attr(p.product) + '">' +
+          ic("caret-right", "c-caret") +
+          '<span class="c-product">' + esc(p.product) + "</span>" +
+          (p.product_name ? '<span class="c-name">' + esc(p.product_name) + "</span>" : "") +
+          '<span class="c-stats"><span class="chip book">' + ic("ticket") + ' codes</span></span>' +
+        "</button>" +
+        '<div class="cluster-body"></div></div>';
+    });
+    html += "</div>";
+    return html;
+  }
+  function bindClusters() {
+    document.querySelectorAll(".cluster-head[data-toggle]").forEach(function (btn) {
+      btn.onclick = function () { toggleCluster(btn.getAttribute("data-toggle")); };
+    });
+  }
+  function invalidateCodeCache(product) {
+    delete state.codesCache[clusterKey(product, "")];
+  }
+  function exportCodesCsv(product, items) {
+    var label = product || "all";
+    var lines = ['"code","product","status","created_at","created_by","used_at"'].concat(items.map(function (i) {
+      return '"' + i.code + '","' + i.product + '","' + i.status + '","' + (i.created_at || "") + '","' + (i.created_by || "") + '","' + (i.used_at || "") + '"';
+    }));
+    var blob = new Blob(["\uFEFF" + lines.join("\r\n")], { type: "text/csv;charset=utf-8;" });
+    var a = el("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "codes_" + label + ".csv";
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  function codesSearchBarHtml(products) {
+    var pOpts = '<option value="">All products</option>' + products.map(function (p) {
+      return '<option value="' + attr(p.product) + '">' + esc(p.product) +
+        (p.product_name ? " · " + esc(p.product_name) : "") + "</option>";
+    }).join("");
+    return '<div class="codes-search-sec">' +
+      '<div class="filter-bar">' +
+        '<div class="field fb-grow"><label>Search codes</label><input class="mono" id="codeSearch" placeholder="MATH1-X7K2 or partial code" /></div>' +
+        '<div class="field"><label>Product</label><select id="codeProduct">' + pOpts + "</select></div>" +
+        '<div class="field"><label>Status</label><select id="codeStatus"><option value="">All</option><option value="unused">unused</option><option value="used">used</option></select></div>' +
+        dateRangeFieldHtml("codeDate", "Created date range") +
+        '<button type="button" class="btn btn-primary" id="btnCodeSearch">' + ic("magnifying-glass") + " Search</button>" +
+      "</div><div id=\"codeSearchBody\">" + emptyState("magnifying-glass", "Search codes", "Find codes across all products") + "</div></div>";
+  }
+  function getCodeSearchPayload() {
+    var p = {};
+    var s = ($("codeSearch") && $("codeSearch").value || "").trim();
+    if (s) p.search = s;
+    if ($("codeProduct") && $("codeProduct").value) p.product = $("codeProduct").value;
+    if ($("codeStatus") && $("codeStatus").value) p.status = $("codeStatus").value;
+    readDateRange("codeDate", "created_from", "created_to", p);
+    return p;
+  }
+  function bindCodeSearch() {
+    var btn = $("btnCodeSearch");
+    if (btn) btn.onclick = searchCodesGlobal;
+    var inp = $("codeSearch");
+    if (inp) inp.addEventListener("keydown", function (e) { if (e.key === "Enter") searchCodesGlobal(); });
+    initDateRangePicker("codeDate");
+  }
+  function searchCodesGlobal() {
+    var btn = $("btnCodeSearch");
+    setLoading(btn, true);
+    $("codeSearchBody").innerHTML = loadingState("Searching...");
+    api("listCodes", getCodeSearchPayload())
+      .then(function (d) { setLoading(btn, false); drawCodeSearchList(d); })
+      .catch(function (err) {
+        setLoading(btn, false);
+        $("codeSearchBody").innerHTML = errorState(errText(err));
+      });
+  }
+  function drawCodeSearchList(d) {
+    var items = listOf(d);
+    var product = ($("codeProduct") && $("codeProduct").value) || "";
+    var unused = items.filter(function (i) { return String(i.status) === "unused"; }).length;
+    var used = items.length - unused;
+    var summary = '<div class="summary-bar"><span class="summary-pill">' + (product || "All products") +
+      ": <b>" + unused + "</b> unused / <b>" + used + "</b> used" + countNote(d, items) + "</span>" +
+      (items.length ? '<button class="btn btn-ghost btn-sm" id="btnCodeExport">' + ic("download-simple") + " Export CSV</button>" : "") +
+      "</div>";
+    if (!items.length) {
+      $("codeSearchBody").innerHTML = summary + emptyState("magnifying-glass", "No codes found", "Try different search or filters");
+      return;
+    }
+    var rows = items.map(function (i) {
+      return "<tr><td class=\"code\">" + esc(i.code) + "</td><td>" + esc(i.product) + "</td><td>" +
+        (String(i.status) === "used" ? '<span class="chip mute">used</span>' : '<span class="chip ok">unused</span>') + "</td>" +
+        '<td class="col-dt col-hide-sm">' + fmtDateTime(i.created_at) + "</td>" +
+        '<td class="col-hide-sm">' + esc(i.created_by || "—") + "</td>" +
+        '<td class="col-dt col-hide-sm">' + fmtDateTime(i.used_at) + "</td>" +
+        '<td><button type="button" class="btn btn-ghost btn-sm code-copy" data-code="' + attr(i.code) + '">' + ic("copy") + "</button></td></tr>";
+    }).join("");
+    $("codeSearchBody").innerHTML = summary +
+      '<div class="table-wrap"><table class="tbl tbl-codes"><thead><tr>' +
+      "<th>Code</th><th>Product</th><th>Status</th><th class=\"col-hide-sm\">Created</th><th class=\"col-hide-sm\">Created by</th><th class=\"col-hide-sm\">Used at</th><th></th>" +
+      "</tr></thead><tbody>" + rows + "</tbody></table></div>";
+    $("codeSearchBody").querySelectorAll(".code-copy").forEach(function (b) {
+      b.onclick = function (e) { e.stopPropagation(); copyText(b.getAttribute("data-code"), b); };
+    });
+    var ex = $("btnCodeExport");
+    if (ex) ex.onclick = function () { exportCodesCsv(product, items); };
+  }
+
   // ======================================================================
   //  หน้า 3 — สินค้า
   // ======================================================================
+  function productsMainHtml() {
+    return '<div class="filter-bar">' +
+      '<div class="field fb-grow"><label>Search</label><input id="prodSearch" placeholder="Code or title" /></div>' +
+      dateRangeFieldHtml("prodDate", "Created date range") +
+      '<button type="button" class="btn btn-primary" id="btnProdFilter">' + ic("magnifying-glass") + " Search</button>" +
+      "</div><div id=\"prodTable\">" + loadingState("Loading products...") + "</div>";
+  }
+  function getProductFilters() {
+    var p = {};
+    var s = ($("prodSearch") && $("prodSearch").value || "").trim();
+    if (s) p.search = s;
+    readDateRange("prodDate", "created_from", "created_to", p);
+    return p;
+  }
+  function bindProductFilters() {
+    var btn = $("btnProdFilter");
+    if (!btn) return;
+    btn.onclick = function () {
+      $("prodTable").innerHTML = loadingState("Searching...");
+      fetchProductsList().catch(function (err) { $("prodTable").innerHTML = errorState(errText(err)); });
+    };
+    var search = $("prodSearch");
+    if (search) search.addEventListener("keydown", function (e) { if (e.key === "Enter") btn.click(); });
+    initDateRangePicker("prodDate");
+  }
   function renderProducts() {
-    setView('<div class="page-head"><h2>📚 สินค้า</h2></div><p class="page-sub">สร้าง/แก้ทะเบียนหนังสือ — ที่เดียวที่ใส่ลิงก์ YouTube ของแต่ละเล่ม</p><div id="prodBody">' + loadingState("กำลังโหลดสินค้า...") + "</div>");
-    api("listProducts", {})
+    setMainWide(true);
+    setView(
+      '<div class="page-head"><h2>' + ic("books") + ' Products</h2></div>' +
+      '<p class="page-sub">Book registry — add a YouTube link for each volume</p>' +
+      '<div id="prodBody"><div class="page-split">' +
+        '<div class="split-main" id="prodMain">' + productsMainHtml() + "</div>" +
+        '<div class="split-aside" id="prodAside">' + productFormHtml() + "</div>" +
+      "</div></div>"
+    );
+    bindProductForm();
+    bindProductFilters();
+    fetchProductsList()
+      .catch(function (err) { $("prodTable").innerHTML = errorState(errText(err)); });
+  }
+  function fetchProductsList() {
+    return api("listProducts", getProductFilters())
       .then(function (d) {
         var items = listOf(d);
         state.cache.products = items;
-        drawProducts(items);
-      })
-      .catch(function (err) { $("prodBody").innerHTML = errorState(errText(err)); });
+        drawProductsList(items);
+        return items;
+      });
   }
-  function drawProducts(items) {
+  function productsListHtml(items) {
+    if (!items.length) return emptyState("books", "No products found", "Try different filters or add a new book in the sidebar");
     var rows = items.map(function (p) {
       var linkChip = (p.youtube_link && String(p.youtube_link).trim())
-        ? '<span class="chip ok">✅ มีลิงก์</span>'
-        : '<span class="chip warn">⚠️ ยังไม่ใส่</span>';
+        ? '<span class="chip ok">' + ic("check-circle") + ' Has link</span>'
+        : '<span class="chip bad">' + ic("warning") + ' Missing</span>';
       return "<tr><td class=\"code\">" + esc(p.product) + "</td><td>" + esc(p.product_name || "-") + "</td><td>" + linkChip + "</td>" +
-        '<td><button class="btn btn-ghost btn-sm" data-edit="' + attr(JSON.stringify(p)) + '">แก้ไข</button></td></tr>';
+        '<td class="col-dt col-hide-sm">' + fmtDateTime(p.created_at) + "</td>" +
+        '<td class="col-dt col-hide-sm">' + fmtDateTime(p.updated_at) + "</td>" +
+        '<td><button class="btn btn-ghost btn-sm" data-edit="' + attr(JSON.stringify(p)) + '">Edit</button></td></tr>';
     }).join("");
-
-    var tableHtml = items.length
-      ? '<div class="table-wrap"><table class="tbl"><thead><tr><th>รหัสสินค้า</th><th>ชื่อเล่ม</th><th>ลิงก์</th><th></th></tr></thead><tbody>' + rows + "</tbody></table></div>"
-      : emptyState("📚", "ยังไม่มีสินค้า", "เพิ่มเล่มแรกด้านล่างก่อนสร้างรหัส");
-
-    $("prodBody").innerHTML =
-      tableHtml +
-      '<div class="card-block" style="margin-top:16px"><h3>➕ เพิ่มสินค้าใหม่</h3>' +
-        '<div class="field"><label>รหัสสินค้า (product)</label><input class="mono" id="npProduct" placeholder="MATH1" /><span class="hint">ตัวเดียวกับที่ใช้ gen รหัส · ระบบแปลงเป็นพิมพ์ใหญ่ให้</span></div>' +
-        '<div class="field"><label>ชื่อเล่ม</label><input id="npName" placeholder="เฉลยคณิต ม.4 เล่ม 1" /></div>' +
-        '<div class="field"><label>ลิงก์ YouTube (ไม่บังคับ)</label><input class="mono" id="npLink" placeholder="https://youtu.be/..." /></div>' +
-        '<button class="btn btn-primary btn-block" id="btnAddProd">บันทึกสินค้า</button>' +
-      "</div>";
-
-    $("prodBody").querySelectorAll("[data-edit]").forEach(function (b) {
+    return '<div class="table-wrap"><table class="tbl"><thead><tr><th>Code</th><th>Title</th><th>Link</th><th class="col-hide-sm">Created</th><th class="col-hide-sm">Updated</th><th></th></tr></thead><tbody>' + rows + "</tbody></table></div>";
+  }
+  function drawProductsList(items) {
+    var listEl = $("prodTable");
+    if (!listEl) return;
+    listEl.innerHTML = productsListHtml(items);
+    listEl.querySelectorAll("[data-edit]").forEach(function (b) {
       b.onclick = function () { editProduct(JSON.parse(b.getAttribute("data-edit"))); };
     });
-    $("btnAddProd").onclick = addProduct;
   }
   function addProduct() {
     var product = ($("npProduct").value || "").trim().toUpperCase();
     var name = ($("npName").value || "").trim();
     var link = ($("npLink").value || "").trim();
-    if (!product) { toast("กรุณากรอกรหัสสินค้า", "err"); return; }
-    var btn = $("btnAddProd"); setLoading(btn, true);
+    if (!product) { toast("Enter a product code", "err"); return; }
+    openLoadingModal("Saving product...");
     api("addProduct", { product: product, product_name: name, youtube_link: link })
-      .then(function () { toast("เพิ่มสินค้า " + product + " แล้ว", "ok"); renderProducts(); })
-      .catch(function (err) { setLoading(btn, false); toast(errText(err), "err"); });
+      .then(function () {
+        closeLoadingModal();
+        toast("Added product " + product, "ok");
+        $("npProduct").value = "";
+        $("npName").value = "";
+        $("npLink").value = "";
+        return fetchProductsList();
+      })
+      .catch(function (err) { closeLoadingModal(); toast(errText(err), "err"); });
   }
   function editProduct(p) {
     openModal({
-      title: "แก้ไข " + p.product,
+      title: "Edit " + p.product,
       bodyHtml:
-        '<div class="field"><label>ชื่อเล่ม</label><input data-field="product_name" value="' + attr(p.product_name || "") + '" /></div>' +
-        '<div class="field"><label>ลิงก์ YouTube</label><input class="mono" data-field="youtube_link" value="' + attr(p.youtube_link || "") + '" placeholder="https://youtu.be/..." /></div>',
-      okLabel: "บันทึก", okClass: "btn-primary",
+        '<div class="field"><label>Book title</label><input data-field="product_name" value="' + attr(p.product_name || "") + '" /></div>' +
+        '<div class="field"><label>YouTube link</label><input class="mono" data-field="youtube_link" value="' + attr(p.youtube_link || "") + '" placeholder="https://youtu.be/..." /></div>',
+      okLabel: "Save", okClass: "btn-primary",
     }).then(function (vals) {
       if (!vals) return;
+      openLoadingModal("Saving...");
       api("updateProduct", { row: Number(p.row), product_name: vals.product_name, youtube_link: vals.youtube_link })
-        .then(function () { toast("บันทึกแล้ว", "ok"); renderProducts(); })
-        .catch(function (err) { toast(errText(err), "err"); });
+        .then(function () { closeLoadingModal(); toast("Saved", "ok"); fetchProductsList(); })
+        .catch(function (err) { closeLoadingModal(); toast(errText(err), "err"); });
     });
   }
 
   // ======================================================================
-  //  หน้า 4 — สร้างรหัส
+  //  หน้า 4 — Codes (ค้นหา + browse + สร้างรหัส)
   // ======================================================================
-  function renderGenerate() {
-    setView('<div class="page-head"><h2>🎟️ สร้างรหัส</h2></div><p class="page-sub">เลือกเล่ม + จำนวน → ได้รหัสไปทำการ์ด</p><div id="genBody">' + loadingState("กำลังเตรียม...") + "</div>");
+  function renderCodes() {
+    setMainWide(true);
+    setView(
+      '<div class="page-head"><h2>' + ic("ticket") + ' Codes</h2></div>' +
+      '<p class="page-sub">Search codes across all products · generate new ones in the sidebar</p>' +
+      '<div id="genBody">' + loadingState("Loading...") + "</div>"
+    );
     ensureProducts()
       .then(function (items) {
         if (!items.length) {
-          $("genBody").innerHTML = emptyState("📚", "ยังไม่มีสินค้า", "ต้องสร้างสินค้าก่อนถึงจะ gen รหัสได้", '<button class="btn btn-primary" onclick="__go(\'products\')">ไปสร้างสินค้า ▸</button>');
+          setMainWide(false);
+          $("genBody").innerHTML = emptyState("books", "No products yet", "Create a product first", '<button class="btn btn-primary" onclick="__go(\'products\')">Go to Products ' + ic("caret-right") + "</button>");
           return;
         }
-        var opts = items.map(function (p) { return '<option value="' + attr(p.product) + '">' + esc(p.product) + (p.product_name ? " · " + esc(p.product_name) : "") + "</option>"; }).join("");
-        $("genBody").innerHTML =
-          '<div class="card-block">' +
-            '<div class="field"><label>เลือกสินค้า</label><select id="genProduct">' + opts + "</select></div>" +
-            '<div class="field"><label>จำนวน (1–500)</label><input type="number" id="genAmount" min="1" max="500" value="100" inputmode="numeric" /></div>' +
-            '<button class="btn btn-primary btn-block btn-lg" id="btnGen">🎲 สร้างรหัส</button>' +
-          '</div><div id="genResult"></div>';
-        $("btnGen").onclick = doGenerate;
+        drawCodesPage(items);
       })
       .catch(function (err) { $("genBody").innerHTML = errorState(errText(err)); });
+  }
+  function drawCodesPage(products) {
+    var main = codesSearchBarHtml(products) +
+      '<div class="codes-browse-label">' + ic("books") + " Browse by product</div>" +
+      buildClusterList(products);
+    $("genBody").innerHTML = splitPage(main, genFormHtml(products));
+    bindCodeSearch();
+    bindClusters();
+    bindGenForm();
   }
   function doGenerate() {
     var product = $("genProduct").value;
     var amount = parseInt($("genAmount").value, 10);
-    if (!amount || amount < 1 || amount > 500) { toast("จำนวนต้องอยู่ระหว่าง 1–500", "err"); return; }
+    if (!amount || amount < 1 || amount > 500) { toast("Amount must be between 1–500", "err"); return; }
     openModal({
-      title: "ยืนยันการสร้างรหัส",
-      bodyHtml: "<p>สร้าง <b>" + amount + "</b> รหัสของ <b>" + esc(product) + "</b> ใช่ไหม? รหัสจะถูกบันทึกเข้าระบบทันที</p>",
-      okLabel: "🎲 สร้างเลย", okClass: "btn-primary",
+      title: "Confirm code generation",
+      bodyHtml: "<p>Create <b>" + amount + "</b> codes for <b>" + esc(product) + "</b>? They will be saved immediately.</p>",
+      okLabel: ic("dice-five") + " Generate", okClass: "btn-primary",
     }).then(function (ok) {
       if (!ok) return;
       var btn = $("btnGen"); setLoading(btn, true);
       api("generateCodes", { product: product, amount: amount })
-        .then(function (d) { setLoading(btn, false); drawGenResult(d); toast("สร้าง " + (d.amount || amount) + " รหัสสำเร็จ", "ok"); })
+        .then(function (d) {
+          setLoading(btn, false);
+          state.genFlash = { product: d.product || product, codes: d.codes || [] };
+          invalidateCodeCache(product);
+          toast("Created " + (d.amount || amount) + " codes", "ok");
+          ensureProducts().then(function (items) {
+            drawCodesPage(items);
+            var prodSel = $("codeProduct");
+            if (prodSel) prodSel.value = product;
+            searchCodesGlobal();
+            // เปิด cluster ของ product ที่เพิ่งสร้าง + โหลดใหม่
+            var cluster = document.querySelector('.cluster[data-product="' + CSS.escape(product) + '"]');
+            if (cluster) {
+              cluster.classList.add("open");
+              loadCluster(product, "", 1, true);
+            }
+          });
+        })
         .catch(function (err) { setLoading(btn, false); toast(errText(err), "err"); });
     });
-  }
-  function drawGenResult(d) {
-    var codes = d.codes || [];
-    $("genResult").innerHTML =
-      '<div class="code-result">' +
-        '<div class="cr-head"><span class="cr-title grow">✅ สร้างสำเร็จ ' + codes.length + " รหัส (" + esc(d.product) + ")</span>" +
-          '<button class="btn btn-sm" id="btnCsv">⬇️ ดาวน์โหลด CSV</button>' +
-          '<button class="btn btn-ghost btn-sm" id="btnCopyAll">📋 คัดลอกทั้งหมด</button></div>' +
-        '<div class="code-list">' + esc(codes.join("\n")) + "</div>" +
-        '<div class="cr-warn">💡 ดาวน์โหลดเก็บไว้เลย — ถ้าหาย ดึงซ้ำได้ที่หน้า "ค้นหารหัส"</div>' +
-      "</div>";
-    $("btnCsv").onclick = function () { downloadCsv(d.product, codes); };
-    $("btnCopyAll").onclick = function () { copyText(codes.join("\n"), $("btnCopyAll")); };
   }
   function downloadCsv(product, codes) {
     // ครอบด้วย " เพื่อกันรหัสเพี้ยนใน Excel/Sheets
@@ -582,109 +1258,214 @@
   }
 
   // ======================================================================
-  //  หน้า 5 — ค้นหารหัส
+  //  หน้า 5 — นักเรียน (listStudents + getStudent)
   // ======================================================================
-  function renderSearch() {
+  function renderStudents() {
+    setMainWide(true);
     setView(
-      '<div class="page-head"><h2>🔍 ค้นหารหัส</h2></div>' +
-      '<div class="card-block"><h3>ค้นหารหัสเดี่ยว</h3>' +
-        '<div class="field-row"><div class="field" style="margin-bottom:0"><input class="mono" id="scCode" placeholder="MATH1-X7K2-9PQR" /></div>' +
-        '<button class="btn btn-primary" id="btnFind">ค้นหา</button></div>' +
-        '<div id="scResult"></div>' +
-      "</div>" +
-      '<div class="card-block"><h3>รายการรหัส (กรอง)</h3>' +
-        '<div class="field-row">' +
-          '<div class="field" style="margin-bottom:0"><label>สินค้า</label><select id="flProduct"><option value="">ทั้งหมด</option></select></div>' +
-          '<div class="field" style="margin-bottom:0"><label>สถานะ</label><select id="flStatus"><option value="">ทั้งหมด</option><option value="unused">unused</option><option value="used">used</option></select></div>' +
-        "</div><button class=\"btn btn-block\" style=\"margin-top:12px\" id=\"btnList\">แสดงรายการ</button>" +
-        '<div id="lcResult" style="margin-top:14px"></div>' +
-      "</div>"
+      '<div class="page-head"><h2>' + ic("graduation-cap") + ' Students</h2></div>' +
+      '<p class="page-sub">Browse registered students and see which books each has access to</p>' +
+      '<div class="filter-bar">' +
+        '<div class="field fb-grow"><label>Search</label><input id="stSearch" placeholder="Name / email / discord / school" /></div>' +
+        '<div class="field"><label>Show</label><select id="stFilter">' +
+          '<option value="">All students</option>' +
+          '<option value="active">Has approved books</option>' +
+          '<option value="pending">Has pending</option>' +
+          '<option value="rejected">Has rejected</option>' +
+        "</select></div>" +
+        '<button type="button" class="btn btn-primary" id="btnStSearch">' + ic("magnifying-glass") + " Search</button>" +
+      "</div><div id=\"stBody\">" + loadingState("Loading students...") + "</div>"
     );
-    ensureProducts().then(function (items) {
-      var sel = $("flProduct");
-      items.forEach(function (p) { var o = el("option"); o.value = p.product; o.textContent = p.product; sel.appendChild(o); });
-    }).catch(function () {});
-    $("btnFind").onclick = findCode;
-    $("scCode").addEventListener("keydown", function (e) { if (e.key === "Enter") findCode(); });
-    $("btnList").onclick = listCodes;
+    $("btnStSearch").onclick = loadStudents;
+    $("stSearch").addEventListener("keydown", function (e) { if (e.key === "Enter") loadStudents(); });
+    $("stFilter").addEventListener("change", loadStudents);
+    loadStudents();
   }
-  function findCode() {
-    var code = ($("scCode").value || "").trim().toUpperCase();
-    if (!code) { toast("กรอกรหัสก่อน", "err"); return; }
-    var btn = $("btnFind"); setLoading(btn, true);
-    $("scResult").innerHTML = "";
-    api("getCodeInfo", { code: code })
-      .then(function (d) { setLoading(btn, false); drawCodeInfo(d.item || d); })
-      .catch(function (err) { setLoading(btn, false); $("scResult").innerHTML = '<div class="warn-box" style="margin-top:12px">' + esc(errText(err)) + "</div>"; });
+  function getStudentListSearch() {
+    return ($("stSearch") && $("stSearch").value || "").trim();
   }
-  function drawCodeInfo(item) {
-    if (!item) { $("scResult").innerHTML = ""; return; }
-    var used = String(item.status) === "used";
-    var html = '<div class="card-block" style="margin-top:14px;box-shadow:none;border-color:' + (used ? "var(--ink)" : "var(--green)") + '">' +
-      '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px">' +
-      '<span class="detail-code">' + esc(item.code) + "</span>" +
-      (used ? '<span class="chip mute">used</span>' : '<span class="chip ok">unused</span>') +
-      '<span class="chip book">' + esc(item.product) + "</span></div>";
-    if (used && item.user) {
-      html += '<div style="font-size:14px">👤 ' + esc(item.user.nickname || item.user.name || "-") +
-        (item.user.school ? " · " + esc(item.user.school) : "") + "<br>✉️ " + esc(item.email || "-") +
-        "<br>สถานะลงทะเบียน: <b>" + esc(item.user.registration_status || "-") + "</b> · ส่งลิงก์: " + esc(item.user.link_sent || "-") +
-        '<br><a onclick="__go2(' + Number(item.user.row) + ')">เปิดรายการนี้ ▸</a></div>';
-    } else if (used) {
-      html += '<div style="font-size:14px;color:var(--muted)">ใช้แล้วโดย ' + esc(item.used_by_discord || "-") + " · " + esc(item.email || "") + "</div>";
-    } else {
-      html += '<div style="font-size:14px;color:var(--muted)">รหัสนี้ยังไม่ถูกใช้</div>';
+  function loadStudents() {
+    var btn = $("btnStSearch");
+    if (btn) setLoading(btn, true);
+    if ($("stBody")) $("stBody").innerHTML = loadingState("Loading students...");
+    var search = getStudentListSearch();
+    var payload = search ? { search: search } : {};
+    Promise.all([
+      api("listStudents", payload),
+      api("listRegistrations", Object.assign({}, payload, { status: "approved" })),
+    ])
+      .then(function (res) {
+        if (btn) setLoading(btn, false);
+        drawStudentList(res[0], buildApprovedProductMap(res[1]));
+      })
+      .catch(function (err) {
+        if (btn) setLoading(btn, false);
+        $("stBody").innerHTML = errorState(errText(err));
+      });
+  }
+  function buildApprovedProductMap(regsData) {
+    var map = {};
+    listOf(regsData).forEach(function (r) {
+      if (String(r.status) !== "approved" || !r.discord_id || !r.product) return;
+      if (!map[r.discord_id]) map[r.discord_id] = [];
+      if (map[r.discord_id].some(function (p) { return p.product === r.product; })) return;
+      map[r.discord_id].push({ product: r.product, product_name: r.product_name || "" });
+    });
+    return map;
+  }
+  function filterStudentItems(items) {
+    var f = $("stFilter") && $("stFilter").value;
+    if (!f) return items;
+    return items.filter(function (s) {
+      if (f === "active") return (s.approved || 0) > 0;
+      if (f === "pending") return (s.pending || 0) > 0;
+      if (f === "rejected") return (s.rejected || 0) > 0;
+      return true;
+    });
+  }
+  function studentDisplayName(s) {
+    if (s.nickname && s.name) return esc(s.nickname) + ' <span class="detail-name-full">(' + esc(s.name) + ")</span>";
+    return esc(s.nickname || s.name || s.email || "—");
+  }
+  function studentBooksHtml(s, productMap) {
+    var prods = productMap[s.discord_id] || [];
+    if (prods.length) {
+      return '<div class="product-chips">' + prods.map(function (p) {
+        var tip = p.product_name ? p.product + " · " + p.product_name : p.product;
+        return '<span class="chip book student-prod" title="' + attr(tip) + '">' +
+          '<span class="student-prod-code">' + esc(p.product) + "</span>" +
+          (p.product_name ? '<span class="student-prod-name">' + esc(p.product_name) + "</span>" : "") +
+        "</span>";
+      }).join("") + "</div>";
     }
-    html += "</div>";
-    $("scResult").innerHTML = html;
+    if ((s.approved || 0) > 0) return '<span class="muted-text">' + s.approved + " book(s)</span>";
+    if ((s.pending || 0) > 0) return '<span class="chip warn">' + ic("clock") + ' Pending</span>';
+    if ((s.rejected || 0) > 0) return '<span class="chip bad">' + ic("x-circle") + ' Rejected</span>';
+    return '<span class="muted-text">—</span>';
   }
-  window.__go2 = function (row) { navigate("detail", { row: row }); };
-  function listCodes() {
-    var product = $("flProduct").value;
-    var status = $("flStatus").value;
-    var btn = $("btnList"); setLoading(btn, true);
-    var payload = {};
-    if (product) payload.product = product;
-    if (status) payload.status = status;
-    api("listCodes", payload)
-      .then(function (d) { setLoading(btn, false); drawCodeList(d, product); })
-      .catch(function (err) { setLoading(btn, false); $("lcResult").innerHTML = errorState(errText(err)); });
+  function studentStatusMini(s) {
+    var bits = [];
+    if ((s.pending || 0) > 0) bits.push('<span class="chip warn sm">' + s.pending + " pending</span>");
+    if ((s.rejected || 0) > 0) bits.push('<span class="chip bad sm">' + s.rejected + " rejected</span>");
+    return bits.length ? '<div class="student-status-mini">' + bits.join("") + "</div>" : "";
   }
-  function drawCodeList(d, product) {
-    var items = listOf(d);
-    var unused = items.filter(function (i) { return String(i.status) === "unused"; }).length;
-    var used = items.length - unused;
-    var summary = '<div class="summary-bar"><span class="summary-pill">' + (product || "ทั้งหมด") + ": เหลือ <b>" + unused + "</b> / ใช้ไป <b>" + used + "</b></span>" +
-      (items.length ? '<button class="btn btn-ghost btn-sm" id="btnExport">⬇️ Export CSV</button>' : "") + "</div>";
-    if (!items.length) { $("lcResult").innerHTML = summary + emptyState("🔍", "ไม่พบรหัสตามเงื่อนไข", ""); return; }
-    var rows = items.map(function (i) {
-      return "<tr><td class=\"code\">" + esc(i.code) + "</td><td>" + esc(i.product) + "</td><td>" +
-        (String(i.status) === "used" ? '<span class="chip mute">used</span>' : '<span class="chip ok">unused</span>') + "</td>" +
-        '<td class="muted">' + esc(i.used_at ? fmtDateTime(i.used_at) : "-") + "</td></tr>";
+  function drawStudentList(d, productMap) {
+    var items = filterStudentItems(listOf(d));
+    productMap = productMap || {};
+    var summary = items.length
+      ? '<div class="summary-bar"><span class="summary-pill"><b>' + items.length + "</b> students" + countNote(d, items) + "</span></div>"
+      : "";
+    if (!items.length) {
+      $("stBody").innerHTML = summary + emptyState("graduation-cap", "No students found", "Try different search or filters");
+      return;
+    }
+    var rows = items.map(function (s) {
+      return "<tr class=\"clickable-student\" data-discord=\"" + attr(s.discord_id) + "\">" +
+        '<td><div class="student-cell">' + studentAvatarHtml(s, "student-avatar") +
+          "<div>" + studentDisplayName(s) + studentStatusMini(s) + "</div></div></td>" +
+        '<td class="col-hide-sm">' + esc(s.school || "—") + "</td>" +
+        '<td class="col-hide-sm">' + esc(s.email || "—") + "</td>" +
+        "<td>" + studentBooksHtml(s, productMap) + "</td>" +
+        '<td class="col-dt col-hide-sm">' + fmtDateTime(s.last_activity || s.first_registered) + "</td>" +
+        '<td><button class="btn btn-ghost btn-sm" data-discord="' + attr(s.discord_id) + '">View ' + ic("caret-right") + "</button></td></tr>";
     }).join("");
-    $("lcResult").innerHTML = summary +
-      '<div class="table-wrap"><table class="tbl"><thead><tr><th>รหัส</th><th>เล่ม</th><th>สถานะ</th><th>ใช้เมื่อ</th></tr></thead><tbody>' + rows + "</tbody></table></div>";
-    var ex = $("btnExport");
-    if (ex) ex.onclick = function () {
-      var lines = ['"code","product","status","used_at"'].concat(items.map(function (i) {
-        return '"' + i.code + '","' + i.product + '","' + i.status + '","' + (i.used_at || "") + '"';
-      }));
-      var blob = new Blob(["\uFEFF" + lines.join("\r\n")], { type: "text/csv;charset=utf-8;" });
-      var a = el("a"); a.href = URL.createObjectURL(blob); a.download = "codes_export.csv";
-      document.body.appendChild(a); a.click(); a.remove();
-    };
+    $("stBody").innerHTML = summary +
+      '<div class="table-wrap"><table class="tbl tbl-students"><thead><tr>' +
+      "<th>Student</th><th class=\"col-hide-sm\">School</th><th class=\"col-hide-sm\">Email</th><th>Active books</th><th class=\"col-hide-sm\">Last active</th><th></th>" +
+      "</tr></thead><tbody>" + rows + "</tbody></table></div>";
+    $("stBody").querySelectorAll("tr.clickable-student").forEach(function (tr) {
+      tr.onclick = function () {
+        navigate("students", { discord_id: tr.getAttribute("data-discord") });
+      };
+    });
   }
+
+  function renderStudentDetail(discordId) {
+    setMainWide(true);
+    stopAutoRefresh();
+    setView(
+      '<a class="back-link" onclick="__backStudent()">◀ Back to students</a>' +
+      '<div class="student-detail-wrap" id="studentBody">' + loadingState("Loading student...") + "</div>"
+    );
+    Promise.all([
+      api("getStudent", { discord_id: discordId }),
+      ensureProducts(),
+    ])
+      .then(function (res) { drawStudentDetail((res[0].student || res[0]), res[1]); })
+      .catch(function (err) { $("studentBody").innerHTML = errorState(errText(err)); });
+  }
+
+  function drawStudentDetail(s, products) {
+    if (!s) { $("studentBody").innerHTML = errorState("Student not found"); return; }
+    var nameMap = {};
+    (products || []).forEach(function (p) { nameMap[p.product] = p.product_name; });
+
+    var quotaLine = s.premium
+      ? '<span class="chip ok">' + ic("star") + " Premium until " + fmtDateTime(s.premium_until) + "</span>"
+      : '<span class="chip mute">Q&amp;A today: <b>' + esc(s.quota_today != null ? s.quota_today : "—") + "</b> / " + esc(s.quota_limit != null ? s.quota_limit : "—") + "</span>";
+
+    var prods = Array.isArray(s.products) ? s.products : [];
+    var prodRows = prods.length ? prods.map(function (p) {
+      var pname = nameMap[p.product] || "";
+      var tip = pname ? p.product + " · " + pname : p.product;
+      return "<tr>" +
+        '<td><span class="chip book student-prod" title="' + attr(tip) + '"><span class="student-prod-code">' + esc(p.product) + "</span>" +
+          (pname ? '<span class="student-prod-name">' + esc(pname) + "</span>" : "") + "</span></td>" +
+        '<td class="code">' + esc(p.code || "—") + "</td>" +
+        "<td>" + regStatusChip(p.status) + "</td>" +
+        '<td class="col-hide-sm">' + (String(p.link_sent) === "yes" ? '<span class="chip ok sm">sent</span>' : '<span class="chip mute sm">not sent</span>') + "</td>" +
+        '<td class="col-dt col-hide-sm">' + fmtDateTime(p.registered_at) + "</td>" +
+        '<td class="col-dt col-hide-sm">' + fmtDateTime(p.approved_at) + "</td>" +
+        '<td class="col-hide-sm">' + esc(p.reviewed_by || "—") + "</td>" +
+        '<td><button class="btn btn-ghost btn-sm" data-row="' + Number(p.row) + '">' + ic("caret-right") + "</button></td></tr>";
+    }).join("") : "";
+
+    $("studentBody").innerHTML =
+      '<div class="student-profile-card">' +
+        '<div class="student-profile-head">' + studentAvatarHtml(s, "student-avatar lg") +
+          '<div class="student-profile-meta">' +
+            '<h3 class="student-profile-name">' + esc(s.nickname || s.name || "—") +
+              (s.name && s.nickname ? ' <span class="detail-name-full">(' + esc(s.name) + ")</span>" : "") + "</h3>" +
+            (s.discord_username ? '<div class="detail-meta">@' + esc(s.discord_username) + "</div>" : "") +
+            '<div class="detail-meta">' + (s.age ? esc(s.age) + " yrs · " : "") + esc(s.school || "—") + "</div>" +
+            '<div class="detail-meta">' + ic("envelope-simple") + " " + esc(s.email || "—") + "</div>" +
+            '<div class="detail-meta">Member since ' + fmtDateTime(s.first_registered) + "</div>" +
+            '<div class="student-profile-stats">' + quotaLine +
+              '<span class="chip book">' + (s.products_total || prods.length) + " registration(s)</span>" +
+              '<span class="chip ok">' + (s.approved != null ? s.approved : prods.filter(function (p) { return p.status === "approved"; }).length) + " approved</span>" +
+            "</div></div></div>" +
+        (prods.length
+          ? '<div class="student-products-sec"><div class="detail-kicker">Books &amp; registrations</div>' +
+            '<div class="table-wrap"><table class="tbl tbl-student-prods"><thead><tr>' +
+            "<th>Book</th><th>Code</th><th>Status</th><th class=\"col-hide-sm\">Link</th><th class=\"col-hide-sm\">Registered</th><th class=\"col-hide-sm\">Approved</th><th class=\"col-hide-sm\">Reviewed by</th><th></th>" +
+            "</tr></thead><tbody>" + prodRows + "</tbody></table></div></div>"
+          : emptyState("books", "No registrations", "This student has not registered any books yet")) +
+      "</div>";
+
+    $("studentBody").querySelectorAll("[data-row]").forEach(function (b) {
+      b.onclick = function (e) {
+        e.stopPropagation();
+        state.detailReturn = { page: "students", discord_id: s.discord_id };
+        navigate("pending", { row: Number(b.getAttribute("data-row")) });
+      };
+    });
+  }
+  window.__go2 = function (row) {
+    state.detailReturn = null;
+    navigate("pending", { row: row });
+  };
 
   // ======================================================================
   //  หน้า 6 — สลิป (เฟส C)
   // ======================================================================
   function renderSlips() {
-    setView('<div class="page-head"><h2>💳 สลิปรอตรวจ</h2></div><p class="page-sub">นักเรียนที่โอนค่าถามเพิ่ม รอครูตรวจสลิปแล้วอนุมัติ</p><div id="slipBody">' + loadingState("กำลังโหลดสลิป...") + "</div>");
+    setMainWide(false);
+    setView('<div class="page-head"><h2>' + ic("credit-card") + ' Slip review</h2></div><p class="page-sub">Premium Q&A payment slips awaiting approval</p><div id="slipBody">' + loadingState("Loading slips...") + "</div>");
     api("listSlips", {})
       .then(function (d) {
         var items = listOf(d);
         setBadge("slips", items.length);
-        if (!items.length) { $("slipBody").innerHTML = emptyState("💳", "ไม่มีสลิปรอตรวจ", "เมื่อมีนักเรียนโอนค่าถามเพิ่ม รายการจะขึ้นที่นี่"); return; }
+        if (!items.length) { $("slipBody").innerHTML = emptyState("credit-card", "No slips pending", "New payment slips will appear here"); return; }
         var grid = el("div", "slips");
         items.forEach(function (it) { grid.appendChild(slipCard(it)); });
         var b = $("slipBody"); b.innerHTML = ""; b.appendChild(grid);
@@ -694,26 +1475,26 @@
   function slipCard(it) {
     var card = el("div", "slip-card"); card.dataset.row = it.row;
     var img = it.slip_url
-      ? '<img src="' + attr(it.slip_url) + '" alt="สลิป" loading="lazy" onerror="this.parentNode.innerHTML=\'<div class=&quot;noimg&quot;>เปิดรูปไม่ได้</div>\'" /><a class="zoom" href="' + attr(it.slip_url) + '" target="_blank" rel="noopener">🔍 ดูเต็ม</a>'
-      : '<div class="noimg">ไม่มีรูปสลิป</div>';
+      ? '<img src="' + attr(it.slip_url) + '" alt="Slip" loading="lazy" onerror="this.parentNode.innerHTML=\'<div class=&quot;noimg&quot;>Cannot load image</div>\'" /><a class="zoom" href="' + attr(it.slip_url) + '" target="_blank" rel="noopener">' + ic("magnifying-glass-plus") + ' Full size</a>'
+      : '<div class="noimg">No slip image</div>';
     card.innerHTML =
       '<div class="slip-img">' + img + "</div>" +
-      '<div class="slip-body"><div class="slip-amount">฿' + fmtBaht(it.amount) + ' <small>บาท</small></div>' +
-      '<div class="slip-meta">👤 ' + esc(it.discord_id || "-") + "<br>🕑 " + esc(fmtDateTime(it.timestamp)) + "</div>" +
-      '<div class="slip-actions"><button class="btn btn-approve" data-ok>✅ อนุมัติ</button></div></div>';
+      '<div class="slip-body"><div class="slip-amount">฿' + fmtBaht(it.amount) + ' <small>THB</small></div>' +
+      '<div class="slip-meta">' + ic("user") + " " + esc(it.discord_id || "-") + "<br>" + ic("clock") + " " + esc(fmtDateTime(it.timestamp)) + "</div>" +
+      '<div class="slip-actions"><button class="btn btn-approve" data-ok>' + ic("check-circle") + ' Approve</button></div></div>';
     card.querySelector("[data-ok]").onclick = function () { onApproveSlip(it, card); };
     return card;
   }
   function onApproveSlip(it, card) {
     openModal({
-      title: "ยืนยันอนุมัติสลิป",
-      bodyHtml: "<p>อนุมัติสลิปยอด <b>฿" + fmtBaht(it.amount) + "</b> ของ " + esc(it.discord_id) + "? ระบบจะเปิดสิทธิ์ถามเพิ่มถึงสิ้นเดือนให้ทันที</p>",
-      okLabel: "✅ อนุมัติ", okClass: "btn-approve",
+      title: "Confirm slip approval",
+      bodyHtml: "<p>Approve slip for <b>฿" + fmtBaht(it.amount) + "</b> from " + esc(it.discord_id) + "? Premium Q&A will be enabled until end of month.</p>",
+      okLabel: ic("check-circle") + " Approve", okClass: "btn-approve",
     }).then(function (ok) {
       if (!ok) return;
       card.classList.add("busy");
       api("approveSlip", { row: Number(it.row) })
-        .then(function () { toast("เปิดสิทธิ์ถามเพิ่มถึงสิ้นเดือนแล้ว", "ok"); renderSlips(); refreshBadges(); })
+        .then(function () { toast("Premium Q&A enabled until end of month", "ok"); renderSlips(); refreshBadges(); })
         .catch(function (err) { card.classList.remove("busy"); toast(errText(err), "err"); });
     });
   }
@@ -726,92 +1507,38 @@
   function copyText(txt, btn) {
     if (!txt) return;
     navigator.clipboard.writeText(txt).then(function () {
-      toast("คัดลอกแล้ว", "ok");
-      if (btn) { var o = btn.innerHTML; btn.innerHTML = "✓ คัดลอกแล้ว"; setTimeout(function () { btn.innerHTML = o; }, 1400); }
-    }).catch(function () { toast("คัดลอกไม่สำเร็จ", "err"); });
-  }
-
-  // ====== DEMO ======
-  function demoApi(action, payload) {
-    return new Promise(function (resolve, reject) {
-      setTimeout(function () {
-        try { resolve(demoHandle(action, payload)); }
-        catch (e) { reject({ reason: "server_error", message: String(e) }); }
-      }, 240);
-    });
-  }
-  var demoProducts = [
-    { row: 2, product: "MATH1", product_name: "เฉลยคณิต ม.4 เล่ม 1", youtube_link: "https://youtu.be/AbCdEf" },
-    { row: 3, product: "MATH2", product_name: "เฉลยคณิต ม.4 เล่ม 2", youtube_link: "" },
-    { row: 4, product: "PHYS2", product_name: "เฉลยฟิสิกส์ ม.5 เล่ม 2", youtube_link: "https://youtu.be/XyZ123" },
-  ];
-  var demoPending = [
-    { row: 7, timestamp: Date.now() - 5 * 60e3, discord_id: "112233445566778899", name: "สมหญิง ใจดี", nickname: "มุก", age: "16", school: "สาธิตปทุมวัน", email: "mook@gmail.com", code: "MATH1-X7K2-9PQR", product: "MATH1", product_name: "เฉลยคณิต ม.4 เล่ม 1", youtube_link: "https://youtu.be/AbCdEf", status: "pending", link_sent: "no" },
-    { row: 8, timestamp: Date.now() - 42 * 60e3, discord_id: "998877665544332211", name: "ภูมิ รักเรียน", nickname: "ภูมิ", age: "15", school: "เซนต์คาเบรียล", email: "poom.study@gmail.com", code: "MATH2-A3BC-7XYZ", product: "MATH2", product_name: "เฉลยคณิต ม.4 เล่ม 2", youtube_link: "", status: "pending", link_sent: "no" },
-    { row: 9, timestamp: Date.now() - 2 * 3600e3, discord_id: "555566667777888899", name: "กานต์ ตั้งใจ", nickname: "เบล", age: "16", school: "เตรียมอุดมฯ", email: "bell.k29@gmail.com", code: "PHYS2-Q1W8-2ABC", product: "PHYS2", product_name: "เฉลยฟิสิกส์ ม.5 เล่ม 2", youtube_link: "https://youtu.be/XyZ123", status: "pending", link_sent: "no" },
-  ];
-  var demoSlips = [
-    { row: 3, timestamp: Date.now() - 90 * 60e3, discord_id: "112233445566778899", amount: 99, slip_url: "https://placehold.co/600x450/eef2fb/24468f?text=Slip+99" },
-    { row: 4, timestamp: Date.now() - 150 * 60e3, discord_id: "998877665544332211", amount: 199, slip_url: "https://placehold.co/600x450/eaf6ef/1f8a5b?text=Slip+199" },
-  ];
-  function randCode(p) {
-    var s = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-    function blk() { return Array.from({ length: 4 }, function () { return s[Math.floor(Math.random() * s.length)]; }).join(""); }
-    return p + "-" + blk() + "-" + blk();
-  }
-  function demoHandle(action, p) {
-    switch (action) {
-      case "listProducts": return { ok: true, items: demoProducts };
-      case "listPending": return { ok: true, items: demoPending };
-      case "getRegistration": {
-        var it = demoPending.filter(function (x) { return String(x.row) === String(p.row); })[0];
-        return it ? { ok: true, item: it } : { ok: false, reason: "notfound" };
-      }
-      case "approve": {
-        demoPending.forEach(function (x) { if (String(x.row) === String(p.row)) { x.status = "approved"; x.link_sent = "no"; } });
-        return { ok: true, status: "approved", approved_at: new Date().toISOString() };
-      }
-      case "reject": {
-        demoPending.forEach(function (x) { if (String(x.row) === String(p.row)) x.status = "rejected"; });
-        return { ok: true };
-      }
-      case "addProduct": {
-        if (demoProducts.some(function (x) { return x.product === p.product; })) return { ok: false, reason: "duplicate" };
-        demoProducts.push({ row: demoProducts.length + 2, product: p.product, product_name: p.product_name || "", youtube_link: p.youtube_link || "" });
-        return { ok: true, product: p.product };
-      }
-      case "updateProduct": {
-        demoProducts.forEach(function (x) { if (String(x.row) === String(p.row)) { if (p.product_name != null) x.product_name = p.product_name; if (p.youtube_link != null) x.youtube_link = p.youtube_link; } });
-        return { ok: true };
-      }
-      case "generateCodes": {
-        if (!demoProducts.some(function (x) { return x.product === p.product; })) return { ok: false, reason: "product_notfound" };
-        var codes = Array.from({ length: p.amount }, function () { return randCode(p.product); });
-        return { ok: true, product: p.product, amount: p.amount, codes: codes };
-      }
-      case "listCodes": {
-        var all = [];
-        demoProducts.forEach(function (pr) {
-          for (var i = 0; i < 12; i++) all.push({ code: randCode(pr.product), product: pr.product, status: i < 4 ? "used" : "unused", used_by_discord: i < 4 ? "1122..." : "", used_at: i < 4 ? new Date(Date.now() - i * 86400e3).toISOString() : "" });
-        });
-        if (p.product) all = all.filter(function (x) { return x.product === p.product; });
-        if (p.status) all = all.filter(function (x) { return x.status === p.status; });
-        return { ok: true, count: all.length, items: all };
-      }
-      case "getCodeInfo": {
-        if (/9PQR$/.test(p.code)) return { ok: true, item: { code: p.code, product: "MATH1", status: "used", used_by_discord: "112233445566778899", email: "mook@gmail.com", used_at: new Date().toISOString(), user: { row: 7, name: "สมหญิง ใจดี", nickname: "มุก", school: "สาธิตปทุมวัน", registration_status: "approved", link_sent: "yes" } } };
-        return { ok: true, item: { code: p.code, product: (p.code.split("-")[0] || "MATH1"), status: "unused", used_by_discord: "", email: "", used_at: "", user: null } };
-      }
-      case "listSlips": return { ok: true, items: demoSlips };
-      case "approveSlip": { demoSlips = demoSlips.filter(function (x) { return String(x.row) !== String(p.row); }); return { ok: true }; }
-      default: return { ok: true };
-    }
+      toast("Copied", "ok");
+      if (btn) { var o = btn.innerHTML; btn.innerHTML = "✓ Copied"; setTimeout(function () { btn.innerHTML = o; }, 1400); }
+    }).catch(function () { toast("Copy failed", "err"); });
   }
 
   // ====== init ======
+  function initSidebar() {
+    var shell = $("appShell");
+    var btn = $("sidebarToggle");
+    if (!shell || !btn) return;
+    var SS_SIDEBAR = "krumook_sidebar_collapsed";
+    if (localStorage.getItem(SS_SIDEBAR) === "1") shell.classList.add("sidebar-collapsed");
+    function syncToggle() {
+      var collapsed = shell.classList.contains("sidebar-collapsed");
+      btn.innerHTML = collapsed ? ic("caret-right") : ic("caret-left");
+      btn.setAttribute("aria-label", collapsed ? "Expand menu" : "Collapse menu");
+    }
+    btn.onclick = function () {
+      shell.classList.toggle("sidebar-collapsed");
+      localStorage.setItem(SS_SIDEBAR, shell.classList.contains("sidebar-collapsed") ? "1" : "0");
+      syncToggle();
+    };
+    syncToggle();
+  }
   function init() {
     $("loginForm").addEventListener("submit", doLogin);
-    $("demoBtn").addEventListener("click", doDemo);
+    var infoBtn = $("secretInfoBtn");
+    if (infoBtn) infoBtn.addEventListener("click", function () {
+      var pop = $("secretInfo");
+      var open = pop.classList.toggle("hidden") === false;
+      infoBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
     $("logoutBtn").addEventListener("click", doLogout);
     var ld = $("logoutBtnDesk"); if (ld) ld.addEventListener("click", doLogout);
     $("refreshBtn").addEventListener("click", function () {
@@ -823,9 +1550,9 @@
       n.addEventListener("click", function () { navigate(n.getAttribute("data-nav")); });
     });
     window.addEventListener("popstate", route);
+    initSidebar();
 
     // กู้ session
-    if (sessionStorage.getItem(SS.demo) === "1") { state.demo = true; enterApp(); return; }
     if (secret() && apiUrl()) { enterApp(); return; }
     showLogin();
   }
