@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>โต๊ะอนุมัติของครู · krumook backoffice</title>
+  <meta name="description" content="เว็บหลังบ้านของครู — คิวอนุมัติ สินค้า สร้างรหัส ค้นหารหัส สลิป" />
+  <meta name="theme-color" content="#f7f8fb" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@400;500;600&family=Sarabun:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%97%82%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+
+  <!-- ============================ LOGIN ============================ -->
+  <div class="login-screen" id="loginScreen">
+    <form class="login-card" id="loginForm" autocomplete="off">
+      <div class="login-logo">🗂️</div>
+      <div class="login-eyebrow">krumook · backoffice</div>
+      <div class="login-title">โต๊ะอนุมัติของครู</div>
+      <p class="login-sub">กรอกรหัสลับครั้งเดียว เพื่อเข้าใช้งานหลังบ้าน</p>
+
+      <div class="login-error hidden" id="loginError"></div>
+
+      <!-- แสดงเฉพาะเมื่อยังไม่ได้ตั้ง API_URL ในโค้ด -->
+      <div class="field hidden" id="apiUrlField">
+        <label for="apiUrl">ลิงก์ API (Apps Script)</label>
+        <input type="url" id="apiUrl" class="mono" placeholder="https://script.google.com/macros/s/..../exec" inputmode="url" />
+        <span class="hint">URL ที่ได้ตอน Deploy → Web App (ไม่ลับ)</span>
+      </div>
+
+      <div class="field">
+        <label for="apiSecret">รหัสลับของครู (API_SECRET)</label>
+        <input type="password" id="apiSecret" placeholder="••••••••••••" />
+        <span class="hint">เก็บอยู่แค่ในเบราว์เซอร์เครื่องนี้ (sessionStorage) หายเมื่อปิดแท็บ</span>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block btn-lg" id="loginBtn">🔓 เข้าใช้งาน</button>
+
+      <div class="login-divider">หรือ</div>
+      <button type="button" class="btn btn-ghost btn-block" id="demoBtn">👀 ลองใช้ด้วยข้อมูลตัวอย่าง</button>
+
+      <div class="login-note">
+        <b>ปลอดภัยไว้ก่อน:</b> repo นี้เป็น public ได้เพราะ<b>ไม่มีค่าลับอยู่ในโค้ด</b> —
+        รหัสลับที่กรอกอยู่แค่ในเบราว์เซอร์ครูเท่านั้น
+      </div>
+    </form>
+  </div>
+
+  <!-- ============================ APP ============================ -->
+  <div class="app-shell hidden" id="appShell">
+
+    <!-- Sidebar (จอใหญ่) -->
+    <aside class="sidebar">
+      <div class="s-brand">
+        <div class="brand-mark">🗂️</div>
+        <div class="brand-text">
+          <h1>โต๊ะอนุมัติ</h1>
+          <p>krumook backoffice</p>
+        </div>
+      </div>
+      <button class="nav-item" data-nav="pending"><span class="nav-ico">🏠</span><span>คิวรออนุมัติ</span><span class="badge-dot hidden" data-badge="pending">0</span></button>
+      <button class="nav-item" data-nav="products"><span class="nav-ico">📚</span><span>สินค้า</span></button>
+      <button class="nav-item" data-nav="generate"><span class="nav-ico">🎟️</span><span>สร้างรหัส</span></button>
+      <button class="nav-item" data-nav="search"><span class="nav-ico">🔍</span><span>ค้นหารหัส</span></button>
+      <button class="nav-item" data-nav="slips"><span class="nav-ico">💳</span><span>สลิปรอตรวจ</span><span class="badge-dot hidden" data-badge="slips">0</span></button>
+      <div class="s-foot">
+        <span class="mode-pill" id="modePillDesk">เชื่อมต่อแล้ว</span>
+        <button class="btn btn-ghost btn-sm btn-block" id="logoutBtnDesk">ออกจากระบบ</button>
+      </div>
+    </aside>
+
+    <div>
+      <!-- Topbar (มือถือ) -->
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">🗂️</div>
+          <div class="brand-text">
+            <h1 id="topTitle">คิวรออนุมัติ</h1>
+            <p>krumook backoffice</p>
+          </div>
+        </div>
+        <div class="topbar-spacer"></div>
+        <span class="mode-pill" id="modePill">เชื่อมต่อแล้ว</span>
+        <button class="icon-btn" id="refreshBtn" title="รีเฟรช" aria-label="รีเฟรช">🔄</button>
+        <button class="icon-btn" id="logoutBtn" title="ออกจากระบบ" aria-label="ออกจากระบบ">⎋</button>
+      </header>
+
+      <!-- เนื้อหา (แต่ละหน้า render โดย JS) -->
+      <main class="main" id="view"></main>
+    </div>
+
+    <!-- Bottom nav (มือถือ) -->
+    <nav class="bottom-nav" aria-label="เมนูหลัก">
+      <button class="nav-item" data-nav="pending"><span class="nav-ico">🏠</span><span>คิว</span><span class="badge-dot hidden" data-badge="pending">0</span></button>
+      <button class="nav-item" data-nav="products"><span class="nav-ico">📚</span><span>สินค้า</span></button>
+      <button class="nav-item" data-nav="generate"><span class="nav-ico">🎟️</span><span>สร้างรหัส</span></button>
+      <button class="nav-item" data-nav="search"><span class="nav-ico">🔍</span><span>ค้นหา</span></button>
+      <button class="nav-item" data-nav="slips"><span class="nav-ico">💳</span><span>สลิป</span><span class="badge-dot hidden" data-badge="slips">0</span></button>
+    </nav>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+  <div id="modalRoot"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
