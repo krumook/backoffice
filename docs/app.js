@@ -26,7 +26,6 @@
     counts: { pending: 0, slips: 0 },
     codesCache: {},   // product → { items, filter, page, loading }
     genFlash: null,   // ผลลัพธ์ล่าสุดหลังสร้างรหัส
-    codesTab: "browse",
     studentsView: "cards",
     studentsExpanded: {},
     studentsCache: null,
@@ -545,6 +544,7 @@
     highlightNav(loc.page);
     switch (loc.page) {
       case "products": renderProducts(); break;
+      case "codes-search": renderCodeSearch(); break;
       case "codes":
       case "generate": renderCodes(); break;
       case "students":
@@ -554,8 +554,9 @@
     }
   }
   function highlightNav(page) {
+    var navPage = page === "codes-search" || page === "generate" ? "codes" : page;
     document.querySelectorAll(".nav-item").forEach(function (n) {
-      n.classList.toggle("active", n.getAttribute("data-nav") === page);
+      n.classList.toggle("active", n.getAttribute("data-nav") === navPage);
     });
   }
 
@@ -935,6 +936,8 @@
           '<option value="unused"' + (filter === "unused" ? " selected" : "") + ">unused (" + unused + ")</option>" +
           '<option value="used"' + (filter === "used" ? " selected" : "") + ">used (" + used + ")</option>" +
         "</select>" +
+        '<button class="btn btn-ghost btn-sm cluster-copy-all" data-product="' + attr(product) + '"' +
+          (items.length ? "" : " disabled") + ">" + ic("copy") + " Copy all</button>" +
         '<button class="btn btn-ghost btn-sm cluster-export" data-product="' + attr(product) + '">' +
           ic("download-simple") + " CSV</button>" +
       "</div>" +
@@ -954,6 +957,12 @@
     };
     var exp = body.querySelector(".cluster-export");
     if (exp) exp.onclick = function () { exportCodesCsv(product, getFilteredItems(cache)); };
+    var copyAll = body.querySelector(".cluster-copy-all");
+    if (copyAll) copyAll.onclick = function () {
+      var filtered = getFilteredItems(cache);
+      if (!filtered.length) { toast("No codes to copy", "err"); return; }
+      copyText(filtered.map(function (i) { return i.code; }).join("\n"), copyAll);
+    };
     var prev = body.querySelector(".cluster-prev");
     var next = body.querySelector(".cluster-next");
     if (prev) prev.onclick = function () { if (cache.page > 1) { cache.page--; renderClusterBody(product); } };
@@ -1023,31 +1032,14 @@
         '<button type="button" class="btn btn-primary" id="btnCodeSearch">' + ic("magnifying-glass") + " Search</button>" +
       "</div><div id=\"codeSearchBody\">" + emptyState("magnifying-glass", "Search codes", "Enter a code or filter, then press Search") + "</div>";
   }
-  function codesPageMainHtml(products) {
-    return '<div class="codes-tabs">' +
-      '<button type="button" class="codes-tab" data-tab="search">' + ic("magnifying-glass") + " Search</button>" +
-      '<button type="button" class="codes-tab" data-tab="browse">' + ic("books") + " By product</button>" +
-      "</div>" +
-      '<div class="codes-panel" id="codesSearchPanel"><div class="codes-panel-card">' + codesSearchPanelHtml(products) + "</div></div>" +
-      '<div class="codes-panel hidden" id="codesBrowsePanel"><div class="codes-panel-card">' +
-        '<p class="codes-panel-desc">Open a product to view, copy, or export its codes</p>' +
-        buildClusterList(products) +
-      "</div></div>";
+  function codesBrowseMainHtml(products) {
+    return '<div class="codes-panel-card">' +
+      '<p class="codes-panel-desc">Open a product to view, copy, or export its codes</p>' +
+      buildClusterList(products) +
+      "</div>";
   }
-  function bindCodesTabs() {
-    document.querySelectorAll(".codes-tab").forEach(function (btn) {
-      btn.onclick = function () { showCodesTab(btn.getAttribute("data-tab")); };
-    });
-  }
-  function showCodesTab(tab) {
-    state.codesTab = tab || "browse";
-    document.querySelectorAll(".codes-tab").forEach(function (b) {
-      b.classList.toggle("active", b.getAttribute("data-tab") === state.codesTab);
-    });
-    var searchPanel = $("codesSearchPanel");
-    var browsePanel = $("codesBrowsePanel");
-    if (searchPanel) searchPanel.classList.toggle("hidden", state.codesTab !== "search");
-    if (browsePanel) browsePanel.classList.toggle("hidden", state.codesTab !== "browse");
+  function codesSearchPageHtml(products) {
+    return '<div class="codes-panel-card">' + codesSearchPanelHtml(products) + "</div>";
   }
   function getCodeSearchPayload() {
     var p = {};
@@ -1215,15 +1207,19 @@
   }
 
   // ======================================================================
-  //  หน้า 4 — Codes (ค้นหา + browse + สร้างรหัส)
+  //  หน้า 4 — Codes (browse + สร้างรหัส)
   // ======================================================================
   function renderCodes() {
     setMainWide(true);
     setView(
-      '<div class="page-head"><h2>' + ic("ticket") + ' Codes</h2></div>' +
-      '<p class="page-sub">Search codes or browse by product · generate new ones in the sidebar</p>' +
+      '<div class="page-head"><h2>' + ic("ticket") + ' Codes</h2>' +
+      '<div class="spacer"></div>' +
+      '<button type="button" class="btn btn-ghost" id="btnGoCodeSearch">' + ic("magnifying-glass") + " Search codes</button></div>" +
+      '<p class="page-sub">Browse codes by product · generate new ones in the sidebar</p>' +
       '<div id="genBody">' + loadingState("Loading...") + "</div>"
     );
+    var goSearch = $("btnGoCodeSearch");
+    if (goSearch) goSearch.onclick = function () { navigate("codes-search"); };
     ensureProducts()
       .then(function (items) {
         if (!items.length) {
@@ -1236,12 +1232,28 @@
       .catch(function (err) { $("genBody").innerHTML = errorState(errText(err)); });
   }
   function drawCodesPage(products) {
-    $("genBody").innerHTML = splitPage(codesPageMainHtml(products), genFormHtml(products));
-    bindCodeSearch();
+    $("genBody").innerHTML = splitPage(codesBrowseMainHtml(products), genFormHtml(products));
     bindClusters();
     bindGenForm();
-    bindCodesTabs();
-    showCodesTab(state.codesTab || "browse");
+  }
+
+  // ======================================================================
+  //  หน้า 4b — ค้นหา Codes
+  // ======================================================================
+  function renderCodeSearch() {
+    setMainWide(true);
+    setView(
+      '<a class="back-link" onclick="__go(\'codes\')">◀ Back to Codes</a>' +
+      '<div class="page-head"><h2>' + ic("magnifying-glass") + ' Search codes</h2></div>' +
+      '<p class="page-sub">Find codes across all products</p>' +
+      '<div id="codeSearchPage">' + loadingState("Loading...") + "</div>"
+    );
+    ensureProducts()
+      .then(function (items) {
+        $("codeSearchPage").innerHTML = codesSearchPageHtml(items);
+        bindCodeSearch();
+      })
+      .catch(function (err) { $("codeSearchPage").innerHTML = errorState(errText(err)); });
   }
   function doGenerate() {
     var product = $("genProduct").value;
@@ -1261,7 +1273,6 @@
           invalidateCodeCache(product);
           toast("Created " + (d.amount || amount) + " codes", "ok");
           ensureProducts().then(function (items) {
-            state.codesTab = "browse";
             drawCodesPage(items);
             var cluster = document.querySelector('.cluster[data-product="' + CSS.escape(product) + '"]');
             if (cluster) {
