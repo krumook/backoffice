@@ -26,6 +26,10 @@
     counts: { pending: 0, slips: 0 },
     codesCache: {},   // product → { items, filter, page, loading }
     genFlash: null,   // ผลลัพธ์ล่าสุดหลังสร้างรหัส
+    codesTab: "browse",
+    studentsView: "cards",
+    studentsExpanded: {},
+    studentsCache: null,
   };
 
   var CODE_PAGE_SIZE = 50;
@@ -531,8 +535,9 @@
       return;
     }
     if (loc.discord_id && (loc.page === "students" || loc.page === "search")) {
+      state.studentsExpanded[loc.discord_id] = true;
       state.page = "students";
-      renderStudentDetail(loc.discord_id);
+      renderStudents();
       highlightNav("students");
       return;
     }
@@ -1004,19 +1009,45 @@
     document.body.appendChild(a); a.click(); a.remove();
   }
 
-  function codesSearchBarHtml(products) {
+  function codesSearchPanelHtml(products) {
     var pOpts = '<option value="">All products</option>' + products.map(function (p) {
       return '<option value="' + attr(p.product) + '">' + esc(p.product) +
         (p.product_name ? " · " + esc(p.product_name) : "") + "</option>";
     }).join("");
-    return '<div class="codes-search-sec">' +
+    return '<p class="codes-panel-desc">Find a code across all products — partial match works</p>' +
       '<div class="filter-bar">' +
-        '<div class="field fb-grow"><label>Search codes</label><input class="mono" id="codeSearch" placeholder="MATH1-X7K2 or partial code" /></div>' +
+        '<div class="field fb-grow"><label>Code</label><input class="mono" id="codeSearch" placeholder="MATH1-X7K2 or partial code" /></div>' +
         '<div class="field"><label>Product</label><select id="codeProduct">' + pOpts + "</select></div>" +
         '<div class="field"><label>Status</label><select id="codeStatus"><option value="">All</option><option value="unused">unused</option><option value="used">used</option></select></div>' +
         dateRangeFieldHtml("codeDate", "Created date range") +
         '<button type="button" class="btn btn-primary" id="btnCodeSearch">' + ic("magnifying-glass") + " Search</button>" +
-      "</div><div id=\"codeSearchBody\">" + emptyState("magnifying-glass", "Search codes", "Find codes across all products") + "</div></div>";
+      "</div><div id=\"codeSearchBody\">" + emptyState("magnifying-glass", "Search codes", "Enter a code or filter, then press Search") + "</div>";
+  }
+  function codesPageMainHtml(products) {
+    return '<div class="codes-tabs">' +
+      '<button type="button" class="codes-tab" data-tab="search">' + ic("magnifying-glass") + " Search</button>" +
+      '<button type="button" class="codes-tab" data-tab="browse">' + ic("books") + " By product</button>" +
+      "</div>" +
+      '<div class="codes-panel" id="codesSearchPanel"><div class="codes-panel-card">' + codesSearchPanelHtml(products) + "</div></div>" +
+      '<div class="codes-panel hidden" id="codesBrowsePanel"><div class="codes-panel-card">' +
+        '<p class="codes-panel-desc">Open a product to view, copy, or export its codes</p>' +
+        buildClusterList(products) +
+      "</div></div>";
+  }
+  function bindCodesTabs() {
+    document.querySelectorAll(".codes-tab").forEach(function (btn) {
+      btn.onclick = function () { showCodesTab(btn.getAttribute("data-tab")); };
+    });
+  }
+  function showCodesTab(tab) {
+    state.codesTab = tab || "browse";
+    document.querySelectorAll(".codes-tab").forEach(function (b) {
+      b.classList.toggle("active", b.getAttribute("data-tab") === state.codesTab);
+    });
+    var searchPanel = $("codesSearchPanel");
+    var browsePanel = $("codesBrowsePanel");
+    if (searchPanel) searchPanel.classList.toggle("hidden", state.codesTab !== "search");
+    if (browsePanel) browsePanel.classList.toggle("hidden", state.codesTab !== "browse");
   }
   function getCodeSearchPayload() {
     var p = {};
@@ -1190,7 +1221,7 @@
     setMainWide(true);
     setView(
       '<div class="page-head"><h2>' + ic("ticket") + ' Codes</h2></div>' +
-      '<p class="page-sub">Search codes across all products · generate new ones in the sidebar</p>' +
+      '<p class="page-sub">Search codes or browse by product · generate new ones in the sidebar</p>' +
       '<div id="genBody">' + loadingState("Loading...") + "</div>"
     );
     ensureProducts()
@@ -1205,13 +1236,12 @@
       .catch(function (err) { $("genBody").innerHTML = errorState(errText(err)); });
   }
   function drawCodesPage(products) {
-    var main = codesSearchBarHtml(products) +
-      '<div class="codes-browse-label">' + ic("books") + " Browse by product</div>" +
-      buildClusterList(products);
-    $("genBody").innerHTML = splitPage(main, genFormHtml(products));
+    $("genBody").innerHTML = splitPage(codesPageMainHtml(products), genFormHtml(products));
     bindCodeSearch();
     bindClusters();
     bindGenForm();
+    bindCodesTabs();
+    showCodesTab(state.codesTab || "browse");
   }
   function doGenerate() {
     var product = $("genProduct").value;
@@ -1231,11 +1261,8 @@
           invalidateCodeCache(product);
           toast("Created " + (d.amount || amount) + " codes", "ok");
           ensureProducts().then(function (items) {
+            state.codesTab = "browse";
             drawCodesPage(items);
-            var prodSel = $("codeProduct");
-            if (prodSel) prodSel.value = product;
-            searchCodesGlobal();
-            // เปิด cluster ของ product ที่เพิ่งสร้าง + โหลดใหม่
             var cluster = document.querySelector('.cluster[data-product="' + CSS.escape(product) + '"]');
             if (cluster) {
               cluster.classList.add("open");
@@ -1263,8 +1290,12 @@
   function renderStudents() {
     setMainWide(true);
     setView(
-      '<div class="page-head"><h2>' + ic("graduation-cap") + ' Students</h2></div>' +
-      '<p class="page-sub">Browse registered students and see which books each has access to</p>' +
+      '<div class="page-head"><h2>' + ic("graduation-cap") + ' Students</h2>' +
+      '<div class="view-toggle" id="studentsViewToggle">' +
+        '<button type="button" class="view-toggle-btn' + (state.studentsView === "cards" ? " active" : "") + '" id="btnViewCards" title="Cards">' + ic("squares-four") + " Cards</button>" +
+        '<button type="button" class="view-toggle-btn' + (state.studentsView === "table" ? " active" : "") + '" id="btnViewTable" title="Table">' + ic("table") + " Table</button>" +
+      "</div></div>" +
+      '<p class="page-sub">Registered students · books on each card (rejected hidden)</p>' +
       '<div class="filter-bar">' +
         '<div class="field fb-grow"><label>Search</label><input id="stSearch" placeholder="Name / email / discord / school" /></div>' +
         '<div class="field"><label>Show</label><select id="stFilter">' +
@@ -1279,7 +1310,17 @@
     $("btnStSearch").onclick = loadStudents;
     $("stSearch").addEventListener("keydown", function (e) { if (e.key === "Enter") loadStudents(); });
     $("stFilter").addEventListener("change", loadStudents);
+    $("btnViewCards").onclick = function () { setStudentsView("cards"); };
+    $("btnViewTable").onclick = function () { setStudentsView("table"); };
     loadStudents();
+  }
+  function setStudentsView(v) {
+    state.studentsView = v;
+    var c = $("btnViewCards");
+    var t = $("btnViewTable");
+    if (c) c.classList.toggle("active", v === "cards");
+    if (t) t.classList.toggle("active", v === "table");
+    if (state.studentsCache) drawStudents(state.studentsCache.d, state.studentsCache.productMap);
   }
   function getStudentListSearch() {
     return ($("stSearch") && $("stSearch").value || "").trim();
@@ -1292,24 +1333,49 @@
     var payload = search ? { search: search } : {};
     Promise.all([
       api("listStudents", payload),
-      api("listRegistrations", Object.assign({}, payload, { status: "approved" })),
+      api("listRegistrations", payload),
     ])
       .then(function (res) {
         if (btn) setLoading(btn, false);
-        drawStudentList(res[0], buildApprovedProductMap(res[1]));
+        state.studentsCache = { d: res[0], productMap: buildStudentProductsMap(res[1]) };
+        drawStudents(res[0], state.studentsCache.productMap);
       })
       .catch(function (err) {
         if (btn) setLoading(btn, false);
         $("stBody").innerHTML = errorState(errText(err));
       });
   }
-  function buildApprovedProductMap(regsData) {
+  function buildStudentProductsMap(regsData) {
     var map = {};
     listOf(regsData).forEach(function (r) {
-      if (String(r.status) !== "approved" || !r.discord_id || !r.product) return;
+      var st = String(r.status);
+      if (st === "rejected" || !r.discord_id || !r.product) return;
       if (!map[r.discord_id]) map[r.discord_id] = [];
-      if (map[r.discord_id].some(function (p) { return p.product === r.product; })) return;
-      map[r.discord_id].push({ product: r.product, product_name: r.product_name || "" });
+      var list = map[r.discord_id];
+      var found = null;
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].product === r.product) { found = list[i]; break; }
+      }
+      var item = {
+        product: r.product,
+        product_name: r.product_name || "",
+        status: st,
+        code: r.code || "",
+        row: r.row,
+        link_sent: r.link_sent,
+      };
+      if (found) {
+        if (st === "pending") Object.assign(found, item);
+      } else {
+        list.push(item);
+      }
+    });
+    Object.keys(map).forEach(function (id) {
+      map[id].sort(function (a, b) {
+        if (a.status === "pending" && b.status !== "pending") return -1;
+        if (b.status === "pending" && a.status !== "pending") return 1;
+        return String(a.product).localeCompare(String(b.product));
+      });
     });
     return map;
   }
@@ -1327,29 +1393,88 @@
     if (s.nickname && s.name) return esc(s.nickname) + ' <span class="detail-name-full">(' + esc(s.name) + ")</span>";
     return esc(s.nickname || s.name || s.email || "—");
   }
-  function studentBooksHtml(s, productMap) {
-    var prods = productMap[s.discord_id] || [];
-    if (prods.length) {
-      return '<div class="product-chips">' + prods.map(function (p) {
-        var tip = p.product_name ? p.product + " · " + p.product_name : p.product;
-        return '<span class="chip book student-prod" title="' + attr(tip) + '">' +
+  function studentProductItemHtml(p) {
+    var isPending = p.status === "pending";
+    var tip = p.product_name ? p.product + " · " + p.product_name : p.product;
+    return '<div class="student-prod-item' + (isPending ? " is-pending" : "") + '" title="' + attr(tip) + '">' +
+      '<div class="student-prod-item-top">' +
+        (isPending ? '<span class="student-prod-pending" title="Pending approval">' + ic("hourglass-medium") + "</span>" : "") +
+        '<div class="student-prod-item-text">' +
           '<span class="student-prod-code">' + esc(p.product) + "</span>" +
           (p.product_name ? '<span class="student-prod-name">' + esc(p.product_name) + "</span>" : "") +
-        "</span>";
-      }).join("") + "</div>";
+          (p.code ? '<span class="student-prod-code-val">' + esc(p.code) + "</span>" : "") +
+        "</div>" +
+        (isPending && p.row
+          ? '<button type="button" class="btn btn-ghost btn-sm student-prod-review" data-row="' + Number(p.row) + '">' + ic("list-checks") + " Review</button>"
+          : "") +
+      "</div></div>";
+  }
+  function studentProductsBlockHtml(discordId, products) {
+    products = products || [];
+    if (!products.length) return '<div class="student-card-books empty">No books yet</div>';
+    var expanded = !!state.studentsExpanded[discordId];
+    var visible = expanded ? products : products.slice(0, 2);
+    var html = '<div class="student-card-books">' + visible.map(studentProductItemHtml).join("") + "</div>";
+    if (products.length > 2) {
+      html += '<button type="button" class="btn btn-ghost btn-sm student-expand-btn" data-discord="' + attr(discordId) + '">' +
+        (expanded ? ic("caret-up") + " Show less" : ic("caret-down") + " Show all " + products.length + " books") +
+        "</button>";
     }
-    if ((s.approved || 0) > 0) return '<span class="muted-text">' + s.approved + " book(s)</span>";
-    if ((s.pending || 0) > 0) return '<span class="chip warn">' + ic("clock") + ' Pending</span>';
-    if ((s.rejected || 0) > 0) return '<span class="chip bad">' + ic("x-circle") + ' Rejected</span>';
-    return '<span class="muted-text">—</span>';
+    return html;
   }
-  function studentStatusMini(s) {
-    var bits = [];
-    if ((s.pending || 0) > 0) bits.push('<span class="chip warn sm">' + s.pending + " pending</span>");
-    if ((s.rejected || 0) > 0) bits.push('<span class="chip bad sm">' + s.rejected + " rejected</span>");
-    return bits.length ? '<div class="student-status-mini">' + bits.join("") + "</div>" : "";
+  function studentCardHtml(s, productMap) {
+    var prods = productMap[s.discord_id] || [];
+    var pendingCount = prods.filter(function (p) { return p.status === "pending"; }).length;
+    var approvedCount = prods.filter(function (p) { return p.status === "approved"; }).length;
+    return '<article class="student-card">' +
+      '<div class="student-card-head">' +
+        studentAvatarHtml(s, "student-avatar lg") +
+        '<div class="student-card-info">' +
+          '<div class="student-card-name">' + studentDisplayName(s) + "</div>" +
+          (s.discord_username ? '<div class="student-card-discord">@' + esc(s.discord_username) + "</div>" : "") +
+          '<div class="student-card-meta">' + ic("graduation-cap") + " " + esc(s.school || "—") + "</div>" +
+          '<div class="student-card-meta">' + ic("envelope-simple") + " " + esc(s.email || "—") + "</div>" +
+          '<div class="student-card-meta subtle">' + ic("clock") + " Last active " + esc(timeAgo(s.last_activity || s.first_registered)) +
+            " · " + esc(fmtDateTime(s.last_activity || s.first_registered)) + "</div>" +
+          '<div class="student-card-meta subtle">' + ic("calendar-blank") + " Member since " + esc(fmtDateTime(s.first_registered)) + "</div>" +
+        "</div>" +
+      "</div>" +
+      '<div class="student-card-books-sec">' +
+        '<div class="student-card-kicker">Books</div>' +
+        studentProductsBlockHtml(s.discord_id, prods) +
+        '<div class="student-card-stats">' +
+          (approvedCount ? '<span class="chip ok sm">' + approvedCount + " approved</span>" : "") +
+          (pendingCount ? '<span class="chip warn sm">' + pendingCount + " pending</span>" : "") +
+        "</div>" +
+      "</div></article>";
   }
-  function drawStudentList(d, productMap) {
+  function studentTableProductsHtml(products) {
+    products = products || [];
+    if (!products.length) return '<span class="muted-text">—</span>';
+    return '<div class="product-chips compact">' + products.slice(0, 4).map(function (p) {
+      var tip = p.product_name ? p.product + " · " + p.product_name : p.product;
+      var pending = p.status === "pending";
+      return '<span class="chip book' + (pending ? " warn" : "") + ' student-prod-sm" title="' + attr(tip) + '">' +
+        (pending ? ic("hourglass-medium") + " " : "") + esc(p.product) + "</span>";
+    }).join("") + (products.length > 4 ? '<span class="chip mute sm">+' + (products.length - 4) + "</span>" : "") + "</div>";
+  }
+  function bindStudentInteractions() {
+    if (!$("stBody")) return;
+    $("stBody").querySelectorAll(".student-expand-btn").forEach(function (btn) {
+      btn.onclick = function () {
+        var id = btn.getAttribute("data-discord");
+        state.studentsExpanded[id] = !state.studentsExpanded[id];
+        if (state.studentsCache) drawStudents(state.studentsCache.d, state.studentsCache.productMap);
+      };
+    });
+    $("stBody").querySelectorAll(".student-prod-review").forEach(function (btn) {
+      btn.onclick = function (e) {
+        e.stopPropagation();
+        navigate("pending", { row: Number(btn.getAttribute("data-row")) });
+      };
+    });
+  }
+  function drawStudents(d, productMap) {
     var items = filterStudentItems(listOf(d));
     productMap = productMap || {};
     var summary = items.length
@@ -1359,101 +1484,30 @@
       $("stBody").innerHTML = summary + emptyState("graduation-cap", "No students found", "Try different search or filters");
       return;
     }
-    var rows = items.map(function (s) {
-      return "<tr class=\"clickable-student\" data-discord=\"" + attr(s.discord_id) + "\">" +
-        '<td><div class="student-cell">' + studentAvatarHtml(s, "student-avatar") +
-          "<div>" + studentDisplayName(s) + studentStatusMini(s) + "</div></div></td>" +
-        '<td class="col-hide-sm">' + esc(s.school || "—") + "</td>" +
-        '<td class="col-hide-sm">' + esc(s.email || "—") + "</td>" +
-        "<td>" + studentBooksHtml(s, productMap) + "</td>" +
-        '<td class="col-dt col-hide-sm">' + fmtDateTime(s.last_activity || s.first_registered) + "</td>" +
-        '<td><button class="btn btn-ghost btn-sm" data-discord="' + attr(s.discord_id) + '">View ' + ic("caret-right") + "</button></td></tr>";
-    }).join("");
-    $("stBody").innerHTML = summary +
-      '<div class="table-wrap"><table class="tbl tbl-students"><thead><tr>' +
-      "<th>Student</th><th class=\"col-hide-sm\">School</th><th class=\"col-hide-sm\">Email</th><th>Active books</th><th class=\"col-hide-sm\">Last active</th><th></th>" +
-      "</tr></thead><tbody>" + rows + "</tbody></table></div>";
-    $("stBody").querySelectorAll("tr.clickable-student").forEach(function (tr) {
-      tr.onclick = function () {
-        navigate("students", { discord_id: tr.getAttribute("data-discord") });
-      };
-    });
+    if (state.studentsView === "table") {
+      var rows = items.map(function (s) {
+        var prods = productMap[s.discord_id] || [];
+        return "<tr><td><div class=\"student-cell\">" + studentAvatarHtml(s, "student-avatar") +
+          "<div>" + studentDisplayName(s) +
+          (s.discord_username ? '<div class="student-card-discord">@' + esc(s.discord_username) + "</div>" : "") +
+          "</div></div></td>" +
+          '<td class="col-hide-sm">' + esc(s.school || "—") + "</td>" +
+          '<td class="col-hide-sm">' + esc(s.email || "—") + "</td>" +
+          "<td>" + studentTableProductsHtml(prods) + "</td>" +
+          '<td class="col-dt col-hide-sm">' + esc(timeAgo(s.last_activity || s.first_registered)) + "</td></tr>";
+      }).join("");
+      $("stBody").innerHTML = summary +
+        '<div class="table-wrap"><table class="tbl tbl-students"><thead><tr>' +
+        "<th>Student</th><th class=\"col-hide-sm\">School</th><th class=\"col-hide-sm\">Email</th><th>Books</th><th class=\"col-hide-sm\">Last active</th>" +
+        "</tr></thead><tbody>" + rows + "</tbody></table></div>";
+    } else {
+      $("stBody").innerHTML = summary +
+        '<div class="student-cards">' + items.map(function (s) {
+          return studentCardHtml(s, productMap);
+        }).join("") + "</div>";
+    }
+    bindStudentInteractions();
   }
-
-  function renderStudentDetail(discordId) {
-    setMainWide(true);
-    stopAutoRefresh();
-    setView(
-      '<a class="back-link" onclick="__backStudent()">◀ Back to students</a>' +
-      '<div class="student-detail-wrap" id="studentBody">' + loadingState("Loading student...") + "</div>"
-    );
-    Promise.all([
-      api("getStudent", { discord_id: discordId }),
-      ensureProducts(),
-    ])
-      .then(function (res) { drawStudentDetail((res[0].student || res[0]), res[1]); })
-      .catch(function (err) { $("studentBody").innerHTML = errorState(errText(err)); });
-  }
-
-  function drawStudentDetail(s, products) {
-    if (!s) { $("studentBody").innerHTML = errorState("Student not found"); return; }
-    var nameMap = {};
-    (products || []).forEach(function (p) { nameMap[p.product] = p.product_name; });
-
-    var quotaLine = s.premium
-      ? '<span class="chip ok">' + ic("star") + " Premium until " + fmtDateTime(s.premium_until) + "</span>"
-      : '<span class="chip mute">Q&amp;A today: <b>' + esc(s.quota_today != null ? s.quota_today : "—") + "</b> / " + esc(s.quota_limit != null ? s.quota_limit : "—") + "</span>";
-
-    var prods = Array.isArray(s.products) ? s.products : [];
-    var prodRows = prods.length ? prods.map(function (p) {
-      var pname = nameMap[p.product] || "";
-      var tip = pname ? p.product + " · " + pname : p.product;
-      return "<tr>" +
-        '<td><span class="chip book student-prod" title="' + attr(tip) + '"><span class="student-prod-code">' + esc(p.product) + "</span>" +
-          (pname ? '<span class="student-prod-name">' + esc(pname) + "</span>" : "") + "</span></td>" +
-        '<td class="code">' + esc(p.code || "—") + "</td>" +
-        "<td>" + regStatusChip(p.status) + "</td>" +
-        '<td class="col-hide-sm">' + (String(p.link_sent) === "yes" ? '<span class="chip ok sm">sent</span>' : '<span class="chip mute sm">not sent</span>') + "</td>" +
-        '<td class="col-dt col-hide-sm">' + fmtDateTime(p.registered_at) + "</td>" +
-        '<td class="col-dt col-hide-sm">' + fmtDateTime(p.approved_at) + "</td>" +
-        '<td class="col-hide-sm">' + esc(p.reviewed_by || "—") + "</td>" +
-        '<td><button class="btn btn-ghost btn-sm" data-row="' + Number(p.row) + '">' + ic("caret-right") + "</button></td></tr>";
-    }).join("") : "";
-
-    $("studentBody").innerHTML =
-      '<div class="student-profile-card">' +
-        '<div class="student-profile-head">' + studentAvatarHtml(s, "student-avatar lg") +
-          '<div class="student-profile-meta">' +
-            '<h3 class="student-profile-name">' + esc(s.nickname || s.name || "—") +
-              (s.name && s.nickname ? ' <span class="detail-name-full">(' + esc(s.name) + ")</span>" : "") + "</h3>" +
-            (s.discord_username ? '<div class="detail-meta">@' + esc(s.discord_username) + "</div>" : "") +
-            '<div class="detail-meta">' + (s.age ? esc(s.age) + " yrs · " : "") + esc(s.school || "—") + "</div>" +
-            '<div class="detail-meta">' + ic("envelope-simple") + " " + esc(s.email || "—") + "</div>" +
-            '<div class="detail-meta">Member since ' + fmtDateTime(s.first_registered) + "</div>" +
-            '<div class="student-profile-stats">' + quotaLine +
-              '<span class="chip book">' + (s.products_total || prods.length) + " registration(s)</span>" +
-              '<span class="chip ok">' + (s.approved != null ? s.approved : prods.filter(function (p) { return p.status === "approved"; }).length) + " approved</span>" +
-            "</div></div></div>" +
-        (prods.length
-          ? '<div class="student-products-sec"><div class="detail-kicker">Books &amp; registrations</div>' +
-            '<div class="table-wrap"><table class="tbl tbl-student-prods"><thead><tr>' +
-            "<th>Book</th><th>Code</th><th>Status</th><th class=\"col-hide-sm\">Link</th><th class=\"col-hide-sm\">Registered</th><th class=\"col-hide-sm\">Approved</th><th class=\"col-hide-sm\">Reviewed by</th><th></th>" +
-            "</tr></thead><tbody>" + prodRows + "</tbody></table></div></div>"
-          : emptyState("books", "No registrations", "This student has not registered any books yet")) +
-      "</div>";
-
-    $("studentBody").querySelectorAll("[data-row]").forEach(function (b) {
-      b.onclick = function (e) {
-        e.stopPropagation();
-        state.detailReturn = { page: "students", discord_id: s.discord_id };
-        navigate("pending", { row: Number(b.getAttribute("data-row")) });
-      };
-    });
-  }
-  window.__go2 = function (row) {
-    state.detailReturn = null;
-    navigate("pending", { row: row });
-  };
 
   // ======================================================================
   //  หน้า 6 — สลิป (เฟส C)
