@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lima — Class Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff; --accent: #0f6e56; --accent-light: #e1f5ee; --tip: #185fa5; --tip-light: #e6f1fb; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
+    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  header { padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 24px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+  .section-label { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .schedule-list { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin-bottom: 28px; }
+  .schedule-row { display: flex; align-items: center; gap: 16px; padding: 16px 20px; }
+  .day-pill { display: inline-block; min-width: 52px; text-align: center; font-size: 12.5px; font-weight: 700; color: var(--accent); background: var(--accent-light); padding: 5px 10px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.02em; }
+  .schedule-time { font-size: 16px; font-weight: 600; color: var(--ink); flex: 1; }
+  .schedule-note { font-size: 12.5px; color: var(--muted); }
+  .note { background: var(--accent-light); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; font-size: 13.5px; color: var(--accent); margin-bottom: 28px; display: flex; gap: 12px; align-items: flex-start; }
+  .note .emoji { font-size: 18px; }
+  .note b { display: block; margin-bottom: 3px; color: var(--ink); }
+  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="home.html">&larr; Back to home</a>
+  <header>
+    <h1>Lima&rsquo;s class schedule</h1>
+    <div class="meta">Recurring weekly session &middot; last confirmed 2026-07-30</div>
+  </header>
+  <div class="section-label">Recurring weekly schedule</div>
+  <div class="schedule-list">
+    <div class="schedule-row">
+      <span class="day-pill">SAT</span>
+      <span class="schedule-time">15:00 &ndash; 16:00</span>
+      <span class="schedule-note">1 hour &middot; Mathematics</span>
+    </div>
+  </div>
+  <div class="note">
+    <span class="emoji">&#127890;</span>
+    <div><b>Current pattern</b>Saturday 15:00&ndash;16:00 is the standing weekly schedule as of 2026-07-30. No end date has been given yet &mdash; let me know when this changes and I&rsquo;ll update this page.</div>
+  </div>
+  <footer>Lima &middot; class schedule &middot; update this page whenever a session is added, moved, or cancelled</footer>
+</div>
+</body>
+</html>

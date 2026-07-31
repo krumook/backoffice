@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Imboon &mdash; 1. Numbers and the Number System &mdash; Topic Detail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
+    --accent: #0f6e56; --accent-light: #e1f5ee;
+    --loss: #993c1d; --loss-light: #faece7;
+    --tip: #185fa5; --tip-light: #e6f1fb;
+    --amber: #854f0b; --amber-light: #faeeda;
+    --pink: #72243e; --pink-light: #fbeaf0;
+    --purple: #3c3489; --purple-light: #eeedfe;
+    --untested: #8b978f; --untested-light: #eef1ef;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
+    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header { padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 20px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); font-size: 13px; table-layout: fixed; margin-bottom: 8px; }
+  thead th { background: var(--ink); color: #fff; text-align: left; padding: 10px 12px; font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
+  tbody td { padding: 10px 12px; border-top: 1px solid var(--line); vertical-align: top; }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.code { font-weight: 600; width: 55px; color: var(--accent); word-break: break-word; line-height: 1.3; font-size: 11.5px; }
+  td.topic { width: 220px; }
+  td.progress { width: 160px; }
+  td.score { width: 130px; color: var(--muted); }
+  td.improve { color: var(--ink); width: auto; }
+
+  .tier-badge { display: block; width: fit-content; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-top: 5px; white-space: nowrap; }
+  .tier-foundation { background: var(--untested-light); color: var(--untested); }
+  .tier-extends { background: var(--tip-light); color: var(--tip); }
+
+  .cat { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 20px; margin-right: 6px; white-space: nowrap; }
+  .cat-correct { background: var(--accent-light); color: var(--accent); }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+
+  tr.untested td { color: var(--muted); }
+  tr.untested td.code { color: var(--muted); }
+  tr.untested td.dash { text-align: center; }
+
+  .legend { display: flex; gap: 16px; font-size: 12px; color: var(--muted); flex-wrap: wrap; align-items: center; margin: 10px 0 30px; }
+
+  .improve-summary { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 18px 0 6px; }
+  .improve-title { font-size: 13px; font-weight: 700; color: var(--ink); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 12px; }
+  .improve-row { font-size: 13px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+  .improve-row:last-child { margin-bottom: 0; }
+  .improve-row .cat { margin-right: 8px; }
+
+  .topic-nav { display:flex; justify-content:space-between; align-items:center; margin: 20px 0; font-size: 13px; }
+  .topic-nav a { color: var(--tip); text-decoration:none; font-weight:600; }
+  .topic-nav a:hover { text-decoration:underline; }
+  .topic-nav .spacer { color: var(--muted); }
+
+  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>1&nbsp;&middot;&nbsp;Numbers and the Number System</h1>
+    <div class="meta">4MA1 Foundation Tier &middot; AO1 Number and algebra &middot; Taught: 0/11 sub-topics &middot; Paper score: not yet tested</div>
+  </header>
+
+  <a class="back-link" href="dash.html">&larr; Back to dashboard</a>
+
+  <div class="legend">
+    <div><span class="cat cat-correct">Learned</span></div>
+    <div><span class="cat cat-slip">Need to revise</span></div>
+    <div>&mdash; Not yet taught</div>
+    <div><span class="tier-badge tier-foundation" style="display:inline-block;margin-top:0;">Foundation</span> covered fully within Foundation Tier</div>
+    <div><span class="tier-badge tier-extends" style="display:inline-block;margin-top:0;">+ Higher</span> gets more depth added in Year 11</div>
+  </div>
+
+  <table>
+    <colgroup><col style="width:55px;"><col style="width:220px;"><col style="width:160px;"><col style="width:130px;"><col></colgroup>
+    <thead><tr><th>Code</th><th>Sub-topic</th><th>Learning Progress</th><th>Paper Score</th><th>How to improve</th></tr></thead>
+    <tbody>
+      <tr class="untested"><td class="code">1.1</td><td class="topic">Integers<div class="tier-badge tier-foundation">Foundation</div></td><td class="progress dash">&mdash; not yet taught</td><td class="score dash">&mdash; no papers yet</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">1.2</td><td class="topic">Fractions<div class="tier-badge tier-foundation">Foundation</div></td><td class="progress dash">&mdash; not yet taught</td><td class="score dash">&mdash; no papers yet</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">1.3</td><td class="topic">Decimals<div class="tier-badge tier-extends">+ Higher</div></td><td class="progress dash">&mdash; not yet taught</td><td class="score dash">&mdash; no papers yet</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">1.4</td><td class="topic">Powers and Roots<div class="tier-badge tier-extends">+ Higher</div></td><td class="progress dash">&mdash; not yet taught</td><td class="score dash">&mdash; no papers yet</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">1.5</td><td class="topic">Set Language and Notation<div class="tier-badge tier-extends">+ Higher</div></td><td class="progress dash">&mdash; not yet taught</td><td class="score dash">&mdash; no papers yet</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">1.6</td><td class="topic">Percentages<div class="tier-badge tier-extends">+ Higher</div></td><td class="progress dash">&mdash; not yet taught</td><td class="score dash">&mdash; no papers yet</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">1.7</td><td class="topic">Ratio and Proportion<div class="tier-badge tier-foundation">Foundation</div></td><td class="progress dash">&mdash; not yet taught</td><td class="score dash">&mdash; no papers yet</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">1.8</td><td class="topic">Degree of Accuracy<div class="tier-badge tier-extends">+ Higher</div></td><td class="progress dash">&mdash; not yet taught</td><td class="score dash">&mdash; no papers yet</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">1.9</td><td class="topic">Standard Form<div class="tier-badge tier-extends">+ Higher</div></td><td class="progress dash">&mdash; not yet taught</td><td class="score dash">&mdash; no papers yet</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">1.10</td><td class="topic">Applying Number<div class="tier-badge tier-foundation">Foundation</div></td><td class="progress dash">&mdash; not yet taught</td><td class="score dash">&mdash; no papers yet</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">1.11</td><td class="topic">Electronic Calculators<div class="tier-badge tier-foundation">Foundation</div></td><td class="progress dash">&mdash; not yet taught</td><td class="score dash">&mdash; no papers yet</td><td class="improve dash">&mdash;</td></tr>
+    </tbody>
+  </table>
+
+  <div class="improve-summary">
+    <div class="improve-title">Areas to improve in this topic</div>
+    <div class="improve-row"><span class="cat cat-slip">Need to revise</span>None tagged yet &mdash; no sessions taught in this topic so far.</div>
+    <div class="improve-row"><span class="cat cat-correct" style="background:var(--untested-light);color:var(--untested);">Not covered</span>All 11 sub-topics are still untaught.</div>
+  </div>
+
+  <div class="topic-nav">
+    <span class="spacer"></span>
+    <a href="dash.html">Dashboard</a>
+    <a href="t2.html">2. Equations, Formulae and Identities &rarr;</a>
+  </div>
+
+  <footer>Imboon &middot; Year 10 (Rugby International School) &middot; Pearson Edexcel International GCSE Mathematics A (4MA1) &middot; Foundation Tier &middot; Learning Progress updates weekly, Paper Score updates when a past paper is graded</footer>
+
+</div>
+</body>
+</html>

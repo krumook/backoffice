@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Iris &mdash; คณิตศาสตร์ ม.3 Syllabus Coverage Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
+    --accent: #0f6e56; --accent-light: #e1f5ee;
+    --loss: #993c1d; --loss-light: #faece7;
+    --tip: #185fa5; --tip-light: #e6f1fb;
+    --amber: #854f0b; --amber-light: #faeeda;
+    --pink: #72243e; --pink-light: #fbeaf0;
+    --purple: #3c3489; --purple-light: #eeedfe;
+    --grade-4: #25935C; --grade-4-light: #D5E2DB; --grade-35: #259346; --grade-35-light: #D5E2D9; --grade-3: #259328; --grade-3-light: #D5E2D5; --grade-25: #499325; --grade-25-light: #D9E2D5; --grade-2: #7D7212; --grade-2-light: #D9D6B4; --grade-15: #B36B19; --grade-15-light: #EEE6DD; --grade-1: #933B25; --grade-1-light: #E2D7D5; --grade-0: #932537; --grade-0-light: #E2D5D7;
+    --weight: #1f2a24; --untested: #8b978f; --untested-light: #eef1ef;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
+    font-family: 'Space Grotesk', 'Noto Sans Thai', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header { padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 20px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+
+  .legend-box { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; margin-bottom: 22px; font-size: 13px; color: var(--muted); }
+  .legend-box b { color: var(--ink); }
+
+  .section-label { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  .topic-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
+  .ts-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: block; text-decoration: none; color: inherit; cursor: pointer; transition: box-shadow 0.15s ease, transform 0.15s ease; }
+  .ts-card:hover { box-shadow: 0 3px 14px rgba(31,42,36,0.14); transform: translateY(-2px); }
+  .ts-card .ts-name { font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 9px; text-transform: uppercase; }
+  .ts-card .ts-name .en { display: block; font-size: 10.5px; font-weight: 500; color: var(--muted); text-transform: none; margin-top: 2px; }
+  .ts-row { display: flex; align-items: baseline; justify-content: space-between; }
+  .ts-row .ts-label { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+  .ts-card .ts-pct { font-size: 20px; font-weight: 700; }
+  .ts-card .ts-frac { font-size: 12px; color: var(--muted); margin-left: 6px; }
+  .ts-bar { height: 5px; border-radius: 3px; background: #fff; margin-top: 4px; margin-bottom: 12px; overflow: hidden; }
+  .ts-bar-fill { height: 100%; border-radius: 3px; }
+  .ts-g4 { background: var(--grade-4-light); } .ts-g4 .ts-pct { color: var(--grade-4); } .ts-g4 .ts-bar-fill { background: var(--grade-4); }
+  .ts-g35 { background: var(--grade-35-light); } .ts-g35 .ts-pct { color: var(--grade-35); } .ts-g35 .ts-bar-fill { background: var(--grade-35); }
+  .ts-g3 { background: var(--grade-3-light); } .ts-g3 .ts-pct { color: var(--grade-3); } .ts-g3 .ts-bar-fill { background: var(--grade-3); }
+  .ts-g25 { background: var(--grade-25-light); } .ts-g25 .ts-pct { color: var(--grade-25); } .ts-g25 .ts-bar-fill { background: var(--grade-25); }
+  .ts-g2 { background: var(--grade-2-light); } .ts-g2 .ts-pct { color: var(--grade-2); } .ts-g2 .ts-bar-fill { background: var(--grade-2); }
+  .ts-g15 { background: var(--grade-15-light); } .ts-g15 .ts-pct { color: var(--grade-15); } .ts-g15 .ts-bar-fill { background: var(--grade-15); }
+  .ts-g1 { background: var(--grade-1-light); } .ts-g1 .ts-pct { color: var(--grade-1); } .ts-g1 .ts-bar-fill { background: var(--grade-1); }
+  .ts-g0 { background: var(--grade-0-light); } .ts-g0 .ts-pct { color: var(--grade-0); } .ts-g0 .ts-bar-fill { background: var(--grade-0); }
+  .ts-untested { background: var(--untested-light); } .ts-untested .ts-pct { color: var(--untested); } .ts-untested .ts-bar-fill { background: var(--untested); }
+
+  .ts-weight-row { margin-top: 2px; }
+  .ts-card .ts-wpct { font-size: 14px; font-weight: 700; color: var(--weight); }
+  .ts-card .ts-wfrac { font-size: 11.5px; color: var(--muted); margin-left: 6px; }
+  .ts-wbar { margin-bottom: 0; }
+  .ts-wbar .ts-bar-fill.ts-wbar-fill { background: var(--weight) !important; }
+
+  .overall-line { font-size: 12.5px; color: var(--muted); margin: 4px 0 0; }
+  .topic-box .topic-summary { margin-bottom: 14px; }
+  .overall-line b { color: var(--ink); }
+
+  .band-legend { display: flex; justify-content: center; gap: 18px; font-size: 12px; color: var(--muted); flex-wrap: wrap; align-items: center; margin: 0 0 30px; }
+  .band-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+  .dot-g4 { background: var(--grade-4); } .dot-g35 { background: var(--grade-35); } .dot-g3 { background: var(--grade-3); } .dot-g25 { background: var(--grade-25); } .dot-g2 { background: var(--grade-2); } .dot-g15 { background: var(--grade-15); } .dot-g1 { background: var(--grade-1); } .dot-g0 { background: var(--grade-0); }
+  .dot-untested { background: var(--untested); }
+
+  .cat { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  .mistake-table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin-top: 4px; }
+  .mistake-table th { background: var(--ink); padding: 10px 14px; text-align: left; }
+  .mistake-table td { padding: 9px 14px; font-size: 13px; color: var(--ink); border-top: 1px solid var(--line); }
+  .mistake-table tr.placeholder td { color: var(--muted); font-style: italic; text-align: center; padding: 20px 14px; }
+
+  .details-link { display: inline-block; background: var(--ink); color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; padding: 10px 18px; border-radius: 8px; margin-bottom: 30px; }
+  .details-link:hover { background: var(--accent); }
+
+  .note { background: var(--accent-light); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; font-size: 13px; color: var(--accent); margin-bottom: 28px; }
+
+  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="home.html">&larr; Back to home</a>
+
+  <header>
+    <h1>Iris &mdash; คณิตศาสตร์ ม.3 syllabus coverage tracker</h1>
+    <div class="meta">คณิตศาสตร์ ม.3 &middot; Mathematics — Matthayom 3 (IPST) &middot; built from every past test marked so far &middot; updated as new tests are added</div>
+  </header>
+
+  <div class="legend-box">
+    <div class="section-label" style="margin-bottom: 6px;">Tests / past papers covered so far</div>
+    <div>No tests marked yet &mdash; grade Iris&rsquo;s first quiz or exam and I&rsquo;ll populate this list with a link and score band for each one.</div>
+  </div>
+
+  <div class="legend-box topic-box">
+  <div class="section-label">Book 1 &middot; เทอม 1 (เล่ม 1) &middot; coverage by topic &middot; click a card for full detail</div>
+  <div class="topic-summary">
+    <a href="t1.html" class="ts-card ts-untested">
+      <div class="ts-name">1&nbsp;&middot;&nbsp;อสมการเชิงเส้นตัวแปรเดียว<span class="en">Linear Inequality in One Variable</span></div>
+      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
+      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
+      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+    </a>
+    <a href="t2.html" class="ts-card ts-untested">
+      <div class="ts-name">2&nbsp;&middot;&nbsp;การแยกตัวประกอบของพหุนามที่มีดีกรีสูงกว่าสอง<span class="en">Factoring Polynomials (Degree > 2)</span></div>
+      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
+      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
+      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+    </a>
+    <a href="t3.html" class="ts-card ts-untested">
+      <div class="ts-name">3&nbsp;&middot;&nbsp;สมการกำลังสองตัวแปรเดียว<span class="en">Quadratic Equation in One Variable</span></div>
+      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
+      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
+      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+    </a>
+    <a href="t4.html" class="ts-card ts-untested">
+      <div class="ts-name">4&nbsp;&middot;&nbsp;ความคล้าย<span class="en">Similarity</span></div>
+      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
+      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
+      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+    </a>
+    <a href="t5.html" class="ts-card ts-untested">
+      <div class="ts-name">5&nbsp;&middot;&nbsp;กราฟของฟังก์ชันกำลังสอง<span class="en">Graph of Quadratic Function</span></div>
+      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
+      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
+      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+    </a>
+    <a href="t6.html" class="ts-card ts-untested">
+      <div class="ts-name">6&nbsp;&middot;&nbsp;สถิติ (3)<span class="en">Statistics (3)</span></div>
+      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
+      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
+      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+    </a>
+  </div>
+  </div>
+  <div class="legend-box topic-box">
+  <div class="section-label">Book 2 &middot; เทอม 2 (เล่ม 2) &middot; coverage by topic &middot; click a card for full detail</div>
+  <div class="topic-summary">
+    <a href="t7.html" class="ts-card ts-untested">
+      <div class="ts-name">7&nbsp;&middot;&nbsp;ระบบสมการเชิงเส้นสองตัวแปร<span class="en">System of Linear Equations (Two Variables)</span></div>
+      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
+      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
+      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+    </a>
+    <a href="t8.html" class="ts-card ts-untested">
+      <div class="ts-name">8&nbsp;&middot;&nbsp;วงกลม<span class="en">Circles</span></div>
+      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
+      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
+      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+    </a>
+    <a href="t9.html" class="ts-card ts-untested">
+      <div class="ts-name">9&nbsp;&middot;&nbsp;พีระมิด กรวย และทรงกลม<span class="en">Pyramid, Cone, and Sphere</span></div>
+      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
+      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
+      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+    </a>
+    <a href="t10.html" class="ts-card ts-untested">
+      <div class="ts-name">10&nbsp;&middot;&nbsp;ความน่าจะเป็น<span class="en">Probability</span></div>
+      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
+      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
+      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+    </a>
+    <a href="t11.html" class="ts-card ts-untested">
+      <div class="ts-name">11&nbsp;&middot;&nbsp;อัตราส่วนตรีโกณมิติ<span class="en">Trigonometric Ratios</span></div>
+      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
+      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
+      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+    </a>
+  </div>
+  </div>
+
+  <div class="overall-line">Overall across all 0 tests marked: <b>&mdash; (not yet tested)</b> &mdash; will be based on every question tested so far, grouped by book and chapter, once the first test is graded.</div>
+
+  <div class="band-legend">
+    <div><span class="band-dot dot-g4"></span>4 (ดีเยี่ยม) &middot; 80&ndash;100</div>
+    <div><span class="band-dot dot-g35"></span>3.5 (ดีมาก) &middot; 75&ndash;79</div>
+    <div><span class="band-dot dot-g3"></span>3 (ดี) &middot; 70&ndash;74</div>
+    <div><span class="band-dot dot-g25"></span>2.5 (ค่อนข้างดี) &middot; 65&ndash;69</div>
+    <div><span class="band-dot dot-g2"></span>2 (พอใช้) &middot; 60&ndash;64</div>
+    <div><span class="band-dot dot-g15"></span>1.5 (พอใช้-ต่ำ) &middot; 55&ndash;59</div>
+    <div><span class="band-dot dot-g1"></span>1 (ผ่าน) &middot; 50&ndash;54</div>
+    <div><span class="band-dot dot-g0"></span>0 (ตก) &middot; 0&ndash;49</div>
+    <div><span class="band-dot dot-untested"></span>Not yet tested</div>
+  </div>
+
+  <div class="legend-box">
+    <div class="section-label" style="margin-bottom: 12px;">Where mistakes are concentrated across all topics</div>
+    <table class="mistake-table">
+      <thead>
+        <tr>
+          <th><span class="cat cat-slip">Careless slip</span></th>
+          <th><span class="cat cat-miscon">Misconception</span></th>
+          <th><span class="cat cat-blank">Left blank</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="placeholder"><td colspan="3">No tests marked yet &mdash; this table fills in automatically once questions have been graded.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <a class="details-link" href="t1.html">Open full syllabus detail (Topic 1) &rarr;</a>
+
+  <div class="note">Add a new test: append it to the &ldquo;tests covered&rdquo; list above with its own link and score, then open the relevant topic page(s) and add a row (or extend an existing row) for every question from that test, and recalculate the Score line there and the section summary here. Every question from a marked test should appear somewhere in the tracker.</div>
+
+  <footer>คณิตศาสตร์ ม.3 &middot; Mathematics — Matthayom 3 (IPST) &middot; topic codes reference the current textbook&rsquo;s chapter/section numbers (Book &middot; Chapter.Section) &middot; every question from all marked tests is accounted for &middot; update after each new test</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lima &mdash; 1. Factors and Factorization &mdash; Topic Detail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
+    --accent: #0f6e56; --accent-light: #e1f5ee;
+    --loss: #993c1d; --loss-light: #faece7;
+    --tip: #185fa5; --tip-light: #e6f1fb;
+    --amber: #854f0b; --amber-light: #faeeda;
+    --pink: #72243e; --pink-light: #fbeaf0;
+    --purple: #3c3489; --purple-light: #eeedfe;
+    --grade-astar: #1BA755; --grade-a: #1B88A7; --grade-b: #DD800E; --grade-below: #A71B46;
+    --grade-astar-light: #E2F8EB; --grade-a-light: #E2F3F8; --grade-b-light: #F8EEE2; --grade-below-light: #F8E2E9;
+    --weight: #1f2a24;
+    --untested: #8b978f; --untested-light: #eef1ef;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
+    font-family: 'Space Grotesk', 'Noto Sans Thai', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header { padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 20px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+  .legend-box { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; margin-bottom: 22px; font-size: 13px; color: var(--muted); }
+  .legend-box b { color: var(--ink); }
+  .legend-box .paper-list { margin-top: 6px; }
+  .legend-box .paper-list a { display: inline-block; padding: 2px 10px; border-radius: 20px; margin: 2px 6px 2px 0; font-size: 12.5px; font-weight: 600; text-decoration: none; }
+  .legend-box .paper-list a.sess { background: var(--tip-light); color: var(--tip); }
+  .legend-box .paper-list a.sess:hover { background: var(--tip); color: #fff; }
+  .section-label { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .topic-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
+  .ts-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: block; text-decoration: none; color: inherit; cursor: pointer; transition: box-shadow 0.15s ease, transform 0.15s ease; }
+  .ts-card:hover { box-shadow: 0 3px 14px rgba(31,42,36,0.14); transform: translateY(-2px); }
+  .ts-card .ts-name { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 9px; text-transform: uppercase; }
+  .ts-row { display: flex; align-items: baseline; justify-content: space-between; }
+  .ts-row .ts-label { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+  .ts-card .ts-pct { font-size: 20px; font-weight: 700; }
+  .ts-card .ts-frac { font-size: 12px; color: var(--muted); margin-left: 6px; }
+  .ts-bar { height: 5px; border-radius: 3px; background: #fff; margin-top: 4px; margin-bottom: 12px; overflow: hidden; }
+  .ts-bar-fill { height: 100%; border-radius: 3px; }
+  .ts-astar { background: var(--grade-astar-light); } .ts-astar .ts-pct { color: var(--grade-astar); } .ts-astar .ts-bar-fill { background: var(--grade-astar); }
+  .ts-a { background: var(--grade-a-light); } .ts-a .ts-pct { color: var(--grade-a); } .ts-a .ts-bar-fill { background: var(--grade-a); }
+  .ts-b { background: var(--grade-b-light); } .ts-b .ts-pct { color: var(--grade-b); } .ts-b .ts-bar-fill { background: var(--grade-b); }
+  .ts-below { background: var(--grade-below-light); } .ts-below .ts-pct { color: var(--grade-below); } .ts-below .ts-bar-fill { background: var(--grade-below); }
+  .ts-weight-row { margin-top: 2px; }
+  .ts-card .ts-wpct { font-size: 14px; font-weight: 700; color: var(--weight); }
+  .ts-card .ts-wfrac { font-size: 11.5px; color: var(--muted); margin-left: 6px; }
+  .ts-wbar { margin-bottom: 0; }
+  .ts-wbar .ts-bar-fill.ts-wbar-fill { background: var(--weight) !important; }
+  .overall-line { font-size: 12.5px; color: var(--muted); margin: 4px 0 0; }
+  .overall-line b { color: var(--ink); }
+  .band-legend { display: flex; justify-content: center; gap: 18px; font-size: 12px; color: var(--muted); flex-wrap: wrap; align-items: center; margin: 0 0 30px; }
+  .band-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+  .dot-astar { background: var(--grade-astar); } .dot-a { background: var(--grade-a); } .dot-b { background: var(--grade-b); } .dot-below { background: var(--grade-below); }
+  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
+  h2.section-title { font-size: 16px; font-weight: 600; margin: 30px 0 14px; padding-top: 6px; color: var(--ink); }
+  h2.section-title:first-of-type { margin-top: 0; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); font-size: 13px; table-layout: fixed; margin-bottom: 8px; }
+  thead th { background: var(--ink); color: #fff; text-align: left; padding: 10px 12px; font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
+  tbody td { padding: 10px 12px; border-top: 1px solid var(--line); vertical-align: top; }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.code { font-weight: 600; width: 70px; color: var(--accent); word-break: break-word; line-height: 1.3; font-size: 11.5px; }
+  td.topic { width: 300px; }
+  td.comment { color: var(--muted); width: auto; }
+  td.improve { color: var(--ink); width: 220px; }
+  .cat { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 20px; margin-right: 6px; white-space: nowrap; }
+  .cat-correct { background: var(--accent-light); color: var(--accent); }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  tr.untested td { color: var(--muted); }
+  tr.untested td.code { color: var(--muted); }
+  tr.untested td.dash { text-align: center; }
+  .sub-bullets { font-size: 11.5px; color: var(--muted); display: block; margin-top: 3px; }
+  .comment-line { display: block; margin-bottom: 6px; }
+  .comment-line:last-child { margin-bottom: 0; }
+  .legend { display: flex; gap: 18px; font-size: 12px; color: var(--muted); flex-wrap: wrap; align-items: center; margin: 10px 0 30px; }
+  .improve-summary { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 18px 0 6px; }
+  .improve-title { font-size: 13px; font-weight: 700; color: var(--ink); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 12px; }
+  .improve-row { font-size: 13px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+  .improve-row:last-child { margin-bottom: 0; }
+  .improve-row b { color: var(--ink); }
+  .improve-row .cat { margin-right: 8px; }
+  .topic-nav { display:flex; justify-content:space-between; align-items:center; margin: 20px 0; font-size: 13px; }
+  .topic-nav a { color: var(--tip); text-decoration:none; font-weight:600; }
+  .topic-nav a:hover { text-decoration:underline; }
+  .topic-nav .spacer { color: var(--muted); width: 33%; }
+  .score-badge { display:inline-block; font-size:20px; font-weight:700; margin-left:14px; vertical-align:middle; }
+  .score-badge.good { color: var(--accent); } .score-badge.mid { color: var(--amber); } .score-badge.low { color: var(--loss); }
+  .score-frac { font-size:13px; color: var(--muted); margin-left:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>1&nbsp;&middot;&nbsp;Factors and Factorization <span class="score-badge good">87.5%</span><span class="score-frac">3.5/4 learned</span></h1>
+    <div class="meta">Grade 6, Semester 1, Chapter 1 &middot; rebuilt from the school textbook table of contents</div>
+  </header>
+
+  <a class="back-link" href="dash.html">&larr; Back to dashboard</a>
+
+  <div class="legend">
+    <div><span class="cat cat-correct">Learned</span></div>
+    <div><span class="cat cat-slip">Need to revise</span></div>
+    <div>&mdash; Not yet covered</div>
+  </div>
+
+  <table>
+    <colgroup><col style="width:70px;"><col style="width:300px;"><col><col style="width:220px;"></colgroup>
+    <thead><tr><th>Code</th><th>Sub-topic</th><th>Status</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td class="code">1.1</td><td class="topic">Factors and Factorization<span class="sub-bullets">Factors of counting numbers &middot; Prime numbers and prime factors &middot; Factorization</span></td><td class="comment"><div class="comment-line"><span class="cat cat-correct">Learned</span> &middot; <a href="fb1227.html">27 Dec 2025</a> &mdash; Introduced via prime factor trees (factors and prime factors).</div><div class="comment-line"><span class="cat cat-correct">Learned</span> &middot; <a href="fb0725.html">25 Jul 2026</a> &mdash; Reviewed definitions and identified factors and multiples, and distinguished between prime and composite numbers. This topic was tricky over the summer but she's noticeably clearer on it now.</div></td><td class="improve">No action needed for now.</td></tr>
+      <tr><td class="code">1.2</td><td class="topic">Highest Common Factor (H.C.F.)<span class="sub-bullets">Finding H.C.F. by common factors &middot; Finding H.C.F. by factorization &middot; Finding H.C.F. by division</span></td><td class="comment"><div class="comment-line"><span class="cat cat-correct">Learned</span> &middot; <a href="fb1227.html">27 Dec 2025</a> &mdash; Found H.C.F. by prime factorization (factor trees, then multiplying shared prime factors).</div><div class="comment-line"><span class="cat cat-correct">Learned</span> &middot; <a href="fb0725.html">25 Jul 2026</a> &mdash; Found H.C.F. by listing &mdash; confident with this method. The division method hasn't been covered yet.</div></td><td class="improve">No action needed for now.</td></tr>
+      <tr><td class="code">1.3</td><td class="topic">Lowest Common Multiple (L.C.M.)<span class="sub-bullets">Finding L.C.M. by common multiples &middot; Finding L.C.M. by factorization &middot; Finding L.C.M. by division</span></td><td class="comment"><span class="cat cat-correct">Learned</span> &middot; <a href="fb0725.html">25 Jul 2026</a> &mdash; Found the L.C.M. of pairs of numbers by listing and applied it to real-world &ldquo;repeating event&rdquo; word problems (e.g. flashing lights, barking dogs). The factorization and division methods haven't been covered yet.</td><td class="improve">No action needed for now.</td></tr>
+      <tr><td class="code">1.4</td><td class="topic">Word Problems</td><td class="comment"><span class="cat cat-slip">Need to revise</span> &middot; <a href="fb0725.html">25 Jul 2026</a> &mdash; Applied LCM to word problems in class, but per the tutor's note, word problems using LCM/HCF in context would still benefit from a bit more practice together.</td><td class="improve">Planned for next session: HCF &amp; LCM word problems, plus Prime Factorization.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="improve-summary">
+    <div class="improve-title">Areas to improve in this topic</div>
+    <div class="improve-row"><span class="cat cat-slip">Need to revise</span>Needs revision: 1.4 Word Problems &mdash; HCF/LCM word problems in context still need a bit more practice.</div>
+    <div class="improve-row"><span class="cat cat-correct" style="background:var(--untested-light);color:var(--untested);">Not covered</span>None &mdash; all sub-topics have been attempted at least once.</div>
+  </div>
+
+  <div class="section-label" style="margin-top:26px;">Related: Big Ideas Math (US) &middot; reference only, not counted in this chapter's weight or score</div>
+  <table>
+    <colgroup><col style="width:70px;"><col style="width:300px;"><col><col style="width:220px;"></colgroup>
+    <thead><tr><th>Code</th><th>Sub-topic</th><th>Status</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr class="untested"><td class="code">US 1.1</td><td class="topic">Power and Exponents</td><td class="comment dash">&mdash; not yet covered</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">US 1.2</td><td class="topic">Order of Operations</td><td class="comment dash">&mdash; not yet covered</td><td class="improve dash">&mdash;</td></tr>
+      <tr><td class="code">US 1.3</td><td class="topic">Prime Factorization</td><td class="comment"><span class="cat cat-correct">Learned</span> &middot; <a href="fb1227.html">27 Dec 2025</a> &mdash; Used factor trees to find the product of prime factors for two-digit and three-digit numbers, then used the prime factorization to work out the total number of factors (e.g. 80 &rarr; 2&sup4;&times;5 &rarr; 10 factors).</td><td class="improve">No action needed for now.</td></tr>
+      <tr><td class="code">US 1.4</td><td class="topic">Greatest Common Factor</td><td class="comment"><div class="comment-line"><span class="cat cat-correct">Learned</span> &middot; <a href="fb1227.html">27 Dec 2025</a> &mdash; Found via prime factorization.</div><div class="comment-line"><span class="cat cat-correct">Learned</span> &middot; <a href="fb0725.html">25 Jul 2026</a> &mdash; Same H.C.F.-by-listing skill practised in class, matches Thai 1.2.</div></td><td class="improve">No action needed for now.</td></tr>
+      <tr><td class="code">US 1.5</td><td class="topic">Least Common Multiple</td><td class="comment"><span class="cat cat-correct">Learned</span> &middot; <a href="fb0725.html">25 Jul 2026</a> &mdash; Same L.C.M.-by-listing skill practised in class, matches Thai 1.3.</td><td class="improve">No action needed for now.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="topic-nav">
+    <span class="spacer"></span>
+    <a href="dash.html">Dashboard</a>
+    <a href="t2.html">2. Fractions and Mixed Numbers &rarr;</a>
+  </div>
+
+  <footer>Lima &middot; Grade 6 (US) / Year 7 (UK) Mathematics &middot; Semester 1 chapters follow the Thai school textbook table of contents; Semester 2 and Extension use TH/UK/US cross-curriculum codes &middot; update after each new test</footer>
+
+</div>
+</body>
+</html>

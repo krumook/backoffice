@@ -1,0 +1,321 @@
+Cambridge IGCSE™
+
+SUBJECT                                                                                            0580/21
+Paper 2 (Extended)                                                                         May/June 2022
+MARK SCHEME
+Maximum Mark: 70
+
+
+
+
+                                               Published
+
+
+
+This mark scheme is published as an aid to teachers and candidates, to indicate the requirements of the
+examination. It shows the basis on which Examiners were instructed to award marks. It does not indicate the
+details of the discussions that took place at an Examiners’ meeting before marking began, which would have
+considered the acceptability of alternative answers.
+
+Mark schemes should be read in conjunction with the question paper and the Principal Examiner Report for
+Teachers.
+
+Cambridge International will not enter into discussions about these mark schemes.
+
+Cambridge International is publishing the mark schemes for the May/June 2022 series for most
+Cambridge IGCSE, Cambridge International A and AS Level and Cambridge Pre-U components, and some
+Cambridge O Level components.
+
+
+
+
+                              This document consists of 6 printed pages.
+
+© UCLES 2022                                                                                   [Turn over
+0580/21                                Cambridge IGCSE – Mark Scheme                                May/June 2022
+                                               PUBLISHED
+
+                                          Generic Marking Principles
+
+These general marking principles must be applied by all examiners when marking candidate answers. They
+should be applied alongside the specific content of the mark scheme or generic level descriptors for a question.
+Each question paper and mark scheme will also comply with these marking principles.
+
+ GENERIC MARKING PRINCIPLE 1:
+
+ Marks must be awarded in line with:
+
+     the specific content of the mark scheme or the generic level descriptors for the question
+     the specific skills defined in the mark scheme or in the generic level descriptors for the question
+     the standard of response required by a candidate as exemplified by the standardisation scripts.
+
+ GENERIC MARKING PRINCIPLE 2:
+
+ Marks awarded are always whole marks (not half marks, or other fractions).
+
+ GENERIC MARKING PRINCIPLE 3:
+
+ Marks must be awarded positively:
+
+     marks are awarded for correct/valid answers, as defined in the mark scheme. However, credit is given for
+      valid answers which go beyond the scope of the syllabus and mark scheme, referring to your Team
+      Leader as appropriate
+     marks are awarded when candidates clearly demonstrate what they know and can do
+     marks are not deducted for errors
+     marks are not deducted for omissions
+     answers should only be judged on the quality of spelling, punctuation and grammar when these features
+      are specifically assessed by the question as indicated by the mark scheme. The meaning, however,
+      should be unambiguous.
+
+ GENERIC MARKING PRINCIPLE 4:
+
+ Rules must be applied consistently, e.g. in situations where candidates have not followed instructions or in the
+ application of generic level descriptors.
+
+ GENERIC MARKING PRINCIPLE 5:
+
+ Marks should be awarded using the full range of marks defined in the mark scheme for the question
+ (however; the use of the full mark range may be limited according to the quality of the candidate responses
+ seen).
+
+ GENERIC MARKING PRINCIPLE 6:
+
+ Marks awarded are based solely on the requirements as defined in the mark scheme. Marks should not be
+ awarded with grade thresholds or grade descriptors in mind.
+
+
+
+
+© UCLES 2022                                         Page 2 of 6
+0580/21                              Cambridge IGCSE – Mark Scheme                              May/June 2022
+                                             PUBLISHED
+
+
+ Maths-Specific Marking Principles
+
+ 1   Unless a particular method has been specified in the question, full marks may be awarded for any correct
+     method. However, if a calculation is required then no marks will be awarded for a scale drawing.
+
+ 2   Unless specified in the question, answers may be given as fractions, decimals or in standard form. Ignore
+     superfluous zeros, provided that the degree of accuracy is not affected.
+
+ 3   Allow alternative conventions for notation if used consistently throughout the paper, e.g. commas being
+     used as decimal points.
+
+ 4   Unless otherwise indicated, marks once gained cannot subsequently be lost, e.g. wrong working
+     following a correct form of answer is ignored (isw).
+
+ 5   Where a candidate has misread a number in the question and used that value consistently throughout,
+     provided that number does not alter the difficulty or the method required, award all marks earned and
+     deduct just 1 mark for the misread.
+
+ 6   Recovery within working is allowed, e.g. a notation error in the working where the following line of
+     working makes the candidate’s intent clear.
+
+
+
+
+© UCLES 2022                                       Page 3 of 6
+0580/21                                  Cambridge IGCSE – Mark Scheme                                  May/June 2022
+                                                 PUBLISHED
+
+
+  Question                  Answer                 Marks                             Partial Marks
+
+      1        31 or 37                                     1
+
+      2        399                                          1
+
+      3        2h 57 min                                    1
+
+      4        4.286 cao                                    2                                   30
+                                                                  B1 for 4.285[7...] or 4.29 or    or 4 72
+                                                                                                 7
+                                                                  or for correctly rounding their more accurate
+                                                                  decimal to 4sf
+
+      5        320                                          2 M1 for 380.8 ÷ 1.19 oe
+
+      6        2 × 2 × 3 × 3 × 5 oe                         2 B1 for 2, 2, 3, 3, 5
+                                                              or M1 for correct factor tree/diagram/table.
+
+      7        9
+               21
+                         2
+                     and 21 oe                           M1 Allow any correct denominator 21k
+
+               1                                          A1
+                 cao and correct working
+               3
+
+     8(a)      7.2 oe                                       1
+
+     8(b)              2s                                   2              s 1 2
+               [±]        final answer                            M1 for     t or 2s = at2 or better
+                       a                                                   a 2
+
+      9        7 y  2 x  y  final answer                                           
+                                                            2 B1 for 7 2 xy  y 2 or y 14 x  7 y 
+
+                                                                  or 7 y  2 x  y  seen then spoilt
+
+    10(a)      –3                                           1
+
+    10(b)      27 – 5n oe final answer                      2 B1 for j – 5n or 27 – kn, k ≠0
+                                                              or for 27 – 5n seen then spoilt
+
+    11(a)      4.5 oe                                       2              8   6
+                                                                  M1 for        oe or better
+                                                                           6 QR
+
+    11(b)      135                                          2            6
+                                                                                3
+                                                                                8
+                                                                                           3
+                                                                                        their 4.5 
+                                                                                                         3
+                                                                  M1 for   or   or             oe
+                                                                         8    6        6      
+
+      12       162                                          3             (5  2)  180 
+                                                                  M2 for                 × k where k = 1, 4, 5,
+                                                                          45579
+                                                                  7, 9
+
+                                                                  or M1 for 180n ÷ (4 + 5 + 5 + 7 + 9) where
+                                                                  n⩾2
+
+                                                                  or for (5 – 2) × 180 oe
+
+
+
+
+© UCLES 2022                                        Page 4 of 6
+0580/21                                 Cambridge IGCSE – Mark Scheme                                      May/June 2022
+                                                PUBLISHED
+
+
+  Question                    Answer               Marks                           Partial Marks
+
+      13       1.98 × 10100                                2 B1 for 200  1098 or 0.02  10100
+                                                             or answer with figs 198
+
+      14       90                                          3 B2 for 210 or 0.09 km
+                                                             OR
+
+                                                                 M1 for speed × time seen
+
+                                                                 M1 for correct conversion of
+                                                                 both km to m and between h and s
+
+      15       –3                                          1
+
+      16       Enlargement                                 3 B1 for each
+                      1
+               [sf] 
+                      2
+               [centre] (4, 4)
+
+      17       3.37 or 3.367 to 3.368                      3                                         120
+                                                                 M2 for isolating r 3 , e.g. r 3 
+                                                                                                     
+
+                                                                             1 4
+                                                                 or M1 for       r 3  80 oe
+                                                                             2 3
+                                                                 If 0 scored SC1 for answer 2.67 or 2.672 to
+                                                                 2.673...
+
+      18       [x = ] 38                                   3 B1 for [x = ] 38
+                                                             and
+               [y = ] 22                                     B2 for [y = ] 22
+                                                             or M1 for angle ACB = their x
+                                                             or angle BAD = 60
+                                                             or angle CBA = 120
+
+      19       PQX and alternate                           4 B2 for lines 1 and 2 correct
+               PXQ and [vertically] opposite oe              or B1 for line 1 or 2 correct, or both angles
+                                                             correct
+               ASA
+               XB                                                B1 for line 3 correct
+                                                                 B1 for line 4 correct
+
+    20(a)                 1                                1
+               1.5 or 1
+                          2
+
+    20(b)      240                                         2 M1 for one correct area
+
+      21       (1 – q)(1 – a) or (a – 1)( q – 1)           2 B1 for 1 – q – a(1 – q) or 1 – a – q(1 – a) or
+               final answer                                  better
+                                                             or correct answer seen and spoilt
+
+      22       36 y144 final answer                        2 B1 for ky144 or 36 y k final answer k ≠ 0
+                                                             or correct answer seen and spoilt
+
+
+
+© UCLES 2022                                       Page 5 of 6
+0580/21                                Cambridge IGCSE – Mark Scheme                                 May/June 2022
+                                               PUBLISHED
+
+
+  Question                  Answer               Marks                               Partial Marks
+
+    23(a)      [p = ] 4                                   2 B1 for one correct
+               [q = ] –6                                    or  x  4   6 or x2 + px + px + p2 [+ q]
+                                                                        2
+
+
+
+    23(b)      –10 and 2                                  2 M1 for  x  4 2  36
+
+                                                                or  x  their 4   30  their  6 
+                                                                                 2
+
+
+                                                                or for correct method to solve quadratic
+                                                                e.g.  x  10  x  2 
+
+      24       28                                         3 M2 for 242 + 122 + 82
+                                                            or M1 for 242 + 122 or 242 + 82 or 122 + 82
+
+      25       16                                         3                   k
+                     oe final answer                            M2 for w        oe
+                 x                                                             x
+
+                                                                OR
+                                                                M1 for w  j y
+                                                                             c
+                                                                M1 for y 
+                                                                             x
+
+      26       5    1                                     4              1   1      2  2
+                 a + b final answer                             M1 for AK =  a + b or BK  a  b
+               3    3                                                        3   3          3  3
+                                                                                        
+                                                                M1 for AL (or OK ) = a + their AK oe soi
+                                                                         
+                                                                or OK (or AL ) = b + their AK⃗ oe soi
+                                                                   
+                                                                or BL = a + their AK⃗ oe soi
+                                                                                                 
+                                                                M1 for a correct route e.g. OL , a + AL , b +
+                                                                
+                                                                BL
+
+      27       (–2, –1) and (6, 7)                        4 B3 for x = – 2 and 6
+                                                                OR
+                                                                M1 for x 2  3 x  11  x  1 or better
+                                                                M1 for correct method to solve their quadratic
+                                                                e.g.  x  2  x  6 
+
+
+                                                                If 0 scored, SC1 for one correct pair of
+                                                                coordinates
+
+
+
+
+© UCLES 2022                                      Page 6 of 6
+

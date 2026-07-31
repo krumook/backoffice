@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lima &mdash; Progress Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
+    --accent: #0f6e56; --accent-light: #e1f5ee;
+    --loss: #993c1d; --loss-light: #faece7;
+    --tip: #185fa5; --tip-light: #e6f1fb;
+    --amber: #854f0b; --amber-light: #faeeda;
+    --pink: #72243e; --pink-light: #fbeaf0;
+    --purple: #3c3489; --purple-light: #eeedfe;
+    --grade-astar: #1BA755; --grade-a: #1B88A7; --grade-b: #DD800E; --grade-below: #A71B46;
+    --grade-astar-light: #E2F8EB; --grade-a-light: #E2F3F8; --grade-b-light: #F8EEE2; --grade-below-light: #F8E2E9;
+    --weight: #1f2a24;
+    --untested: #8b978f; --untested-light: #eef1ef;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
+    font-family: 'Space Grotesk', 'Noto Sans Thai', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header { padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 20px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+  .legend-box { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; margin-bottom: 22px; font-size: 13px; color: var(--muted); }
+  .legend-box b { color: var(--ink); }
+  .legend-box .paper-list { margin-top: 6px; }
+  .legend-box .paper-list a { display: inline-block; padding: 2px 10px; border-radius: 20px; margin: 2px 6px 2px 0; font-size: 12.5px; font-weight: 600; text-decoration: none; }
+  .legend-box .paper-list a.sess { background: var(--tip-light); color: var(--tip); }
+  .legend-box .paper-list a.sess:hover { background: var(--tip); color: #fff; }
+  .session-months { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
+  .month-card-sess { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .mcs-title { display: block; font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+  .mcs-sub { font-size: 11.5px; color: var(--muted); margin-bottom: 8px; }
+  .month-card-sess .paper-list { margin-top: 0; }
+  @media (max-width: 720px) { .session-months { grid-template-columns: 1fr; } }
+  .section-label { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .topic-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
+  .semester-box { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px 20px; margin-bottom: 16px; }
+  .semester-box .topic-summary { margin-bottom: 0; }
+  .semester-title { font-size: 13px; font-weight: 700; color: var(--ink); text-transform: uppercase; letter-spacing: 0.03em; margin: 0 0 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .ts-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: block; text-decoration: none; color: inherit; cursor: pointer; transition: box-shadow 0.15s ease, transform 0.15s ease; }
+  .ts-card:hover { box-shadow: 0 3px 14px rgba(31,42,36,0.14); transform: translateY(-2px); }
+  .ts-card .ts-name { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 9px; text-transform: uppercase; }
+  .ts-row { display: flex; align-items: baseline; justify-content: space-between; }
+  .ts-row .ts-label { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+  .ts-card .ts-pct { font-size: 20px; font-weight: 700; }
+  .ts-card .ts-frac { font-size: 12px; color: var(--muted); margin-left: 6px; }
+  .ts-bar { height: 5px; border-radius: 3px; background: #fff; margin-top: 4px; margin-bottom: 12px; overflow: hidden; }
+  .ts-bar-fill { height: 100%; border-radius: 3px; }
+  .ts-row2 { margin-top: 2px; }
+  .ts-card .ts-pct2 { font-size: 14px; font-weight: 700; color: var(--weight); }
+  .ts-bar2 { margin-bottom: 0; }
+  .ts-bar2 .ts-bar-fill2 { background: var(--weight); opacity: 0.55; }
+  .ts-nocompare { font-size: 11px; color: var(--muted); font-style: italic; margin-top: 6px; }
+  .ts-astar { background: var(--grade-astar-light); } .ts-astar .ts-pct { color: var(--grade-astar); } .ts-astar .ts-bar-fill { background: var(--grade-astar); }
+  .ts-a { background: var(--grade-a-light); } .ts-a .ts-pct { color: var(--grade-a); } .ts-a .ts-bar-fill { background: var(--grade-a); }
+  .ts-b { background: var(--grade-b-light); } .ts-b .ts-pct { color: var(--grade-b); } .ts-b .ts-bar-fill { background: var(--grade-b); }
+  .ts-below { background: var(--grade-below-light); } .ts-below .ts-pct { color: var(--grade-below); } .ts-below .ts-bar-fill { background: var(--grade-below); }
+  .overall-line { font-size: 12.5px; color: var(--muted); margin: 4px 0 0; }
+  .overall-line b { color: var(--ink); }
+  .band-legend { display: flex; justify-content: center; gap: 18px; font-size: 12px; color: var(--muted); flex-wrap: wrap; align-items: center; margin: 0 0 30px; }
+  .band-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+  .dot-astar { background: var(--grade-astar); } .dot-a { background: var(--grade-a); } .dot-b { background: var(--grade-b); } .dot-below { background: var(--grade-below); }
+  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
+  h2.section-title { font-size: 16px; font-weight: 600; margin: 30px 0 14px; padding-top: 6px; color: var(--ink); }
+  h2.section-title:first-of-type { margin-top: 0; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); font-size: 13px; table-layout: fixed; margin-bottom: 8px; }
+  thead th { background: var(--ink); color: #fff; text-align: left; padding: 10px 12px; font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
+  tbody td { padding: 10px 12px; border-top: 1px solid var(--line); vertical-align: top; }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.code { font-weight: 600; width: 100px; color: var(--accent); word-break: break-word; line-height: 1.3; font-size: 11.5px; }
+  td.topic { width: 220px; }
+  td.comment { color: var(--muted); width: auto; }
+  td.improve { color: var(--ink); width: 240px; }
+  .cat { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 20px; margin-right: 6px; white-space: nowrap; }
+  .cat-correct { background: var(--accent-light); color: var(--accent); }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  tr.untested td { color: var(--muted); }
+  tr.untested td.code { color: var(--muted); }
+  tr.untested td.dash { text-align: center; }
+  .legend { display: flex; gap: 18px; font-size: 12px; color: var(--muted); flex-wrap: wrap; align-items: center; margin: 10px 0 30px; }
+  .improve-summary { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 18px 0 6px; }
+  .improve-title { font-size: 13px; font-weight: 700; color: var(--ink); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 12px; }
+  .improve-row { font-size: 13px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+  .improve-row:last-child { margin-bottom: 0; }
+  .improve-row b { color: var(--ink); }
+  .improve-row .cat { margin-right: 8px; }
+  .topic-nav { display:flex; justify-content:space-between; align-items:center; margin: 20px 0; font-size: 13px; }
+  .topic-nav a { color: var(--tip); text-decoration:none; font-weight:600; }
+  .topic-nav a:hover { text-decoration:underline; }
+  .topic-nav .spacer { color: var(--muted); width: 33%; }
+  .score-badge { display:inline-block; font-size:20px; font-weight:700; margin-left:14px; vertical-align:middle; }
+  .score-badge.good { color: var(--accent); } .score-badge.mid { color: var(--amber); } .score-badge.low { color: var(--loss); }
+  .score-frac { font-size:13px; color: var(--muted); margin-left:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="home.html">&larr; Back to home</a>
+
+  <header>
+    <h1>Lima &mdash; Syllabus Coverage Tracker</h1>
+    <div class="meta">Grade 6 (US) / Year 7 (UK) Mathematics &middot; organized around her Thai school curriculum, with Cambridge/Common Core shown as extension &middot; &ldquo;Learned&rdquo; % reflects the school's own tags, not a graded exam score &mdash; no papers marked yet</div>
+  </header>
+
+  <div class="legend-box">
+    <div class="section-label" style="margin-bottom: 6px;">Class sessions &middot; 27 logged since Dec 2025</div>
+
+    <div class="session-months">
+      <div class="month-card-sess">
+        <div class="mcs-title">December 2025</div>
+        <div class="mcs-sub">5 sessions</div>
+        <div class="paper-list"><a class="sess" href="fb1206.html">Sat 6 Dec</a><a class="sess" href="fb1220.html">Sat 20 Dec</a><a class="sess" href="fb1225.html">Thu 25 Dec</a><a class="sess" href="fb1226.html">Fri 26 Dec</a><a class="sess" href="fb1227.html">Sat 27 Dec</a></div>
+      </div>
+      <div class="month-card-sess">
+        <div class="mcs-title">January 2026</div>
+        <div class="mcs-sub">3 sessions</div>
+        <div class="paper-list"><a class="sess" href="fb0117.html">Sat 17 Jan</a><a class="sess" href="fb0123.html">Fri 23 Jan</a><a class="sess" href="fb0131.html">Sat 31 Jan</a></div>
+      </div>
+      <div class="month-card-sess">
+        <div class="mcs-title">February 2026</div>
+        <div class="mcs-sub">2 sessions</div>
+        <div class="paper-list"><a class="sess" href="fb0207.html">Sat 7 Feb</a><a class="sess" href="fb0214.html">Sat 14 Feb</a></div>
+      </div>
+      <div class="month-card-sess">
+        <div class="mcs-title">March 2026</div>
+        <div class="mcs-sub">4 sessions</div>
+        <div class="paper-list"><a class="sess" href="fb0307.html">Sat 7 Mar</a><a class="sess" href="fb0314.html">Sat 14 Mar</a><a class="sess" href="fb0321.html">Sat 21 Mar</a><a class="sess" href="fb0328.html">Sat 28 Mar</a></div>
+      </div>
+      <div class="month-card-sess">
+        <div class="mcs-title">April 2026</div>
+        <div class="mcs-sub">2 sessions</div>
+        <div class="paper-list"><a class="sess" href="fb0412.html">Sun 12 Apr</a><a class="sess" href="fb0418.html">Sat 18 Apr</a></div>
+      </div>
+      <div class="month-card-sess">
+        <div class="mcs-title">May 2026</div>
+        <div class="mcs-sub">5 sessions</div>
+        <div class="paper-list"><a class="sess" href="fb0502.html">Sat 2 May</a><a class="sess" href="fb0509.html">Sat 9 May</a><a class="sess" href="fb0516.html">Sat 16 May</a><a class="sess" href="fb0523.html">Sat 23 May</a><a class="sess" href="fb0530.html">Sat 30 May</a></div>
+      </div>
+      <div class="month-card-sess">
+        <div class="mcs-title">June 2026</div>
+        <div class="mcs-sub">2 sessions</div>
+        <div class="paper-list"><a class="sess" href="fb0613.html">Sat 13 Jun</a><a class="sess" href="fb0620.html">Sat 20 Jun</a></div>
+      </div>
+      <div class="month-card-sess">
+        <div class="mcs-title">July 2026</div>
+        <div class="mcs-sub">4 sessions</div>
+        <div class="paper-list"><a class="sess" href="fb0704.html">Sat 4 Jul</a><a class="sess" href="fb0711.html">Sat 11 Jul</a><a class="sess" href="fb0718.html">Sat 18 Jul</a><a class="sess" href="fb0725.html">Sat 25 Jul</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend-box" id="teaching-notes">
+    <b>Teaching notes</b><br>
+    ตั้งใจเรียนมากๆ แต่ว่าไม่ค่อยถามไม่สงสัยตรงไหนเลย ต้องสอนแบบมี check ทุกครั้งหลัง example ถ้าทำได้คือเข้าใจจริงๆ แต่ถ้าไม่ได้ให้ assume ว่าไม่เคลียและอธิบายซ้ำยกตัวอย่างเพิ่ม<br><br>ควรมีการบ้าน<br>- ในคลาสทำได้แล้ว ตอนไม่มีครูทำได้หรือเปล่า<br>- เพื่อความต่อเนื่องกันลืมเพราะเจอกันวีคละครั้ง
+    <p style="margin:10px 0 0;font-size:12.5px;">In short: she works hard and follows examples well but rarely asks questions when confused &mdash; check her understanding after every worked example, and give homework so skills don't fade between weekly sessions.</p>
+  </div>
+
+  <div class="section-label">Coverage by topic &middot; click a card for full detail</div>
+  <div class="legend-box" style="margin-top:-8px;">Semester 1 &amp; 2 chapters show two bars: <b>Thai Progress</b> is against all of that chapter's own Thai-textbook sub-topics; <b>US/UK Progress</b> (grey bar, reference only) is against all of the Cambridge/Big Ideas Math rows listed for the same chapter. Both count Learned as 1 and Need to revise as 0.5, out of every sub-topic in that table &mdash; covered or not &mdash; so an untouched sub-topic pulls the bar down rather than being left out of the count.</div>
+
+  <div class="semester-box">
+    <div class="semester-title">Grade 6 &middot; Semester 1</div>
+    <div class="topic-summary">
+      <a href="t1.html" class="ts-card ts-astar">
+        <div class="ts-name">1&nbsp;&middot;&nbsp;Factors and Factorization</div>
+        <div class="ts-row"><span class="ts-label">Thai Progress</span><span><span class="ts-pct">87.5%</span><span class="ts-frac">3.5/4</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:87.5%;"></div></div>
+        <div class="ts-row ts-row2"><span class="ts-label">US/UK Progress</span><span><span class="ts-pct2">60.0%</span><span class="ts-frac">3/5</span></span></div>
+        <div class="ts-bar ts-bar2"><div class="ts-bar-fill ts-bar-fill2" style="width:60.0%;"></div></div>
+      </a>    <a href="t2.html" class="ts-card ts-below">
+        <div class="ts-name">2&nbsp;&middot;&nbsp;Fractions and Mixed Numbers</div>
+        <div class="ts-row"><span class="ts-label">Thai Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/4</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+        <div class="ts-row ts-row2"><span class="ts-label">US/UK Progress</span><span><span class="ts-pct2">25.0%</span><span class="ts-frac">2/8</span></span></div>
+        <div class="ts-bar ts-bar2"><div class="ts-bar-fill ts-bar-fill2" style="width:25.0%;"></div></div>
+      </a>    <a href="t3.html" class="ts-card ts-below">
+        <div class="ts-name">3&nbsp;&middot;&nbsp;Decimals</div>
+        <div class="ts-row"><span class="ts-label">Thai Progress</span><span><span class="ts-pct">25.0%</span><span class="ts-frac">1/4</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:25.0%;"></div></div>
+        <div class="ts-row ts-row2"><span class="ts-label">US/UK Progress</span><span><span class="ts-pct2">0.0%</span><span class="ts-frac">0/9</span></span></div>
+        <div class="ts-bar ts-bar2"><div class="ts-bar-fill ts-bar-fill2" style="width:0.0%;"></div></div>
+      </a>    <a href="t4.html" class="ts-card ts-astar">
+        <div class="ts-name">4&nbsp;&middot;&nbsp;Percentage and Ratio</div>
+        <div class="ts-row"><span class="ts-label">Thai Progress</span><span><span class="ts-pct">100.0%</span><span class="ts-frac">3/3</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:100.0%;"></div></div>
+        <div class="ts-row ts-row2"><span class="ts-label">US/UK Progress</span><span><span class="ts-pct2">60.0%</span><span class="ts-frac">9/15</span></span></div>
+        <div class="ts-bar ts-bar2"><div class="ts-bar-fill ts-bar-fill2" style="width:60.0%;"></div></div>
+      </a>    <a href="t5.html" class="ts-card ts-astar">
+        <div class="ts-name">5&nbsp;&middot;&nbsp;Patterns</div>
+        <div class="ts-row"><span class="ts-label">Thai Progress</span><span><span class="ts-pct">100.0%</span><span class="ts-frac">2/2</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:100.0%;"></div></div>
+        <div class="ts-row ts-row2"><span class="ts-label">US/UK Progress</span><span><span class="ts-pct2">0.0%</span><span class="ts-frac">0/3</span></span></div>
+        <div class="ts-bar ts-bar2"><div class="ts-bar-fill ts-bar-fill2" style="width:0.0%;"></div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="semester-box">
+    <div class="semester-title">Grade 6 &middot; Semester 2</div>
+    <div class="topic-summary">
+      <a href="t6.html" class="ts-card ts-below">
+        <div class="ts-name">6&nbsp;&middot;&nbsp;Triangles</div>
+        <div class="ts-row"><span class="ts-label">Thai Progress</span><span><span class="ts-pct">33.3%</span><span class="ts-frac">2/6</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:33.3%;"></div></div>
+        <div class="ts-row ts-row2"><span class="ts-label">US/UK Progress</span><span><span class="ts-pct2">100.0%</span><span class="ts-frac">2/2</span></span></div>
+        <div class="ts-bar ts-bar2"><div class="ts-bar-fill ts-bar-fill2" style="width:100.0%;"></div></div>
+      </a>    <a href="t7.html" class="ts-card ts-b">
+        <div class="ts-name">7&nbsp;&middot;&nbsp;Polygons</div>
+        <div class="ts-row"><span class="ts-label">Thai Progress</span><span><span class="ts-pct">60.0%</span><span class="ts-frac">3/5</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:60.0%;"></div></div>
+        <div class="ts-row ts-row2"><span class="ts-label">US/UK Progress</span><span><span class="ts-pct2">40.0%</span><span class="ts-frac">2/5</span></span></div>
+        <div class="ts-bar ts-bar2"><div class="ts-bar-fill ts-bar-fill2" style="width:40.0%;"></div></div>
+      </a>    <a href="t8.html" class="ts-card ts-b">
+        <div class="ts-name">8&nbsp;&middot;&nbsp;Circles</div>
+        <div class="ts-row"><span class="ts-label">Thai Progress</span><span><span class="ts-pct">60.0%</span><span class="ts-frac">3/5</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:60.0%;"></div></div>
+        <div class="ts-nocompare">No Cambridge/US cross-reference exists for this chapter.</div>
+      </a>    <a href="t9.html" class="ts-card ts-below">
+        <div class="ts-name">9&nbsp;&middot;&nbsp;3D Shapes</div>
+        <div class="ts-row"><span class="ts-label">Thai Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/4</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+        <div class="ts-row ts-row2"><span class="ts-label">US/UK Progress</span><span><span class="ts-pct2">0.0%</span><span class="ts-frac">0/8</span></span></div>
+        <div class="ts-bar ts-bar2"><div class="ts-bar-fill ts-bar-fill2" style="width:0.0%;"></div></div>
+      </a>    <a href="t10.html" class="ts-card ts-below">
+        <div class="ts-name">10&nbsp;&middot;&nbsp;Data Handling: Pie Charts</div>
+        <div class="ts-row"><span class="ts-label">Thai Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/2</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+        <div class="ts-row ts-row2"><span class="ts-label">US/UK Progress</span><span><span class="ts-pct2">0.0%</span><span class="ts-frac">0/8</span></span></div>
+        <div class="ts-bar ts-bar2"><div class="ts-bar-fill ts-bar-fill2" style="width:0.0%;"></div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="semester-box">
+    <div class="semester-title">Extension &middot; Cambridge Y7 (UK) &amp; Big Ideas Math (US) chapters beyond Semester 1/2</div>
+    <div class="topic-summary">
+      <a href="t11.html" class="ts-card ts-b">
+        <div class="ts-name">11&nbsp;&middot;&nbsp;Integers</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">83.3%</span><span class="ts-frac">5/6</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:83.3%;"></div></div>
+      </a>    <a href="t12.html" class="ts-card ts-below">
+        <div class="ts-name">12&nbsp;&middot;&nbsp;Expressions, Formulae and Equations</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/6</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>    <a href="t13.html" class="ts-card ts-below">
+        <div class="ts-name">13&nbsp;&middot;&nbsp;Place Value and Rounding</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/2</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>    <a href="t14.html" class="ts-card ts-below">
+        <div class="ts-name">14&nbsp;&middot;&nbsp;Shapes and Symmetry</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/4</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>    <a href="t15.html" class="ts-card ts-below">
+        <div class="ts-name">15&nbsp;&middot;&nbsp;Graph</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/4</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>    <a href="t16.html" class="ts-card ts-below">
+        <div class="ts-name">16&nbsp;&middot;&nbsp;Probability</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>    <a href="t17.html" class="ts-card ts-below">
+        <div class="ts-name">17&nbsp;&middot;&nbsp;Position and Transformation</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/6</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>    <a href="t18.html" class="ts-card ts-below">
+        <div class="ts-name">18&nbsp;&middot;&nbsp;Algebraic Expressions and Properties</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/5</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>    <a href="t19.html" class="ts-card ts-below">
+        <div class="ts-name">19&nbsp;&middot;&nbsp;Equations</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/4</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>    <a href="t20.html" class="ts-card ts-below">
+        <div class="ts-name">20&nbsp;&middot;&nbsp;Integers, Number Lines, and the Coordinate Plane</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">25.0%</span><span class="ts-frac">2/8</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:25.0%;"></div></div>
+      </a>    <a href="t21.html" class="ts-card ts-b">
+        <div class="ts-name">21&nbsp;&middot;&nbsp;Statistical Measures</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">60.0%</span><span class="ts-frac">3/5</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:60.0%;"></div></div>
+      </a>    <a href="t22.html" class="ts-card ts-below">
+        <div class="ts-name">22&nbsp;&middot;&nbsp;Data Displays</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/5</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="overall-line">Overall across all topics: <b>27.5/97 (28.4%) learned</b> of what's been covered so far &mdash; every &ldquo;Learned&rdquo;/&ldquo;Need to revise&rdquo; tag on this tracker comes only from real class feedback logs (see the session list above), not from an external syllabus checklist.</div>
+
+  <div class="band-legend">
+    <div><span class="band-dot dot-astar"></span>&ge;85% learned</div>
+    <div><span class="band-dot dot-b"></span>60&ndash;84% learned</div>
+    <div><span class="band-dot dot-below"></span>&lt;60% learned</div>
+  </div>
+
+  <div class="legend-box">Add a new test: once you grade Lima's first past test/quiz, switch this dashboard over to the full marks-based scoring format (like Mildy's) &mdash; the topic pages already give you the syllabus codes to grade against.</div>
+
+  <footer>Lima &middot; Grade 6 (US) / Year 7 (UK) &middot; EP curriculum, Thai-primary with Cambridge/Common Core extensions &middot; updated as classes happen</footer>
+
+</div>
+</body>
+</html>

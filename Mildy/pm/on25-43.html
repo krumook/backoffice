@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — 0580/43 October/November 2025 Marking Breakdown</title>
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 28px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .score-box { text-align: right; }
+  .score-box .num { font-size: 40px; font-weight: 700; color: var(--accent); line-height: 1; }
+  .score-box .pct { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .summary-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .summary-card .value { font-size: 22px; font-weight: 600; margin-top: 4px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13.5px;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.q { font-weight: 600; width: 48px; text-align: center; color: var(--ink); }
+  td.topic { width: 200px; color: var(--ink); }
+  td.topic .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tip);
+    background: var(--tip-light);
+    padding: 1px 7px;
+    border-radius: 20px;
+    margin-bottom: 4px;
+  }
+  td.topic .topic-name { display: block; }
+  td.marks { width: 85px; text-align: center; white-space: nowrap; }
+  td.reason { color: var(--muted); }
+  .full { color: var(--accent); font-weight: 600; }
+  .partial { color: var(--loss); font-weight: 600; }
+  .dash { color: var(--muted); }
+  .tip-label { color: var(--tip); font-weight: 600; }
+
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-hw { background: var(--loss-light); color: var(--loss); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  tr.total td {
+    border-top: 2px solid var(--ink);
+    font-weight: 700;
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+  tr.total td.reason { color: var(--accent); font-weight: 600; }
+
+  .legend {
+    margin: 18px 0 40px;
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .legend span.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .dot.full-dot { background: var(--accent); }
+  .dot.partial-dot { background: var(--loss); }
+  .dot.tip-dot { background: var(--tip); }
+
+  h2.section-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    padding-top: 8px;
+    border-top: 2px solid var(--ink);
+  }
+
+  .ladder {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 8px 20px;
+    margin-bottom: 28px;
+  }
+  .ladder-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .ladder-row:last-child { border-bottom: none; }
+  .ladder-score {
+    font-size: 20px;
+    font-weight: 700;
+    min-width: 78px;
+    color: var(--ink);
+  }
+  .ladder-row.final .ladder-score { color: var(--accent); }
+  .ladder-desc { font-size: 13.5px; color: var(--muted); flex: 1; }
+  .ladder-desc b { color: var(--ink); font-weight: 600; }
+  .ladder-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .tag-slip { background: var(--amber-light); color: var(--amber); }
+  .tag-hand { background: var(--loss-light); color: var(--loss); }
+  .tag-miscon { background: var(--pink-light); color: var(--pink); }
+  .tag-blank { background: var(--purple-light); color: var(--purple); }
+
+  .weak-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .weak-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--tip);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .weak-card h3 { margin: 0 0 6px; font-size: 14.5px; font-weight: 600; }
+  .weak-card p { margin: 0; font-size: 13px; color: var(--muted); }
+  .weak-card.hand { border-left-color: var(--amber); }
+
+  footer {
+    margin-top: 28px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tip);
+    text-decoration: none;
+    background: var(--tip-light);
+    padding: 7px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .back-link:hover { background: var(--tip); color: #fff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../tracker.html">&larr; Back to dashboard</a>
+
+  <header>
+    <div>
+      <h1>Mildy — marking breakdown</h1>
+      <div class="meta">Cambridge IGCSE Mathematics 0580/43 (Extended, calculator) &middot; October/November 2025</div>
+    </div>
+    <div class="score-box">
+      <div class="num">74<span style="font-size:20px;color:var(--muted);">/100</span></div>
+      <div class="pct">74%</div>
+    </div>
+  </header>
+
+  <div class="summary-row">
+    <div class="summary-card">
+      <div class="label">Questions fully correct</div>
+      <div class="value">30 / 45</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Careless slips</div>
+      <div class="value">&minus;1</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Handwriting</div>
+      <div class="value">&minus;0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Misconceptions</div>
+      <div class="value">&minus;13</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Left blank</div>
+      <div class="value">&minus;12</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:48px;">Q</th>
+        <th style="width:175px;">Topic</th>
+        <th style="width:85px;">Marks</th>
+        <th>Marks deducted &amp; reason</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="q">1a</td><td class="topic"><span class="tag">E1.6</span><span class="topic-name">Directed numbers</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">1b</td><td class="topic"><span class="tag">E1.6</span><span class="topic-name">Directed numbers</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">2a</td><td class="topic"><span class="tag">E1.2</span><span class="topic-name">Sets (Venn diagram)</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">2b</td><td class="topic"><span class="tag">E1.2</span><span class="topic-name">Sets (Venn diagram)</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">2c</td><td class="topic"><span class="tag">E1.2</span><span class="topic-name">Sets (probability from a Venn diagram)</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">3</td><td class="topic"><span class="tag">E2.1</span><span class="topic-name">Substitution into a formula</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">4a</td><td class="topic"><span class="tag">E4.3</span><span class="topic-name">Scale drawing (bearing)</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">4b</td><td class="topic"><span class="tag">E4.3</span><span class="topic-name">Back bearing</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span>0/2: the bearing of D from C is found by adding 180&deg; to the bearing of C from D (130&deg;&nbsp;+&nbsp;180&deg;&nbsp;=&nbsp;310&deg;), since bearings measured from opposite ends of the same line always differ by exactly 180&deg;. The answer given, 230, suggests 360&deg;&minus;130&deg; was used instead &mdash; that rule applies to a different situation (a bearing measured the other way round from north), not to a back bearing. No working showing 180+130 was visible, so no method credit is available either.</td></tr>
+
+      <tr><td class="q">5a</td><td class="topic"><span class="tag">E4.6</span><span class="topic-name">Angles of a regular polygon</span></td><td class="marks partial">2/3</td><td class="reason"><span class="cat cat-slip">Careless slip</span>&minus;1: the method was entirely correct &mdash; interior angle = 180&times;(10&minus;2)/10 = 144&deg;, and since AB is a line of symmetry bisecting the angle at A, d = 144&divide;2. The value 144 was correctly reached, but 144&divide;2 was then written as 12 instead of 72 &mdash; a division slip, not a method error.</td></tr>
+      <tr><td class="q">5b</td><td class="topic"><span class="tag">E4.6</span><span class="topic-name">Exterior angle &rarr; number of sides</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-blank">Left blank</span>0/1: left blank &mdash; only the exterior-angle-sum formula was jotted down, with no final value reached. Guideline: for a regular polygon with exterior angle 45&deg;, the number of sides is 360&divide;45 = 8, since the exterior angles of any polygon sum to 360&deg;.</td></tr>
+
+      <tr><td class="q">6a</td><td class="topic"><span class="tag">E2.4</span><span class="topic-name">Indices: simplifying y&#8309;/y&sup2;</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">6b</td><td class="topic"><span class="tag">E2.4</span><span class="topic-name">Indices: simplifying 3x&sup3;&times;5x&#8309;</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">7a</td><td class="topic"><span class="tag">E7.1</span><span class="topic-name">Transformation: D onto E</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span>0/2: the transformation mapping D onto E is a <b>translation by vector (2,&minus;8)</b>. The vector given, (2,8), has the right transformation type and the right magnitude, but the wrong sign on the y-component &mdash; D moves <b>down</b> to reach E, so the vertical component must be &minus;8, not +8.</td></tr>
+      <tr><td class="q">7b</td><td class="topic"><span class="tag">E7.1</span><span class="topic-name">Transformation: D onto F</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">8</td><td class="topic"><span class="tag">E1.5</span><span class="topic-name">Ordering percentages and fractions of m</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span>0/2: the correct order (smallest to largest) is 320% of m/10, 33% of m, 1/3 of m, m &mdash; since 320% of m/10 works out to 0.32m (smaller than it looks once the &divide;10 is applied), while m itself (100%) is actually the largest value. The order written was m, 33% of m, 1/3 of m, 320% of m/10 &mdash; the exact reverse of the correct order. This suggests the large &ldquo;320%&rdquo; was taken at face value as the biggest number, without working out that it applies to only a tenth of m.</td></tr>
+
+      <tr><td class="q">9</td><td class="topic"><span class="tag">E1.6</span><span class="topic-name">Dividing by a mixed number</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">10</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Simultaneous equations</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">11</td><td class="topic"><span class="tag">E1.8</span><span class="topic-name">Standard form: ordering</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span>&minus;1: &ldquo;not standard form&rdquo; (0.3&times;10&#8315;&sup2;) and &ldquo;smallest&rdquo; (2.03&times;10&#8315;&#8309;) were both correct. For &ldquo;largest&rdquo;, 9&times;10&sup1;&sup9; was chosen, but 1.3&times;10&sup1;&sup2; is larger: 1.3&times;10&sup1;&sup2; = 1,300,000,000,000 versus 9&times;10&sup1;&sup9; = 900,000,000,000. When exponents differ, the higher power of 10 dominates even when its coefficient looks smaller &mdash; comparing the coefficients (9 vs 1.3) without first checking the exponents led to the wrong choice.</td></tr>
+
+      <tr><td class="q">12</td><td class="topic"><span class="tag">E8.1</span><span class="topic-name">Probability: three exhaustive outcomes</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-blank">Left blank</span>&minus;1: P(red) = 1&minus;0.9 = 0.1 and P(pink) = 1&minus;0.65 = 0.35 were both correctly written next to the given values, but the final step &mdash; P(white) = 1&minus;0.1&minus;0.35 = 0.55 &mdash; was never carried out, and the answer line was left blank. The method was on track; it just wasn&rsquo;t finished.</td></tr>
+
+      <tr><td class="q">13</td><td class="topic"><span class="tag">E2.4</span><span class="topic-name">Exponential curve: finding c and evaluating</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">14</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations linked by a common value</span></td><td class="marks full">5/5</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">15a</td><td class="topic"><span class="tag">E1.17</span><span class="topic-name">Exponential decrease: population</span></td><td class="marks partial">2/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span>&minus;1: wrote 54000&times;(1+2/100)&#8308; instead of 54000&times;(1&minus;2/100)&#8308; &mdash; it should be <b>minus</b>, since the population is decreasing. Correct working: 54000&times;(1&minus;0.02)&#8308; = 49808 (new population), so the decrease = 54000&minus;49808 = <b>4192</b>. The final subtraction to find the decrease was also never written down.</td></tr>
+      <tr><td class="q">15b</td><td class="topic"><span class="tag">E1.17</span><span class="topic-name">Exponential decrease: number of years</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">16a</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Expanding brackets (linear)</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">16b</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Expanding brackets (quadratic)</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">17</td><td class="topic"><span class="tag">E2.1</span><span class="topic-name">Change of subject (algebraic fraction)</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">18a</td><td class="topic"><span class="tag">E6.5</span><span class="topic-name">Sine rule</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">18b</td><td class="topic"><span class="tag">E6.5</span><span class="topic-name">Cosine rule</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">19a</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: f(5)</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">19b</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: g(8x)</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">19c</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: inverse g&supminus;&sup1;(x)</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">19d</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: solving gh(x)=364</span></td><td class="marks full">3/3</td><td class="reason"><span class="tip-label">Note:</span> correct &mdash; 3(x&sup2;+1)&minus;2=364 was solved to x&sup2;=121, giving x=&plusmn;11. The question asked specifically for the positive solution, and the final answer was written as &ldquo;&plusmn;11&rdquo; rather than isolating 11 on its own. The correct value is clearly present, so no marks were lost, but it&rsquo;s worth practising writing a single, clearly identified final answer when a question filters for just one root.</td></tr>
+      <tr><td class="q">19e</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: ff&supminus;&sup1;(12)</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-blank">Left blank</span>0/1: left blank. Guideline: since f and f&supminus;&sup1; are inverse functions, applying one after the other always returns the original input, so ff&supminus;&sup1;(12) = 12 &mdash; no calculation is needed once that relationship is recognised.</td></tr>
+
+      <tr><td class="q">20a</td><td class="topic"><span class="tag">E2.12</span><span class="topic-name">Differentiation: dy/dx</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">20b</td><td class="topic"><span class="tag">E2.12</span><span class="topic-name">Differentiation: gradient at x=3</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span>&minus;1: substituting x=3 into 3x&sup2;+6x&minus;13 gives 27+18&minus;13=32, and this number is present in the working. However, the answer should simply be <b>32</b> (the gradient), not the coordinate pair (3,32). Writing &ldquo;3x&sup2;+6x&minus;13=0&rdquo; beforehand also shows the turning-point method (solving dy/dx=0) was mixed in with evaluating the gradient at a given x &mdash; these are two different questions.</td></tr>
+
+      <tr><td class="q">21</td><td class="topic"><span class="tag">E1.13</span><span class="topic-name">Percentage increase in a rate</span></td><td class="marks partial">0/4</td><td class="reason"><span class="cat cat-blank">Left blank</span>0/4: left blank. Guideline: in week 1, the rate was 4 dresses in 12.5 hours = 0.32 dresses/hour. In week 2, the rate was 27 dresses in (75&minus;12.5)=62.5 hours = 0.432 dresses/hour. The percentage increase is (0.432&minus;0.32)/0.32&times;100 = 35%.</td></tr>
+
+      <tr><td class="q">22a</td><td class="topic"><span class="tag">E4.4</span><span class="topic-name">Similar triangles</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">22b</td><td class="topic"><span class="tag">E4.4</span><span class="topic-name">Similar containers: capacity</span></td><td class="marks partial">1/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span>&minus;2: the linear scale factor was correctly found from the surface areas, &radic;124:&radic;279 = 2&radic;31:3&radic;31 = 2:3. However, the next step &mdash; cubing this ratio to get the volume/capacity scale factor (2&sup3;:3&sup3;=8:27) and applying it to the known capacity (56&times;27/8=189&nbsp;ml) &mdash; was not carried out correctly, and the final figure written did not match 189&nbsp;ml. The square-root step is credited; the cube-and-apply step needs another pass.</td></tr>
+
+      <tr><td class="q">23a</td><td class="topic"><span class="tag">E9.3</span><span class="topic-name">Mean from grouped data</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">23b</td><td class="topic"><span class="tag">E9.7</span><span class="topic-name">Histogram: missing bar heights</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-blank">Left blank</span>0/3: the frequency-density formula (FD = frequency &divide; class width) was written down, but none of the three missing bar heights were actually worked out &mdash; the table was left blank. Guideline: FD for 180&lt;m&le;200 is 32&divide;20=1.6, for 200&lt;m&le;210 is 64&divide;10=6.4, for 215&lt;m&le;230 is 30&divide;15=2. Since the given bar (210&lt;m&le;215) has FD=74&divide;5=14.8 shown as a height of 7.4cm, every FD must be halved to get the bar height on this scale &mdash; giving 0.8cm, 3.2cm and 1cm.</td></tr>
+
+      <tr><td class="q">24a</td><td class="topic"><span class="tag">E6.6</span><span class="topic-name">3D Pythagoras: EF</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">24b</td><td class="topic"><span class="tag">E6.6</span><span class="topic-name">3D angle: AG to the base</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">25</td><td class="topic"><span class="tag">E1.10</span><span class="topic-name">Limits of accuracy: remaining wire</span></td><td class="marks partial">1/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span>&minus;2: the bounds for the two cut pieces were both found correctly (4.7cm &rarr; 46.5&ndash;47.5mm; 10.0cm &rarr; 99.5&ndash;100.5mm). However, the original 68cm length (correct to the nearest cm) was treated as an exact 680mm rather than a range of 675&ndash;685mm &mdash; the same &plusmn;0.5 rounding rule that was correctly applied to the two smaller pieces was not applied to the original measurement. Treating 680 as fixed gives bounds of 53.2/53.4cm; using the correct range of 675&ndash;685mm gives the correct bounds of 52.7cm (lower) and 53.9cm (upper). The individual piece bounds are credited; the original measurement's own bounds are not.</td></tr>
+
+      <tr><td class="q">26a</td><td class="topic"><span class="tag">E7.2/E7.3</span><span class="topic-name">Vectors: finding EF</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">26b</td><td class="topic"><span class="tag">E7.4</span><span class="topic-name">Vectors: finding CG</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-blank">Left blank</span>0/2: left blank. Guideline: using the ratio in which F divides BC (BF:FC=4:1) and E divides AD (AE:ED=1:2), vector CG can be found by working through the ratio 2/3[p]:1/5[p] where the extended lines EF and DC meet at G, giving CG = 3/7 m.</td></tr>
+
+      <tr class="total"><td colspan="2">Total</td><td class="marks">74/100</td><td class="reason">74%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="legend">
+    <div><span class="dot full-dot"></span>Full marks</div>
+    <div><span class="dot partial-dot"></span>Marks dropped</div>
+    <div><span class="dot tip-dot"></span>Technique tip (no marks lost)</div>
+  </div>
+
+  <div class="legend">
+    <span class="cat cat-slip">Careless slip</span>
+    <span class="cat cat-hw">Handwriting</span>
+    <span class="cat cat-miscon">Misconception</span>
+    <span class="cat cat-blank">Left blank</span>
+  </div>
+
+  <h2 class="section-title">What she could achieve</h2>
+  <div class="ladder">
+    <div class="ladder-row">
+      <div class="ladder-score">74/100</div>
+      <div class="ladder-desc">Actual mark obtained on this paper.</div>
+      <span></span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">75/100</div>
+      <div class="ladder-desc">Achievable by correcting the <b>1 careless slip</b> (Q5a's 144&divide;2 division) &mdash; the method used was fully correct.</div>
+      <span class="ladder-tag tag-slip">slips</span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">75/100</div>
+      <div class="ladder-desc">No handwriting-related losses on this paper.</div>
+      <span class="ladder-tag tag-hand">handwriting</span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">88/100</div>
+      <div class="ladder-desc">Achievable by additionally resolving the <b>8 underlying misconceptions</b>: the back-bearing rule (Q4b), reversed size-ordering (Q8), comparing standard-form magnitudes (Q11), the direction of a translation vector (Q7a), answering &ldquo;decrease&rdquo; vs. new population (Q15a), giving a coordinate instead of a gradient value (Q20b), the cube-and-apply step for similar solids (Q22b), and applying rounding bounds to every quantity (Q25).</div>
+      <span class="ladder-tag tag-miscon">misconceptions</span>
+    </div>
+    <div class="ladder-row final">
+      <div class="ladder-score">100/100</div>
+      <div class="ladder-desc">Achievable by additionally attempting and completing the <b>6 blank answers</b> (Q5b, Q12's final step, Q19e, Q21, Q23b, Q26b) &mdash; worth 12 marks lost purely to not being finished or attempted.</div>
+      <span class="ladder-tag tag-blank">blank</span>
+    </div>
+  </div>
+
+  <h2 class="section-title">Weak topics to target next session</h2>
+  <div class="weak-grid">
+    <div class="weak-card">
+      <h3>Bearings: the back-bearing rule</h3>
+      <p>Question 4(b) shows a specific rule gap: the bearing of D from C should be found by adding 180&deg; to the given bearing of C from D (130&deg;+180&deg;=310&deg;), but 360&deg;&minus;130&deg;=230 was used instead &mdash; a rule for a different bearing situation entirely. Worth a few dedicated back-bearing questions with a quick sketch each time to fix the "add or subtract 180&deg;" rule.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Comparing magnitudes across different forms</h3>
+      <p>Both Question 8 (percentages/fractions of m) and Question 11 (standard form) show the same underlying pattern: the actual size of a value isn&rsquo;t always obvious from how "big" it looks written down. In Q8 the order was fully reversed (320% of m/10 looks large but is actually smallest); in Q11, 9&times;10&sup1;&sup9; was picked as largest over the true largest, 1.3&times;10&sup1;&sup2;, because the exponents weren&rsquo;t compared first. A few side-by-side comparison drills, converting everything to the same form before ordering, would help with both at once.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Applying a rounding rule to every quantity</h3>
+      <p>In Question 25, the &plusmn;0.5 bound rule was applied correctly to the two cut pieces but not to the original 68cm measurement, which was treated as an exact value instead of a range. The individual pieces were bounded correctly &mdash; the gap is remembering that <i>every</i> rounded quantity in a question needs its own bounds, not just the ones that look like they need it.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Left blank under time pressure</h3>
+      <p>Six separate answers (Q5b, the final step of Q12, Q19e, Q21, Q23b, Q26b) were left blank or unfinished &mdash; together the single biggest source of lost marks on this paper (12 of 26). Several were quick, low-mark questions with a short final step (Q12, Q19e) that seem to have been skipped rather than genuinely not understood. Worth practising a habit of always writing a final answer, even a best guess, before moving on.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Similar shapes: scale factor cubed for volume</h3>
+      <p>Question 22(b) correctly found the linear scale factor from the surface areas (2:3) but didn&rsquo;t correctly cube it to get the volume/capacity scale factor (2&sup3;:3&sup3;=8:27) and apply it to 56ml. A couple more area-to-volume similar-solids questions, explicitly labelling each step (linear &rarr; area &rarr; volume), would help make the cubing step automatic.</p>
+    </div>
+  </div>
+
+  <footer>0580/43 &middot; Cambridge IGCSE Mathematics &middot; October/November 2025 &middot; marked against the official mark scheme</footer>
+
+</div>
+</body>
+</html>

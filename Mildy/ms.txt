@@ -1,0 +1,558 @@
+Cambridge IGCSE™
+
+MATHEMATICS                                                                                      0580/21
+Paper 2 (Extended)                                                                        May/June 2025
+MARK SCHEME
+Maximum Mark: 100
+
+
+
+
+                                                 Published
+
+
+
+
+This mark scheme is published as an aid to teachers and candidates, to indicate the requirements of the
+examination. It shows the basis on which Examiners were instructed to award marks. It does not indicate the
+details of the discussions that took place at an Examiners’ meeting before marking began, which would have
+considered the acceptability of alternative answers.
+
+Mark schemes should be read in conjunction with the question paper and the Principal Examiner Report f or
+Teachers.
+
+Cambridge International will not enter into discussions about these mark schemes.
+
+Cambridge International is publishing the mark schemes f or the May/June 2025 series f or most
+Cambridge IGCSE, Cambridge International A and AS Level components, and some Cambridge O Level
+components.
+
+
+
+
+                               This document consists of 10 printed pages.
+
+© Cambridge University Press & Assessment 2025                                                 [Turn over
+0580/21                                          Cambridge IGCSE – Mark Scheme                    May/June 2025
+                                                          PUBLISHED
+
+                                                   Generic Marking Principles
+
+These general marking principles must be applied by all examiners when marking candidate answers. They
+should be applied alongside the specific content of the mark scheme or generic level descriptions for a question.
+Each question paper and mark scheme will also comply with these marking principles.
+
+ GENERIC MARKING PRINCIPLE 1:
+
+ Marks must be awarded in line with:
+
+ •     the specific content of the mark scheme or the generic level descriptors for the question
+ •     the specific skills defined in the mark scheme or in the generic level descriptors for the question
+ •     the standard of response required by a candidate as exemplified by the standardisation scripts.
+
+ GENERIC MARKING PRINCIPLE 2:
+
+ Marks awarded are always whole marks (not half marks, or other fractions).
+
+ GENERIC MARKING PRINCIPLE 3:
+
+ Marks must be awarded positively:
+
+ •     marks are awarded for correct/valid answers, as defined in the mark scheme. However, credit is given for
+       valid answers which go beyond the scope of the syllabus and mark scheme, referring to your Team
+       Leader as appropriate
+ •     marks are awarded when candidates clearly demonstrate what they know and can do
+ •     marks are not deducted for errors
+ •     marks are not deducted for omissions
+ •     answers should only be judged on the quality of spelling, punctuation and grammar when these features
+       are specifically assessed by the question as indicated by the mark scheme. The meaning, however,
+       should be unambiguous.
+
+ GENERIC MARKING PRINCIPLE 4:
+
+ Rules must be applied consistently, e.g. in situations where candidates have not followed instructions or in
+ the application of generic level descriptors.
+
+ GENERIC MARKING PRINCIPLE 5:
+
+ Marks should be awarded using the full range of marks defined in the mark scheme for the question
+ (however; the use of the full mark range may be limited according to the quality of the candidate responses
+ seen).
+
+ GENERIC MARKING PRINCIPLE 6:
+
+ Marks awarded are based solely on the requirements as defined in the mark scheme. Marks should not be
+ awarded with grade thresholds or grade descriptors in mind.
+
+
+
+
+© Cambridge University Press & Assessment 2025             Page 2 of 10
+0580/21                                          Cambridge IGCSE – Mark Scheme                  May/June 2025
+                                                          PUBLISHED
+
+
+                                        Mathematics-Specific Marking Principles
+
+ 1     Unless a particular method has been specified in the question, full marks may be awarded for any correct
+       method. However, if a calculation is required then no marks will be awarded for a scale drawing.
+
+ 2     Unless specified in the question, non-integer answers may be given as fractions, decimals or in standard
+       form. Ignore superfluous zeros, provided that the degree of accuracy is not affected.
+
+ 3     Allow alternative conventions for notation if used consistently throughout the paper, e.g. commas being
+       used as decimal points.
+
+ 4     Unless otherwise indicated, marks once gained cannot subsequently be lost, e.g. wrong working
+       following a correct form of answer is ignored (isw).
+
+ 5     Where a candidate has misread a number or sign in the question and used that value consistently
+       throughout, provided that number does not alter the difficulty or the method required, award all marks
+       earned and deduct just 1 A or B mark for the misread.
+
+ 6     Recovery within working is allowed, e.g. a notation error in the working where the following line of
+       working makes the candidate’s intent clear.
+
+
+
+
+© Cambridge University Press & Assessment 2025             Page 3 of 10
+0580/21                                          Cambridge IGCSE – Mark Scheme                   May/June 2025
+                                                          PUBLISHED
+
+Annotations guidance for centres
+
+Examiners use a system of annotations as a shorthand for communicating their marking decisions to one
+another. Examiners are trained during the standardisation process on how and when to use annotations. The
+purpose of annotations is to inform the standardisation and monitoring processes and guide the supervising
+examiners when they are checking the work of examiners within their team. The meaning of annotations and
+how they are used is specific to each component and is understood by all examiners who mark the component.
+
+We publish annotations in our mark schemes to help centres understand the annotations they may see on copies
+of scripts. Note that there may not be a direct correlation between the number of annotations on a script and the
+mark awarded. Similarly, the use of an annotation may not be an indication of the quality of the response.
+
+The annotations listed below were available to examiners marking this component in this series.
+
+Annotations
+
+ Annotation                 Meaning
+
+                            More information required
+
+                            Accuracy mark awarded zero
+
+                            Accuracy mark awarded one
+
+                            Accuracy mark awarded two
+
+                            Accuracy mark awarded three
+
+                            Independent mark awarded zero
+
+                            Independent mark awarded one
+
+                            Independent mark awarded two
+
+                            Independent mark awarded three
+
+                            Benefit of the doubt
+
+                            Communication mark
+
+                            Incorrect
+
+                            Follow through
+
+ Highlighter                Highlight a key point in the working
+
+                            Ignore subsequent work
+
+                            Method mark awarded zero
+
+                            Method mark awarded one
+
+                            Method mark awarded two
+
+                            Method mark awarded three
+
+
+© Cambridge University Press & Assessment 2025             Page 4 of 10
+0580/21                                          Cambridge IGCSE – Mark Scheme                  May/June 2025
+                                                          PUBLISHED
+
+
+ Annotation                 Meaning
+
+                            Misread
+
+                            Omission
+
+                            Allows comments to be entered at the bottom of the RM marking window and then
+ Off-page comment
+                            displayed when the associated question item is navigated to.
+
+ On-page comment            Allows comments to be entered in speech bubbles on the candidate response.
+
+                            Premature rounding/approximation
+
+                            Special case
+
+                            Indicates that work/page has been seen
+
+                            Transcription error
+
+                            Correct
+
+                            Correct answer from incorrect working
+
+
+                                                   MARK SCHEME NOTES
+
+The following notes are intended to aid interpretation of mark schemes in general, but individual mark schemes
+may include marks awarded for specific reasons outside the scope of these notes.
+
+
+Types of mark
+
+M        Method marks, awarded for a valid method applied to the problem.
+
+A        Accuracy mark, awarded for a correct answer or intermediate step correctly obtained. For accuracy
+         marks to be given, the associated Method mark must be earned or implied.
+
+B        Mark for a correct result or statement independent of Method marks.
+
+When a part of a question has two or more ‘method’ steps, the M marks are in principle independent unless the
+scheme specifically says otherwise; and similarly where there are several B marks allocated. The notation ‘dep’
+is used to indicate that a particular M or B mark is dependent on an earlier mark in the scheme.
+
+Abbreviations
+
+awrt     answers which round to
+cao      correct answer only
+dep      dependent
+FT       follow through after error
+isw      ignore subsequent working
+nfww     not from wrong working
+oe       or equivalent
+rot      rounded or truncated
+SC       Special Case
+soi      seen or implied
+
+
+© Cambridge University Press & Assessment 2025             Page 5 of 10
+0580/21                                          Cambridge IGCSE – Mark Scheme                              May/June 2025
+                                                          PUBLISHED
+
+
+  Question                         Answer                    Marks                         Partial Marks
+
+       1          8c – 2d final answer                               2    B1 for answer 8c – kd or kc – 2d or for correct
+                                                                          answer seen and spoilt
+
+       2          [w =] 158                                          4    B1 for w correct
+                  [x =] 76                                                B1 for x correct
+                  [y =] 82                                                B2FT for y = 158 – their x correctly evaluated
+                                                                          or B1 for 22 (identified)
+                                                                          or 82 in position vertically opposite to y
+                                                                          or for y = 158 – their x
+
+       3          1770                                               3    B2 for 270
+                                                                                            1500  3 6
+                                                                          or M2 for 1500 +
+                                                                                                100
+                                                                                    1500  3 6
+                                                                          or M1 for
+                                                                                       100
+
+       4           7                                                 3              6
+                     oe                                                   M1 for       oe
+                  12                                                               24
+                                                                          M1 for correct use of common denominator in
+                                                                                       5         6         20      6
+                                                                          subtraction    – their    , e.g.     and    oe
+                                                                                       6         24        24      24
+                                                                                                         1
+                                                                          If 0 scored, SC1 for answer       oe
+                                                                                                        16
+
+       5          12                                                 2               360            180 ( n − 2 )
+                                                                          M1 for             or for               = 150
+                                                                                   180 − 150             n
+
+     6(a)         Correct line drawn                                 2    M1 for a line with gradient 2 or for a line with
+                                                                          positive gradient and intercept at y = 1
+
+     6(b)         [x =] 2, [y =] 5                                   1    FT intersection of their (a) with the given line
+
+       7           4                                                 3             24
+                                                                          B2 for      oe
+                  15                                                               90
+
+                                                                          or M1 for 26.66… – 2.66… oe
+                                                                          or for 90x = 24 oe
+                                                                                  2     6
+                                                                          or for     +     oe
+                                                                                 10    90
+
+     8(a)         14                                               2           14       k         22 
+                                                                        B1 for   or for   or for  
+                  13                                                           k        13        10 
+
+     8(b)         24                                                 2    M1 for y + 52 = 72 or better
+
+       9          4 nfww                                             3    M2 for 8 + 20 + 8n = 6(2 + 4 + n) or better
+
+                                                                                     2  4 + 4  5 + n 8
+                                                                          or M1 for                       [= 6] oe
+                                                                                          2+4+ n
+                                                                          or 8 + 20 + 8n or 6(2 + 4 + n)
+
+
+© Cambridge University Press & Assessment 2025             Page 6 of 10
+0580/21                                          Cambridge IGCSE – Mark Scheme                                 May/June 2025
+                                                          PUBLISHED
+
+
+  Question                         Answer                    Marks                          Partial Marks
+
+    10(a)         110                                                1
+
+    10(b)         55                                                 1    FT their 110  2
+
+    10(c)         55                                                 1    FT their (b)
+                                                                          Provided their (b) < 90
+
+    10(d)         15                                                 1    FT 70 – their (b)
+                                                                          Provided their (b) < 70
+
+    11(a)         For correct ruled tangent and                      2    B1 for correct ruled tangent or both values
+                  [a =] 1, [b =] 2                                        correct without a correct tangent
+
+    11(b)         [y =] 5 – 3x                                       3    3FT their (a) provided m < 0, c ≠ 0
+
+                                                                          B1 for (their –3)x + c
+                                                                                             rise
+                                                                          or M1 for correct       for their line
+                                                                                             run
+
+                                                                          B1 for mx + c where c is the correct intercept
+                                                                          for their graph, m ≠ 0
+
+    12(a)         1.4                                                2    B1 for [UQ =] 5.6 or for [LQ =] 4.2
+
+                                                                          or SC1 for 0.7
+
+    12(b)         5.4                                                2    B1 for 84 seen
+
+    13(a)         12.5 oe                                            5    M4 for 8[]h = 100[]
+
+                                                                          OR
+
+                                                                          M3 for
+                                                                          π  6 10 + 2  π  62 = 2  π  42 + 2  π  4  h
+                                                                          oe
+
+                                                                          OR
+
+                                                                          M1 for π  6 10 + 2  π  62 oe
+                                                                          M1 2  π  42 + 2  π  4  h oe
+
+                                                                          OR
+
+                                                                          SC2 for answer 16.5
+
+    13(b)         14                                                 3    M2 for     102 − 62
+
+                                                                          or M1 for 62 + x2 = 102
+
+    14(a)         –10                                                1
+
+
+
+
+© Cambridge University Press & Assessment 2025             Page 7 of 10
+0580/21                                          Cambridge IGCSE – Mark Scheme                             May/June 2025
+                                                          PUBLISHED
+
+
+  Question                         Answer                    Marks                         Partial Marks
+
+    14(b)          x+4                                               2    M1 for correct first step
+                       oe
+                    3                                                     y + 4 = 3x or x = 3y – 4
+                                                                              y      4
+                                                                          or = x −
+                                                                             3       3
+
+    14(c)         a = 12, b = –1                                     2    B1 for either a or b correct
+
+                                                                          or M1 for 3(4x + 1) – 4
+
+    14(d)              22 − 7 x            22 − 7 x                  3    B1 for 2(4x + 1) – 5(3x – 4) oe or better isw
+                                      or
+                  ( 3x − 4 )( 4 x + 1) 12 x 2 − 13x − 4
+                                                                          B1 for common denominator (3x – 4)(4x + 1)
+                  final answer                                            oe isw
+
+    15(a)         17 – 7 5 final answer                              2    B1 for 3 correct terms from
+                                                                          2–6 5 – 5 +3 5                 5 oe
+
+    15(b)         3 10                                               2                 6    10
+                       cao                                                M1 for              oe
+                    5                                                                  10   10
+
+      16          3x3 + 5x2 – 34x – 24 final answer                  3    B2 for correct expansion unsimplified
+                                                                          or simplified four-term expression of correct
+                                                                          form with 3 terms correct
+
+                                                                          or B1 for one pair of brackets expanded with at
+                                                                          least 3 terms out of 4 correct
+
+    17(a)          9                                                 2              3    3
+                      oe                                                  M1 for      
+                  100                                                              10   10
+
+   17(b)(i)       2                                                  2             2
+                                                                          B1 for
+                  5                                                                5
+                  4
+                  5
+                  1
+                  5
+
+  17(b)(ii)       16                                                 3    3FT their tree diagram dep on probabilities < 1
+                     oe
+                  30
+                                                                                        4   2   2   4
+                                                                          M2FT for           +   
+                                                                                        6   5   6   5
+
+                                                                                          4   2        2   4
+                                                                          or M1FT for          or for   
+                                                                                          6   5        6   5
+
+    18(a)         12                                                 1
+                   x
+
+    18(b)           10                                               1
+                   x−4
+
+
+© Cambridge University Press & Assessment 2025             Page 8 of 10
+0580/21                                          Cambridge IGCSE – Mark Scheme                                 May/June 2025
+                                                          PUBLISHED
+
+
+  Question                         Answer                    Marks                           Partial Marks
+
+    18(c)                  10         12                          M1
+                  their       – their    = 1 oe
+                          x−4          x
+
+                  10x – 12x + 48 = x2 – 4x                        M2      Correctly multiplying their brackets and
+                                                                          clearing algebraic fractions
+                                                                                          12 
+                                                                          e.g. ( x − 4 )  + 1 = 10
+                                                                                          x    
+                                                                                             48
+                                                                          leading to 12 − + x − 4 = 10 and then
+                                                                                              x
+                                                                                         2
+                                                                          12 x − 48 + x − 4 x = 10 x
+
+                                                                          or M1 for correctly clearing, or correctly
+                                                                          collecting into a single fraction, two fractions
+                                                                          both with different algebraic denominators
+                                                                          e.g. 10x – 12(x – 4) = x(x – 4)
+                                                                          or
+                                                                          10 x − 12 ( x − 4 )
+                                                                                              [= 1]
+                                                                              x ( x − 4)
+
+                  Leading to 0 = x2 – 2x – 48                      A1     With no errors or omissions seen, dep on M3
+
+
+    18(d)         (x + 6)(x – 8)                                  M2      M1 for x(x – 8) + 6(x – 8)
+                                                                          or x(x + 6) – 8(x + 6)
+                                                                          or (x + a)(x + b) where ab = –48 or a + b = –2
+
+                  –6, 8                                            B1
+
+    18(e)                    1                                       1           12
+                  1.5 or 1                                                FT
+                             2                                                 their 8
+
+      19          1                                                  2                          1        1
+                                                                          M1 for 9–1 or for       2
+                                                                                                    or 3
+                  9                                                                             3        729
+
+      20          6 3 oe                                             4                        1      3
+                                                                          B1 for tan30 =         or
+                                                                                               3    3
+                                                                                              3              1
+                                                                          or for sin 60 =       and sin 30 =
+                                                                                             2               2
+
+                                                                                      6       6sin ( 60 )
+                                                                          M2 for           or
+                                                                                    tan 30    sin ( 30 )
+
+                                                                                         6             sin 60 sin 30
+                                                                          or M1 for        = tan 30 or       =
+                                                                                         x                x     6
+
+   21(a)(i)       2m – n                                             1
+
+  21(a)(ii)       2m + n                                             1
+
+
+
+© Cambridge University Press & Assessment 2025             Page 9 of 10
+0580/21                                          Cambridge IGCSE – Mark Scheme                                    May/June 2025
+                                                          PUBLISHED
+
+
+  Question                         Answer                     Marks                           Partial Marks
+
+    21(b)         CD = 10m – 5n                                    M2      Allow M2 for equivalents
+                                                                           CD = –2n + 10m – 3n
+                                                                           or CD = − ( 2m + n ) + 2m − n + 10m − 3n
+
+                                                                           For M2, FT their (a) e.g.
+                                                                           CD = their CO + their OA +10m − 3n
+
+                                                                           or M1 for correct route for CD using the lines
+                                                                           of the diagram with AD
+                                                                           e.g. CD = CA + AD oe
+
+                   CD = 5 OA                                       A1      Dependent on M2
+                  leading to CD is parallel to OA
+                  [ OACD is a trapezium]
+
+    22(a)         [n =] 3, [q =] – 6                                  2    B1 for each correct value
+
+    22(b)         (1, 4) and (3, 0)                                   4    B3 for (1, 4) or (3, 0)
+                                                                           or for two correct values of x
+
+                                                                           or M2 for [3](x – 1)(x – 3) [ = 0] oe
+                                                                                    − ( −12 )    ( −12)2 − 4  3  9
+                                                                           or x =                                       oe
+                                                                                                  23
+
+                                                                                                 dy
+                                                                           or M1 for writing         =0
+                                                                                                 dx
+                                                                           or for 3x 2 − 12 x + 9 = 0
+
+      23            2x                                                3    B1 for 2x(x + 5)
+                        final answer
+                   x −5
+                                                                           B1 for (x – 5)(x + 5)
+
+
+
+
+© Cambridge University Press & Assessment 2025             Page 10 of 10
+

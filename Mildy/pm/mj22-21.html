@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — 0580/21 May/June 2022 Marking Breakdown</title>
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 28px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .score-box { text-align: right; }
+  .score-box .num { font-size: 40px; font-weight: 700; color: var(--accent); line-height: 1; }
+  .score-box .pct { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .summary-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .summary-card .value { font-size: 22px; font-weight: 600; margin-top: 4px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13.5px;
+    table-layout: fixed;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.q { font-weight: 600; width: 44px; text-align: center; color: var(--ink); }
+  td.topic { width: 220px; color: var(--ink); }
+  td.topic .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tip);
+    background: var(--tip-light);
+    padding: 1px 7px;
+    border-radius: 20px;
+    margin-bottom: 4px;
+  }
+  td.topic .topic-name { display: block; }
+  td.marks { width: 70px; text-align: center; white-space: nowrap; }
+  td.note { color: var(--muted); }
+  .full { color: var(--accent); font-weight: 600; }
+  .partial { color: var(--loss); font-weight: 600; }
+  .dash { color: var(--muted); }
+
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-hw { background: var(--loss-light); color: var(--loss); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  tr.total td {
+    border-top: 2px solid var(--ink);
+    font-weight: 700;
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+  tr.total td.note { color: var(--accent); font-weight: 600; }
+
+  .legend {
+    margin: 18px 0 40px;
+    display: flex;
+    gap: 18px;
+    font-size: 12px;
+    color: var(--muted);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  h2.section-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    padding-top: 8px;
+    border-top: 2px solid var(--ink);
+  }
+
+  .ladder {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 8px 20px;
+    margin-bottom: 28px;
+  }
+  .ladder-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .ladder-row:last-child { border-bottom: none; }
+  .ladder-score {
+    font-size: 20px;
+    font-weight: 700;
+    min-width: 84px;
+    color: var(--ink);
+  }
+  .ladder-row.final .ladder-score { color: var(--accent); }
+  .ladder-desc { font-size: 13.5px; color: var(--muted); flex: 1; }
+  .ladder-desc b { color: var(--ink); font-weight: 600; }
+  .ladder-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .weak-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .weak-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--pink);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .weak-card h3 { margin: 0 0 6px; font-size: 14.5px; font-weight: 600; }
+  .weak-card p { margin: 0; font-size: 13px; color: var(--muted); }
+  .weak-card .tag { font-size: 11px; font-weight: 600; color: var(--tip); background: var(--tip-light); padding: 1px 7px; border-radius: 20px; margin-bottom: 6px; display: inline-block; }
+
+  footer {
+    margin-top: 28px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tip);
+    text-decoration: none;
+    background: var(--tip-light);
+    padding: 7px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .back-link:hover { background: var(--tip); color: #fff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../tracker.html">&larr; Back to dashboard</a>
+
+  <header>
+    <div>
+      <h1>Mildy — marking breakdown</h1>
+      <div class="meta">Cambridge IGCSE Mathematics 0580/21 (Extended) &middot; May/June 2022</div>
+    </div>
+    <div class="score-box">
+      <div class="num">49<span style="font-size:20px;color:var(--muted);">/70</span></div>
+      <div class="pct">70%</div>
+    </div>
+  </header>
+
+  <div class="summary-row">
+    <div class="summary-card">
+      <div class="label">Questions fully correct</div>
+      <div class="value">17 / 27</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Careless slips / rounding</div>
+      <div class="value">&minus;7</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Handwriting</div>
+      <div class="value">0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Misconceptions</div>
+      <div class="value">&minus;4</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Left blank</div>
+      <div class="value">&minus;10</div>
+    </div>
+  </div>
+
+  <table>
+    <colgroup>
+      <col style="width:44px;">
+      <col style="width:220px;">
+      <col style="width:70px;">
+      <col>
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Q</th>
+        <th>Topic</th>
+        <th>Marks</th>
+        <th>Note</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="q">1</td><td class="topic"><span class="tag">E1.1</span><span class="topic-name">Types of number (primes)</span></td><td class="marks full">1/1</td><td class="note dash">&mdash;</td></tr>
+
+      <tr><td class="q">2</td><td class="topic"><span class="tag">E1.7</span><span class="topic-name">Indices I</span></td><td class="marks partial">0/1</td><td class="note"><span class="cat cat-slip">Careless slip</span>4<sup>5</sup> = 1024 and 5<sup>4</sup> = 625 were both calculated correctly, but the subtraction 1024 &minus; 625 was carried out incorrectly, giving 1399 instead of 399. The borrowing went wrong partway through; the powers themselves were not the problem.</td></tr>
+
+      <tr><td class="q">3</td><td class="topic"><span class="tag">E1.15</span><span class="topic-name">Time</span></td><td class="marks full">1/1</td><td class="note dash">&mdash;</td></tr>
+
+      <tr><td class="q">4</td><td class="topic"><span class="tag">E1.6</span><span class="topic-name">The four operations</span></td><td class="marks full">2/2</td><td class="note dash">&mdash;</td></tr>
+
+      <tr><td class="q">5</td><td class="topic"><span class="tag">E1.12</span><span class="topic-name">Rates (currency conversion)</span></td><td class="marks full">2/2</td><td class="note dash">&mdash;</td></tr>
+
+      <tr><td class="q">6</td><td class="topic"><span class="tag">E1.1</span><span class="topic-name">Types of number (prime factors)</span></td><td class="marks full">2/2</td><td class="note dash">&mdash;</td></tr>
+
+      <tr><td class="q">7</td><td class="topic"><span class="tag">E1.6</span><span class="topic-name">The four operations (fractions)</span></td><td class="marks full">2/2</td><td class="note dash">&mdash;</td></tr>
+
+      <tr><td class="q">8a</td><td class="topic"><span class="tag">E2.1</span><span class="topic-name">Substitution into a formula</span></td><td class="marks partial">0/1</td><td class="note"><span class="cat cat-slip">Careless slip</span>t = 4 was read and substituted as 0.4, so 0.4&sup2; = 0.16 was used instead of 4&sup2; = 16. The formula s = &frac12;at&sup2; itself was applied correctly &mdash; this was a misread of the given value, not a misunderstanding of the formula.</td></tr>
+      <tr><td class="q">8b</td><td class="topic"><span class="tag">E2.1</span><span class="topic-name">Rearranging a formula</span></td><td class="marks partial">1/2</td><td class="note"><span class="cat cat-slip">Careless slip</span>the rearrangement itself was correct, reaching t = &radic;(2s/a). The final mark requires the &plusmn; sign in front of the root (t = &plusmn;&radic;(2s/a)), which was left off.</td></tr>
+
+      <tr><td class="q">9</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation (factorising)</span></td><td class="marks full">2/2</td><td class="note dash">&mdash;</td></tr>
+
+      <tr><td class="q">10a</td><td class="topic"><span class="tag">E2.7</span><span class="topic-name">Sequences</span></td><td class="marks full">1/1</td><td class="note dash">&mdash;</td></tr>
+      <tr><td class="q">10b</td><td class="topic"><span class="tag">E2.7</span><span class="topic-name">Sequences (nth term)</span></td><td class="marks full">2/2</td><td class="note dash">&mdash;</td></tr>
+
+      <tr><td class="q">11a</td><td class="topic"><span class="tag">E4.4</span><span class="topic-name">Similarity</span></td><td class="marks full">2/2</td><td class="note dash">&mdash;</td></tr>
+      <tr><td class="q">11b</td><td class="topic"><span class="tag">E4.4</span><span class="topic-name">Similarity (volume of similar solids)</span></td><td class="marks full">2/2</td><td class="note dash">&mdash;</td></tr>
+
+      <tr><td class="q">12</td><td class="topic"><span class="tag">E4.6</span><span class="topic-name">Angles (polygons)</span></td><td class="marks full">3/3</td><td class="note dash">&mdash;</td></tr>
+
+      <tr><td class="q">13</td><td class="topic"><span class="tag">E1.8</span><span class="topic-name">Standard form</span></td><td class="marks partial">1/2</td><td class="note"><span class="cat cat-slip">Careless slip</span>the coefficient was worked out correctly (2.00 &minus; 0.02 = 1.98), but the power of 10 attached to it was written as 10<sup>98</sup> instead of 10<sup>100</sup>. The digits (198) are right; the exponent was not carried through correctly.</td></tr>
+
+      <tr><td class="q">14</td><td class="topic"><span class="tag">E1.12</span><span class="topic-name">Rates (speed, distance, time)</span></td><td class="marks partial">0/3</td><td class="note"><span class="cat cat-blank">Left blank</span>only the given values were labelled ("distance", "time") &mdash; no calculation was attempted. Guideline: convert 108 km/h to 30 m/s, multiply by 7 s to get the total distance covered (210 m), then subtract the station length: 210 &minus; 120 = 90 m.</td></tr>
+
+      <tr><td class="q">15</td><td class="topic"><span class="tag">E2.4</span><span class="topic-name">Indices II</span></td><td class="marks full">1/1</td><td class="note dash">&mdash;</td></tr>
+
+      <tr><td class="q">16</td><td class="topic"><span class="tag">E7.1</span><span class="topic-name">Transformations</span></td><td class="marks full">3/3</td><td class="note dash">&mdash;</td></tr>
+
+      <tr><td class="q">17</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Surface area and volume</span></td><td class="marks partial">1/3</td><td class="note"><span class="cat cat-miscon">Misconception</span>the full sphere volume formula (4/3&pi;r&sup3;) was set equal to 80, when 80 is the volume of the <b>hemisphere</b> &mdash; half of a full sphere. It should have been (1/2)(4/3&pi;r&sup3;) = 80. This is a common mix-up (the exam board's mark scheme specifically anticipates this exact error), but it does reflect a gap in the hemisphere-vs-sphere relationship rather than a slip.</td></tr>
+
+      <tr><td class="q">18</td><td class="topic"><span class="tag">E4.7 / E4.8</span><span class="topic-name">Circle theorems</span></td><td class="marks partial">2/3</td><td class="note"><span class="cat cat-miscon">Misconception</span>x = 38 is correct. For y, the mark scheme answer is 22, but 42 was given &mdash; the value used for y looks like it was read directly off an intermediate angle already marked on the diagram (42), rather than carried through the extra step needed to reach the actual angle asked for. Method credit is available for correctly marking angle CBA = 120 on the diagram, which is why this isn't a full loss, but the specific angle labelled y needs re-checking against exactly which angle the question means.</td></tr>
+
+      <tr><td class="q">19</td><td class="topic"><span class="tag">E4.4</span><span class="topic-name">Congruent triangles</span></td><td class="marks partial">3/4</td><td class="note"><span class="cat cat-blank">Left blank</span>the alternate-angle and vertically-opposite-angle reasoning were both correct, and the final side (PX = BX) was also correct. Only the congruency criterion itself (ASA) was left blank.</td></tr>
+
+      <tr><td class="q">20a</td><td class="topic"><span class="tag">E2.9</span><span class="topic-name">Graphs in practical situations</span></td><td class="marks full">1/1</td><td class="note dash">&mdash;</td></tr>
+      <tr><td class="q">20b</td><td class="topic"><span class="tag">E2.9</span><span class="topic-name">Graphs in practical situations (area under graph)</span></td><td class="marks partial">1/2</td><td class="note"><span class="cat cat-miscon">Misconception</span>only the triangular deceleration section (16 s to 24 s) was used to find distance, giving 48 m. The constant-speed section from 0 s to 16 s (a rectangle, 16 &times; 12 = 192 m) was left out of the total entirely. Total distance needs every section of the graph added together, not just one part of it.</td></tr>
+
+      <tr><td class="q">21</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation (factorising)</span></td><td class="marks partial">0/2</td><td class="note"><span class="cat cat-blank">Left blank</span>no working shown. Guideline: group the terms as (1 &minus; q) &minus; a(1 &minus; q), which factorises to (1 &minus; q)(1 &minus; a).</td></tr>
+
+      <tr><td class="q">22</td><td class="topic"><span class="tag">E2.4</span><span class="topic-name">Indices II</span></td><td class="marks full">2/2</td><td class="note dash">&mdash;</td></tr>
+
+      <tr><td class="q">23a</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations (completing the square)</span></td><td class="marks full">2/2</td><td class="note dash">&mdash;</td></tr>
+      <tr><td class="q">23b</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations (solving a quadratic)</span></td><td class="marks partial">0/2</td><td class="note"><span class="cat cat-blank">Left blank</span>the equation was correctly rearranged to x&sup2; + 8x &minus; 20 = 0, but it was never solved. Using the completed-square form from part (a), (x + 4)&sup2; &minus; 6 = 30 gives (x + 4)&sup2; = 36, so x + 4 = &plusmn;6, giving x = 2 or x = &minus;10.</td></tr>
+
+      <tr><td class="q">24</td><td class="topic"><span class="tag">E6.6</span><span class="topic-name">Pythagoras in 3D</span></td><td class="marks partial">1/3</td><td class="note"><span class="cat cat-slip">Careless slip</span>24&sup2; and 12&sup2; were both calculated correctly (576 and 144), but the third term, 8&sup2; = 64, was dropped when adding them together, leaving 720 instead of 784. The 3D diagonal formula itself (&radic;(l&sup2;+w&sup2;+h&sup2;)) was applied correctly in principle &mdash; one term simply went missing during the addition.</td></tr>
+
+      <tr><td class="q">25</td><td class="topic"><span class="tag">E2.8</span><span class="topic-name">Proportion</span></td><td class="marks partial">0/3</td><td class="note"><span class="cat cat-blank">Left blank</span>no working shown at all. This combines two proportionality relationships (w &prop; &radic;y and y &prop; 1/x) into one &mdash; worth revisiting as its own topic, since joint/combined proportion questions haven't appeared elsewhere in these papers.</td></tr>
+
+      <tr><td class="q">26</td><td class="topic"><span class="tag">E7.2 / E7.4</span><span class="topic-name">Vectors in two dimensions</span></td><td class="marks full">4/4</td><td class="note dash">&mdash;</td></tr>
+
+      <tr><td class="q">27</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations (simultaneous, linear and quadratic)</span></td><td class="marks full">4/4</td><td class="note dash">&mdash;</td></tr>
+
+      <tr class="total"><td colspan="2">Total</td><td class="marks">49/70</td><td class="note">70%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="legend">
+    <span class="cat cat-slip">Careless slip</span>
+    <span class="cat cat-hw">Handwriting</span>
+    <span class="cat cat-miscon">Misconception</span>
+    <span class="cat cat-blank">Left blank</span>
+  </div>
+
+  <h2 class="section-title">What she could achieve</h2>
+  <div class="ladder">
+    <div class="ladder-row">
+      <div class="ladder-score">49/70</div>
+      <div class="ladder-desc">Actual mark obtained on this paper.</div>
+      <span></span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">56/70</div>
+      <div class="ladder-desc">Achievable by fixing the <b>7 marks lost to careless slips</b> (Q2, Q8a, Q8b, Q13, Q24) &mdash; in every one of these, the method was correct and the error was a misread value, a dropped term, or a missing symbol.</div>
+      <span class="ladder-tag" style="background:var(--amber-light);color:var(--amber);">slips</span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">60/70</div>
+      <div class="ladder-desc">Achievable by additionally resolving the <b>3 misconceptions</b>: correctly identifying which angle is being asked for in multi-angle circle theorem questions (Q18), the hemisphere-vs-sphere volume relationship (Q17), and remembering to add every section of a speed-time graph when finding total distance (Q20b).</div>
+      <span class="ladder-tag" style="background:var(--pink-light);color:var(--pink);">misconceptions</span>
+    </div>
+    <div class="ladder-row final">
+      <div class="ladder-score">70/70</div>
+      <div class="ladder-desc">Achievable by additionally attempting the <b>questions left blank</b> (Q14, Q19's last line, Q21, Q23b, Q25) &mdash; several of these had correct working already in place elsewhere on the paper, or needed just one more step to finish.</div>
+      <span class="ladder-tag" style="background:var(--purple-light);color:var(--purple);">blank</span>
+    </div>
+  </div>
+
+  <h2 class="section-title">Topics to target next session</h2>
+  <div class="weak-grid">
+    <div class="weak-card">
+      <span class="tag">E4.7 / E4.8</span>
+      <h3>Tracking which angle is which</h3>
+      <p>In Q18, x was found correctly, but the value given for y matched a different angle already marked on the diagram rather than the one actually being asked for. In multi-step circle theorem questions with several labelled angles, it's worth double-checking at the end which angle in the diagram corresponds to which letter before writing the final answer.</p>
+    </div>
+    <div class="weak-card">
+      <span class="tag">E5.4</span>
+      <h3>Hemisphere vs sphere volume</h3>
+      <p>Q17 used the full sphere formula for a hemisphere's volume, missing the factor of 1/2. Worth a couple of direct hemisphere/sphere questions side by side so the relationship is automatic.</p>
+    </div>
+    <div class="weak-card">
+      <span class="tag">E2.9</span>
+      <h3>Total distance from a speed-time graph</h3>
+      <p>Q20(b) only used one section of the graph. Worth reinforcing that "total distance" always means adding the area of every section &mdash; rectangles and triangles alike &mdash; not just the most recent or most obvious one.</p>
+    </div>
+    <div class="weak-card">
+      <span class="tag">E2.8</span>
+      <h3>Combined proportion</h3>
+      <p>Q25 (w proportional to &radic;y, y inversely proportional to x) was left blank rather than attempted. This combines two proportionality rules into one question, which hasn't come up elsewhere &mdash; worth introducing as its own mini-topic rather than assuming it follows automatically from simple proportion.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Carrying working through to a final answer</h3>
+      <p>Q19, Q23(b), and part of Q14 all had correct or partially correct working that stopped short of a final answer. This is the same pattern seen on both previous papers: the content is often there, but the last step doesn't get written down.</p>
+    </div>
+  </div>
+
+  <footer>0580/21 &middot; Cambridge IGCSE Mathematics &middot; May/June 2022 &middot; marked against the official mark scheme &middot; syllabus codes reference the current (2025&ndash;2027) Extended subject content</footer>
+
+</div>
+</body>
+</html>

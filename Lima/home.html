@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lima — Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
+    --accent: #0f6e56; --accent-light: #e1f5ee;
+    --tip: #185fa5; --tip-light: #e6f1fb;
+    --amber: #854f0b; --amber-light: #faeeda;
+    --grade-a: #1B88A7; --grade-a-light: #E2F3F8;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 56px 24px 64px; background: var(--bg); color: var(--ink);
+    font-family: 'Space Grotesk', 'Noto Sans Thai', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 44px; }
+  .eyebrow { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+  header h1 { margin: 0 0 10px; font-size: 32px; font-weight: 700; }
+  header .meta { color: var(--muted); font-size: 14.5px; }
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+  .hub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .hub-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 26px 22px;
+    text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: flex-start;
+    gap: 10px; transition: box-shadow 0.15s ease, transform 0.15s ease; border-top: 4px solid var(--hub-color, var(--accent));
+  }
+  .hub-card:hover { box-shadow: 0 6px 22px rgba(31,42,36,0.14); transform: translateY(-3px); }
+  .hub-icon { font-size: 26px; line-height: 1; }
+  .hub-card h2 { margin: 0; font-size: 16.5px; font-weight: 700; }
+  .hub-card p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .hub-goto { margin-top: auto; padding-top: 10px; font-size: 12.5px; font-weight: 600; color: var(--hub-color, var(--accent)); }
+  .hub-card.schedule { --hub-color: var(--tip); }
+  .hub-card.fees { --hub-color: var(--amber); }
+  .hub-card.progress { --hub-color: var(--grade-a); }
+  footer { margin-top: 46px; font-size: 12px; color: var(--muted); text-align: center; }
+  @media (max-width: 720px) { .hub-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../teacher-hub.html">&larr; Back to Teacher Hub</a>
+
+  <header>
+    <div class="eyebrow">Lima &middot; Tutoring hub</div>
+    <h1>What would you like to check?</h1>
+    <div class="meta">Everything in one place &mdash; schedule, fees, and Grade 6 / Year 7 maths progress.</div>
+  </header>
+
+  <div class="hub-grid">
+    <a class="hub-card schedule" href="sched.html">
+      <div class="hub-icon">🗓️</div>
+      <h2>View class schedule</h2>
+      <p>The recurring weekly class times, and how long the current schedule runs before it changes.</p>
+      <div class="hub-goto">Open schedule &rarr;</div>
+    </a>
+    <a class="hub-card fees" href="mo/index.html">
+      <div class="hub-icon">🧾</div>
+      <h2>Monthly fees</h2>
+      <p>Session log and running total by month.</p>
+      <div class="hub-goto">Open fees &rarr;</div>
+    </a>
+    <a class="hub-card progress" href="dash.html">
+      <div class="hub-icon">📐</div>
+      <h2>Maths progress</h2>
+      <p>Syllabus coverage across her Thai curriculum, with Cambridge/Common Core extension topics.</p>
+      <div class="hub-goto">Open progress tracker &rarr;</div>
+    </a>
+  </div>
+
+  <footer>Lima &middot; Grade 6 (US) / Year 7 (UK) &middot; school not yet provided &middot; updated as classes happen</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teacher Hub</title>
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --card-bg: #ffffff;
+    --border: #e2e5ec;
+    --text: #1f2430;
+    --muted: #6b7280;
+    --accent: #3b5bdb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    padding: 32px 24px 16px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  header h1 {
+    margin: 0 0 4px;
+    font-size: 28px;
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 8px 24px 48px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card h2 {
+    margin: 0;
+    font-size: 17px;
+  }
+  .card .info {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card a.open {
+    margin-top: auto;
+    display: inline-block;
+    text-align: center;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 8px;
+  }
+  .card a.open:hover { opacity: 0.9; }
+  .add-card {
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 18px 20px;
+    text-align: center;
+  }
+  footer {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  footer code {
+    background: #eef0f6;
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Teacher Hub</h1>
+  <p>Your private overview of every student's tracker. Click a card to open their dashboard.</p>
+</header>
+
+<main>
+  <div class="grid">
+
+    <!-- ===== ONE CARD PER STUDENT — copy this block to add another student, then make a matching subfolder ===== -->
+    <div class="card">
+      <h2>Mildy</h2>
+      <p class="info">🏫 School: Harrow International School Bangkok</p>
+      <p class="info">📖 Curriculum: IGCSE Maths (0580)</p>
+      <p class="info">🎓 Grade/Year: Year 10</p>
+      <a class="open" href="Mildy/home.html">Open dashboard</a>
+    </div>
+
+    <div class="card">
+      <h2>Iris</h2>
+      <p class="info">🏫 School: ChokChai School</p>
+      <p class="info">📖 Curriculum: คณิตศาสตร์ ม.3 (IPST)</p>
+      <p class="info">🎓 Grade/Year: Matthayom 3</p>
+      <a class="open" href="Iris/home.html">Open dashboard</a>
+    </div>
+
+    <div class="card">
+      <h2>Lima</h2>
+      <p class="info">🏫 School: not yet provided</p>
+      <p class="info">📖 Curriculum: EP (English Program), Thai national core curriculum</p>
+      <p class="info">🎓 Grade/Year: Grade 6 (US) / Year 7 (UK)</p>
+      <a class="open" href="Lima/home.html">Open dashboard</a>
+    </div>
+
+    <div class="card">
+      <h2>Imboon</h2>
+      <p class="info">🏫 School: Rugby International School</p>
+      <p class="info">📖 Curriculum: Pearson Edexcel IGCSE Maths A (4MA1)</p>
+      <p class="info">🎓 Grade/Year: Year 10 (Foundation Tier; Higher Tier from Year 11)</p>
+      <a class="open" href="Imboon/home.html">Open dashboard</a>
+    </div>
+
+    <div class="add-card">
+      + Copy a card above for each new student.<br>Make a matching subfolder (e.g. <code>NewStudent/</code>) with a <code>home.html</code> inside, then update the link.
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  Everything lives in this one folder now: this page plus one subfolder per student (<code>Mildy/</code>, <code>Iris/</code>, <code>Lima/</code>). Each student's own pages link back here.
+</footer>
+
+</body>
+</html>

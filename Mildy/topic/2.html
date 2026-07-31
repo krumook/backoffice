@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — 2. Algebra and graphs — Topic Detail</title>
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header {
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 20px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tip);
+    text-decoration: none;
+    background: var(--tip-light);
+    padding: 7px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .back-link:hover { background: var(--tip); color: #fff; }
+
+  h2.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 30px 0 14px;
+    padding-top: 6px;
+    color: var(--ink);
+    scroll-margin-top: 16px;
+  }
+  h2.section-title:first-of-type { margin-top: 0; }
+  h2.section-title .count { font-weight: 400; color: var(--muted); font-size: 13px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13px;
+    table-layout: fixed;
+    margin-bottom: 8px;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 10px 12px;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 10px 12px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.code { font-weight: 600; width: 88px; color: var(--accent); word-break: break-word; line-height: 1.3; }
+  td.topic { width: 150px; }
+  td.papers { width: 130px; }
+  td.papers span.paper-tag {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 3px;
+    white-space: nowrap;
+  }
+  td.comment { color: var(--muted); width: auto; }
+  td.improve { color: var(--ink); width: 220px; }
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .cat-correct { background: var(--accent-light); color: var(--accent); }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-hw { background: var(--loss-light); color: var(--loss); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  .score { font-weight: 700; margin-bottom: 6px; font-size: 12.5px; }
+  .sc-good { color: var(--accent); }
+  .sc-mid { color: var(--amber); }
+  .sc-low { color: var(--loss); }
+
+  .qline { margin-bottom: 6px; }
+  .qline:last-child { margin-bottom: 0; }
+  .qline b { color: var(--ink); font-weight: 600; }
+  .qmarks { font-weight: 600; color: var(--tip); background: var(--tip-light); padding: 1px 6px; border-radius: 10px; font-size: 11.5px; white-space: nowrap; }
+
+  tr.untested td { color: var(--muted); }
+  tr.untested td.code { color: var(--muted); }
+  tr.untested td.dash { text-align: center; }
+
+  .legend {
+    display: flex;
+    gap: 18px;
+    font-size: 12px;
+    color: var(--muted);
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px 0 30px;
+  }
+
+  footer {
+    margin-top: 30px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .topic-nav { display:flex; justify-content:space-between; align-items:center; margin: 20px 0; font-size: 13px; }
+  .topic-nav a { color: var(--tip); text-decoration:none; font-weight:600; }
+  .topic-nav a:hover { text-decoration:underline; }
+  .topic-nav .spacer { color: var(--muted); }
+  .score-badge { display:inline-block; font-size:20px; font-weight:700; margin-left:14px; vertical-align:middle; }
+  .score-badge.ts-good { color: var(--accent); }
+  .score-badge.ts-mid { color: var(--amber); }
+  .score-badge.ts-low { color: var(--loss); }
+  .score-frac { font-size:13px; color: var(--muted); margin-left:6px; }
+
+  .improve-summary { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 18px 0 6px; }
+  .improve-title { font-size: 13px; font-weight: 700; color: var(--ink); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 12px; }
+  .improve-row { font-size: 13px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+  .improve-row:last-child { margin-bottom: 0; }
+  .improve-row b { color: var(--ink); }
+  .improve-row .cat { margin-right: 8px; }
+  .mini-retake { display: inline-block; font-size: 10px; font-weight: 700; color: var(--tip); background: var(--tip-light); padding: 1px 7px; border-radius: 8px; margin-left: 6px; white-space: nowrap; }
+  .mini-hw { display: inline-block; font-size: 10px; font-weight: 700; color: var(--amber); background: var(--amber-light); padding: 1px 7px; border-radius: 8px; margin-left: 6px; white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>2&nbsp;&middot;&nbsp;Algebra and graphs <span class="score-badge ts-mid">81.9%</span><span class="score-frac">103.25/126</span></h1>
+    <div class="meta">Every algebra and graphs question from every marked paper so far</div>
+  </header>
+
+  <a class="back-link" href="../tracker.html">&larr; Back to dashboard</a>
+
+  <div class="legend">
+    <div><span class="cat cat-correct">Correct</span></div>
+    <div><span class="cat cat-slip">Careless slip</span></div>
+    <div><span class="cat cat-hw">Handwriting</span></div>
+    <div><span class="cat cat-miscon">Misconception</span></div>
+    <div><span class="cat cat-blank">Left blank</span></div>
+    <div>&mdash; Not yet tested in a marked paper</div>
+    <div><span class="score sc-good">Score</span> &ge;85% &nbsp; <span class="score sc-mid">Score</span> 60&ndash;84% &nbsp; <span class="score sc-low">Score</span> &lt;60%</div>
+  </div>
+
+  <h2 class="section-title" id="sec-2">2&nbsp;&middot;&nbsp;Algebra and graphs</h2>
+  <table>
+    <colgroup><col style="width:88px;"><col style="width:150px;"><col style="width:130px;"><col><col style="width:220px;"></colgroup>
+    <thead><tr><th>Code</th><th>Topic</th><th>Paper(s)</th><th>Comment (per paper)</th><th>How to improve</th></tr></thead>
+    <tbody>
+      <tr><td class="code">E2.1</td><td class="topic">Substitution & rearranging formulae</td><td class="papers"><span class="paper-tag">FebMarch2025 P22</span><span class="paper-tag">MayJune2022 P21</span><span class="paper-tag">OctNov2025 P43</span></td><td class="comment"><div class="score sc-mid">Score: 9/11 (81.8%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P22</b> Q4a <span class="qmarks">(2/2)</span> &mdash; Substitution into a formula, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P22</b> Q4b <span class="qmarks">(2/2)</span> &mdash; Rearranging and solving for a variable, correct.</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>MayJune2022 P21</b> Q8a <span class="qmarks">(0/1)</span> &mdash; read t=4 as 0.4 when substituting into s=&frac12;at&sup2;.</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>MayJune2022 P21</b> Q8b <span class="qmarks">(1/2)</span> &mdash; rearranged correctly to t=&radic;(2s/a) but left off the &plusmn; sign.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q3 <span class="qmarks">(1/1)</span> &mdash; Substitution into a formula, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q17 <span class="qmarks">(3/3)</span> &mdash; Change of subject with an algebraic fraction, correct.</div></td><td class="improve">Method is understood &mdash; re-read given values before substituting, and remember &plusmn; is part of the final answer when reversing a square.</td></tr>
+      <tr><td class="code">E2.2</td><td class="topic">Algebraic manipulation</td><td class="papers"><span class="paper-tag">MayJune2025 P21</span><span class="paper-tag">FebMarch2025 P22</span><span class="paper-tag">MayJune2022 P21</span><span class="paper-tag">OctNov2025 P43</span></td><td class="comment"><div class="score sc-mid">Score: 11.5/15 (76.7%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q1 <span class="qmarks">(2/2)</span> &mdash; Simplifying expressions, correct.</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>MayJune2025 P21</b> Q16 <span class="qmarks">(2/3)</span> &mdash; expanding (x&sup2;+x&minus;12)(3x+2): the +2x term was dropped, giving &minus;36x instead of &minus;34x.<span class="mini-retake">&#8635; retaken</span></div><div class="qline"><span class="cat cat-correct">Retake</span><b>29 Jul</b> <span class="qmarks">(1/2)</span> &mdash; the pattern is easing but not fully resolved, weighted to half: <b>+0.5/1</b> into this sub-topic's score.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P22</b> Q12b <span class="qmarks">(1/1)</span> &mdash; Factorising, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2022 P21</b> Q9 <span class="qmarks">(2/2)</span> &mdash; Algebraic manipulation (factorising), correct.</div><div class="qline"><span class="cat cat-blank">Left blank</span><b>MayJune2022 P21</b> Q21 <span class="qmarks">(0/2)</span> &mdash; 4-term factorising &mdash; left blank.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q16a <span class="qmarks">(2/2)</span> &mdash; Expanding brackets (linear), correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q16b <span class="qmarks">(2/2)</span> &mdash; Expanding brackets (quadratic), correct.</div></td><td class="improve">When expanding more than two brackets, write out all six cross-terms before combining. Always attempt factorising by grouping in pairs, even unsure.</td></tr>
+      <tr><td class="code">E2.3</td><td class="topic">Algebraic fractions</td><td class="papers"><span class="paper-tag">MayJune2025 P21</span><span class="paper-tag">FebMarch2025 P22</span></td><td class="comment"><div class="score sc-good">Score: 9/9 (100%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q14d <span class="qmarks">(3/3)</span> &mdash; Functions: algebraic fraction, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q23 <span class="qmarks">(3/3)</span> &mdash; Algebraic fractions, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P22</b> Q12a <span class="qmarks">(3/3)</span> &mdash; Combining algebraic fractions, correct.</div></td><td class="improve">No action needed.</td></tr>
+      <tr><td class="code">E2.4</td><td class="topic">Indices II</td><td class="papers"><span class="paper-tag">MayJune2025 P21</span><span class="paper-tag">FebMarch2025 P22</span><span class="paper-tag">MayJune2022 P21</span><span class="paper-tag">OctNov2025 P43</span></td><td class="comment"><div class="score sc-good">Score: 15/17 (88.2%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q19 <span class="qmarks">(2/2)</span> &mdash; Indices, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P22</b> Q23a <span class="qmarks">(2/2)</span> &mdash; Simplifying fractional indices, correct.</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>FebMarch2025 P22</b> Q23b <span class="qmarks">(2/4)</span> &mdash; combined 16&#832;&times;(1/2)&#832; into 8&sup2;&#832; instead of 8&#832; before converting to base 2; also not carried through to a final numerical answer.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2022 P21</b> Q15 <span class="qmarks">(1/1)</span> &mdash; Indices II, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2022 P21</b> Q22 <span class="qmarks">(2/2)</span> &mdash; Indices II, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q6a <span class="qmarks">(1/1)</span> &mdash; Simplifying y&#8309;/y&sup2;, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q6b <span class="qmarks">(2/2)</span> &mdash; Simplifying 3x&sup3;&times;5x&#8309;, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q13 <span class="qmarks">(3/3)</span> &mdash; Exponential curve: finding c from c&#8309;=1024, then evaluating c&#8315;&sup2;, correct.</div></td><td class="improve">Fine with one power term; slips when two bases must be combined first &mdash; convert every term to the same base individually before combining.</td></tr>
+      <tr><td class="code">E2.5</td><td class="topic">Equations</td><td class="papers"><span class="paper-tag">MayJune2025 P21</span><span class="paper-tag">MayJune2022 P21</span><span class="paper-tag">OctNov2025 P43</span></td><td class="comment"><div class="score sc-mid">Score: 18.25/24.5 (74.5%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q6b <span class="qmarks">(1/1)</span> &mdash; Simultaneous equations from a graph, correct.</div><div class="qline"><span class="cat cat-blank">Left blank</span><b>MayJune2025 P21</b> Q18c <span class="qmarks">(0/4)</span> &mdash; forming the quadratic equation &mdash; left blank.<span class="mini-retake">&#8635; retaken</span></div><div class="qline"><span class="cat cat-correct">Retake</span><b>29 Jul</b> &mdash; Q18c was retaken as part of a mixed 2-problem set with E1.12 Rates (6 parts total, 5 correct); with no way to split the miss precisely, this topic's share is credited as 2.5/3 correct, weighted to half: <b>+1.25/1.5</b> into this sub-topic's score.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q18d <span class="qmarks">(3/3)</span> &mdash; Solving the quadratic by factorising, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2022 P21</b> Q23a <span class="qmarks">(2/2)</span> &mdash; Equations (completing the square), correct.</div><div class="qline"><span class="cat cat-blank">Left blank</span><b>MayJune2022 P21</b> Q23b <span class="qmarks">(0/2)</span> &mdash; formed x&sup2;+8x&minus;20=0 correctly but never solved it.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2022 P21</b> Q27 <span class="qmarks">(4/4)</span> &mdash; Equations (simultaneous, linear and quadratic), correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q10 <span class="qmarks">(2/2)</span> &mdash; Simultaneous equations, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q14 <span class="qmarks">(5/5)</span> &mdash; Three linked expressions set equal, solving for x then y, correct.</div></td><td class="improve">Forms equations reliably &mdash; the drop-off is finishing/solving once the equation is set up. Practise "finish the equation" as a standalone drill.</td></tr>
+      <tr><td class="code">E2.6</td><td class="topic">Inequalities</td><td class="papers"><span class="paper-tag">FebMarch2025 P22</span></td><td class="comment"><div class="score sc-good">Score: 2/2 (100%)</div><div class="qline"><span class="cat cat-hw">Handwriting</span><b>FebMarch2025 P22</b> Q7 <span class="qmarks">(2/2)</span> &mdash; correct, but the 4 at the endpoint reads like a 9.</div></td><td class="improve">No action needed.</td></tr>
+      <tr><td class="code">E2.7</td><td class="topic">Sequences</td><td class="papers"><span class="paper-tag">MayJune2022 P21</span></td><td class="comment"><div class="score sc-good">Score: 3/3 (100%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2022 P21</b> Q10a <span class="qmarks">(1/1)</span> &mdash; Sequences, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2022 P21</b> Q10b <span class="qmarks">(2/2)</span> &mdash; Sequences (nth term), correct.</div></td><td class="improve">No action needed.</td></tr>
+      <tr><td class="code">E2.8</td><td class="topic">Proportion</td><td class="papers"><span class="paper-tag">MayJune2022 P21</span></td><td class="comment"><div class="score sc-low">Score: 0/3 (0%)</div><div class="qline"><span class="cat cat-blank">Left blank</span><b>MayJune2022 P21</b> Q25 <span class="qmarks">(0/3)</span> &mdash; combined proportion (w&prop;&radic;y, y&prop;1/x) &mdash; left blank.</div></td><td class="improve">Combines two proportionality rules in one question &mdash; hasn't been seen elsewhere. Introduce combined/joint proportion as its own topic.</td></tr>
+      <tr><td class="code">E2.9</td><td class="topic">Graphs in practical situations</td><td class="papers"><span class="paper-tag">MayJune2022 P21</span></td><td class="comment"><div class="score sc-mid">Score: 2/3 (66.7%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2022 P21</b> Q20a <span class="qmarks">(1/1)</span> &mdash; Graphs in practical situations, correct.</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>MayJune2022 P21</b> Q20b <span class="qmarks">(1/2)</span> &mdash; only used the triangular deceleration section; missed the constant-speed rectangle entirely.</div></td><td class="improve">Reinforce that "total distance" = sum of every section's area on a speed-time graph, not just one part. Practise on 2&ndash;3-section graphs.</td></tr>
+      <tr class="untested"><td class="code">E2.10</td><td class="topic">Graphs of functions</td><td class="papers dash">&mdash;</td><td class="comment dash">&mdash;</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">E2.11</td><td class="topic">Sketching curves</td><td class="papers dash">&mdash;</td><td class="comment dash">&mdash;</td><td class="improve dash">&mdash;</td></tr>
+      <tr><td class="code">E2.12</td><td class="topic">Differentiation</td><td class="papers"><span class="paper-tag">MayJune2025 P21</span><span class="paper-tag">FebMarch2025 P22</span><span class="paper-tag">OctNov2025 P43</span></td><td class="comment"><div class="score sc-mid">Score: 21.5/25.5 (84.3%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q11a <span class="qmarks">(2/2)</span> &mdash; Tangent to a curve: reading a, b, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q11b <span class="qmarks">(3/3)</span> &mdash; Tangent to a curve: equation, correct.</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>MayJune2025 P21</b> Q22a <span class="qmarks">(1/2)</span> &mdash; matched the coefficient correctly but dropped the negative sign: q=6 instead of q=&minus;6.<span class="mini-retake">&#8635; retaken</span></div><div class="qline"><span class="cat cat-correct">Retake</span><b>29 Jul</b> <span class="qmarks">(3/3)</span> &mdash; sign error resolved on 3 fresh problems, weighted to half: <b>+1.5/1.5</b> into this sub-topic's score.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q22b <span class="qmarks">(4/4)</span> &mdash; Turning points of the curve, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P22</b> Q22a <span class="qmarks">(5/5)</span> &mdash; Stationary points of a cubic, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P22</b> Q22b <span class="qmarks">(2/2)</span> &mdash; Sketching a cubic; classifying a stationary point, correct.</div><div class="qline"><span class="cat cat-blank">Left blank</span><b>FebMarch2025 P22</b> Q22c <span class="qmarks">(0/2)</span> &mdash; range of values for fewer solutions &mdash; left blank.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q20a <span class="qmarks">(2/2)</span> &mdash; Finding dy/dx, correct.</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>OctNov2025 P43</b> Q20b <span class="qmarks">(1/2)</span> &mdash; correctly evaluated 3x&sup2;+6x&minus;13 at x=3 to get 32, but the final answer was written as the coordinate pair (3,32) instead of just the gradient value 32, and the working briefly set dy/dx=0 (the turning-point method) beforehand &mdash; mixing up "find the gradient at a point" with "find a turning point."</div></td><td class="improve">Mechanics are strong across both papers &mdash; missing piece is reasoning from stationary points to number of solutions (a couple of "range of k" questions), and keeping "find the gradient at a point" separate from "find a turning point" (OctNov2025 Q20b), since the two methods got mixed together mid-question.</td></tr>
+      <tr><td class="code">E2.13</td><td class="topic">Functions</td><td class="papers"><span class="paper-tag">MayJune2025 P21</span><span class="paper-tag">OctNov2025 P43</span></td><td class="comment"><div class="score sc-good">Score: 12/13 (92.3%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q14a <span class="qmarks">(1/1)</span> &mdash; Functions: f(&minus;2), correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q14b <span class="qmarks">(2/2)</span> &mdash; Functions: inverse f&supminus;&sup1;(x), correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q14c <span class="qmarks">(2/2)</span> &mdash; Functions: composite fg(x), correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q19a <span class="qmarks">(1/1)</span> &mdash; Functions: f(5), correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q19b <span class="qmarks">(1/1)</span> &mdash; Functions: g(8x), correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q19c <span class="qmarks">(2/2)</span> &mdash; Functions: inverse g&supminus;&sup1;(x), correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q19d <span class="qmarks">(3/3)</span> &mdash; Functions: solving gh(x)=364 for the positive root, correct (final answer written as &ldquo;&plusmn;11&rdquo; rather than isolating 11, but the correct value is clearly present).</div><div class="qline"><span class="cat cat-blank">Left blank</span><b>OctNov2025 P43</b> Q19e <span class="qmarks">(0/1)</span> &mdash; ff&supminus;&sup1;(12) &mdash; left blank; didn't recognise that a function and its inverse always undo each other.</div></td><td class="improve">Very strong on direct evaluation, composition and inverses. The one miss was a quick recognition question (ff&supminus;&sup1;(x)=x) left blank &mdash; worth flagging as a "free mark" pattern to look out for.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="improve-summary"><div class="improve-title">Areas to improve in this topic</div><div class="improve-row"><span class="cat cat-slip">Careless slip</span>Most concentrated in <b>E2.1 Substitution & rearranging formulae</b> (2 of 4 in this topic).<span class="mini-retake">&#8635; retaken</span> E2.2 (Q16) was retaken 29 Jul &mdash; 1 of 2 correct, the pattern is easing but not fully resolved. E2.12 (Q22a) was also retaken 29 Jul &mdash; 3 of 3 fresh problems correct, sign error resolved.</div><div class="improve-row"><span class="cat cat-miscon">Misconception</span>Spread across <b>E2.4 Indices II</b>, <b>E2.9 Graphs in practical situations</b>, and <b>E2.12 Differentiation</b> (1 each, 3 total in this topic) &mdash; no single weak point.</div><div class="improve-row"><span class="cat cat-blank">Left blank</span>Most concentrated in <b>E2.5 Equations</b> (2 of 5 in this topic).<span class="mini-retake">&#8635; retaken</span> The Q18c part was retaken 29 Jul as part of a 2-problem set (5 of 6 parts correct) &mdash; the remaining miss was a unit-conversion slip, not a blank. <b>E2.13 Functions</b> also had one quick recognition question (Q19e) left blank this paper.</div></div>
+
+  <div class="topic-nav">
+    <a href="1.html">&larr; 1. Number</a>
+    <a href="../tracker.html">Dashboard</a>
+    <a href="3.html">3. Coordinate geometry &rarr;</a>
+  </div>
+
+  <footer>Cambridge IGCSE Mathematics 0580 (Extended) &middot; syllabus codes reference the current (2025&ndash;2027) subject content &middot; update after each new paper</footer>
+
+</div>
+</body>
+</html>

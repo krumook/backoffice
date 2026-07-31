@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — 0580/21 May/June 2025 Marking Breakdown</title>
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 28px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .score-box { text-align: right; }
+  .score-box .num { font-size: 40px; font-weight: 700; color: var(--accent); line-height: 1; }
+  .score-box .pct { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .summary-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .summary-card .value { font-size: 22px; font-weight: 600; margin-top: 4px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13.5px;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.q { font-weight: 600; width: 48px; text-align: center; color: var(--ink); }
+  td.topic { width: 200px; color: var(--ink); }
+  td.topic .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tip);
+    background: var(--tip-light);
+    padding: 1px 7px;
+    border-radius: 20px;
+    margin-bottom: 4px;
+  }
+  td.topic .topic-name { display: block; }
+  td.marks { width: 85px; text-align: center; white-space: nowrap; }
+  td.reason { color: var(--muted); }
+  .full { color: var(--accent); font-weight: 600; }
+  .partial { color: var(--loss); font-weight: 600; }
+  .dash { color: var(--muted); }
+  .tip-label { color: var(--tip); font-weight: 600; }
+
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-hw { background: var(--loss-light); color: var(--loss); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  tr.total td {
+    border-top: 2px solid var(--ink);
+    font-weight: 700;
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+  tr.total td.reason { color: var(--accent); font-weight: 600; }
+
+  .legend {
+    margin: 18px 0 40px;
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .legend span.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .dot.full-dot { background: var(--accent); }
+  .dot.partial-dot { background: var(--loss); }
+  .dot.tip-dot { background: var(--tip); }
+
+  h2.section-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    padding-top: 8px;
+    border-top: 2px solid var(--ink);
+  }
+
+  .ladder {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 8px 20px;
+    margin-bottom: 28px;
+  }
+  .ladder-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .ladder-row:last-child { border-bottom: none; }
+  .ladder-score {
+    font-size: 20px;
+    font-weight: 700;
+    min-width: 78px;
+    color: var(--ink);
+  }
+  .ladder-row.final .ladder-score { color: var(--accent); }
+  .ladder-desc { font-size: 13.5px; color: var(--muted); flex: 1; }
+  .ladder-desc b { color: var(--ink); font-weight: 600; }
+  .ladder-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .tag-slip { background: var(--amber-light); color: var(--amber); }
+  .tag-hand { background: var(--loss-light); color: var(--loss); }
+  .tag-miscon { background: var(--pink-light); color: var(--pink); }
+  .tag-blank { background: var(--purple-light); color: var(--purple); }
+
+  .weak-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .weak-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--tip);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .weak-card h3 { margin: 0 0 6px; font-size: 14.5px; font-weight: 600; }
+  .weak-card p { margin: 0; font-size: 13px; color: var(--muted); }
+  .weak-card.hand { border-left-color: var(--amber); }
+
+  footer {
+    margin-top: 28px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  td.retake { width: 230px; color: var(--muted); }
+  .retake-done { color: var(--accent); font-weight: 700; }
+  .retake-partial { color: var(--amber); font-weight: 700; }
+  .retake-hw { color: var(--tip); font-weight: 700; }
+  .retake-dash { color: var(--muted); }
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tip);
+    text-decoration: none;
+    background: var(--tip-light);
+    padding: 7px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .back-link:hover { background: var(--tip); color: #fff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../tracker.html">&larr; Back to dashboard</a>
+
+  <header>
+    <div>
+      <h1>Mildy — marking breakdown</h1>
+      <div class="meta">Cambridge IGCSE Mathematics 0580/21 (Extended, non-calculator) &middot; May/June 2025</div>
+    </div>
+    <div class="score-box">
+      <div class="num">81<span style="font-size:20px;color:var(--muted);">/100</span></div>
+      <div class="pct">81%</div>
+    </div>
+  </header>
+
+  <div class="summary-row">
+    <div class="summary-card">
+      <div class="label">Questions fully correct</div>
+      <div class="value">14 / 23</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Careless slips</div>
+      <div class="value">&minus;4</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Handwriting</div>
+      <div class="value">&minus;1</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Misconceptions</div>
+      <div class="value">&minus;6</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Left blank</div>
+      <div class="value">&minus;8</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:48px;">Q</th>
+        <th style="width:175px;">Topic</th>
+        <th style="width:85px;">Marks</th>
+        <th>Marks deducted &amp; reason</th>
+        <th style="width:230px;">Retake &middot; 29 Jul 2026</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="q">1</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Simplifying expressions</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">2</td><td class="topic"><span class="tag">E4.6</span><span class="topic-name">Angles in parallel lines</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+
+      <tr><td class="q">3</td><td class="topic"><span class="tag">E1.13</span><span class="topic-name">Simple interest</span></td><td class="marks partial">2/3</td><td class="reason"><span class="cat cat-slip">Careless slip</span>&minus;1: the method was correct (1500 + 1500&times;3&times;6/100), but 45&times;6 was calculated as 280 instead of 270, producing a final answer of $1780 rather than the correct $1770. This was an arithmetic slip; the method itself was entirely correct.</td><td class="retake retake-dash">&mdash;</td></tr>
+
+      <tr><td class="q">4</td><td class="topic"><span class="tag">E1.6</span><span class="topic-name">Fraction subtraction</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">5</td><td class="topic"><span class="tag">E4.6</span><span class="topic-name">Interior angles of a polygon</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+
+      <tr><td class="q">6a</td><td class="topic"><span class="tag">E3.2</span><span class="topic-name">Drawing a line, y=2x+1</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">6b</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Simultaneous equations from a graph</span></td><td class="marks full">1/1</td><td class="reason"><span class="tip-label">Note:</span> correct, though solved algebraically. Since both lines were already drawn on the grid, the intersection point (2, 5) could have been read directly from the graph, without solving the equations &mdash; a faster approach with less room for error.</td><td class="retake retake-dash">&mdash;</td></tr>
+
+      <tr><td class="q">7</td><td class="topic"><span class="tag">E1.4</span><span class="topic-name">Recurring decimal to fraction</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+
+      <tr><td class="q">8a</td><td class="topic"><span class="tag">E7.2</span><span class="topic-name">Vectors: 2m &minus; n</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">8b</td><td class="topic"><span class="tag">E7.3</span><span class="topic-name">Vectors: magnitude equation</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span>&minus;1: the equation was correctly set up as 5&sup2; + y = 7&sup2; (that is, 25 + y = 49). However, rather than keeping the right-hand side squared, an attempt was made to undo the square root by writing 5 + &radic;y = 7. When both sides of &radic;(25+y) = 7 are squared, 7 becomes 7&sup2; = 49, not 5 + something. A square root cannot be distributed across a sum (&radic;(a+b) &ne; &radic;a + &radic;b). This produced y = 9 instead of the correct y = 24.</td><td class="retake"><span class="retake-partial">3/3 &middot; correct, with support</span> Retook the vector-magnitude equation on 3 fresh numbers today &mdash; got the right final answer on all 3, but variant 2 (b&sup2;=9) only gave b=3, missing the &plusmn; on her own, and variant 3 (cube-root version) needed a prompt on fractional-indices rules to finish. Worth re-emphasizing &plusmn; on squared unknowns and revisiting fractional indices before the next paper.</td></tr>
+
+      <tr><td class="q">9</td><td class="topic"><span class="tag">E9.3</span><span class="topic-name">Mean from a frequency table</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+
+      <tr><td class="q">10a</td><td class="topic"><span class="tag">E4.7</span><span class="topic-name">Circle theorems: angle AOC</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">10b</td><td class="topic"><span class="tag">E4.7</span><span class="topic-name">Circle theorems: angle ABC</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">10c</td><td class="topic"><span class="tag">E4.7</span><span class="topic-name">Circle theorems: angle DAC</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">10d</td><td class="topic"><span class="tag">E4.8</span><span class="topic-name">Circle theorems: angle OAB</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-hw">Handwriting</span>&minus;1: the digit written is ambiguous and could be read as either 15 or 75; it has therefore been marked incorrect. The correct answer is 15. This is a matter of presentation rather than mathematics: when a digit cannot be read with confidence, credit cannot be given, even if the correct answer was intended. It would be worth practising clear, unambiguous formation of numerals, particularly digits such as 1 and 7, which can look similar when written quickly.</td><td class="retake"><span class="retake-done">5/5 &middot; correct</span> Retook full circle-theorem angle chains on 2 fresh diagrams (5 parts) today &mdash; all correct, clearly written. Confirms the original mark loss was a legibility issue, not a gap in understanding.</td></tr>
+
+      <tr><td class="q">11a</td><td class="topic"><span class="tag">E2.12</span><span class="topic-name">Tangent to a curve: reading a, b</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">11b</td><td class="topic"><span class="tag">E2.12</span><span class="topic-name">Tangent to a curve: equation</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+
+      <tr><td class="q">12a</td><td class="topic"><span class="tag">E9.6</span><span class="topic-name">Cumulative frequency: IQR</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">12b</td><td class="topic"><span class="tag">E9.6</span><span class="topic-name">Cumulative frequency: percentile</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+
+      <tr><td class="q">13a</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Surface area (hemisphere+cone vs cylinder)</span></td><td class="marks full">5/5</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">13b</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Height of a composite solid</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+
+      <tr><td class="q">14a</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: f(&minus;2)</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">14b</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: inverse f&supminus;&sup1;(x)</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">14c</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: composite fg(x)</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">14d</td><td class="topic"><span class="tag">E2.3</span><span class="topic-name">Functions: algebraic fraction</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+
+      <tr><td class="q">15a</td><td class="topic"><span class="tag">E1.18</span><span class="topic-name">Surds: expanding brackets</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-slip">Careless slip</span>&minus;1: in expanding (2&minus;&radic;5)(1&minus;3&radic;5), the final term is (&minus;&radic;5)&times;(&minus;3&radic;5). A negative multiplied by a negative gives a positive, and &radic;5&times;&radic;5=5, so this term equals <b>+15</b> (3&times;5). It was written as &minus;15, which reverses the sign of the final answer. The correct result is 17&minus;7&radic;5; the working produced the negative of this instead.</td><td class="retake"><span class="retake-partial">2/3 &middot; correct</span> Retook surd-bracket expansion on 3 fresh pairs today &mdash; 2 correct, but variant 3 (involving &radic;8) was wrong: &radic;8 was left unsimplified instead of being written as 2&radic;2 before combining like terms, which threw off the final answer. Needs a quick refresher on simplifying surds before combining them in an expansion.</td></tr>
+      <tr><td class="q">15b</td><td class="topic"><span class="tag">E1.18</span><span class="topic-name">Surds: rationalising a denominator</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+
+      <tr><td class="q">16</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Expanding triple brackets</span></td><td class="marks partial">2/3</td><td class="reason"><span class="cat cat-slip">Careless slip</span>&minus;1: in expanding (x&sup2;+x&minus;12)(3x+2), five of the six terms were correct (3x&sup3;, 2x&sup2;, 3x&sup2;, &minus;36x, &minus;24), but the term x&times;2 = <b>+2x</b> was omitted. The two x-terms should combine as 2x + (&minus;36x) = &minus;34x; without the +2x, the result was &minus;36x instead. The remainder of the expansion was correct.</td><td class="retake"><span class="retake-partial">1/2 &middot; correct</span> Retook triple-bracket expansion on 2 fresh questions today &mdash; question 1&rsquo;s first attempt had a sign error (matching the original mistake pattern), but question 2 was correct independently. The careless-slip pattern from the original paper is easing but not yet fully resolved.</td></tr>
+
+      <tr><td class="q">17a</td><td class="topic"><span class="tag">E8.3</span><span class="topic-name">Probability: both green, with replacement</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span>0/2: the question specifies that the marbles are picked <b>with replacement</b> &mdash; meaning the first marble is returned to the bag before the second is drawn, so the bag still contains 10 marbles, three of them green, for both draws. The correct working is P(green, green) = 3/10 &times; 3/10 = 9/100. The fractions 3/10 &times; 2/9 were used instead, which apply to drawing without replacement, giving 1/15; the final written answer was 2/15, which also does not match. Neither corresponds to the correct answer of 9/100.</td><td class="retake"><span class="retake-partial">7/10 &middot; correct</span> Retook &ldquo;with replacement&rdquo; probability across 2 full word problems today &mdash; 7 of 10 parts correct independently; parts 1c, 2c and 2d needed guidance to complete. Still a genuine conceptual gap here, not just a slip &mdash; worth another dedicated pass.</td></tr>
+      <tr><td class="q">17b(i)</td><td class="topic"><span class="tag">E8.3</span><span class="topic-name">Probability: tree diagram</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">17b(ii)</td><td class="topic"><span class="tag">E8.3</span><span class="topic-name">Probability: exactly one yellow</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span>0/3: the question asks for the probability that exactly <b>one</b> of the two counters is yellow. The calculation 2/6 &times; 1/5 = 1/15 gives the probability that both counters are yellow. To find the probability of exactly one yellow, the two possible orders must be added: (red, yellow) + (yellow, red) = (4/6&times;2/5) + (2/6&times;4/5) = 8/30 + 8/30 = 16/30 = 8/15.</td><td class="retake"><span class="retake-partial">7/10 &middot; correct</span> Retook &ldquo;without replacement&rdquo; probability across 2 full word problems today &mdash; 7 of 10 parts correct; parts 1c, 1d and 1e were wrong on the first attempt. A mix of careless slip and genuine concept gap &mdash; the (A,B)+(B,A) method isn&rsquo;t fully secure yet.</td></tr>
+
+      <tr><td class="q">18a</td><td class="topic"><span class="tag">E1.12</span><span class="topic-name">Speed/distance/time: running time</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">18b</td><td class="topic"><span class="tag">E1.12</span><span class="topic-name">Speed/distance/time: walking time</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">18c</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Forming the quadratic equation</span></td><td class="marks partial">0/4</td><td class="reason"><span class="cat cat-blank">Left blank</span>0/4: left blank &mdash; these marks were lost through not attempting the question, rather than through an incorrect answer. Guideline: since walking takes one hour longer than running, (walking time) &minus; (running time) = 1, giving 10/(x&minus;4) &minus; 12/x = 1. Multiplying every term by x(x&minus;4) clears the fractions: 10x &minus; 12(x&minus;4) = x(x&minus;4). Expanding gives 10x &minus; 12x + 48 = x&sup2; &minus; 4x, which simplifies to &minus;2x + 48 = x&sup2; &minus; 4x. Rearranging gives x&sup2; &minus; 4x + 2x &minus; 48 = 0, i.e. x&sup2; &minus; 2x &minus; 48 = 0.</td><td class="retake"><span class="retake-partial">5/6 &middot; correct</span> Retook the rates-to-quadratic pipeline across 2 fresh word problems (6 sub-parts total) today &mdash; 5 of 6 correct, both carried through to a final answer with no step left blank. The remaining miss was a unit-conversion slip (km/h to m/s) &mdash; worth a couple of quick conversion drills.</td></tr>
+      <tr><td class="q">18d</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Solving the quadratic by factorising</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">18e</td><td class="topic"><span class="tag">E1.12</span><span class="topic-name">Time spent running</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-blank">Left blank</span>0/1: left blank. Guideline: from part (d), x = 8 or x = &minus;6; since x represents a speed, it cannot be negative, so x = 8. The running time is therefore 12/x = 12/8 = 1.5 hours.</td><td class="retake"><span class="retake-partial">See Q18c</span> Covered by the same 2 retake problems above &mdash; 5 of 6 parts correct; the miss was a unit-conversion slip, not a blank/non-attempt like the original.</td></tr>
+
+      <tr><td class="q">19</td><td class="topic"><span class="tag">E2.4</span><span class="topic-name">Indices</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">20</td><td class="topic"><span class="tag">E6.3</span><span class="topic-name">Trigonometry, exact values</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+
+      <tr><td class="q">21a</td><td class="topic"><span class="tag">E7.2</span><span class="topic-name">Vectors: OA and OC</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">21b</td><td class="topic"><span class="tag">E7.4</span><span class="topic-name">Vectors: showing OADC is a trapezium</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-blank">Left blank</span>0/3: left blank. Guideline: first find OD using OD = OA + AD = (2m&minus;n) + (10m&minus;3n) = 12m&minus;4n. Then find CD = OD &minus; OC = (12m&minus;4n) &minus; (2m+n) = 10m&minus;5n. Comparing this to OA = 2m&minus;n shows that CD = 5 &times; OA, so CD is a scalar multiple of OA, meaning the two are parallel. Since OA and CD form a pair of opposite sides of quadrilateral OADC, and they are parallel, OADC must be a trapezium.</td><td class="retake"><span class="retake-done">2/2 &middot; correct</span> Retook the OADC trapezium proof on 2 fresh parallelogram/rhombus variants today (29 Jul). Problem 2 (rhombus, OP=4m) was checked correct start to finish, including constructing the CD = 5&times;OA argument herself &mdash; this is the exact skill that was left blank on the original paper. Problem 1's vector values (OA, OC) were also correct; its proof step wasn't separately written down, but the skill is independently confirmed by problem 2.</td></tr>
+
+      <tr><td class="q">22a</td><td class="topic"><span class="tag">E2.12</span><span class="topic-name">Differentiation: finding q</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-slip">Careless slip</span>&minus;1: matching dy/dx = 3x&sup2;&minus;12x+9 to the derivative of y = x&#8319;+qx&sup2;+9x, the term qx&sup2; differentiates to 2qx. This must equal the &minus;12x term in the given derivative, so 2q = &minus;12, giving <b>q = &minus;6</b>. The magnitude was matched correctly, but the negative sign was omitted, giving q = 6 instead.</td><td class="retake"><span class="retake-done">3/3 &middot; correct</span> Retook &ldquo;match dy/dx to find n and q, then find the turning points&rdquo; on 3 fresh cubics today (29 Jul), each using a different sign convention for q (some +qx&sup2;, some &minus;qx&sup2;) &mdash; all three fully correct and independent, both parts checked each time. The sign slip from the original paper (q = 6 instead of &minus;6) did not reappear, even with the convention varied.</td></tr>
+      <tr><td class="q">22b</td><td class="topic"><span class="tag">E2.12</span><span class="topic-name">Turning points of the curve</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+
+      <tr><td class="q">23</td><td class="topic"><span class="tag">E2.3</span><span class="topic-name">Algebraic fractions</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+
+      <tr class="total"><td colspan="2">Total</td><td class="marks">81/100</td><td class="reason">81%</td><td class="retake retake-dash"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="legend">
+    <div><span class="dot full-dot"></span>Full marks</div>
+    <div><span class="dot partial-dot"></span>Marks dropped</div>
+    <div><span class="dot tip-dot"></span>Technique tip (no marks lost)</div>
+  </div>
+
+  <div class="legend">
+    <span class="cat cat-slip">Careless slip</span>
+    <span class="cat cat-hw">Handwriting</span>
+    <span class="cat cat-miscon">Misconception</span>
+    <span class="cat cat-blank">Left blank</span>
+  </div>
+
+  <h2 class="section-title">What she could achieve</h2>
+  <div class="ladder">
+    <div class="ladder-row">
+      <div class="ladder-score">81/100</div>
+      <div class="ladder-desc">Actual mark obtained on this paper.</div>
+      <span></span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">85/100</div>
+      <div class="ladder-desc">Achievable by correcting the <b>4 careless slips</b> (Q3 multiplication, Q15a and Q22a sign errors, Q16 missing term) &mdash; in each case, the method used was correct.</div>
+      <span class="ladder-tag tag-slip">slips</span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">86/100</div>
+      <div class="ladder-desc">Achievable by additionally writing numerals more clearly (Q10d), so that answers are not marked incorrect simply because they are difficult to read.</div>
+      <span class="ladder-tag tag-hand">handwriting</span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">92/100</div>
+      <div class="ladder-desc">Achievable by additionally resolving the <b>2 underlying misconceptions</b>: distributing a square root across a sum (Q8b), and the rules for replacement and "exactly one" in probability (Q17a, Q17b(ii)).</div>
+      <span class="ladder-tag tag-miscon">misconceptions</span>
+    </div>
+    <div class="ladder-row final">
+      <div class="ladder-score">100/100</div>
+      <div class="ladder-desc">Achievable by additionally attempting and completing the <b>3 blank "show that" questions</b> (Q18c, Q18e, Q21b) &mdash; worth 8 marks lost purely to not being attempted.</div>
+      <span class="ladder-tag tag-blank">blank</span>
+    </div>
+  </div>
+
+  <h2 class="section-title">Weak topics to target next session</h2>
+  <div class="weak-grid">
+    <div class="weak-card">
+      <h3>Surds and roots</h3>
+      <p>Question 8(b) reveals a genuine misconception: a square root cannot be distributed across a sum, since &radic;(a+b) &ne; &radic;a + &radic;b. Squaring both sides is the reliable method in such cases. Additional practice on isolating and squaring expressions correctly would help reinforce this.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Probability: replacement and "exactly one"</h3>
+      <p>Two separate errors in Question 17 point to the same underlying gap: not tracking what changes, or does not change, between draws, and confusing "both" with "exactly one." It would be worthwhile to review the distinction between sampling with and without replacement, and to practise constructing "exactly one of two" problems using the method (A, B) + (B, A).</p>
+    </div>
+    <div class="weak-card">
+      <h3>Multi-step "show that" questions</h3>
+      <p>Each blank answer (Q18c, Q18e, Q21b) involved a multi-step derivation worth several marks; these were not incorrect attempts, but non-attempts. This is consistent with previous observations that confidence can drop when a question requires several linked steps. Breaking similar questions into smaller, guided steps, and building confidence gradually with past-paper "show that" questions, should help directly.</p>
+    </div>
+    <div class="weak-card hand">
+      <h3>Handwriting clarity</h3>
+      <p>Marks were lost on Q10d purely because the digit written was not legible (it could be read as either 15 or 75). It would be worth a brief reminder that clear, unambiguous numerals, particularly 1s and 7s, are as important as the mathematics itself when working under time pressure.</p>
+    </div>
+  </div>
+
+  <footer>0580/21 &middot; Cambridge IGCSE Mathematics &middot; May/June 2025 &middot; marked against the official mark scheme</footer>
+
+</div>
+</body>
+</html>
