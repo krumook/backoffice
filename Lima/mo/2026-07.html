@@ -34,23 +34,13 @@
   .status-learned { background: var(--accent-light); color: var(--accent); }
   .status-nocharge { background: var(--amber-light); color: var(--amber); }
   tr.total td { border-top: 2px solid var(--ink); font-weight: 700; background: var(--accent-light); color: var(--accent); }
-  .note { background: var(--tip-light); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; font-size: 13.5px; color: var(--tip); margin-bottom: 28px; display: flex; gap: 12px; align-items: flex-start; }
-  .note .emoji { font-size: 18px; }
-  .note b { display: block; margin-bottom: 3px; color: var(--ink); }
   footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
-  .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
-  .share-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #fff; background: var(--accent); border: none; text-decoration: none; padding: 7px 14px; border-radius: 20px; cursor: pointer; font-family: inherit; }
-  .share-btn:hover { background: #0b5a44; }
-  .share-btn:disabled { opacity: 0.6; cursor: default; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <div class="toolbar no-export">
-    <a class="back-link" href="index.html" style="margin-bottom:0;">&larr; Back to all months</a>
-    <button class="share-btn no-export" id="shareBtn" type="button">&#128247; Share as PNG</button>
-  </div>
+  <a class="back-link" href="index.html">&larr; Back to all months</a>
 
   <header>
     <div>
@@ -78,38 +68,5 @@
 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script>
-  document.getElementById('shareBtn').addEventListener('click', function () {
-    var btn = this;
-    var hidden = document.querySelectorAll('.no-export');
-    var wrap = document.querySelector('.wrap');
-    btn.disabled = true;
-    var oldLabel = btn.innerHTML;
-    btn.innerHTML = 'Preparing image&hellip;';
-    hidden.forEach(function (el) { el.style.visibility = 'hidden'; });
-
-    html2canvas(wrap, { backgroundColor: '#fbfaf7', scale: 2 }).then(function (canvas) {
-      hidden.forEach(function (el) { el.style.visibility = ''; });
-      btn.disabled = false;
-      btn.innerHTML = oldLabel;
-      canvas.toBlob(function (blob) {
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = 'Lima-2026-07-fee-summary.png';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      });
-    }).catch(function () {
-      hidden.forEach(function (el) { el.style.visibility = ''; });
-      btn.disabled = false;
-      btn.innerHTML = oldLabel;
-      alert('Could not generate the image. Please check your internet connection and try again.');
-    });
-  });
-</script>
 </body>
 </html>
