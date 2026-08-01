@@ -32,6 +32,12 @@
 
   .month-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
   .empty-state { background: var(--card); border: 1px dashed var(--line); border-radius: 12px; padding: 22px 20px; font-size: 13.5px; color: var(--muted); text-align: center; }
+  .month-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; text-decoration: none; color: inherit; transition: box-shadow 0.15s ease, transform 0.15s ease; }
+  .month-card:hover { box-shadow: 0 4px 16px rgba(31,42,36,0.12); transform: translateY(-2px); }
+  .month-name { font-size: 15.5px; font-weight: 700; }
+  .month-sub { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+  .month-total { font-size: 18px; font-weight: 700; color: var(--amber); text-align: right; white-space: nowrap; }
+  .month-goto { font-size: 12px; color: var(--tip); font-weight: 600; margin-top: 3px; text-align: right; }
 
   footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
 </style>
@@ -43,14 +49,23 @@
 
   <header>
     <h1>Monthly fee summaries</h1>
-    <div class="meta">Mathematics tutoring &middot; ฿250 / hour (assumed &mdash; same as your other students; tell me if Chilli's rate differs) &middot; pick a month to see the full session list and total</div>
+    <div class="meta">Mathematics tutoring &middot; ฿250 / hour &middot; pick a month to see the full session list and total</div>
   </header>
 
   <div class="month-list">
-    <div class="empty-state">No sessions logged yet &mdash; tell me the dates of sessions held (or confirm the recurring Tuesday 14:00&ndash;15:00 slot has started) and I'll build the first month's page.</div>
+    <a class="month-card" href="2026-07.html">
+      <div>
+        <div class="month-name">July 2026</div>
+        <div class="month-sub">4 sessions logged &middot; 3 charged</div>
+      </div>
+      <div>
+        <div class="month-total">&#3647;750</div>
+        <div class="month-goto">Open &rarr;</div>
+      </div>
+    </a>
   </div>
 
-  <footer>Chilli &middot; fee summaries by month &middot; ฿250 / hour (assumed)</footer>
+  <footer>Chilli &middot; fee summaries by month &middot; ฿250 / hour</footer>
 
 </div>
 </body>
