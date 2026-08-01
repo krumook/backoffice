@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — 0580/42 February/March 2025 Marking Breakdown</title>
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 28px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .score-box { text-align: right; }
+  .score-box .num { font-size: 40px; font-weight: 700; color: var(--loss); line-height: 1; }
+  .score-box .pct { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .summary-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .summary-card .value { font-size: 22px; font-weight: 600; margin-top: 4px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13.5px;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.q { font-weight: 600; width: 48px; text-align: center; color: var(--ink); }
+  td.topic { width: 200px; color: var(--ink); }
+  td.topic .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tip);
+    background: var(--tip-light);
+    padding: 1px 7px;
+    border-radius: 20px;
+    margin-bottom: 4px;
+  }
+  td.topic .topic-name { display: block; }
+  td.marks { width: 85px; text-align: center; white-space: nowrap; }
+  td.reason { color: var(--muted); }
+  .full { color: var(--accent); font-weight: 600; }
+  .partial { color: var(--loss); font-weight: 600; }
+  .dash { color: var(--muted); }
+
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-hw { background: var(--loss-light); color: var(--loss); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  tr.total td {
+    border-top: 2px solid var(--ink);
+    font-weight: 700;
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+  tr.total td.reason { color: var(--accent); font-weight: 600; }
+
+  .legend {
+    margin: 18px 0 40px;
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .legend span.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .dot.full-dot { background: var(--accent); }
+  .dot.partial-dot { background: var(--loss); }
+
+  h2.section-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    padding-top: 8px;
+    border-top: 2px solid var(--ink);
+  }
+
+  .ladder {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 8px 20px;
+    margin-bottom: 28px;
+  }
+  .ladder-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .ladder-row:last-child { border-bottom: none; }
+  .ladder-score {
+    font-size: 20px;
+    font-weight: 700;
+    min-width: 78px;
+    color: var(--ink);
+  }
+  .ladder-row.final .ladder-score { color: var(--accent); }
+  .ladder-desc { font-size: 13.5px; color: var(--muted); flex: 1; }
+  .ladder-desc b { color: var(--ink); font-weight: 600; }
+
+  .weak-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .weak-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--tip);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .weak-card h3 { margin: 0 0 6px; font-size: 14.5px; font-weight: 600; }
+  .weak-card p { margin: 0; font-size: 13px; color: var(--muted); }
+  .weak-card.blank { border-left-color: var(--purple); }
+  .weak-card.miscon { border-left-color: var(--pink); }
+  .weak-card.slip { border-left-color: var(--amber); }
+
+  .note-banner {
+    background: var(--pink-light);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13.5px;
+    color: var(--pink);
+    margin-bottom: 28px;
+  }
+
+  .method-box {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .method-box .step { margin: 4px 0; }
+  .method-box .step b { font-weight: 600; }
+
+  footer {
+    margin-top: 28px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tip);
+    text-decoration: none;
+    background: var(--tip-light);
+    padding: 7px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .back-link:hover { background: var(--tip); color: #fff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../tracker.html">&larr; Back to dashboard</a>
+
+  <header>
+    <div>
+      <h1>Mildy — marking breakdown</h1>
+      <div class="meta">Cambridge IGCSE Mathematics 0580/42 (Extended, Calculator) &middot; February/March 2025</div>
+    </div>
+    <div class="score-box">
+      <div class="num">72<span style="font-size:20px;color:var(--muted);">/100</span></div>
+      <div class="pct">72%</div>
+    </div>
+  </header>
+
+  <div class="note-banner">Her weakest paper of the four marked so far (previous: 96%, 81%, 74%, 70%). Two things are driving most of the drop and are both fixable quickly: three questions (8a, 8b, 10b, 17a, 17c — 14 marks) were left blank, and two of those (8, 17) involve scale drawings/bearings that genuinely couldn't be done properly on a screen without a ruler or protractor — that's a testing-format issue, not a knowledge gap, and is worth redoing on paper before drawing conclusions about loci/bearings specifically. The one real content gap worth a dedicated session is Q23 (7 marks): the "NOT TO SCALE" diagram's angle was assumed rather than calculated from the given dimensions. Three small arithmetic/transcription slips (Q16b, 18b, 21) cost 3 marks on otherwise fully correct working.</div>
+
+  <div class="summary-row">
+    <div class="summary-card">
+      <div class="label">Questions fully correct</div>
+      <div class="value">15 / 23</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Careless slips</div>
+      <div class="value">&minus;3</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Handwriting (no marks lost)</div>
+      <div class="value">0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Misconceptions</div>
+      <div class="value">&minus;11</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Left blank</div>
+      <div class="value">&minus;14</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:48px;">Q</th>
+        <th style="width:200px;">Topic</th>
+        <th style="width:85px;">Marks</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="q">1</td><td class="topic"><span class="tag">E1.1</span><span class="topic-name">Types of number</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">2</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">3</td><td class="topic"><span class="tag">E4.5</span><span class="topic-name">Symmetry</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-miscon">Misconception</span>0/1: shaded two random-looking squares rather than reasoning about the existing pattern first. The grid already has a partial pattern of shaded squares; the two new squares needed to be placed so the <i>whole</i> grid has two lines of symmetry (one vertical, one horizontal, since a square grid can have both). The approach should be: check what each existing shaded square needs as a mirror partner on both axes, then shade whatever's missing &mdash; not place shading anywhere convenient.</td></tr>
+      <tr><td class="q">4</td><td class="topic"><span class="tag">E1.3</span><span class="topic-name">Powers and roots</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">5</td><td class="topic"><span class="tag">E3.1</span><span class="topic-name">Coordinates</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">6</td><td class="topic"><span class="tag">E1.13</span><span class="topic-name">Percentages</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">7a</td><td class="topic"><span class="tag">E9.5</span><span class="topic-name">Scatter diagrams: plotting points</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">7b</td><td class="topic"><span class="tag">E9.5</span><span class="topic-name">Scatter diagrams: type of correlation</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">7c</td><td class="topic"><span class="tag">E9.5</span><span class="topic-name">Scatter diagrams: line of best fit</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">7d</td><td class="topic"><span class="tag">E9.5</span><span class="topic-name">Scatter diagrams: reading an estimate</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">8a</td><td class="topic"><span class="tag">E4.3</span><span class="topic-name">Scale drawings: finding a distance</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-blank">Left blank</span>0/2: left blank. This one is worth flagging to her directly &mdash; the scale drawing on this paper couldn't actually be measured on screen (no ruler against the digital diagram), so this isn't a maths gap. Worth having her redo Q8 on a printed copy so the ruler-and-compasses skill itself gets tested properly.</td></tr>
+      <tr><td class="q">8b</td><td class="topic"><span class="tag">E4.2</span><span class="topic-name">Geometrical constructions: loci</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-blank">Left blank</span>0/3: left blank, same reason as 8a &mdash; constructing intersecting arcs with compasses isn't possible on a screen. Redo on paper alongside 8a.</td></tr>
+      <tr><td class="q">9a</td><td class="topic"><span class="tag">E1.8</span><span class="topic-name">Standard form: writing a small number</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">9b</td><td class="topic"><span class="tag">E1.8</span><span class="topic-name">Standard form: evaluating a power</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">10ai</td><td class="topic"><span class="tag">E7.1</span><span class="topic-name">Transformations: reflection</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">10aii</td><td class="topic"><span class="tag">E7.1</span><span class="topic-name">Transformations: translation</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">10b</td><td class="topic"><span class="tag">E7.1</span><span class="topic-name">Transformations: describing a single transformation</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-blank">Left blank</span>0/3: both answer lines left blank, even though the two triangles A and B were both drawn correctly (so she can perform transformations, just not yet describe one from a diagram). Triangle A maps to triangle B by a rotation of 180&deg; about a specific centre &mdash; worth practising the describing step specifically: state the transformation type, then find the centre/angle/vector, then write all three as a single sentence.</td></tr>
+      <tr><td class="q">11a</td><td class="topic"><span class="tag">E1.17</span><span class="topic-name">Exponential growth and decay: compound interest</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">11b</td><td class="topic"><span class="tag">E1.17</span><span class="topic-name">Exponential growth and decay: finding the rate</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">12</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Surface area and volume: cone</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">13</td><td class="topic"><span class="tag">E2.7</span><span class="topic-name">Sequences: three nth terms</span></td><td class="marks full">6/6</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">14a</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: evaluating f(&minus;3)</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">14b</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: f(3&minus;2x) simplified</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">14c</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: inverse function</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">15a</td><td class="topic"><span class="tag">E9.3</span><span class="topic-name">Averages: estimating the mean from grouped data</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">15b</td><td class="topic"><span class="tag">E9.7</span><span class="topic-name">Histograms: drawing from frequency density</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">16a</td><td class="topic"><span class="tag">E2.9</span><span class="topic-name">Graphs in practical situations: acceleration from a flat section</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">16b</td><td class="topic"><span class="tag">E2.9</span><span class="topic-name">Graphs in practical situations: gradient of a tangent</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-slip">Careless slip</span>1/2: the tangent line itself was drawn in roughly the right place (mark for that is earned), but the gradient read from it, 0.125 m/s&sup2;, falls outside the accepted range (0.25 to 0.4). The two points used to find the gradient (around (7, 7.5) and (11, 8)) sit close to the curve rather than exactly on a true tangent line at t = 7.5s &mdash; a slightly steeper tangent, drawn to just touch the curve at that one point, would land in range. This is a drawing-precision issue rather than a method error.</td></tr>
+      <tr><td class="q">16c</td><td class="topic"><span class="tag">E2.9</span><span class="topic-name">Graphs in practical situations: average speed from a graph</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span>0/3: answered &minus;1.6 m/s, which is actually the <i>acceleration</i> during the braking phase (25s to 30s): (0&minus;8)/(30&minus;25) = &minus;1.6. Average speed over 15s to 30s is a completely different calculation &mdash; total distance travelled in that interval, divided by the 15 seconds it took &mdash; and it can never come out negative. See the worked guideline below the table.</td></tr>
+      <tr><td class="q">17a</td><td class="topic"><span class="tag">E4.6</span><span class="topic-name">Angles: bearing of B from C</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-blank">Left blank</span>0/2: left blank.</td></tr>
+      <tr><td class="q">17b</td><td class="topic"><span class="tag">E6.5</span><span class="topic-name">Non-right-angled triangles: cosine rule (show that)</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">17c</td><td class="topic"><span class="tag">E4.6</span><span class="topic-name">Angles: bearing of B from A</span></td><td class="marks partial">0/4</td><td class="reason"><span class="cat cat-blank">Left blank</span>0/4: left blank &mdash; follows on from the unanswered 17a, and also depends on recognising angle BAC is obtuse from the given cosine-rule value, which wasn't reached.</td></tr>
+      <tr><td class="q">18a</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation: factorising</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">18b</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation: expanding three brackets</span></td><td class="marks partial">2/3</td><td class="reason"><span class="cat cat-slip">Careless slip</span>2/3: (x+4)(2x&minus;1) was correctly expanded to 2x&sup2;+7x&minus;4, but when carrying that result into the second multiplication it was copied down as 2x&sup2;<b>&minus;</b>7x&minus;4 &mdash; the sign on the 7x flipped. Multiplying out from there was then done correctly given that (now wrong) starting expression, producing 2x&sup3;&minus;11x&sup2;&minus;18x+8 instead of the correct 2x&sup3;+3x&sup2;&minus;18x+8. Three of the four terms match the correct answer (the x&sup3;, x and constant terms), which is why 2 of the 3 marks are still earned &mdash; the method throughout is sound, this was purely a sign slip made while transcribing between two lines of working.</td></tr>
+      <tr><td class="q">19</td><td class="topic"><span class="tag">E6.4</span><span class="topic-name">Trigonometric functions: solving cos&nbsp;x = k</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">20</td><td class="topic"><span class="tag">E1.10</span><span class="topic-name">Limits of accuracy: bounds of a calculated quantity</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">21</td><td class="topic"><span class="tag">E7.2</span><span class="topic-name">Vectors: finding a position vector</span></td><td class="marks partial">3/4</td><td class="reason"><span class="cat cat-slip">Careless slip</span>3/4: the vector method was entirely correct &mdash; OB = m+n, and BE = (5/9)(m&minus;n) using the 4:5 ratio &mdash; and the working line 5/9m &minus; 5/9n + m + n correctly combines to 14/9 m + 4/9 n. But the final answer written in the box drops the leading 1, giving 4/9 m + 4/9 n instead of 14/9 m + 4/9 n. This is a one-digit transcription slip from her own correct working into the answer space, not a method error.</td></tr>
+      <tr><td class="q">22</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations: line and curve intersection</span></td><td class="marks full">6/6</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">23</td><td class="topic"><span class="tag">E5.3</span><span class="topic-name">Circles, arcs and sectors: segment area in a volume problem</span></td><td class="marks partial">0/7</td><td class="reason"><span class="cat cat-miscon">Misconception</span>0/7: assumed the angle at the centre O was 60&deg; and used it directly, but this diagram is marked “NOT TO SCALE” and no angle is given in the question &mdash; the actual angle has to be <i>calculated</i> from the given height (3m) and radius (2.5m), and comes out to roughly 157&deg; (or a 203&deg; reflex angle for the major segment), nowhere near 60&deg;. There's also a slip in the formula itself (360 written as 366). See the worked guideline below the table for the full method.</td></tr>
+      <tr class="total"><td colspan="2">Total</td><td class="marks">72/100</td><td class="reason">72%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="legend">
+    <div><span class="dot full-dot"></span>Full marks</div>
+    <div><span class="dot partial-dot"></span>Marks dropped</div>
+  </div>
+
+  <div class="legend">
+    <span class="cat cat-slip">Careless slip</span>
+    <span class="cat cat-hw">Handwriting</span>
+    <span class="cat cat-miscon">Misconception</span>
+    <span class="cat cat-blank">Left blank</span>
+  </div>
+
+  <h2 class="section-title">What she could achieve &mdash; fixing each category in turn</h2>
+  <div class="ladder">
+    <div class="ladder-row">
+      <div class="ladder-score">72/100</div>
+      <div class="ladder-desc">Actual score.</div>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">75/100</div>
+      <div class="ladder-desc">+ careless slips fixed: <b>Q16b</b> (tangent gradient in range), <b>Q18b</b> (sign carried correctly), <b>Q21</b> (final answer matches own working).</div>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">75/100</div>
+      <div class="ladder-desc">+ handwriting fixed: none this paper &mdash; every legible answer was already read correctly.</div>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">86/100</div>
+      <div class="ladder-desc">+ misconceptions resolved: <b>Q3</b> (symmetry reasoning), <b>Q16c</b> (average speed vs acceleration), <b>Q23</b> (calculating the segment angle instead of assuming it).</div>
+    </div>
+    <div class="ladder-row final">
+      <div class="ladder-score">100/100</div>
+      <div class="ladder-desc">+ blanks completed: <b>Q8a/8b</b> and <b>Q17a/17c</b> (both pairs likely a screen/tooling issue rather than a gap &mdash; worth confirming on paper), <b>Q10b</b> (describing a transformation from a diagram).</div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Q16(c) worked through &mdash; average speed vs acceleration</h2>
+  <div class="method-box">
+    <div class="step"><b>Question:</b> work out the average speed of the cyclist between 15 seconds and 30 seconds.</div>
+    <div class="step"><b>What was written:</b> &minus;1.6 m/s, calculated as (0&nbsp;&minus;&nbsp;8)&nbsp;&divide;&nbsp;(30&nbsp;&minus;&nbsp;25) &mdash; this is actually correct as a calculation, just for the wrong quantity. It's the <b>acceleration</b> during the braking phase from 25s to 30s (change in speed &divide; time for that change), not the average speed over the full 15&ndash;30s interval.</div>
+    <div class="step"><b>The key distinction:</b> average speed is always <i>total distance travelled &divide; total time taken</i>, never a difference of speeds. It also can never be negative, since distance travelled and time taken are both positive &mdash; a negative "average speed" is a useful warning sign that the wrong quantities were combined.</div>
+    <div class="step"><b>Step 1 &mdash; split 15s to 30s at the graph's shape change (25s):</b> speed is constant at 8 m/s from 15s to 25s, then decreases in a straight line from 8 m/s to 0 m/s between 25s and 30s.</div>
+    <div class="step"><b>Step 2 &mdash; distance from 15s to 25s (constant speed):</b> distance = speed &times; time = 8 &times; 10 = 80 m.</div>
+    <div class="step"><b>Step 3 &mdash; distance from 25s to 30s (constant deceleration, so use the trapezium/triangle area under the graph):</b> distance = average of (8 and 0) &times; time = ((8+0)/2) &times; 5 = 20 m.</div>
+    <div class="step"><b>Step 4 &mdash; total distance and total time:</b> total distance = 80 + 20 = 100 m; total time = 30 &minus; 15 = 15 s.</div>
+    <div class="step"><b>Step 5 &mdash; average speed:</b> 100 &divide; 15 = <b>6.67 m/s</b> (matches the mark scheme's 6.666 to 6.733 range, which allows a small tolerance for reading the graph).</div>
+  </div>
+
+  <h2 class="section-title">Q23 worked through &mdash; finding the segment angle instead of assuming it</h2>
+  <div class="method-box">
+    <div class="step"><b>Question:</b> the diagram shows the major segment of a circle, centre O, radius 2.5m, which is the cross section of a tunnel with height 3m. The tunnel is 800m long. Calculate the volume.</div>
+    <div class="step"><b>What went wrong:</b> the working used 60&deg; as the angle at the centre without it being given anywhere in the question &mdash; the diagram is explicitly labelled "NOT TO SCALE", which is the exam's signal that any angle or length that looks a certain way in the picture cannot be read off or assumed, only calculated from the numbers actually given (height 3m, radius 2.5m).</div>
+    <div class="step"><b>Step 1 &mdash; find the perpendicular distance from the centre to the chord:</b> the height of 3m is measured from the chord to the top of the major segment. Since the full circle's diameter reach from the centre to the top is one radius (2.5m), and the tunnel height (3m) is more than the radius, the chord must sit <i>below</i> the centre, at distance (3 &minus; 2.5) = 0.5m below O.</div>
+    <div class="step"><b>Step 2 &mdash; use that 0.5m with the radius to find the half-angle:</b> in the right-angled triangle formed by the centre, the midpoint of the chord, and one end of the chord, the side adjacent to the half-angle is 0.5m and the hypotenuse is the radius, 2.5m. So cos(half-angle) = 0.5/2.5 = 0.2, giving half-angle = cos&#8315;&sup1;(0.2) &asymp; 78.46&deg;.</div>
+    <div class="step"><b>Step 3 &mdash; double it for the full angle of the <i>minor</i> segment:</b> angle = 2 &times; 78.46&deg; &asymp; 156.9&deg;. (The reflex angle for the major segment, which is what the tunnel's cross section actually is, is 360&deg; &minus; 156.9&deg; &asymp; 203.1&deg;.)</div>
+    <div class="step"><b>Step 4 &mdash; area of the major segment</b> = area of circle &minus; area of the minor segment, or equivalently, major sector area + triangle area (the triangle gets <i>added</i> back for a major segment, not subtracted): area &asymp; 12.29 to 12.31 m&sup2; (matching the mark scheme).</div>
+    <div class="step"><b>Step 5 &mdash; volume of the tunnel</b> = cross-sectional area &times; length = 12.3 &times; 800 &asymp; <b>9835 to 9844 m&sup3;</b>.</div>
+    <div class="step"><b>The one-line takeaway:</b> whenever a diagram says "NOT TO SCALE" and an angle isn't printed on it, that angle must come from a calculation using the numbers given &mdash; never from how the picture looks.</div>
+  </div>
+
+  <h2 class="section-title">Topics to target next session</h2>
+  <div class="weak-grid">
+    <div class="weak-card miscon">
+      <h3>NOT TO SCALE diagrams: calculate, don't assume</h3>
+      <p>Q23's 60&deg; assumption (worth 7 marks) is the single biggest loss on this paper, and it's a general habit rather than a one-off: any angle or length not printed on a "not to scale" diagram needs to be derived from the given numbers. Worth a few quick drills spotting "what's actually given vs. what's just drawn" before diving into the maths.</p>
+    </div>
+    <div class="weak-card blank">
+      <h3>Scale drawings and bearings on screen</h3>
+      <p>Q8 (5 marks) and Q17a/17c (6 marks) were all left blank, and both involve either measuring a printed distance or constructing with compasses/protractor &mdash; neither works well on a tablet screen. Worth redoing these specifically on a printed copy before treating them as a knowledge gap; if she can do them on paper, this isn't really a maths issue at all.</p>
+    </div>
+    <div class="weak-card slip">
+      <h3>Carrying working from one line to the next</h3>
+      <p>Q18b (sign flipped mid-expansion) and Q21 (a digit dropped copying the final answer) both had fully correct method but lost marks purely in the transcription between steps. A brief final check &mdash; re-reading the last line of working against the box just written &mdash; would likely catch both.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Describing a transformation from a diagram</h3>
+      <p>Q10b was left blank despite both individual transformations (10a i and ii) being drawn correctly &mdash; the gap is specifically in going backwards from "here are two shapes" to naming the single transformation between them. A short, dedicated set of "describe the transformation" questions (not "perform the transformation") would target this directly.</p>
+    </div>
+  </div>
+
+  <footer>0580/42 &middot; Cambridge IGCSE Mathematics &middot; February/March 2025 &middot; marked against the official mark scheme</footer>
+
+</div>
+</body>
+</html>
