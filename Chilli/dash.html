@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Chilli &mdash; AC9M10 Syllabus Coverage Tracker</title>
+<title>Chilli &mdash; Term 3 Syllabus Coverage Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -36,13 +36,13 @@
 
   .section-label { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.04em; }
 
-  .topic-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
+  .topic-summary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 10px; }
   .ts-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: block; text-decoration: none; color: inherit; cursor: pointer; transition: box-shadow 0.15s ease, transform 0.15s ease; }
   .ts-card:hover { box-shadow: 0 3px 14px rgba(31,42,36,0.14); transform: translateY(-2px); }
-  .ts-card .ts-name { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 9px; text-transform: uppercase; white-space: nowrap; }
+  .ts-card .ts-name { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 9px; text-transform: uppercase; }
   .ts-row { display: flex; align-items: baseline; justify-content: space-between; }
   .ts-label { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
-  .ts-untested { font-size: 12.5px; color: var(--muted); font-style: italic; padding: 10px 0 2px; }
+  .ts-taught { font-size: 12.5px; color: var(--tip); font-weight: 600; padding: 10px 0 2px; }
   .ts-count { font-size: 11px; color: var(--muted); margin-top: 4px; }
 
   .overall-line { font-size: 12.5px; color: var(--muted); margin: 4px 0 0; }
@@ -50,6 +50,7 @@
   .overall-line b { color: var(--ink); }
 
   .cat { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+  .cat-taught { background: var(--tip-light); color: var(--tip); }
   .cat-slip { background: var(--amber-light); color: var(--amber); }
   .cat-miscon { background: var(--pink-light); color: var(--pink); }
   .cat-blank { background: var(--purple-light); color: var(--purple); }
@@ -68,57 +69,37 @@
   <a class="back-link" href="home.html">&larr; Back to home</a>
 
   <header>
-    <h1>Chilli &mdash; AC9M10 syllabus coverage tracker</h1>
-    <div class="meta">Mathematics &middot; Australian Curriculum v9.0, Year 10 (general strands &mdash; specific school/board not yet confirmed) &middot; built from every past paper marked so far</div>
+    <h1>Chilli &mdash; Term 3 syllabus coverage tracker</h1>
+    <div class="meta">Mathematics &middot; topics as taught in her actual class (school/exam board not yet confirmed) &middot; built from what's covered in lessons and, once graded, from past papers</div>
   </header>
 
   <div class="legend-box">
     <div class="section-label" style="margin-bottom: 6px;">Papers covered so far</div>
-    <div class="empty-state">No papers marked yet &mdash; send a past paper or worksheet with the mark scheme and I'll grade it and populate this tracker.</div>
+    <div class="empty-state">No papers marked yet &mdash; send a past paper or worksheet with the mark scheme and I'll grade it and add scores to this tracker.</div>
   </div>
 
   <div class="legend-box topic-box">
-  <div class="section-label">Coverage by topic &middot; click a card for the full question-by-question detail</div>
+  <div class="section-label">Coverage by topic &middot; click a card for the full sub-topic detail</div>
   <div class="topic-summary">
     <a href="topic/1.html" class="ts-card">
-      <div class="ts-name">1&nbsp;&middot;&nbsp;Number</div>
-      <div class="ts-untested">Not tested yet</div>
-      <div class="ts-count">1 content code</div>
+      <div class="ts-name">1&nbsp;&middot;&nbsp;Quadratic graphs</div>
+      <div class="ts-taught">&#9989; Taught this term</div>
+      <div class="ts-count">10 sub-topics covered &middot; 0 graded</div>
     </a>
     <a href="topic/2.html" class="ts-card">
-      <div class="ts-name">2&nbsp;&middot;&nbsp;Algebra</div>
-      <div class="ts-untested">Not tested yet</div>
-      <div class="ts-count">5 content codes</div>
-    </a>
-    <a href="topic/3.html" class="ts-card">
-      <div class="ts-name">3&nbsp;&middot;&nbsp;Measurement</div>
-      <div class="ts-untested">Not tested yet</div>
-      <div class="ts-count">5 content codes</div>
-    </a>
-    <a href="topic/4.html" class="ts-card">
-      <div class="ts-name">4&nbsp;&middot;&nbsp;Space</div>
-      <div class="ts-untested">Not tested yet</div>
-      <div class="ts-count">3 content codes</div>
-    </a>
-    <a href="topic/5.html" class="ts-card">
-      <div class="ts-name">5&nbsp;&middot;&nbsp;Statistics</div>
-      <div class="ts-untested">Not tested yet</div>
-      <div class="ts-count">5 content codes</div>
-    </a>
-    <a href="topic/6.html" class="ts-card">
-      <div class="ts-name">6&nbsp;&middot;&nbsp;Probability</div>
-      <div class="ts-untested">Not tested yet</div>
-      <div class="ts-count">2 content codes</div>
+      <div class="ts-name">2&nbsp;&middot;&nbsp;Percentage / financial maths</div>
+      <div class="ts-taught">&#9989; Taught this term</div>
+      <div class="ts-count">3 sub-topics covered &middot; 0 graded</div>
     </a>
   </div>
-  <div class="overall-line">Overall across all papers: <b>no data yet</b> &mdash; scores and weight-in-papers fill in once the first paper is marked.</div>
+  <div class="overall-line">Overall across all papers: <b>no graded data yet</b> &mdash; 13 sub-topics taught in class so far this term, across 2 units. Scores fill in once the first paper is marked.</div>
   </div>
 
-  <a class="details-link" href="topic/1.html">Open full syllabus detail &rarr;</a>
+  <a class="details-link" href="topic/1.html">Open full sub-topic detail &rarr;</a>
 
-  <div class="note">Add the first paper: send the question paper + mark scheme (or a worksheet), and I'll grade it, add it to the list above, fill in the relevant topic pages, and calculate scores and weight-in-papers here.</div>
+  <div class="note">Add a new unit or paper: tell me the new sub-topics covered (I'll add a topic card and page), or send a past paper + mark scheme to grade and I'll add scores throughout.</div>
 
-  <footer>Mathematics &middot; AC9M10 content codes (Australian Curriculum v9.0, Year 10) &middot; update after each new paper</footer>
+  <footer>Mathematics &middot; topics reflect what's actually taught in Chilli's class, Term 3 2026 &middot; update as new units or papers come in</footer>
 
 </div>
 </body>

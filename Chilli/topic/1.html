@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Chilli &mdash; 1. Number &mdash; Topic Detail</title>
+<title>Chilli &mdash; 1. Quadratic graphs &mdash; Topic Detail</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -31,14 +31,15 @@
   thead th { background: var(--ink); color: #fff; text-align: left; padding: 10px 12px; font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
   tbody td { padding: 10px 12px; border-top: 1px solid var(--line); vertical-align: top; }
   tbody tr:nth-child(even) { background: #fafaf8; }
-  td.code { font-weight: 600; width: 110px; color: var(--accent); word-break: break-word; line-height: 1.3; }
-  td.topic { width: auto; }
-  td.papers { width: 110px; }
-  td.comment { color: var(--muted); width: 90px; }
+  td.code { font-weight: 600; width: 70px; color: var(--accent); word-break: break-word; line-height: 1.3; }
+  td.topic { width: 230px; }
+  td.papers { width: 90px; }
+  td.comment { color: var(--muted); width: auto; }
   td.improve { color: var(--ink); width: 90px; }
 
   .cat { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 20px; margin-right: 6px; white-space: nowrap; }
   .cat-correct { background: var(--accent-light); color: var(--accent); }
+  .cat-taught { background: var(--tip-light); color: var(--tip); }
   .cat-slip { background: var(--amber-light); color: var(--amber); }
   .cat-hw { background: var(--loss-light); color: var(--loss); }
   .cat-miscon { background: var(--pink-light); color: var(--pink); }
@@ -47,6 +48,7 @@
   tr.untested td { color: var(--muted); }
   tr.untested td.code { color: var(--muted); }
   tr.untested td.dash { text-align: center; }
+  tr.taught td.dash { text-align: center; }
 
   .legend { display: flex; gap: 18px; font-size: 12px; color: var(--muted); flex-wrap: wrap; align-items: center; margin: 10px 0 30px; }
 
@@ -71,25 +73,35 @@
   <a class="back-link" href="../dash.html">&larr; Back to dashboard</a>
 
   <header>
-    <h1>1&nbsp;&middot;&nbsp;Number</h1>
-    <div class="meta">Every number question from every marked paper so far &mdash; no papers marked yet</div>
+    <h1>1&nbsp;&middot;&nbsp;Quadratic graphs</h1>
+    <div class="meta">Every quadratic graphs sub-topic covered so far &mdash; taught in class, Term 3 2026; no graded paper marked yet</div>
   </header>
 
   <div class="legend">
     <div><span class="cat cat-correct">Correct</span></div>
+    <div><span class="cat cat-taught">Taught, not graded</span></div>
     <div><span class="cat cat-slip">Careless slip</span></div>
     <div><span class="cat cat-hw">Handwriting</span></div>
     <div><span class="cat cat-miscon">Misconception</span></div>
     <div><span class="cat cat-blank">Left blank</span></div>
-    <div>&mdash; Not yet tested in a marked paper</div>
+    <div>&mdash; Not yet taught or tested</div>
   </div>
 
-  <h2 class="section-title" id="sec-1">1&nbsp;&middot;&nbsp;Number</h2>
+  <h2 class="section-title" id="sec-1">1&nbsp;&middot;&nbsp;Quadratic graphs</h2>
   <table>
-    <colgroup><col style="width:110px;"><col><col style="width:110px;"><col style="width:90px;"><col style="width:90px;"></colgroup>
-    <thead><tr><th>Code</th><th>Content description</th><th>Paper(s)</th><th>Comment</th><th>How to improve</th></tr></thead>
+    <colgroup><col style="width:70px;"><col style="width:230px;"><col style="width:90px;"><col><col style="width:90px;"></colgroup>
+    <thead><tr><th>Code</th><th>Sub-topic</th><th>Paper(s)</th><th>Status</th><th>How to improve</th></tr></thead>
     <tbody>
-      <tr class="untested"><td class="code">AC9M10N01</td><td class="topic">Approximation in repeated calculations</td><td class="papers dash">&mdash;</td><td class="comment dash">&mdash;</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="taught"><td class="code">QG.1</td><td class="topic">Parent function</td><td class="papers dash">&mdash;</td><td class="comment"><span class="cat cat-taught">Taught</span>Covered in class, Term 3 2026 &mdash; no graded paper yet to confirm retention.</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="taught"><td class="code">QG.2</td><td class="topic">Vertex form</td><td class="papers dash">&mdash;</td><td class="comment"><span class="cat cat-taught">Taught</span>Covered in class, Term 3 2026 &mdash; no graded paper yet to confirm retention.</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="taught"><td class="code">QG.3</td><td class="topic">Factorised form</td><td class="papers dash">&mdash;</td><td class="comment"><span class="cat cat-taught">Taught</span>Covered in class, Term 3 2026 &mdash; no graded paper yet to confirm retention.</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="taught"><td class="code">QG.4</td><td class="topic">General form</td><td class="papers dash">&mdash;</td><td class="comment"><span class="cat cat-taught">Taught</span>Covered in class, Term 3 2026 &mdash; no graded paper yet to confirm retention.</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="taught"><td class="code">QG.5</td><td class="topic">Completing the square</td><td class="papers dash">&mdash;</td><td class="comment"><span class="cat cat-taught">Taught</span>Covered in class, Term 3 2026 &mdash; no graded paper yet to confirm retention.</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="taught"><td class="code">QG.6</td><td class="topic">Discriminant</td><td class="papers dash">&mdash;</td><td class="comment"><span class="cat cat-taught">Taught</span>Covered in class, Term 3 2026 &mdash; no graded paper yet to confirm retention.</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="taught"><td class="code">QG.7</td><td class="topic">Expanding binomial products</td><td class="papers dash">&mdash;</td><td class="comment"><span class="cat cat-taught">Taught</span>Covered in class, Term 3 2026 &mdash; no graded paper yet to confirm retention.</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="taught"><td class="code">QG.8</td><td class="topic">Factorising quadratic expressions</td><td class="papers dash">&mdash;</td><td class="comment"><span class="cat cat-taught">Taught</span>Covered in class, Term 3 2026 &mdash; no graded paper yet to confirm retention.</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="taught"><td class="code">QG.9</td><td class="topic">Solving quadratic equations</td><td class="papers dash">&mdash;</td><td class="comment"><span class="cat cat-taught">Taught</span>Covered in class, Term 3 2026 &mdash; no graded paper yet to confirm retention.</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="taught"><td class="code">QG.10</td><td class="topic">Simplifying algebraic fractions</td><td class="papers dash">&mdash;</td><td class="comment"><span class="cat cat-taught">Taught</span>Covered in class, Term 3 2026 &mdash; no graded paper yet to confirm retention.</td><td class="improve dash">&mdash;</td></tr>
     </tbody>
   </table>
 
@@ -103,10 +115,10 @@
   <div class="topic-nav">
     <span class="spacer"></span>
     <a href="../dash.html">Dashboard</a>
-    <a href="2.html">2. Algebra &rarr;</a>
+    <a href="2.html">2. Percentage / financial maths &rarr;</a>
   </div>
 
-  <footer>Mathematics &middot; AC9M10 content codes (Australian Curriculum v9.0, Year 10) &middot; update after each new paper</footer>
+  <footer>Mathematics &middot; topics as taught in Chilli's actual class (Term 3 2026) &middot; update after each new paper or unit</footer>
 
 </div>
 </body>
