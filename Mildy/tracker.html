@@ -81,6 +81,14 @@
   .paper-list a.grade-b:hover { background: var(--grade-b); color: #fff; }
   .paper-list a.grade-below { background: var(--grade-below-light); color: var(--grade-below); }
   .paper-list a.grade-below:hover { background: var(--grade-below); color: #fff; }
+  .paper-list a.sess { background: var(--tip-light); color: var(--tip); }
+  .paper-list a.sess:hover { background: var(--tip); color: #fff; }
+  .session-months { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
+  .month-card-sess { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .mcs-title { display: block; font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+  .mcs-sub { font-size: 11.5px; color: var(--muted); margin-bottom: 8px; }
+  .month-card-sess .paper-list { margin-top: 0; }
+  @media (max-width: 720px) { .session-months { grid-template-columns: 1fr; } }
 
   .section-label {
     font-size: 13px;
@@ -227,6 +235,11 @@
     <h1>Mildy — 0580 Extended syllabus coverage tracker</h1>
     <div class="meta">Cambridge IGCSE Mathematics 0580 &middot; built from every past paper marked so far &middot; updated as new papers are added</div>
   </header>
+
+  <div class="legend-box">
+    <div class="section-label" style="margin-bottom: 6px;">Class sessions &middot; 0 logged since Aug 2026</div>
+    <div class="paper-list" style="font-style:italic;">No sessions logged yet &mdash; tell me how each class goes and I'll add it here, month by month.</div>
+  </div>
 
   <div class="legend-box">
     <div class="section-label" style="margin-bottom: 6px;">Papers covered so far</div>
