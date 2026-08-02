@@ -108,6 +108,18 @@
   .dash { color: var(--muted); }
   .tip-label { color: var(--amber); font-weight: 600; }
 
+  .reason .note-line { display: block; margin-top: 6px; color: var(--ink); font-size: 13px; line-height: 1.45; }
+  .reason .mini-eq {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin: 7px 0;
+    font-size: 12.5px;
+  }
+  .reason .mini-eq .eln { padding: 2px 0; }
+  .reason .note-line.correct-line, .reason .mini-eq .eln.correct-line { color: var(--accent); font-weight: 600; }
+
   .cat {
     display: inline-block;
     font-size: 11px;
@@ -301,13 +313,13 @@
       <tr><td class="q">4a</td><td class="topic"><span class="tag">E2.1</span><span class="topic-name">Substitution into a formula</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
       <tr><td class="q">4b</td><td class="topic"><span class="tag">E2.1</span><span class="topic-name">Rearranging and solving for a variable</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
 
-      <tr><td class="q">5</td><td class="topic"><span class="tag">E1.5</span><span class="topic-name">Ordering measurements</span></td><td class="marks full">2/2</td><td class="reason"><span class="cat cat-hw">Handwriting</span>correct &mdash; 0.03 m was intended and the order is right, but the 3 was written in a way that could be read as a 5. Worth writing 3s and 5s a little more distinctly, especially in a list of values being compared side by side.</td></tr>
+      <tr><td class="q">5</td><td class="topic"><span class="tag">E1.5</span><span class="topic-name">Ordering measurements</span></td><td class="marks full">2/2</td><td class="reason"><span class="cat cat-hw">Handwriting</span><div class="note-line">Correct! <b>0.03 m</b> was the intended value and the order is right &mdash; but the 3 was written in a way that could look like a 5.</div><div class="note-line">Try writing your 3s and 5s a little more distinctly, especially when comparing several values side by side.</div></td></tr>
 
       <tr><td class="q">6</td><td class="topic"><span class="tag">E5.2</span><span class="topic-name">Area of a trapezium</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
 
-      <tr><td class="q">7</td><td class="topic"><span class="tag">E2.6</span><span class="topic-name">Inequalities from a number line</span></td><td class="marks full">2/2</td><td class="reason"><span class="cat cat-hw">Handwriting</span>correct &mdash; the endpoint matches the closed circle at x = 4, but the 4 was written with a closed top that reads as a 9. Same digit as the note below: worth practising an open-topped 4 so it isn't mistaken for a 9.</td></tr>
+      <tr><td class="q">7</td><td class="topic"><span class="tag">E2.6</span><span class="topic-name">Inequalities from a number line</span></td><td class="marks full">2/2</td><td class="reason"><span class="cat cat-hw">Handwriting</span><div class="note-line">Correct! The endpoint matches the closed circle at <b>x = 4</b> &mdash; but the 4 was written with a closed top that reads as a 9.</div><div class="note-line">Same digit as the note below: try practising an open-topped 4 so it isn't mistaken for a 9.</div></td></tr>
 
-      <tr><td class="q">8a</td><td class="topic"><span class="tag">E8.1</span><span class="topic-name">Probability: completing a table</span></td><td class="marks full">2/2</td><td class="reason"><span class="cat cat-hw">Handwriting</span>correct &mdash; 0.45 was the intended value both in the table and below it, but the 4 again reads as something closer to a 9 and then a 6. This is the same recurring digit issue as Q7: a clear, open 4 would remove the ambiguity in both places.</td></tr>
+      <tr><td class="q">8a</td><td class="topic"><span class="tag">E8.1</span><span class="topic-name">Probability: completing a table</span></td><td class="marks full">2/2</td><td class="reason"><span class="cat cat-hw">Handwriting</span><div class="note-line">Correct! <b>0.45</b> was the intended value in both places &mdash; but the 4 reads closer to a 9, then a 6.</div><div class="note-line">Same recurring issue as Q7: a clear, open-topped 4 would remove the ambiguity in both places.</div></td></tr>
       <tr><td class="q">8b</td><td class="topic"><span class="tag">E8.1</span><span class="topic-name">Probability: expected frequency</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
 
       <tr><td class="q">9</td><td class="topic"><span class="tag">E1.9</span><span class="topic-name">Estimation to 1 significant figure</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
@@ -351,12 +363,12 @@
       <tr><td class="q">22a</td><td class="topic"><span class="tag">E2.12</span><span class="topic-name">Stationary points of a cubic</span></td><td class="marks full">5/5</td><td class="reason dash">&mdash;</td></tr>
       <tr><td class="q">22b</td><td class="topic"><span class="tag">E2.12</span><span class="topic-name">Sketching a cubic; classifying a stationary point</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
       <tr><td class="q">22c</td><td class="topic"><span class="tag">E2.12</span><span class="topic-name">Range of values for fewer solutions</span></td><td class="marks partial">0/2</td><td class="reason">
-        <span class="cat cat-blank">Left blank</span>0/2: left blank. See the worked guideline below the table &mdash; this one is worth talking through together, since it also raises a genuinely subtle point about the boundary values.
+        <span class="cat cat-blank">Left blank</span><div class="note-line">Left blank &mdash; the key idea: y = k is a horizontal line, and the number of solutions is how many times it crosses the curve.</div><div class="note-line">From part (a), the stationary points are <b>(&minus;1, 1)</b> and <b>(1/3, &minus;5/27)</b>.</div><div class="note-line">Between these values the line crosses the curve <b>3 times</b>; outside them it only crosses once.</div><div class="note-line correct-line">So: <b>k &gt; 1 or k &lt; &minus;5/27</b>.</div><div class="note-line">Good question to think about: what happens exactly at the boundary? There the line just touches the curve at the stationary point, giving a repeated root &mdash; only <b>2 distinct solutions</b>, not 3. So k = 1 and k = &minus;5/27 also count as "fewer than 3" &mdash; but Cambridge's mark scheme still asks for the strict version above as the expected answer.</div>
       </td></tr>
 
       <tr><td class="q">23a</td><td class="topic"><span class="tag">E2.4</span><span class="topic-name">Simplifying fractional indices</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
       <tr><td class="q">23b</td><td class="topic"><span class="tag">E2.4</span><span class="topic-name">Solving an exponential equation</span></td><td class="marks partial">2/4</td><td class="reason">
-        <span class="cat cat-miscon">Misconception</span>&minus;2: 4<sup>x+3</sup> was correctly rewritten as 2<sup>2(x+3)</sup>, and a linear equation was formed from the resulting powers. However, 16<sup>x</sup> was combined with (1/2)<sup>x</sup> to give 8<sup>2x</sup>, when it should give 8<sup>x</sup> &mdash; an extra factor of 2 entered the exponent. The working was also not carried through to a final numerical answer. See the base-2 guideline below the table.
+        <span class="cat cat-miscon">Misconception</span><div class="note-line">Good start &mdash; <b>4<sup>x+3</sup></b> was correctly rewritten as <b>2<sup>2(x+3)</sup></b>, and a linear equation was set up from the powers.</div><div class="note-line">The fix: rewrite every term in base 2 individually first, rather than combining terms early.</div><div class="mini-eq"><div class="eln">16<sup>x</sup> = 2<sup>4x</sup>,&nbsp; (&frac12;)<sup>x</sup> = 2<sup>&minus;x</sup>,&nbsp; 4<sup>x+3</sup> = 2<sup>2x+6</sup></div><div class="eln">2<sup>4x</sup> &times; 2<sup>&minus;x</sup> = 2<sup>2x+6</sup> &rarr; 2<sup>3x</sup> = 2<sup>2x+6</sup></div><div class="eln correct-line">3x = 2x+6 &rarr; <b>x = 6</b></div></div><div class="note-line">Instead, 16<sup>x</sup> and (&frac12;)<sup>x</sup> were combined directly into <b>8<sup>2x</sup></b> (it should be 8<sup>x</sup>) &mdash; an extra factor of 2 crept into the exponent, and the working also wasn't carried through to a final numerical answer.</div>
       </td></tr>
 
       <tr class="total"><td colspan="2">Total</td><td class="marks">96/100</td><td class="reason">96%</td></tr>
@@ -373,27 +385,6 @@
     <span class="cat cat-hw">Handwriting</span>
     <span class="cat cat-miscon">Misconception</span>
     <span class="cat cat-blank">Left blank</span>
-  </div>
-
-  <h2 class="section-title">Q22(c) worked through &mdash; and a genuine subtlety</h2>
-  <div class="method-box">
-    <div class="step"><b>Question:</b> the equation x&sup3;+x&sup2;&minus;x = k has fewer than 3 solutions. Find the range of possible values of k.</div>
-    <div class="step"><b>The idea &mdash; vertical translation:</b> solving x&sup3;+x&sup2;&minus;x = k is the same as asking how many times the horizontal line y = k crosses the curve y = x&sup3;+x&sup2;&minus;x. Equivalently, this is the same as taking the fixed curve y = x&sup3;+x&sup2;&minus;x&minus;k (the original curve translated vertically by &minus;k) and asking how many times it crosses the x-axis. As k changes, the whole curve effectively slides up or down past a fixed horizontal line, and the number of crossings changes only when the line passes through one of the two stationary points.</div>
-    <div class="step"><b>From part (a):</b> the two stationary points are (&minus;1, 1) &mdash; a local maximum &mdash; and (1/3, &minus;5/27) &mdash; a local minimum.</div>
-    <div class="step"><b>Reading the sketch:</b> while k is strictly between &minus;5/27 and 1, the line y = k passes through the "hump" of the curve and crosses it 3 times. Once k moves above 1 or below &minus;5/27, the line only crosses once. So the standard, expected answer is <b>k &gt; 1 or k &lt; &minus;5/27</b>.</div>
-    <div class="step"><b>The subtlety worth discussing with her:</b> the question you raised is a good one. At exactly k = 1 or k = &minus;5/27, the line touches the curve at the stationary point rather than crossing it, which produces a repeated root there. Checking algebraically: at k = 1, x&sup3;+x&sup2;&minus;x&minus;1 factorises as (x+1)&sup2;(x&minus;1) &mdash; a repeated root at x = &minus;1 and a single root at x = 1, giving <b>2 distinct solutions</b>, not 3. The same happens at k = &minus;5/27. So strictly speaking, "fewer than 3 solutions" is also true at the boundary itself, and a fully rigorous answer would be k &ge; 1 or k &le; &minus;5/27.</div>
-    <div class="step"><b>Why the mark scheme still asks for the strict version:</b> Cambridge's official mark scheme awards full marks for the strict inequalities (k &gt; 1 or k &lt; &minus;5/27) as the expected answer, and separately allows a special-case mark for the inclusive version. In practice this is a case where the exam's expected answer and the fully rigorous answer differ slightly at the boundary &mdash; a nice discussion point, but for exam purposes the strict version is the one to write down.</div>
-  </div>
-
-  <h2 class="section-title">Q23(b) worked through in base 2</h2>
-  <div class="method-box">
-    <div class="step"><b>Question:</b> 16<sup>x</sup> &times; (1/2)<sup>x</sup> = 4<sup>x+3</sup>. Find the value of x.</div>
-    <div class="step"><b>Step 1 &mdash; rewrite every term with base 2:</b> 16 = 2<sup>4</sup>, so 16<sup>x</sup> = (2<sup>4</sup>)<sup>x</sup> = 2<sup>4x</sup>. Also 1/2 = 2<sup>&minus;1</sup>, so (1/2)<sup>x</sup> = (2<sup>&minus;1</sup>)<sup>x</sup> = 2<sup>&minus;x</sup>. And 4 = 2<sup>2</sup>, so 4<sup>x+3</sup> = (2<sup>2</sup>)<sup>x+3</sup> = 2<sup>2(x+3)</sup> = 2<sup>2x+6</sup>.</div>
-    <div class="step"><b>Step 2 &mdash; substitute back into the equation:</b> 2<sup>4x</sup> &times; 2<sup>&minus;x</sup> = 2<sup>2x+6</sup>.</div>
-    <div class="step"><b>Step 3 &mdash; combine the left-hand side</b> using the rule for multiplying powers with the same base (add the exponents): 2<sup>4x + (&minus;x)</sup> = 2<sup>3x</sup>. So the equation becomes 2<sup>3x</sup> = 2<sup>2x+6</sup>.</div>
-    <div class="step"><b>Step 4 &mdash; equate the exponents</b> (same base on both sides, so the powers must be equal): 3x = 2x + 6.</div>
-    <div class="step"><b>Step 5 &mdash; solve:</b> 3x &minus; 2x = 6, so <b>x = 6</b>.</div>
-    <div class="step"><b>Where the working differed:</b> the recorded working converted the right-hand side to 2<sup>2(x+3)</sup> correctly, but combined 16<sup>x</sup> and (1/2)<sup>x</sup> directly into 8<sup>2x</sup> without going through the base-2 form of each term individually. Converting every term to base 2 first, one at a time as above, keeps each exponent rule separate and avoids that slip.</div>
   </div>
 
   <h2 class="section-title">Topics to target next session</h2>
