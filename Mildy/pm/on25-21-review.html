@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — Corrections: October/November 2025 Paper 21</title>
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; }
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tip);
+    text-decoration: none;
+    background: var(--tip-light);
+    padding: 7px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    margin-right: 8px;
+  }
+  .back-link:hover { background: var(--tip); color: #fff; }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 24px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .score-box { text-align: right; }
+  .score-box .num { font-size: 40px; font-weight: 700; color: var(--accent); line-height: 1; }
+  .score-box .pct { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+  .reminder {
+    background: var(--amber-light);
+    border: 1px solid var(--line);
+    border-left: 5px solid var(--amber);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 30px;
+  }
+  .reminder .reminder-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+  .reminder p { margin: 6px 0; font-size: 14px; color: var(--ink); }
+  .reminder p:last-child { margin-bottom: 0; }
+
+  h2.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 34px 0 14px;
+    padding-top: 10px;
+    border-top: 2px solid var(--ink);
+  }
+  h2.section-title:first-of-type { margin-top: 0; }
+
+  .q-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  .q-head {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .q-num { font-size: 15px; font-weight: 700; color: var(--ink); }
+  .q-topic { font-size: 13px; color: var(--muted); }
+  .q-marks {
+    margin-left: auto;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--loss);
+  }
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  .q-body p { margin: 7px 0; font-size: 14px; color: var(--ink); }
+  .q-body p.correct { color: var(--accent); font-weight: 600; }
+
+  .eq-box {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 10px 0;
+    font-size: 14.5px;
+  }
+  .eq-box .eq-line { padding: 3px 0; }
+  .eq-box .eq-line b { font-weight: 700; }
+
+  footer {
+    margin-top: 36px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../tracker.html">&larr; Back to dashboard</a>
+  <a class="back-link" href="on25-21.html">Full marking breakdown &rarr;</a>
+
+  <header>
+    <div>
+      <h1>Let's go through your corrections together</h1>
+      <div class="meta">Cambridge IGCSE Mathematics 0580/21 &middot; October/November 2025</div>
+    </div>
+    <div class="score-box">
+      <div class="num">73<span style="font-size:20px;color:var(--muted);">/100</span></div>
+      <div class="pct">73% &mdash; nice work overall!</div>
+    </div>
+  </header>
+
+  <div class="reminder">
+    <div class="reminder-title">Before you go through these, one habit to build</div>
+    <p>Read every question slowly and carefully before you start writing &mdash; a lot of the marks below weren't lost because of maths you don't know, but because of small misreads or rushed final steps.</p>
+    <p>This paper is a 2-hour exam. When you practise, time yourself. If you finish with time still on the clock, don't stop there &mdash; go back over every answer and check it, just like you would have to in the real exam. Make this your habit every single time, not just when you remember.</p>
+  </div>
+
+  <h2 class="section-title">Question 2 &mdash; Angles</h2>
+  <div class="q-card">
+    <div class="q-head"><span class="q-num">Q2</span><span class="q-topic">Isosceles triangle</span><span class="cat cat-miscon">Misconception</span><span class="q-marks">&minus;2 marks</span></div>
+    <div class="q-body">
+      <p>You correctly worked out that angle ACB = 130&deg; &mdash; but that's not what the question was asking for. It asked for angle <b>CAB</b>.</p>
+      <p>Since AC = BC, triangle ABC is isosceles, so there's one more step: angle CAB = (180 &minus; 130) &divide; 2 = <b>25&deg;</b>.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Question 5 &mdash; Transformations</h2>
+  <div class="q-card">
+    <div class="q-head"><span class="q-num">Q5(a)</span><span class="q-topic">Describing a translation</span><span class="cat cat-miscon">Misconception</span><span class="q-marks">&minus;2 marks</span></div>
+    <div class="q-body">
+      <p>Recognising it as a translation was correct &mdash; the vector was the problem.</p>
+      <p>The question asks for the transformation that maps T <b>onto</b> P, so the vector should be (&minus;3, 1). Your answer, (3, &minus;1), is actually the vector for P onto T &mdash; the opposite direction.</p>
+      <p><b>Way to improve:</b> draw a small arrow on the grid from the first triangle to the second, instead of just picturing it. That way you can double check you're going the right direction before you write your final vector. This looks like a rushed, careless misread rather than not knowing the method.</p>
+    </div>
+  </div>
+  <div class="q-card">
+    <div class="q-head"><span class="q-num">Q5(b)</span><span class="q-topic">Enlargement</span><span class="cat cat-blank">Left blank</span><span class="q-marks">&minus;2 marks</span></div>
+    <div class="q-body">
+      <p>This one was left blank, so let's go through it together.</p>
+      <p>To enlarge by scale factor 2 from centre (3,3), take each vertex, measure how far it is from the centre, and place the new point <b>twice</b> as far away, in the same direction.</p>
+      <p>Triangle T's vertices are (1,1), (3,1), (3,2). After the enlargement, the new triangle's vertices are <b>(3,1), (3,&minus;1), (&minus;1,&minus;1)</b>.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Question 7(b) &mdash; Algebraic fractions</h2>
+  <div class="q-card">
+    <div class="q-head"><span class="q-num">Q7(b)</span><span class="q-topic">Subtracting algebraic fractions</span><span class="cat cat-miscon">Misconception</span><span class="q-marks">&minus;1 mark</span></div>
+    <div class="q-body">
+      <div class="eq-box">
+        <div class="eq-line">3x/4 &minus; (x&minus;1)/2</div>
+        <div class="eq-line">= 6x/8 &minus; (4x&minus;4)/8</div>
+      </div>
+      <p>When (x&minus;1)/2 is converted to eighths, the <b>whole bracket</b> gets multiplied by 4, giving (4x&minus;4)/8 &mdash; not just the x.</p>
+      <p>So the full numerator is 6x &minus; (4x &minus; 4). It needs brackets, because you're subtracting the <b>entire</b> expression, not just one term of it.</p>
+      <div class="eq-box">
+        <div class="eq-line">6x &minus; (4x &minus; 4) = 6x &minus; 4x + 4 = 2x + 4</div>
+        <div class="eq-line correct">Answer: (2x+4)/8 = (x+2)/4</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Question 8 &mdash; Simultaneous equations</h2>
+  <div class="q-card">
+    <div class="q-head"><span class="q-num">Q8</span><span class="q-topic">Word problem</span><span class="cat cat-blank">Left blank</span><span class="q-marks">&minus;5 marks</span></div>
+    <div class="q-body">
+      <p>The first step with a word problem like this is turning each sentence into an equation.</p>
+      <div class="eq-box">
+        <div class="eq-line">"3 oranges + 1 apple = 51 cents" &rarr; <b>3t + w = 51</b></div>
+        <div class="eq-line">"6 oranges + 5 apples = 129 cents" &rarr; <b>6t + 5w = 129</b></div>
+      </div>
+      <p>Then solve the two equations together (simultaneously):</p>
+      <div class="eq-box">
+        <div class="eq-line correct">t = 14 cents, w = 9 cents</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Question 10(b) &mdash; Sets</h2>
+  <div class="q-card">
+    <div class="q-head"><span class="q-num">Q10(b)</span><span class="q-topic">n(A&prime;&cup;B)</span><span class="cat cat-miscon">Misconception</span><span class="q-marks">&minus;1 mark</span></div>
+    <div class="q-body">
+      <p>The question asks for the <b>number</b> of elements, not a list of the elements.</p>
+      <p>A&prime; means everything in the universal set that is <b>not</b> in set A, so A&prime; = {5, 7, 8}.</p>
+      <p>B = {1, 3, 5, 7} &mdash; in your working, the 5 was missed out when writing B.</p>
+      <p>So A&prime;&cup;B = {1, 3, 5, 7, 8}, which has <b>5</b> elements &mdash; that's your answer: n(A&prime;&cup;B) = 5.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Question 11 &mdash; Recurring decimals</h2>
+  <div class="q-card">
+    <div class="q-head"><span class="q-num">Q11</span><span class="q-topic">Fraction in simplest form</span><span class="cat cat-slip">Careless slip</span><span class="q-marks">&minus;1 mark</span></div>
+    <div class="q-body">
+      <p>x = 24/99 is correct!</p>
+      <p>But the question clearly says to write your answer as a fraction <b>in its simplest form</b>, and 24/99 can still be simplified &mdash; divide the top and bottom by 3 to get <b>8/33</b>.</p>
+      <p>Always ask yourself at the end: can this fraction be simplified any further?</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Question 14(b)(ii) &mdash; Similar triangles</h2>
+  <div class="q-card">
+    <div class="q-head"><span class="q-num">Q14(b)(ii)</span><span class="q-topic">Area ratio</span><span class="cat cat-miscon">Misconception</span><span class="q-marks">&minus;1 mark</span></div>
+    <div class="q-body">
+      <p>CX : BX = 2 : 1 is the <b>linear</b> scale factor &mdash; that's the ratio between lengths.</p>
+      <p>But this question asks for the ratio between <b>areas</b>, not lengths.</p>
+      <p>Area scales with the <b>square</b> of the linear scale factor, so the correct ratio is 2&sup2; : 1&sup2; = <b>4 : 1</b>.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Question 16 &mdash; Inequalities</h2>
+  <div class="q-card">
+    <div class="q-head"><span class="q-num">Q16</span><span class="q-topic">Region on a graph</span><span class="cat cat-slip">Careless slip</span><span class="q-marks">&minus;1 mark</span></div>
+    <div class="q-body">
+      <p>The diagonal boundary through (1,2) and (2,4) was written as y &lt; 2x &mdash; but that line is drawn <b>solid</b>, not dashed, so it should be <b>y &le; 2x</b> instead.</p>
+      <p class="correct">The rest &mdash; x &le; 2.5, y &gt; 3, y &le; 4 &mdash; were all correct.</p>
+      <p>Quick check for next time: solid line = &le; or &ge;, dashed line = &lt; or &gt;.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Question 17(b) &mdash; Rearranging a formula</h2>
+  <div class="q-card">
+    <div class="q-head"><span class="q-num">Q17(b)</span><span class="q-topic">Making k the subject</span><span class="cat cat-miscon">Misconception</span><span class="q-marks">&minus;1 mark</span></div>
+    <div class="q-body">
+      <div class="eq-box">
+        <div class="eq-line">I = Mk&sup2; + Mc&sup2;</div>
+        <div class="eq-line">I &minus; Mc&sup2; = Mk&sup2;</div>
+        <div class="eq-line">k&sup2; = (I &minus; Mc&sup2;) &divide; M</div>
+        <div class="eq-line correct">k = &radic;((I &minus; Mc&sup2;) &divide; M)</div>
+      </div>
+      <p>Your first three steps were all correct! The only thing missing is the very last one &mdash; since it's <b>k&sup2;</b> that equals (I&minus;Mc&sup2;)/M, you need to take the square root of both sides to get k on its own.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Question 18 &mdash; Functions</h2>
+  <div class="q-card">
+    <div class="q-head"><span class="q-num">Q18</span><span class="q-topic">f(x)f(x) &minus; ff(x)</span><span class="cat cat-slip">Careless slip</span><span class="q-marks">&minus;1 mark</span></div>
+    <div class="q-body">
+      <div class="eq-box">
+        <div class="eq-line correct">(2x+5)(2x+5) = 4x&sup2;+10x+10x+25 = 4x&sup2;+20x+25 &mdash; correct!</div>
+        <div class="eq-line">f(x)f(x) &minus; ff(x) = (4x&sup2;+20x+<b>25</b>) &minus; (4x+15)</div>
+      </div>
+      <p>Everything up to here was right! But when 4x&sup2;+20x+25 was copied onto the next line, the <b>+25 turned into &minus;25</b> by accident.</p>
+      <p>That one sign flip changed c from 10 to &minus;30, even though a=4 and b=16 both stayed correct.</p>
+      <p>This is the exact same kind of slip &mdash; a sign flipping while copying one line into the next &mdash; that showed up on your FebMarch2025 paper too. Worth double-checking every sign each time you copy a line of working onto the next line.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Question 19 &mdash; Indices equation</h2>
+  <div class="q-card">
+    <div class="q-head"><span class="q-num">Q19</span><span class="q-topic">Solving (1/3)<sup>x</sup> = 9<sup>x+4</sup></span><span class="cat cat-blank">Left blank</span><span class="q-marks">&minus;3 marks</span></div>
+    <div class="q-body">
+      <p>This was left blank, so here's the full route through it:</p>
+      <div class="eq-box">
+        <div class="eq-line"><b>Step 1:</b> rewrite 1/3 as 3<sup>&minus;1</sup>, so the left side becomes 3<sup>&minus;x</sup>.</div>
+        <div class="eq-line"><b>Step 2:</b> rewrite 9 as 3<sup>2</sup>, so the right side becomes 3<sup>2(x+4)</sup>.</div>
+        <div class="eq-line"><b>Step 3:</b> both sides now have the same base (3), so the powers must be equal: &minus;x = 2(x+4).</div>
+        <div class="eq-line correct"><b>Step 4:</b> &minus;x = 2x+8 &rarr; &minus;3x = 8 &rarr; x = &minus;8/3.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Question 20(b) &mdash; Probability tree diagram</h2>
+  <div class="q-card">
+    <div class="q-head"><span class="q-num">Q20(b)(i)</span><span class="q-topic">Bag B branches</span><span class="cat cat-miscon">Misconception</span><span class="q-marks">&minus;2 marks</span></div>
+    <div class="q-body">
+      <p>The second pick is from Bag B, which contains 3 white and 1 black ball &mdash; so those branches should show <b>3/4</b> and <b>1/4</b>.</p>
+      <p>Your tree used Bag A's numbers (5/8 and 3/8) again instead. Worth double-checking which bag each set of branches belongs to before filling them in.</p>
+    </div>
+  </div>
+  <div class="q-card">
+    <div class="q-head"><span class="q-num">Q20(b)(ii)</span><span class="q-topic">Combining the branches</span><span class="cat cat-miscon">Misconception</span><span class="q-marks">&minus;1 mark</span></div>
+    <div class="q-body">
+      <p>Your method for "both the same colour" &mdash; P(both black) + P(both white) &mdash; is exactly right, and you correctly used your own numbers from part (i).</p>
+      <p>Because those branch numbers were wrong (see 20(b)(i) above), your final answer (17/32) didn't match the correct one (18/32) &mdash; but you still earn credit here for using the right method with your own numbers.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Question 24 &mdash; Vectors</h2>
+  <div class="q-card">
+    <div class="q-head"><span class="q-num">Q24</span><span class="q-topic">Position vector of M</span><span class="cat cat-miscon">Misconception</span><span class="q-marks">&minus;3 marks</span></div>
+    <div class="q-body">
+      <p class="correct">You earned 1 mark for the correct route: OM = OB + BC + CM.</p>
+      <p>The mistake: BD isn't &#8531; of b. OB is b &mdash; but in your redrawn diagram, b ended up being used for OD instead, which threw off everything that followed.</p>
+      <p>Here's how to find BD properly:</p>
+      <div class="eq-box">
+        <div class="eq-line">BD = &#8531; of OD, and OD = OB + BD = b + BD</div>
+        <div class="eq-line">So BD = &#8531;(b + BD)</div>
+        <div class="eq-line">3BD = b + BD &rarr; 2BD = b</div>
+        <div class="eq-line correct">BD = &frac12;b</div>
+      </div>
+      <p>Now find CD (using BC = &#8531;a, so CB = &minus;&#8531;a):</p>
+      <div class="eq-box">
+        <div class="eq-line">CD = CB + BD = &minus;&#8531;a + &frac12;b</div>
+      </div>
+      <p>M is the midpoint of CD, so:</p>
+      <div class="eq-box">
+        <div class="eq-line">CM = &frac12;CD = &frac12;(&minus;&#8531;a + &frac12;b) = &minus;1/6&nbsp;a + &frac14;b</div>
+      </div>
+      <p>Finally, put it all together:</p>
+      <div class="eq-box">
+        <div class="eq-line">OM = OB + BC + CM = b + &#8531;a + (&minus;1/6&nbsp;a + &frac14;b)</div>
+        <div class="eq-line correct">OM = 1/6&nbsp;a + 5/4&nbsp;b</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>0580/21 &middot; Cambridge IGCSE Mathematics &middot; October/November 2025 &middot; keep this page handy while you go through your corrections</footer>
+
+</div>
+</body>
+</html>
