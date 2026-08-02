@@ -81,6 +81,16 @@
   .paper-list a.grade-b:hover { background: var(--grade-b); color: #fff; }
   .paper-list a.grade-below { background: var(--grade-below-light); color: var(--grade-below); }
   .paper-list a.grade-below:hover { background: var(--grade-below); color: #fff; }
+  .paper-list span.grade-pending { display: inline-block; padding: 2px 10px; border-radius: 20px; margin: 2px 6px 2px 0; font-size: 12.5px; font-weight: 600; background: var(--card); border: 1px dashed var(--line); color: var(--muted); font-style: italic; }
+  .paper-list span.grade-cleared { display: inline-block; padding: 2px 10px; border-radius: 20px; margin: 2px 6px 2px 0; font-size: 12.5px; font-weight: 600; background: var(--card); border: 1px solid var(--line); color: var(--muted); }
+  .paper-list span.grade-undone { display: inline-block; padding: 2px 10px; border-radius: 20px; margin: 2px 6px 2px 0; font-size: 12.5px; font-weight: 700; background: #fff; border: 1.5px solid var(--grade-below); color: var(--grade-below); }
+
+  .session-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 4px; }
+  .session-row:last-child { margin-bottom: 0; }
+  .session-row .session-label { flex: 0 0 68px; font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; padding-top: 5px; }
+  .session-row .paper-list { margin: 0; flex: 1; min-width: 0; }
+  .papers-note { font-size: 11.5px; color: var(--muted); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
+  .papers-note b { color: var(--ink); }
   .paper-list a.sess { background: var(--tip-light); color: var(--tip); }
   .paper-list a.sess:hover { background: var(--tip); color: #fff; }
   .session-months { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
@@ -244,17 +254,84 @@
   <div class="legend-box">
     <div class="section-label" style="margin-bottom: 6px;">Papers covered so far</div>
     <div class="paper-year">2025</div>
-    <div class="paper-list">
-      <a href="pm/fm25-22.html" class="grade-astar">FebMarch2025 Paper 22 &middot; <span class="p-score">96/100 (96%)</span></a>
-      <a href="pm/fm25-42.html" class="grade-b">FebMarch2025 Paper 42 &middot; <span class="p-score">72/95 (75.8%)</span></a>
-      <a href="pm/mj25-21.html" class="grade-b">MayJune2025 Paper 21 &middot; <span class="p-score">81/100 (81%)</span></a>
-      <a href="pm/on25-43.html" class="grade-b">OctNov2025 Paper 43 &middot; <span class="p-score">74/100 (74%)</span></a>
-      <a href="pm/on25-21.html" class="grade-b">OctNov2025 Paper 21 &middot; <span class="p-score">73/100 (73%)</span></a>
+    <div class="session-row">
+      <span class="session-label">FebMarch</span>
+      <div class="paper-list">
+        <a href="pm/fm25-22.html" class="grade-astar">Paper 22 &middot; <span class="p-score">96/100 (96%)</span></a>
+        <a href="pm/fm25-42.html" class="grade-b">Paper 42 &middot; <span class="p-score">72/95 (75.8%)</span></a>
+      </div>
+    </div>
+    <div class="session-row">
+      <span class="session-label">MayJune</span>
+      <div class="paper-list">
+        <a href="pm/mj25-21.html" class="grade-b">Paper 21 &middot; <span class="p-score">81/100 (81%)</span></a>
+        <span class="grade-pending">Paper 22 &middot; done at school, awaiting results</span>
+        <span class="grade-pending">Paper 23 &middot; done at school, awaiting results</span>
+        <span class="grade-undone">Paper 41 &middot; not yet done</span>
+        <span class="grade-undone">Paper 42 &middot; not yet done</span>
+        <span class="grade-undone">Paper 43 &middot; not yet done</span>
+      </div>
+    </div>
+    <div class="session-row">
+      <span class="session-label">OctNov</span>
+      <div class="paper-list">
+        <a href="pm/on25-21.html" class="grade-b">Paper 21 &middot; <span class="p-score">73/100 (73%)</span></a>
+        <span class="grade-undone">Paper 22 &middot; not yet done</span>
+        <span class="grade-undone">Paper 23 &middot; not yet done</span>
+        <span class="grade-undone">Paper 41 &middot; not yet done</span>
+        <span class="grade-undone">Paper 42 &middot; not yet done</span>
+        <a href="pm/on25-43.html" class="grade-b">Paper 43 &middot; <span class="p-score">74/100 (74%)</span></a>
+      </div>
+    </div>
+    <div class="paper-year">2024</div>
+    <div class="session-row">
+      <span class="session-label">MayJune</span>
+      <div class="paper-list">
+        <span class="grade-cleared">Paper 21 &middot; Cleared</span>
+        <span class="grade-undone">Paper 22 &middot; not yet done</span>
+        <span class="grade-undone">Paper 23 &middot; not yet done</span>
+        <span class="grade-undone">Paper 41 &middot; not yet done</span>
+        <span class="grade-undone">Paper 42 &middot; not yet done</span>
+        <span class="grade-undone">Paper 43 &middot; not yet done</span>
+      </div>
+    </div>
+    <div class="paper-year">2023</div>
+    <div class="session-row">
+      <span class="session-label">MayJune</span>
+      <div class="paper-list">
+        <span class="grade-undone">Paper 21 &middot; not yet done</span>
+        <span class="grade-undone">Paper 22 &middot; not yet done</span>
+        <span class="grade-undone">Paper 23 &middot; not yet done</span>
+        <span class="grade-undone">Paper 41 &middot; not yet done</span>
+        <span class="grade-cleared">Paper 42 &middot; Cleared</span>
+        <span class="grade-undone">Paper 43 &middot; not yet done</span>
+      </div>
+    </div>
+    <div class="session-row">
+      <span class="session-label">OctNov</span>
+      <div class="paper-list">
+        <span class="grade-undone">Paper 21 &middot; not yet done</span>
+        <span class="grade-undone">Paper 22 &middot; not yet done</span>
+        <span class="grade-undone">Paper 23 &middot; not yet done</span>
+        <span class="grade-cleared">Paper 41 &middot; Cleared</span>
+        <span class="grade-undone">Paper 42 &middot; not yet done</span>
+        <span class="grade-undone">Paper 43 &middot; not yet done</span>
+      </div>
     </div>
     <div class="paper-year">2022</div>
-    <div class="paper-list">
-      <a href="pm/mj22-21.html" class="grade-b">MayJune2022 Paper 21 &middot; <span class="p-score">49/70 (70%)</span></a>
+    <div class="session-row">
+      <span class="session-label">MayJune</span>
+      <div class="paper-list">
+        <a href="pm/mj22-21.html" class="grade-b">Paper 21 &middot; <span class="p-score">49/70 (70%)</span></a>
+        <span class="grade-undone">Paper 22 &middot; not yet done</span>
+        <span class="grade-undone">Paper 23 &middot; not yet done</span>
+        <span class="grade-undone">Paper 41 &middot; not yet done</span>
+        <span class="grade-undone">Paper 42 &middot; not yet done</span>
+        <span class="grade-undone">Paper 43 &middot; not yet done</span>
+      </div>
     </div>
+
+    <div class="papers-note"><b>Cleared</b> &mdash; covered together in class before this tracking system started; no detailed marking record exists for these. <b>Dashed/italic</b> pills are done at school but awaiting results. <b>Pink outline</b> pills are papers in that session's full set (FebMarch: 22, 42 &middot; MayJune/OctNov: 21, 22, 23, 41, 42, 43) not yet attempted.</div>
   </div>
 
   <div class="legend-box topic-box">
