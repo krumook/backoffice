@@ -54,12 +54,20 @@
   .ts-card .ts-pct { font-size: 18px; font-weight: 700; color: var(--untested); }
   .ts-card .ts-frac { font-size: 12px; color: var(--muted); margin-left: 6px; }
   .ts-untested { background: var(--untested-light); }
+  .ts-untested .ts-bar-fill { background: var(--untested); }
   .ts-sub-note { font-size: 11.5px; color: var(--muted); margin-top: 8px; }
+  .ts-bar { height: 5px; border-radius: 3px; background: #fff; margin-top: 4px; margin-bottom: 12px; overflow: hidden; }
+  .ts-bar-fill { height: 100%; border-radius: 3px; }
+  .ts-row2 { margin-top: 2px; }
+  .ts-card .ts-pct2 { font-size: 14px; font-weight: 700; color: var(--weight); }
+  .ts-bar2 { margin-bottom: 0; }
+  .ts-bar2 .ts-bar-fill2 { background: var(--weight); opacity: 0.55; }
+  .ts-nocompare { font-size: 11px; color: var(--muted); font-style: italic; margin-top: 6px; }
 
-  .ts-astar { background: var(--grade-astar-light); } .ts-astar .ts-pct { color: var(--grade-astar); }
-  .ts-a { background: var(--grade-a-light); } .ts-a .ts-pct { color: var(--grade-a); }
-  .ts-b { background: var(--grade-b-light); } .ts-b .ts-pct { color: var(--grade-b); }
-  .ts-below { background: var(--grade-below-light); } .ts-below .ts-pct { color: var(--grade-below); }
+  .ts-astar { background: var(--grade-astar-light); } .ts-astar .ts-pct { color: var(--grade-astar); } .ts-astar .ts-bar-fill { background: var(--grade-astar); }
+  .ts-a { background: var(--grade-a-light); } .ts-a .ts-pct { color: var(--grade-a); } .ts-a .ts-bar-fill { background: var(--grade-a); }
+  .ts-b { background: var(--grade-b-light); } .ts-b .ts-pct { color: var(--grade-b); } .ts-b .ts-bar-fill { background: var(--grade-b); }
+  .ts-below { background: var(--grade-below-light); } .ts-below .ts-pct { color: var(--grade-below); } .ts-below .ts-bar-fill { background: var(--grade-below); }
 
   .overall-line { font-size: 12.5px; color: var(--muted); margin: 4px 0 0; }
   .topic-box .topic-summary { margin-bottom: 14px; }
@@ -104,34 +112,52 @@
   <div class="legend-box topic-box">
   <div class="section-label">Coverage by topic &middot; click a card for the full sub-topic list</div>
   <div class="topic-summary">
-    <a href="t1.html" class="ts-card ts-untested">
+    <a href="t1.html" class="ts-card ts-below">
       <div class="ts-name">1&nbsp;&middot;&nbsp;Numbers and the number system</div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">no papers yet</span></span></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">9.1%</span><span class="ts-frac">1/11</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:9.1%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Paper Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No papers marked yet for this topic.</div>
       <div class="ts-sub-note">11 sub-topics mapped (1.1&ndash;1.11)</div>
     </a>
     <a href="t2.html" class="ts-card ts-untested">
       <div class="ts-name">2&nbsp;&middot;&nbsp;Equations, Formulae and Identities</div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">no papers yet</span></span></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/7</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Paper Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No papers marked yet for this topic.</div>
       <div class="ts-sub-note">7 sub-topics mapped at Foundation (2.5 is Higher-only)</div>
     </a>
     <a href="t3.html" class="ts-card ts-untested">
       <div class="ts-name">3&nbsp;&middot;&nbsp;Sequences, Functions and Graphs</div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">no papers yet</span></span></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/2</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Paper Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No papers marked yet for this topic.</div>
       <div class="ts-sub-note">2 sub-topics mapped at Foundation (3.2, 3.4 are Higher-only)</div>
     </a>
     <a href="t4.html" class="ts-card ts-untested">
       <div class="ts-name">4&nbsp;&middot;&nbsp;Geometry</div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">no papers yet</span></span></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/11</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Paper Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No papers marked yet for this topic.</div>
       <div class="ts-sub-note">11 sub-topics mapped (4.1&ndash;4.11)</div>
     </a>
     <a href="t5.html" class="ts-card ts-untested">
       <div class="ts-name">5&nbsp;&middot;&nbsp;Vectors and Transformation Geometry</div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">no papers yet</span></span></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/1</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Paper Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No papers marked yet for this topic.</div>
       <div class="ts-sub-note">1 sub-topic mapped at Foundation (5.1 Vectors is Higher-only)</div>
     </a>
     <a href="t6.html" class="ts-card ts-untested">
       <div class="ts-name">6&nbsp;&middot;&nbsp;Statistics and Probability</div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">no papers yet</span></span></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Paper Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No papers marked yet for this topic.</div>
       <div class="ts-sub-note">3 sub-topics mapped (6.1&ndash;6.3)</div>
     </a>
   </div>
