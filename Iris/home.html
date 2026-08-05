@@ -23,7 +23,7 @@
   header h1 { margin: 0 0 10px; font-size: 32px; font-weight: 700; }
   header .meta { color: var(--muted); font-size: 14.5px; }
 
-  .hub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .hub-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
   .hub-card {
     background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 26px 22px;
     text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: flex-start;
@@ -38,6 +38,7 @@
   .hub-card.c1 { --hub-color: var(--tip); }
   .hub-card.c2 { --hub-color: var(--amber); }
   .hub-card.c3 { --hub-color: var(--grade-a); }
+  .hub-card.c4 { --hub-color: #7a4fb3; }
 
   footer { margin-top: 46px; font-size: 12px; color: var(--muted); text-align: center; }
 
@@ -76,9 +77,16 @@
       <p>Learning progress and test scores by topic, and where mistakes concentrate.</p>
       <div class="hub-goto">Open progress tracker &rarr;</div>
     </a>
+
+    <a class="hub-card c4" href="profile.html">
+      <div class="hub-icon">&#128100;</div>
+      <h2>Student profile</h2>
+      <p>School, ม.4 entrance exam goals and concerns, and target schools.</p>
+      <div class="hub-goto">Open profile &rarr;</div>
+    </a>
   </div>
 
-  <footer>Iris &middot; Matthayom 3 &middot; ChokChai School &middot; updated as classes happen</footer>
+  <footer>Iris &middot; Matthayom 3 &middot; โรงเรียนสาธิตมหาวิทยาลัยธรรมศาสตร์ &middot; updated as classes happen</footer>
 
 </div>
 </body>

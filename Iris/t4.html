@@ -61,6 +61,7 @@
   tr.untested td { color: var(--muted); }
   tr.untested td.code { color: var(--untested); }
   tr.untested td.dash { text-align: center; }
+  tr.learned td.progress { color: var(--ink); }
 
   .legend { display: flex; gap: 14px; font-size: 11.5px; color: var(--muted); flex-wrap: wrap; align-items: center; margin: 10px 0 30px; }
   .legend .grade-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
@@ -90,7 +91,7 @@
     <h1>4&nbsp;&middot;&nbsp;ความคล้าย <span class="score-badge">&mdash;</span><span class="score-frac">not yet tested</span>
       <span class="en-name">Similarity</span>
     </h1>
-    <div class="meta">Book 1 &middot; เทอม 1 (เล่ม 1) &middot; &#3610;&#3607;&#3607;&#3637;&#3656; 4 &middot; every question from every marked test so far &middot; Taught: 0/3 sub-topics</div>
+    <div class="meta">Book 1 &middot; เทอม 1 (เล่ม 1) &middot; &#3610;&#3607;&#3607;&#3637;&#3656; 4 &middot; every question from every marked test so far &middot; Taught: 3/3 sub-topics</div>
   </header>
 
   <a class="back-link" href="dash.html">&larr; Back to dashboard</a>
@@ -119,9 +120,9 @@
     <colgroup><col style="width:80px;"><col style="width:220px;"><col style="width:130px;"><col style="width:90px;"><col><col style="width:180px;"></colgroup>
     <thead><tr><th>Code</th><th>Topic</th><th>Learning Progress</th><th>Test(s)</th><th>Comment (per test)</th><th>How to improve</th></tr></thead>
     <tbody>
-      <tr class="untested"><td class="code">B1-4.1</td><td class="topic">รูปเรขาคณิตที่คล้ายกัน</td><td class="progress dash">&mdash; not yet taught</td><td class="papers dash">&mdash;</td><td class="comment dash">&mdash;</td><td class="improve dash">&mdash;</td></tr>
-      <tr class="untested"><td class="code">B1-4.2</td><td class="topic">รูปสามเหลี่ยมที่คล้ายกัน</td><td class="progress dash">&mdash; not yet taught</td><td class="papers dash">&mdash;</td><td class="comment dash">&mdash;</td><td class="improve dash">&mdash;</td></tr>
-      <tr class="untested"><td class="code">B1-4.3</td><td class="topic">โจทย์ปัญหาเกี่ยวกับรูปสามเหลี่ยมที่คล้ายกัน</td><td class="progress dash">&mdash; not yet taught</td><td class="papers dash">&mdash;</td><td class="comment dash">&mdash;</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested learned"><td class="code">B1-4.1</td><td class="topic">รูปเรขาคณิตที่คล้ายกัน</td><td class="progress"><span class="cat cat-correct">Learned</span><div style="font-size:11px;color:var(--muted);margin-top:4px;">Covered in Semester 1</div></td><td class="papers dash">&mdash;</td><td class="comment dash">&mdash;</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested learned"><td class="code">B1-4.2</td><td class="topic">รูปสามเหลี่ยมที่คล้ายกัน</td><td class="progress"><span class="cat cat-correct">Learned</span><div style="font-size:11px;color:var(--muted);margin-top:4px;">Covered in Semester 1</div></td><td class="papers dash">&mdash;</td><td class="comment dash">&mdash;</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested learned"><td class="code">B1-4.3</td><td class="topic">โจทย์ปัญหาเกี่ยวกับรูปสามเหลี่ยมที่คล้ายกัน</td><td class="progress"><span class="cat cat-correct">Learned</span><div style="font-size:11px;color:var(--muted);margin-top:4px;">Covered in Semester 1</div></td><td class="papers dash">&mdash;</td><td class="comment dash">&mdash;</td><td class="improve dash">&mdash;</td></tr>
     </tbody>
   </table>
 
@@ -130,7 +131,7 @@
     <div class="improve-row"><span class="cat cat-slip">Careless slip</span>No tests marked yet in this topic &mdash; nothing to report.</div>
     <div class="improve-row"><span class="cat cat-miscon">Misconception</span>No tests marked yet in this topic &mdash; nothing to report.</div>
     <div class="improve-row"><span class="cat cat-blank">Left blank</span>No tests marked yet in this topic &mdash; nothing to report.</div>
-    <div class="improve-row"><span class="cat" style="background:var(--untested-light);color:var(--untested);">Not covered</span>3 of 3 sub-topics are still untaught.</div>
+    <div class="improve-row"><span class="cat cat-correct">Learned</span>All 3 sub-topics covered in Semester 1 (school + tutoring review, as of 5 Aug 2026). No test graded yet to confirm retention topic-by-topic.</div>
   </div>
 
   <div class="topic-nav">

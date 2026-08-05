@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Iris &mdash; Feedback 5 Aug 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
+    --accent: #0f6e56; --accent-light: #e1f5ee;
+    --tip: #185fa5; --tip-light: #e6f1fb;
+    --amber: #854f0b; --amber-light: #faeeda;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
+    font-family: 'Space Grotesk', 'Noto Sans Thai', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.55; }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+  header { padding-bottom: 18px; border-bottom: 2px solid var(--ink); margin-bottom: 22px; }
+  header h1 { margin: 0 0 6px; font-size: 21px; font-weight: 700; }
+  header .meta { color: var(--muted); font-size: 13.5px; }
+  .sess-nav { display:flex; justify-content:space-between; align-items:center; margin: 22px 0 4px; font-size: 13px; }
+  .sess-nav a { color: var(--tip); text-decoration:none; font-weight:600; }
+  .sess-nav a:hover { text-decoration:underline; }
+  .sess-nav .spacer { color: var(--muted); }
+  .fb-section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
+  .fb-title { font-size: 14px; font-weight: 700; color: var(--ink); margin: 0 0 10px; }
+  .fb-sub { font-size: 13.5px; font-weight: 700; color: var(--accent); margin: 14px 0 6px; }
+  .fb-sub:first-of-type { margin-top: 0; }
+  .fb-section p { margin: 0 0 8px; font-size: 13.5px; color: var(--ink); }
+  .fb-section ul { margin: 0 0 4px; padding-left: 20px; }
+  .fb-section li { font-size: 13.5px; color: var(--ink); margin-bottom: 5px; }
+  .fb-section.homework .fb-title { color: var(--accent); }
+  .fb-section.next .fb-title { color: var(--tip); }
+  .fb-section.today-hw { background: var(--amber-light); border-color: #eddcb8; }
+  .fb-section.today-hw .fb-title { color: var(--amber); }
+  .fb-section.next { background: var(--tip-light); border-color: #cfe1f4; }
+  footer { margin-top: 28px; font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="dash.html">&larr; Back to progress tracker</a>
+
+  <header>
+    <h1>Iris &mdash; Class Feedback</h1>
+    <div class="meta">Wednesday 5 Aug 2026 &middot; 19:00&ndash;20:00</div>
+  </header>
+
+  <div class="fb-section homework">
+    <div class="fb-title">📬 ผลการบ้าน</div>
+    <p>ไม่มีการบ้านจากครั้งก่อน</p>
+  </div>
+
+  <div class="fb-section">
+    <div class="fb-title">📚 เนื้อหาที่เรียนวันนี้</div>
+
+    <div class="fb-sub">📝 1.1 แนะนำระบบสมการเชิงเส้น 2 ตัวแปร</div>
+    <ul>
+      <li><b>บทนำระบบสมการเชิงเส้นสองตัวแปร:</b> เกริ่นนำว่ามีวิธีการ 3 วิธีในการแก้ระบบสมการ ได้แก่ วิธีกราฟ วิธีกำจัด (elimination) และวิธีแทนค่า (substitution)</li>
+      <li><b>จำนวนคำตอบของระบบสมการ:</b> ฝึกวิเคราะห์จำนวนคำตอบของระบบสมการเชิงเส้นสองตัวแปร โดยดูจากความชัน หากความชันเท่ากันแปลว่าเส้นตรงขนานกัน แล้วเช็คต่อว่าเมื่อขนานกันแล้วเส้นตรงทับกันหรือไม่
+        <ul>
+          <li>หากขนานกันและเส้นตรงไม่ทับกัน &mdash; ไม่มีจุดตัด ระบบของสมการไม่มีคำตอบ</li>
+          <li>หากขนานกันและเส้นตรงทับกัน &mdash; ตัดกันทุกจุด ระบบของสมการมีคำตอบมากมายไม่จำกัด</li>
+          <li>หากไม่ขนานกัน &mdash; เส้นตรงสองเส้นมีจุดตัดกัน 1 จุด ระบบของสมการมีคำตอบ 1 คำตอบ</li>
+        </ul>
+      </li>
+      <li>ฝึกวิเคราะห์กราฟเพื่อบอกว่าระบบสมการมีคำตอบเดียว ไม่มีคำตอบ หรือมีคำตอบไม่จำกัด โดยดูจากลักษณะเส้นตรง (ตัดกัน ขนานกัน หรือทับกัน)</li>
+    </ul>
+
+    <div class="fb-sub">📝 1.2 การแก้ระบบสมการเชิงเส้นสองตัวแปร</div>
+    <ul>
+      <li>เกริ่นนำไปเล็กน้อยพร้อมให้ตัวอย่างไปแล้ว 1 ตัวอย่าง &mdash; ยังไม่ครบ จะสอนต่อคาบหน้า</li>
+    </ul>
+
+    <div class="fb-sub">🎯 ความตั้งใจและความเข้าใจ</div>
+    <ul>
+      <li>ตั้งใจเรียนเต็มที่ตลอดคาบ เหมือนเช่นเคย</li>
+      <li>เข้าใจเนื้อหาได้ดี ช่วงแรกมีทำผิดบ้างตอนหาจำนวนคำตอบของสมการ แต่พอฝึกทำไปหลายข้อก็ทำได้ดีขึ้นตามลำดับ</li>
+      <li>จังหวะการเรียนเท่ากับครั้งก่อน แต่มีข้อสังเกตเล็กน้อยว่าอาจจะลืมเนื้อหาเรื่องฟังก์ชันเชิงเส้นที่เคยเรียนไปแล้วบ้าง แต่สามารถทบทวนได้หากน้องลืม เช่น รูปแบบของสมการ การหาความชัน และจุดตัดต่างๆ เพื่อให้กราฟได้</li>
+      <li>ทัศนคติในการเรียนดีเยี่ยมเหมือนเดิม</li>
+    </ul>
+  </div>
+
+  <div class="fb-section today-hw">
+    <div class="fb-title">🏠 การบ้านวันนี้ &mdash; แบบทดสอบแนวข้อสอบเข้า ม.4 ชุดที่ 1 (ระดับง่าย)</div>
+    <p>ให้ลองทำแบบทดสอบเพื่อประเมินและวิเคราะห์หัวข้อที่ควรทบทวนต่อไป แบบทดสอบชุดนี้ครอบคลุมหลายหัวข้อซึ่งหลายๆหัวข้อน้องเคยเรียนมาแล้ว:</p>
+    <ul>
+      <li>จำนวนและตัวประกอบ ห.ร.ม./ค.ร.น.</li>
+      <li>เศษส่วนและทศนิยม</li>
+      <li>เปอร์เซ็นต์</li>
+      <li>มุมและรูปหลายเหลี่ยม</li>
+      <li>พื้นที่และปริมาตร</li>
+      <li>โจทย์ระยะทาง&ndash;เวลา&ndash;ความเร็ว</li>
+      <li>ความน่าจะเป็น</li>
+    </ul>
+    <p><b>คำอธิบายการบ้าน:</b> ให้น้องลองทำเต็มที่โดยไม่ต้องกังวลเรื่องความถูกต้องทั้งหมด จุดประสงค์หลักคือดูว่ามีหัวข้อไหนที่ควรกลับมาทบทวนเป็นพิเศษก่อนสอบเข้า ม.4</p>
+  </div>
+
+  <div class="fb-section next">
+    <div class="fb-title">🗓️ แผนการเรียนคลาสถัดไป</div>
+    <ul>
+      <li>ตรวจและวิเคราะห์ผลแบบทดสอบร่วมกัน เพื่อวางแผนทบทวนหัวข้อที่ยังไม่แข็งแรง พร้อมทั้งทบทวนเรื่องฟังก์ชันเชิงเส้นอีกครั้งเพื่อให้แน่ใจว่ายังจำเนื้อหาเดิมได้ดี</li>
+      <li>สอนต่อในหัวข้อ 1.2 การแก้ระบบสมการเชิงเส้นสองตัวแปรที่ได้เกริ่นนำและให้ตัวอย่างไปแล้ว 1 ตัวอย่าง และทำแบบฝึกหัด 1.2 เป็นแบบฝึกหัดแก้สมการ</li>
+      <li>เนื่องจากหนังสือ สสวท ไม่ได้สอนวิธีการแทนค่า อาจสอนเพิ่มโดยใช้ไฟล์เนื้อหาจาก CIMT หรือ CorbettMath เพื่อให้น้องเห็นภาพชัดเจนขึ้นว่าเมื่อไหร่ควรใช้วิธี elimination (กำจัดตัวแปร) เมื่อไหร่ควรใช้วิธี substitution (แทนค่า)</li>
+    </ul>
+  </div>
+
+  <div class="sess-nav">
+    <span class="spacer">&larr; Previous session</span>
+    <a href="dash.html">Progress tracker</a>
+    <span class="spacer">Next session &rarr;</span>
+  </div>
+
+  <footer>Iris &middot; คณิตศาสตร์ ม.3 (IPST) &middot; class feedback log</footer>
+
+</div>
+</body>
+</html>
