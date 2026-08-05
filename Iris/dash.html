@@ -94,6 +94,19 @@
 
   .note { background: var(--accent-light); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; font-size: 13px; color: var(--accent); margin-bottom: 28px; }
 
+  .note-block { border-radius: 10px; padding: 12px 16px; font-size: 13px; margin-bottom: 10px; }
+  .note-block:last-child { margin-bottom: 0; }
+  .note-block b { display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; }
+  .note-concern { background: var(--amber-light); color: var(--ink); }
+  .note-concern b { color: var(--amber); }
+  .note-goal { background: var(--purple-light); color: var(--ink); }
+  .note-goal b { color: var(--purple); }
+  .note-plan { background: var(--accent-light); color: var(--ink); }
+  .note-plan b { color: var(--accent); }
+  .school-tag { display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 11px; border-radius: 20px; background: var(--accent-light); color: var(--accent); margin: 3px 6px 0 0; }
+  .school-tag.target-mentioned { background: var(--tip-light); color: var(--tip); }
+  .updated-note { font-size: 11.5px; color: var(--muted); font-style: italic; margin-top: 6px; }
+
   footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
 </style>
 </head>
@@ -106,6 +119,25 @@
     <h1>Iris &mdash; คณิตศาสตร์ ม.3 syllabus coverage tracker</h1>
     <div class="meta">คณิตศาสตร์ ม.3 &middot; Mathematics — Matthayom 3 (IPST) &middot; built from every past test marked so far &middot; updated as new tests are added</div>
   </header>
+
+  <div class="legend-box">
+    <div class="section-label" style="margin-bottom: 12px;">โรงเรียนสาธิตมหาวิทยาลัยธรรมศาสตร์ &middot; ม.4 entrance exam &mdash; goals &amp; concerns</div>
+    <div class="note-block note-concern">
+      <b>Student's concern</b>
+      School exams feel easy to her, which makes her unsure how she'd actually perform on the ม.4 entrance exam. She's worried about being competitive against students from more well-known/competitive schools.
+      <div class="updated-note">Noted 5 Aug 2026</div>
+    </div>
+    <div class="note-block note-goal">
+      <b>Target school for ม.4</b>
+      Iris mentioned <span class="school-tag target-mentioned">โรงเรียนหอวัง</span> as her goal.
+      Suggested by tutor as similar-tier alternatives to widen her options: <span class="school-tag">โรงเรียนบดินทรเดชา (สิงห์ สิงหเสนี)</span> <span class="school-tag">โรงเรียนสตรีวิทยา</span>
+      <div class="updated-note">Noted 5 Aug 2026</div>
+    </div>
+    <div class="note-block note-plan">
+      <b>How this shapes tutoring</b>
+      Since school exams aren't a reliable gauge of entrance-exam readiness, plan to introduce ม.4 entrance-exam-style past papers/practice questions alongside the regular syllabus once Semester 1 review is confirmed solid &mdash; started 5 Aug 2026 with a diagnostic practice set (see <a href="fb0805.html">5 Aug feedback</a>).
+    </div>
+  </div>
 
   <div class="legend-box">
     <div class="section-label" style="margin-bottom: 6px;">Class sessions &middot; 1 logged since Aug 2026</div>
