@@ -49,7 +49,7 @@
   .ts-card .ts-name .en { display: block; font-size: 10.5px; font-weight: 500; color: var(--muted); text-transform: none; margin-top: 2px; }
   .ts-row { display: flex; align-items: baseline; justify-content: space-between; }
   .ts-row .ts-label { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
-  .ts-card .ts-pct { font-size: 20px; font-weight: 700; }
+  .ts-card .ts-pct { font-size: 18px; font-weight: 700; }
   .ts-card .ts-frac { font-size: 12px; color: var(--muted); margin-left: 6px; }
   .ts-bar { height: 5px; border-radius: 3px; background: #fff; margin-top: 4px; margin-bottom: 12px; overflow: hidden; }
   .ts-bar-fill { height: 100%; border-radius: 3px; }
@@ -63,11 +63,12 @@
   .ts-g0 { background: var(--grade-0-light); } .ts-g0 .ts-pct { color: var(--grade-0); } .ts-g0 .ts-bar-fill { background: var(--grade-0); }
   .ts-untested { background: var(--untested-light); } .ts-untested .ts-pct { color: var(--untested); } .ts-untested .ts-bar-fill { background: var(--untested); }
 
-  .ts-weight-row { margin-top: 2px; }
-  .ts-card .ts-wpct { font-size: 14px; font-weight: 700; color: var(--weight); }
-  .ts-card .ts-wfrac { font-size: 11.5px; color: var(--muted); margin-left: 6px; }
-  .ts-wbar { margin-bottom: 0; }
-  .ts-wbar .ts-bar-fill.ts-wbar-fill { background: var(--weight) !important; }
+  .ts-row2 { margin-top: 2px; }
+  .ts-card .ts-pct2 { font-size: 14px; font-weight: 700; color: var(--weight); }
+  .ts-bar2 { margin-bottom: 0; }
+  .ts-bar2 .ts-bar-fill2 { background: var(--weight); opacity: 0.55; }
+  .ts-nocompare { font-size: 11px; color: var(--muted); font-style: italic; margin-top: 6px; }
+  .ts-sub-note { font-size: 11.5px; color: var(--muted); margin-top: 8px; }
 
   .overall-line { font-size: 12.5px; color: var(--muted); margin: 4px 0 0; }
   .topic-box .topic-summary { margin-bottom: 14px; }
@@ -121,45 +122,51 @@
   <div class="topic-summary">
     <a href="t1.html" class="ts-card ts-untested">
       <div class="ts-name">1&nbsp;&middot;&nbsp;อสมการเชิงเส้นตัวแปรเดียว<span class="en">Linear Inequality in One Variable</span></div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/4</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Test Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No tests marked yet for this topic.</div>
+      <div class="ts-sub-note">4 sub-topics mapped (1.1&ndash;1.4)</div>
     </a>
     <a href="t2.html" class="ts-card ts-untested">
       <div class="ts-name">2&nbsp;&middot;&nbsp;การแยกตัวประกอบของพหุนามที่มีดีกรีสูงกว่าสอง<span class="en">Factoring Polynomials (Degree > 2)</span></div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/2</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Test Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No tests marked yet for this topic.</div>
+      <div class="ts-sub-note">2 sub-topics mapped (2.1&ndash;2.2)</div>
     </a>
     <a href="t3.html" class="ts-card ts-untested">
       <div class="ts-name">3&nbsp;&middot;&nbsp;สมการกำลังสองตัวแปรเดียว<span class="en">Quadratic Equation in One Variable</span></div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Test Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No tests marked yet for this topic.</div>
+      <div class="ts-sub-note">3 sub-topics mapped (3.1&ndash;3.3)</div>
     </a>
     <a href="t4.html" class="ts-card ts-untested">
       <div class="ts-name">4&nbsp;&middot;&nbsp;ความคล้าย<span class="en">Similarity</span></div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Test Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No tests marked yet for this topic.</div>
+      <div class="ts-sub-note">3 sub-topics mapped (4.1&ndash;4.3)</div>
     </a>
     <a href="t5.html" class="ts-card ts-untested">
       <div class="ts-name">5&nbsp;&middot;&nbsp;กราฟของฟังก์ชันกำลังสอง<span class="en">Graph of Quadratic Function</span></div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/2</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Test Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No tests marked yet for this topic.</div>
+      <div class="ts-sub-note">2 sub-topics mapped (5.1&ndash;5.2)</div>
     </a>
     <a href="t6.html" class="ts-card ts-untested">
       <div class="ts-name">6&nbsp;&middot;&nbsp;สถิติ (3)<span class="en">Statistics (3)</span></div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/2</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Test Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No tests marked yet for this topic.</div>
+      <div class="ts-sub-note">2 sub-topics mapped (6.1&ndash;6.2)</div>
     </a>
   </div>
   </div>
@@ -168,43 +175,48 @@
   <div class="topic-summary">
     <a href="t7.html" class="ts-card ts-untested">
       <div class="ts-name">7&nbsp;&middot;&nbsp;ระบบสมการเชิงเส้นสองตัวแปร<span class="en">System of Linear Equations (Two Variables)</span></div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Test Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No tests marked yet for this topic.</div>
+      <div class="ts-sub-note">3 sub-topics mapped (1.1&ndash;1.3)</div>
     </a>
     <a href="t8.html" class="ts-card ts-untested">
       <div class="ts-name">8&nbsp;&middot;&nbsp;วงกลม<span class="en">Circles</span></div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Test Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No tests marked yet for this topic.</div>
+      <div class="ts-sub-note">3 sub-topics mapped (2.1&ndash;2.3)</div>
     </a>
     <a href="t9.html" class="ts-card ts-untested">
       <div class="ts-name">9&nbsp;&middot;&nbsp;พีระมิด กรวย และทรงกลม<span class="en">Pyramid, Cone, and Sphere</span></div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Test Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No tests marked yet for this topic.</div>
+      <div class="ts-sub-note">3 sub-topics mapped (3.1&ndash;3.3)</div>
     </a>
     <a href="t10.html" class="ts-card ts-untested">
       <div class="ts-name">10&nbsp;&middot;&nbsp;ความน่าจะเป็น<span class="en">Probability</span></div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/2</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Test Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No tests marked yet for this topic.</div>
+      <div class="ts-sub-note">2 sub-topics mapped (4.1&ndash;4.2)</div>
     </a>
     <a href="t11.html" class="ts-card ts-untested">
       <div class="ts-name">11&nbsp;&middot;&nbsp;อัตราส่วนตรีโกณมิติ<span class="en">Trigonometric Ratios</span></div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">&mdash;</span><span class="ts-frac">not yet tested</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">&mdash;</span><span class="ts-wfrac">0/0</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:0%;"></div></div>
+      <div class="ts-row"><span class="ts-label">Learning Progress</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
+      <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      <div class="ts-row ts-row2"><span class="ts-label">Test Score</span><span><span class="ts-pct2" style="color:var(--untested);">&mdash;</span></span></div>
+      <div class="ts-nocompare">No tests marked yet for this topic.</div>
+      <div class="ts-sub-note">3 sub-topics mapped (5.1&ndash;5.3)</div>
     </a>
   </div>
   </div>
 
-  <div class="overall-line">Overall across all 0 tests marked: <b>&mdash; (not yet tested)</b> &mdash; will be based on every question tested so far, grouped by book and chapter, once the first test is graded.</div>
+  <div class="overall-line">Overall across all tests marked: <b>no tests marked yet</b> &mdash; 30 sub-topics mapped across 11 chapters (Book 1 + Book 2), sourced from the current IPST textbook. Log each class&rsquo;s content to start tracking <b>Learning Progress</b>; grade the first quiz or exam to start tracking <b>Test Score</b>.</div>
 
   <div class="band-legend">
     <div><span class="band-dot dot-g4"></span>4 (ดีเยี่ยม) &middot; 80&ndash;100</div>
@@ -236,7 +248,7 @@
 
   <a class="details-link" href="t1.html">Open full syllabus detail (Topic 1) &rarr;</a>
 
-  <div class="note">Add a new test: append it to the &ldquo;tests covered&rdquo; list above with its own link and score, then open the relevant topic page(s) and add a row (or extend an existing row) for every question from that test, and recalculate the Score line there and the section summary here. Every question from a marked test should appear somewhere in the tracker.</div>
+  <div class="note">Each topic page tracks two separate things per sub-topic: <b>Learning Progress</b> (Learned / Need to revise, updated from your weekly class feedback) and <b>Test Score</b> (marks earned once a real test or exam is graded, broken down by question). Send weekly class feedback to update Learning Progress; send a marked test to update Test Score. Every question from a marked test should appear somewhere in the tracker.</div>
 
   <footer>คณิตศาสตร์ ม.3 &middot; Mathematics — Matthayom 3 (IPST) &middot; topic codes reference the current textbook&rsquo;s chapter/section numbers (Book &middot; Chapter.Section) &middot; every question from all marked tests is accounted for &middot; update after each new test</footer>
 
