@@ -79,17 +79,9 @@
     border-radius: 8px;
   }
   .card a.open:hover { opacity: 0.9; }
-  .add-card {
-    border: 2px dashed var(--border);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted);
-    font-size: 13px;
-    padding: 18px 20px;
-    text-align: center;
-  }
+  .tool-card { border: 1px dashed #b7bdf0; background: #f5f6fe; }
+  .tool-card h2 { color: #3b3489; }
+  .tool-card a.open { background: #5a4fc2; }
   footer {
     max-width: 1000px;
     margin: 0 auto;
@@ -155,8 +147,11 @@
       <a class="open" href="Chilli/home.html">Open dashboard</a>
     </div>
 
-    <div class="add-card">
-      + Copy a card above for each new student.<br>Make a matching subfolder (e.g. <code>NewStudent/</code>) with a <code>home.html</code> inside, then update the link.
+    <div class="card tool-card">
+      <h2>📚 0580 Paper Breakdown</h2>
+      <p class="info">Personal work &mdash; not tied to a student</p>
+      <p class="info">IGCSE 0580 past paper questions tagged by syllabus topic, for lesson planning and building a question bank.</p>
+      <a class="open" href="0580-breakdown/index.html">Open dashboard</a>
     </div>
 
   </div>
