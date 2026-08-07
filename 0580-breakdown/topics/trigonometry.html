@@ -66,6 +66,19 @@
     margin: 0 auto;
     padding: 8px 24px 48px;
   }
+  .code-group {
+    margin: 26px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--trig-bg);
+    font-size: 15px;
+  }
+  .code-group:first-of-type { margin-top: 8px; }
+  .code-group .code {
+    color: var(--trig);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+  .code-group .name { color: var(--text); }
   .entry {
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -94,6 +107,16 @@
     font-size: 12px;
     color: var(--muted);
   }
+  .entry .code-tag {
+    display: inline-block;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--trig);
+    background: var(--trig-bg);
+    border-radius: 999px;
+    padding: 2px 9px;
+    margin-bottom: 8px;
+  }
   .entry p.qtext {
     margin: 0;
     font-size: 14px;
@@ -116,13 +139,15 @@
 </head>
 <body>
 <header>
-  <a class="back" href="../index.html">&larr; 0580 Paper 2 Breakdown</a>
+  <a class="back" href="../index.html">&larr; 0580 Paper Breakdown</a>
   <h1>6. Trigonometry <span class="pill">9 questions &middot; 42 marks</span></h1>
-  <p>Every question tagged Trigonometry across all 7 papers (0580 Paper 2, 2025), in order by paper. Click a paper name to open its full breakdown.</p>
+  <p>Every question tagged Trigonometry across all 7 papers (0580 Paper 2, 2025), grouped by Extended syllabus sub-topic (e.g. E1.11 Ratio and proportion), in ascending code order. Click a paper name to open its full breakdown.</p>
 </header>
 
 <main>
+  <h3 class="code-group"><span class="code">E6.2</span><span class="name">Right-angled triangles</span></h3>
   <div class="entry">
+    <span class="code-tag">E6.2 Right-angled triangles</span>
     <div class="entry-head">
       <span class="paper"><a href="../m25-22.html">0580/22 &mdash; Feb/March 2025</a> &middot; Q18</span>
       <span class="meta">9 marks</span>
@@ -130,20 +155,7 @@
     <p class="qtext">The quadrilateral ACDE is formed by two right-angled triangles ABE and BCD. AC=17&nbsp;cm, AE=18&nbsp;cm and BD=6&nbsp;cm [60&deg; angle at A]. (a) Show that CD=10&nbsp;cm. [5] (b) Find the perimeter of the quadrilateral ACDE. Give your answer in the form p+k&radic;q. [4]</p>
   </div>
   <div class="entry">
-    <div class="entry-head">
-      <span class="paper"><a href="../s25-21.html">0580/21 &mdash; May/June 2025</a> &middot; Q20</span>
-      <span class="meta">4 marks</span>
-    </div>
-    <p class="qtext">[Right triangle: 6&nbsp;cm height, 30&deg; angle, x&nbsp;cm base] Find the exact value of x.</p>
-  </div>
-  <div class="entry">
-    <div class="entry-head">
-      <span class="paper"><a href="../s25-22.html">0580/22 &mdash; May/June 2025</a> &middot; Q22</span>
-      <span class="meta">4 marks</span>
-    </div>
-    <p class="qtext">(a) Write down the exact value of tan&nbsp;60&deg;. [1] (b) Solve 2sin&nbsp;x &minus; 1 = 0 for 0&deg;&le;x&le;360&deg;. [3]</p>
-  </div>
-  <div class="entry">
+    <span class="code-tag">E6.2 Right-angled triangles</span>
     <div class="entry-head">
       <span class="paper"><a href="../s25-23.html">0580/23 &mdash; May/June 2025</a> &middot; Q23</span>
       <span class="meta">6 marks</span>
@@ -151,6 +163,32 @@
     <p class="qtext">(a) Write down the value of cos&nbsp;90&deg;. [1] (b) The diagram shows two different right-angled triangles joined by a common side [n height, 30&deg;/30&deg; angles, x hypotenuse]. Find x in terms of n. [5]</p>
   </div>
   <div class="entry">
+    <span class="code-tag">E6.2 Right-angled triangles</span>
+    <div class="entry-head">
+      <span class="paper"><a href="../w25-23.html">0580/23 &mdash; Oct/Nov 2025</a> &middot; Q10</span>
+      <span class="meta">4 marks</span>
+    </div>
+    <p class="qtext">The diagram shows a right-angled triangle ABC [11&nbsp;cm hypotenuse, 8&nbsp;cm base, x&deg; angle]. (a) Work out the exact length of AC. [3] (b) cos&nbsp;x = k. Write down the value of k. [1]</p>
+  </div>
+  <h3 class="code-group"><span class="code">E6.3</span><span class="name">Exact values and trig graphs</span></h3>
+  <div class="entry">
+    <span class="code-tag">E6.3 Exact values and trig graphs</span>
+    <div class="entry-head">
+      <span class="paper"><a href="../s25-21.html">0580/21 &mdash; May/June 2025</a> &middot; Q20</span>
+      <span class="meta">4 marks</span>
+    </div>
+    <p class="qtext">[Right triangle: 6&nbsp;cm height, 30&deg; angle, x&nbsp;cm base] Find the exact value of x.</p>
+  </div>
+  <div class="entry">
+    <span class="code-tag">E6.3 Exact values and trig graphs</span>
+    <div class="entry-head">
+      <span class="paper"><a href="../s25-22.html">0580/22 &mdash; May/June 2025</a> &middot; Q22</span>
+      <span class="meta">4 marks</span>
+    </div>
+    <p class="qtext">(a) Write down the exact value of tan&nbsp;60&deg;. [1] (b) Solve 2sin&nbsp;x &minus; 1 = 0 for 0&deg;&le;x&le;360&deg;. [3]</p>
+  </div>
+  <div class="entry">
+    <span class="code-tag">E6.3 Exact values and trig graphs</span>
     <div class="entry-head">
       <span class="paper"><a href="../w25-21.html">0580/21 &mdash; Oct/Nov 2025</a> &middot; Q26</span>
       <span class="meta">3 marks</span>
@@ -158,6 +196,7 @@
     <p class="qtext">Solve tan&nbsp;x = &minus;1/&radic;3 for 0&deg;&le;x&le;360&deg;.</p>
   </div>
   <div class="entry">
+    <span class="code-tag">E6.3 Exact values and trig graphs</span>
     <div class="entry-head">
       <span class="paper"><a href="../w25-22.html">0580/22 &mdash; Oct/Nov 2025</a> &middot; Q21</span>
       <span class="meta">5 marks</span>
@@ -165,20 +204,16 @@
     <p class="qtext">(a) On the diagram, sketch the graph of y=cos&nbsp;x for 0&deg;&le;x&le;360&deg;. [2] (b) Solve the equation 2cos&nbsp;x + &radic;3 = 0 for 0&deg;&le;x&le;360&deg;. [3]</p>
   </div>
   <div class="entry">
-    <div class="entry-head">
-      <span class="paper"><a href="../w25-23.html">0580/23 &mdash; Oct/Nov 2025</a> &middot; Q10</span>
-      <span class="meta">4 marks</span>
-    </div>
-    <p class="qtext">The diagram shows a right-angled triangle ABC [11&nbsp;cm hypotenuse, 8&nbsp;cm base, x&deg; angle]. (a) Work out the exact length of AC. [3] (b) cos&nbsp;x = k. Write down the value of k. [1]</p>
-  </div>
-  <div class="entry">
+    <span class="code-tag">E6.3 Exact values and trig graphs</span>
     <div class="entry-head">
       <span class="paper"><a href="../w25-23.html">0580/23 &mdash; Oct/Nov 2025</a> &middot; Q17</span>
       <span class="meta">4 marks</span>
     </div>
     <p class="qtext">(a) Sketch the graph of y=cos&nbsp;x for 0&deg;&le;x&le;360&deg;. [2] (b) cos&nbsp;x&deg; = 1/&radic;2 and x is a reflex angle. Find the value of x. [2]</p>
   </div>
+  <h3 class="code-group"><span class="code">E6.4</span><span class="name">Sine and cosine rules</span></h3>
   <div class="entry">
+    <span class="code-tag">E6.4 Sine and cosine rules</span>
     <div class="entry-head">
       <span class="paper"><a href="../w25-23.html">0580/23 &mdash; Oct/Nov 2025</a> &middot; Q23</span>
       <span class="meta">3 marks</span>
