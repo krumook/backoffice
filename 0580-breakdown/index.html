@@ -87,6 +87,20 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 16px 18px;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .topic-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 10px rgba(90, 79, 194, 0.12);
+  }
+  .topic-card .click-hint {
+    font-size: 11.5px;
+    color: var(--accent);
+    margin-top: 8px;
+    font-weight: 600;
   }
   .topic-card h2 {
     margin: 0 0 4px;
@@ -158,53 +172,62 @@
   </div>
 
   <div class="topic-grid">
-    <div class="topic-card">
+    <a class="topic-card" href="topics/number.html">
       <h2>1. Number <span class="weight-pct">17.9%</span></h2>
       <div class="count">42 questions tagged &middot; 125 of 700 marks</div>
       <div class="weight-bar"><div class="weight-bar-fill" style="width:17.9%;"></div></div>
-    </div>
-    <div class="topic-card">
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics/algebra.html">
       <h2>2. Algebra and graphs <span class="weight-pct">31.7%</span></h2>
       <div class="count">47 questions tagged &middot; 222 of 700 marks</div>
       <div class="weight-bar"><div class="weight-bar-fill" style="width:31.7%;"></div></div>
-    </div>
-    <div class="topic-card">
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics/coordinate-geometry.html">
       <h2>3. Coordinate geometry <span class="weight-pct">3.9%</span></h2>
       <div class="count">4 questions tagged &middot; 27 of 700 marks</div>
       <div class="weight-bar"><div class="weight-bar-fill" style="width:3.9%;"></div></div>
-    </div>
-    <div class="topic-card">
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics/geometry.html">
       <h2>4. Geometry <span class="weight-pct">12.3%</span></h2>
       <div class="count">25 questions tagged &middot; 86 of 700 marks</div>
       <div class="weight-bar"><div class="weight-bar-fill" style="width:12.3%;"></div></div>
-    </div>
-    <div class="topic-card">
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics/mensuration.html">
       <h2>5. Mensuration <span class="weight-pct">7.6%</span></h2>
       <div class="count">14 questions tagged &middot; 53 of 700 marks</div>
       <div class="weight-bar"><div class="weight-bar-fill" style="width:7.6%;"></div></div>
-    </div>
-    <div class="topic-card">
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics/trigonometry.html">
       <h2>6. Trigonometry <span class="weight-pct">6.0%</span></h2>
       <div class="count">9 questions tagged &middot; 42 of 700 marks</div>
       <div class="weight-bar"><div class="weight-bar-fill" style="width:6.0%;"></div></div>
-    </div>
-    <div class="topic-card">
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics/transformations-vectors.html">
       <h2>7. Transformations and vectors <span class="weight-pct">7.7%</span></h2>
       <div class="count">11 questions tagged &middot; 54 of 700 marks</div>
       <div class="weight-bar"><div class="weight-bar-fill" style="width:7.7%;"></div></div>
-    </div>
-    <div class="topic-card">
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics/probability.html">
       <h2>8. Probability <span class="weight-pct">6.1%</span></h2>
       <div class="count">12 questions tagged &middot; 43 of 700 marks</div>
       <div class="weight-bar"><div class="weight-bar-fill" style="width:6.1%;"></div></div>
-    </div>
-    <div class="topic-card">
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics/statistics.html">
       <h2>9. Statistics <span class="weight-pct">6.9%</span></h2>
       <div class="count">10 questions tagged &middot; 48 of 700 marks</div>
       <div class="weight-bar"><div class="weight-bar-fill" style="width:6.9%;"></div></div>
-    </div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
   </div>
-  <p style="font-size:12px;color:var(--muted);margin-top:10px;">Weight = topic's marks &divide; 700 total marks tagged so far (7 papers). Will shift slightly as more papers are added.</p>
+  <p style="font-size:12px;color:var(--muted);margin-top:10px;">Weight = topic's marks &divide; 700 total marks tagged so far (7 papers). Will shift slightly as more papers are added. Click any card to see the full list of questions under that topic.</p>
 </main>
 
 <footer>
