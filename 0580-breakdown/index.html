@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>0580 Paper Breakdown</title>
+<title>0580 Paper 2 Breakdown &mdash; 2025</title>
 <style>
   :root {
     --bg: #f6f7fb;
@@ -73,6 +73,10 @@
     text-transform: uppercase;
     letter-spacing: 0.03em;
   }
+  .papers-log ul { margin: 0; padding-left: 18px; }
+  .papers-log li { margin-bottom: 4px; }
+  .papers-log a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .papers-log a:hover { text-decoration: underline; }
   .topic-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -87,10 +91,31 @@
   .topic-card h2 {
     margin: 0 0 4px;
     font-size: 15px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .topic-card h2 .weight-pct {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
   }
   .topic-card .count {
     font-size: 13px;
     color: var(--muted);
+  }
+  .weight-bar {
+    margin-top: 8px;
+    height: 6px;
+    border-radius: 4px;
+    background: #eceefa;
+    overflow: hidden;
+  }
+  .weight-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 4px;
   }
   footer {
     max-width: 900px;
@@ -105,13 +130,13 @@
 
 <header>
   <a class="back" href="../teacher-hub.html">&larr; Teacher Hub</a>
-  <h1>📚 0580 Paper Breakdown</h1>
-  <p>Personal question bank for IGCSE 0580 (Cambridge) &mdash; not tied to any student. Past paper questions tagged by syllabus topic, for planning lessons and pulling practice sets fast.</p>
+  <h1>📚 0580 Paper 2 Breakdown &mdash; 2025</h1>
+  <p>Personal question bank for IGCSE 0580 (Cambridge), Paper 2 (Non-calculator, Extended) &mdash; not tied to any student. All 2025 sittings tagged by syllabus topic, with each topic's weight across the papers so far, for planning lessons and pulling practice sets fast.</p>
 </header>
 
 <main>
   <div class="intake">
-    <strong>Ready to tag papers.</strong> Send over the 4 papers and for each I'll go question-by-question and tag it to a topic below, noting the paper/year/question number, marks, and a short description of what it's testing.
+    <strong>All 7 papers tagged.</strong> 1 from Feb/March 2025, 3 from May/June 2025, 3 from Oct/Nov 2025 &mdash; 700 marks worth of questions sorted by topic below. Send another paper any time and I'll tag it and fold it into these totals.
     <ul>
       <li>Works from PDFs, images, or pasted question text</li>
       <li>Each tagged question gets logged under its topic card below</li>
@@ -120,21 +145,66 @@
   </div>
 
   <div class="papers-log">
-    <h3>Papers tagged so far</h3>
-    <div>None yet &mdash; 0 of 4 papers received.</div>
+    <h3>Papers tagged &mdash; 7 of 7 (all done)</h3>
+    <ul>
+      <li><a href="m25-22.html">0580/22 &mdash; Feb/March 2025</a> (Non-calculator, Extended) &mdash; 23 questions tagged</li>
+      <li><a href="s25-21.html">0580/21 &mdash; May/June 2025</a> (Non-calculator, Extended) &mdash; 23 questions tagged</li>
+      <li><a href="s25-22.html">0580/22 &mdash; May/June 2025</a> (Non-calculator, Extended) &mdash; 24 questions tagged</li>
+      <li><a href="s25-23.html">0580/23 &mdash; May/June 2025</a> (Non-calculator, Extended) &mdash; 24 questions tagged</li>
+      <li><a href="w25-21.html">0580/21 &mdash; Oct/Nov 2025</a> (Non-calculator, Extended) &mdash; 26 questions tagged</li>
+      <li><a href="w25-22.html">0580/22 &mdash; Oct/Nov 2025</a> (Non-calculator, Extended) &mdash; 24 questions tagged</li>
+      <li><a href="w25-23.html">0580/23 &mdash; Oct/Nov 2025</a> (Non-calculator, Extended) &mdash; 29 questions tagged</li>
+    </ul>
   </div>
 
   <div class="topic-grid">
-    <div class="topic-card"><h2>1. Number</h2><div class="count">0 questions tagged</div></div>
-    <div class="topic-card"><h2>2. Algebra and graphs</h2><div class="count">0 questions tagged</div></div>
-    <div class="topic-card"><h2>3. Coordinate geometry</h2><div class="count">0 questions tagged</div></div>
-    <div class="topic-card"><h2>4. Geometry</h2><div class="count">0 questions tagged</div></div>
-    <div class="topic-card"><h2>5. Mensuration</h2><div class="count">0 questions tagged</div></div>
-    <div class="topic-card"><h2>6. Trigonometry</h2><div class="count">0 questions tagged</div></div>
-    <div class="topic-card"><h2>7. Transformations and vectors</h2><div class="count">0 questions tagged</div></div>
-    <div class="topic-card"><h2>8. Probability</h2><div class="count">0 questions tagged</div></div>
-    <div class="topic-card"><h2>9. Statistics</h2><div class="count">0 questions tagged</div></div>
+    <div class="topic-card">
+      <h2>1. Number <span class="weight-pct">17.9%</span></h2>
+      <div class="count">42 questions tagged &middot; 125 of 700 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:17.9%;"></div></div>
+    </div>
+    <div class="topic-card">
+      <h2>2. Algebra and graphs <span class="weight-pct">31.7%</span></h2>
+      <div class="count">47 questions tagged &middot; 222 of 700 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:31.7%;"></div></div>
+    </div>
+    <div class="topic-card">
+      <h2>3. Coordinate geometry <span class="weight-pct">3.9%</span></h2>
+      <div class="count">4 questions tagged &middot; 27 of 700 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:3.9%;"></div></div>
+    </div>
+    <div class="topic-card">
+      <h2>4. Geometry <span class="weight-pct">12.3%</span></h2>
+      <div class="count">25 questions tagged &middot; 86 of 700 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:12.3%;"></div></div>
+    </div>
+    <div class="topic-card">
+      <h2>5. Mensuration <span class="weight-pct">7.6%</span></h2>
+      <div class="count">14 questions tagged &middot; 53 of 700 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:7.6%;"></div></div>
+    </div>
+    <div class="topic-card">
+      <h2>6. Trigonometry <span class="weight-pct">6.0%</span></h2>
+      <div class="count">9 questions tagged &middot; 42 of 700 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:6.0%;"></div></div>
+    </div>
+    <div class="topic-card">
+      <h2>7. Transformations and vectors <span class="weight-pct">7.7%</span></h2>
+      <div class="count">11 questions tagged &middot; 54 of 700 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:7.7%;"></div></div>
+    </div>
+    <div class="topic-card">
+      <h2>8. Probability <span class="weight-pct">6.1%</span></h2>
+      <div class="count">12 questions tagged &middot; 43 of 700 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:6.1%;"></div></div>
+    </div>
+    <div class="topic-card">
+      <h2>9. Statistics <span class="weight-pct">6.9%</span></h2>
+      <div class="count">10 questions tagged &middot; 48 of 700 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:6.9%;"></div></div>
+    </div>
   </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:10px;">Weight = topic's marks &divide; 700 total marks tagged so far (7 papers). Will shift slightly as more papers are added.</p>
 </main>
 
 <footer>
