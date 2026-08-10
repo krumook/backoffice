@@ -49,6 +49,7 @@
   .day-pill {
     display: inline-block;
     min-width: 52px;
+    align-self: flex-start;
     text-align: center;
     font-size: 12.5px;
     font-weight: 700;
@@ -59,8 +60,9 @@
     text-transform: uppercase;
     letter-spacing: 0.02em;
   }
-  .schedule-time { font-size: 16px; font-weight: 600; color: var(--ink); flex: 1; }
-  .schedule-note { font-size: 12.5px; color: var(--muted); }
+  .schedule-info { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  .schedule-time { font-size: 16px; font-weight: 600; color: var(--ink); }
+  .schedule-note { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
 
   .note {
     background: var(--accent-light);
@@ -115,18 +117,24 @@
   <div class="schedule-list">
     <div class="schedule-row">
       <span class="day-pill">Mon</span>
+      <div class="schedule-info">
       <span class="schedule-time">11:00 &ndash; 12:30</span>
       <span class="schedule-note">1.5 hrs</span>
     </div>
+    </div>
     <div class="schedule-row">
       <span class="day-pill">Wed</span>
+      <div class="schedule-info">
       <span class="schedule-time">17:00 &ndash; 18:30</span>
       <span class="schedule-note">1.5 hrs</span>
     </div>
+    </div>
     <div class="schedule-row">
       <span class="day-pill">Thu</span>
+      <div class="schedule-info">
       <span class="schedule-time">16:00 &ndash; 17:30</span>
       <span class="schedule-note">1.5 hrs</span>
+    </div>
     </div>
   </div>
 
@@ -137,100 +145,164 @@
 
   <div class="section-label">Key dates this school year &middot; AQA Further Maths SOL</div>
   <div class="schedule-list">
-    <div class="schedule-row"><span class="day-pill">18&ndash;20 Aug</span><span class="schedule-time">Revision for 0580</span><span class="schedule-note">pre-term</span></div>
-    <div class="schedule-row"><span class="day-pill">21 Aug</span><span class="schedule-time">Term starts</span></div>
-    <div class="schedule-row"><span class="day-pill">10 Sep</span><span class="schedule-time">Non-calc practice test</span></div>
-    <div class="schedule-row"><span class="day-pill">24 Sep</span><span class="schedule-time">Calc practice test</span></div>
-    <div class="schedule-row"><span class="day-pill">13&ndash;17 Oct</span><span class="schedule-time">Half term &middot; real 0580 exam</span><span class="schedule-note">13 Oct Paper 2, 15 Oct Paper 4 &mdash; treating these as her real Cambridge 0580 sitting per the class plan below</span></div>
-    <div class="schedule-row"><span class="day-pill">24&ndash;28 Nov</span><span class="schedule-time">Practice exam week</span><span class="schedule-note">no Further Maths assessment that week</span></div>
-    <div class="schedule-row"><span class="day-pill">15 Dec&ndash;2 Jan</span><span class="schedule-time">Winter holiday</span></div>
-    <div class="schedule-row"><span class="day-pill">28 Jan</span><span class="schedule-time">IA1 (Sequences)</span></div>
-    <div class="schedule-row"><span class="day-pill">16&ndash;20 Feb</span><span class="schedule-time">Half term</span></div>
-    <div class="schedule-row"><span class="day-pill">18 Mar</span><span class="schedule-time">IA2</span></div>
-    <div class="schedule-row"><span class="day-pill">6&ndash;17 Apr</span><span class="schedule-time">Spring holiday</span></div>
+    <div class="schedule-row"><span class="day-pill">18&ndash;20 Aug</span><div class="schedule-info">
+      <span class="schedule-time">Revision for 0580</span>
+      <span class="schedule-note">pre-term</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">21 Aug</span><div class="schedule-info">
+      <span class="schedule-time">Term starts</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">10 Sep</span><div class="schedule-info">
+      <span class="schedule-time">Non-calc practice test</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">24 Sep</span><div class="schedule-info">
+      <span class="schedule-time">Calc practice test</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">13&ndash;17 Oct</span><div class="schedule-info">
+      <span class="schedule-time">Half term &middot; real 0580 exam</span>
+      <span class="schedule-note">13 Oct Paper 2, 15 Oct Paper 4 &mdash; treating these as her real Cambridge 0580 sitting per the class plan below</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">21&ndash;30 Oct</span><div class="schedule-info">
+      <span class="schedule-time">Surds</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">3&ndash;14 Nov</span><div class="schedule-info">
+      <span class="schedule-time">Differentiation</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">17&ndash;21 Nov</span><div class="schedule-info">
+      <span class="schedule-time">Sketching Cubics and Quadratics</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">24&ndash;28 Nov</span><div class="schedule-info">
+      <span class="schedule-time">Practice exam week</span>
+      <span class="schedule-note">no Further Maths assessment that week</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">1&ndash;5 Dec</span><div class="schedule-info">
+      <span class="schedule-time">Quadratic Inequalities</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">8&ndash;12 Dec</span><div class="schedule-info">
+      <span class="schedule-time">Simultaneous Equations in 3 Unknowns</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">15 Dec&ndash;2 Jan</span><div class="schedule-info">
+      <span class="schedule-time">Winter holiday</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">5&ndash;16 Jan</span><div class="schedule-info">
+      <span class="schedule-time">Binomial Series</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">19&ndash;23 Jan</span><div class="schedule-info">
+      <span class="schedule-time">Product Rule for Counting</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">26&ndash;27 Jan</span><div class="schedule-info">
+      <span class="schedule-time">Sequences</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">28 Jan</span><div class="schedule-info">
+      <span class="schedule-time">IA1</span>
+      <span class="schedule-note">school-set internal test covering everything from Surds (21 Oct) through Sequences &mdash; not part of the official AQA grade</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">2&ndash;6 Feb</span><div class="schedule-info">
+      <span class="schedule-time">Circle Geometry</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">9&ndash;13 Feb</span><div class="schedule-info">
+      <span class="schedule-time">Functions: Domain and Range / Exponential Functions / Piecewise</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">16&ndash;20 Feb</span><div class="schedule-info">
+      <span class="schedule-time">Half term</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">23 Feb&ndash;6 Mar</span><div class="schedule-info">
+      <span class="schedule-time">Proof</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">9&ndash;17 Mar</span><div class="schedule-info">
+      <span class="schedule-time">Factor Theorem</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">18 Mar</span><div class="schedule-info">
+      <span class="schedule-time">IA2</span>
+      <span class="schedule-note">school-set internal test covering everything from Circle Geometry (2 Feb) through Factor Theorem &mdash; not part of the official AQA grade</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">19&ndash;27 Mar</span><div class="schedule-info">
+      <span class="schedule-time">Revision</span>
+    </div></div>
+    <div class="schedule-row"><span class="day-pill">6&ndash;17 Apr</span><div class="schedule-info">
+      <span class="schedule-time">Spring holiday</span>
+    </div></div>
   </div>
 
   <div class="section-label">9-week class plan to the October exam</div>
   <div class="plan-list">
 
     <div class="plan-week plan-checkpoint">
-      <div class="plan-head"><span class="plan-wk">Week 1 &middot; Checkpoint</span><span class="plan-dates">11&ndash;17 Aug</span></div>
-      <div class="plan-goal">Review today's homework as a diagnostic, then decide the route for Week 2</div>
+      <div class="plan-head"><span class="plan-wk">Week 1</span><span class="plan-dates">10&ndash;16 Aug</span></div>
+      <div class="plan-goal">3 classes: 10, 12, 13 Aug</div>
       <ul>
-        <li>Go through <b>OctNov2025 Paper 22 and Paper 23</b> together (per her own plan for this session) &mdash; full papers, timed at home</li>
-        <li>Check whether errors are careless slips (as 10 Aug's homework mostly was) or land on the known weak spots: <span class="code">E8.3</span> Probability, <span class="code">E7.1</span> Transformations, <span class="code">E7.4</span> Vector geometry proofs</li>
-        <li><b>Branch point:</b> mostly clean &rarr; start Paper 4 in Week 2. Real gaps reappear &rarr; spend Week 2 on remediation first, push Paper 4 to Week 3</li>
+        <li><b>Mon 10 Aug &mdash; done, see <a href="fb0810.html">feedback</a>:</b> reviewed retake corrections (mostly careless slips, cleared in chat); in-class covered Indices II (<span class="code">E2.4</span> exponential equations, same-base method), Probability (<span class="code">E8.3</span> tree diagrams with/without replacement + CorbettMaths worksheet), and Vectors (<span class="code">E7.2/E7.3</span> position vectors of midpoints). Fully focused, better pace than last session. Homework set: OctNov2025 Paper 22 and Paper 23 (full papers, timed)</li>
+        <li><b>Wed 12 Aug:</b> go through <b>OctNov2025 Paper 22 and Paper 23</b> together (homework from 10 Aug) &mdash; likely set retake questions as homework on whatever comes up wrong</li>
+        <li><b>Thu 13 Aug:</b> decide, based on 12 Aug's result, whether to continue Paper 2 practice or switch to Paper 4 (she has 5 Paper 4 papers from 2025 not properly attempted yet: MayJune 41/42/43 and OctNov 41/42) &mdash; high chance of setting <b>OctNov2025 Paper 41 and Paper 42</b> as homework. If time is left over once that's wrapped up, use it for <a href="topic/8.html#sec-8"><span class="code">E8.3</span> Probability</a> practice</li>
       </ul>
     </div>
 
     <div class="plan-week">
-      <div class="plan-head"><span class="plan-wk">Week 2</span><span class="plan-dates">18&ndash;24 Aug</span></div>
-      <div class="plan-goal">Start Paper 4 (calculator) practice, using the new topic breakdown</div>
+      <div class="plan-head"><span class="plan-wk">Week 2</span><span class="plan-dates">17&ndash;23 Aug</span></div>
+      <div class="plan-goal">3 classes: 17, 19, 20 Aug &middot; school revision days 18&ndash;20 Aug, term starts 21 Aug</div>
       <ul>
-        <li>School has 0580 revision days 18&ndash;20 Aug and term starts 21 Aug &mdash; her weekly times may shift this week, confirm once known</li>
-        <li>If Week 1 went well: begin Paper 4 practice via <a href="../0580-breakdown/topics4/algebra.html">Algebra and graphs</a> (33.6% of Paper 4) and <a href="../0580-breakdown/topics4/number.html">Number</a> (17.4%) &mdash; the two heaviest-weighted areas</li>
-        <li>If not: hold off on Paper 4, drill whatever Week 1's papers exposed instead</li>
+        <li><b>Mon 17 Aug:</b> go through <b>OctNov2025 Paper 41 and Paper 42</b> together (homework from 13 Aug) &mdash; likely set retake questions as homework</li>
+        <li><b>Wed 19 Aug:</b> consolidate the weak topics that came up across 12&ndash;17 Aug's paper reviews &mdash; currently that's <a href="topic/7.html#sec-7"><span class="code">E7.1</span> Transformations</a> (52.3%, lowest sub-topic overall) and <a href="topic/7.html#sec-7"><span class="code">E7.4</span> Vector geometry proofs</a> (63.3%)</li>
+        <li><b>Thu 20 Aug:</b> <a href="topic/8.html#sec-8"><span class="code">E8.3</span> Probability of combined events</a> (67.6%) &mdash; another dedicated pass, on top of the 13 Aug session</li>
+        <li>Her weekly times may shift once term starts 21 Aug &mdash; confirm once known</li>
       </ul>
     </div>
 
     <div class="plan-week">
-      <div class="plan-head"><span class="plan-wk">Week 3</span><span class="plan-dates">25&ndash;31 Aug</span></div>
-      <div class="plan-goal">Targeted drill: Probability &mdash; the single weakest sub-topic right now (64.2%)</div>
+      <div class="plan-head"><span class="plan-wk">Week 3</span><span class="plan-dates">24&ndash;30 Aug</span></div>
+      <div class="plan-goal">Homework: 2024 MayJune Paper 22 and Paper 42</div>
       <ul>
-        <li><a href="topic/8.html#sec-8"><span class="code">E8.3</span> Probability of combined events</a> &mdash; tree diagrams, replacement wording, &ldquo;exactly one&rdquo; phrasing</li>
-        <li>Cross-check against <a href="../0580-breakdown/topics4/probability.html">Paper 4's probability questions</a> so the practice matches calculator-paper style too</li>
+        <li>Class time reviews the pair once submitted, drilling whatever weak spots the marking surfaces</li>
       </ul>
     </div>
 
     <div class="plan-week">
-      <div class="plan-head"><span class="plan-wk">Week 4</span><span class="plan-dates">1&ndash;7 Sep</span></div>
-      <div class="plan-goal">Targeted drill: Transformations and vector geometry proofs (52.4% and 56.3%, the two lowest sub-topics)</div>
+      <div class="plan-head"><span class="plan-wk">Week 4</span><span class="plan-dates">31 Aug&ndash;6 Sep</span></div>
+      <div class="plan-goal">Homework: 2024 MayJune Paper 23 and Paper 43</div>
       <ul>
-        <li><a href="topic/7.html#sec-7"><span class="code">E7.1</span> Transformations</a> &mdash; naming the specific transformation, not the umbrella term; constructing (not just describing) an enlargement</li>
-        <li><a href="topic/7.html#sec-7"><span class="code">E7.4</span> Vector geometry proofs</a> &mdash; constructing an argument unprompted, not just following a given route</li>
+        <li>Class time reviews the pair once submitted, drilling whatever weak spots the marking surfaces</li>
       </ul>
     </div>
 
     <div class="plan-week">
-      <div class="plan-head"><span class="plan-wk">Week 5</span><span class="plan-dates">8&ndash;14 Sep</span></div>
-      <div class="plan-goal">Targeted drill: Mensuration and Geometry (72.7% and 75.2%), interwoven with more Paper 4 practice</div>
+      <div class="plan-head"><span class="plan-wk">Week 5</span><span class="plan-dates">7&ndash;13 Sep</span></div>
+      <div class="plan-goal">Homework: 2024 OctNov Paper 21 and Paper 41</div>
       <ul>
-        <li><a href="topic/5.html">Mensuration</a> and <a href="topic/4.html">Geometry</a> &mdash; circle theorems, surface area and volume</li>
-        <li>Continue Paper 4 practice via <a href="../0580-breakdown/topics4/trigonometry.html">Trigonometry</a> (13.6% weight) and <a href="../0580-breakdown/topics4/mensuration.html">Mensuration</a> (7.9%)</li>
-      </ul>
-    </div>
-
-    <div class="plan-week plan-checkpoint">
-      <div class="plan-head"><span class="plan-wk">Week 6 &middot; Checkpoint</span><span class="plan-dates">15&ndash;21 Sep</span></div>
-      <div class="plan-goal">First full timed mixed set under exam conditions</div>
-      <ul>
-        <li>One Paper 2 and one Paper 4, both timed and marked properly</li>
-        <li>Update <a href="tracker.html">the tracker</a> with the results and re-check which sub-topics are still below 70%</li>
-      </ul>
-    </div>
-
-    <div class="plan-week plan-checkpoint">
-      <div class="plan-head"><span class="plan-wk">Week 7 &middot; Checkpoint</span><span class="plan-dates">22&ndash;28 Sep</span></div>
-      <div class="plan-goal">Second full timed mixed set, targeting whatever Week 6 re-exposed</div>
-      <ul>
-        <li>Retake/redrill only the sub-topics still flagged after Week 6 &mdash; don't reopen ground that's already solid</li>
+        <li>Class time reviews the pair once submitted, drilling whatever weak spots the marking surfaces</li>
+        <li>Her school's Further Maths non-calc practice test is 10 Sep this week &mdash; separate from 0580, but be aware of the extra workload</li>
       </ul>
     </div>
 
     <div class="plan-week">
-      <div class="plan-head"><span class="plan-wk">Week 8</span><span class="plan-dates">29 Sep&ndash;5 Oct</span></div>
-      <div class="plan-goal">Consolidation &mdash; lighter pace, mixed quick-fire questions across everything still under ~80%</div>
+      <div class="plan-head"><span class="plan-wk">Week 6</span><span class="plan-dates">14&ndash;20 Sep</span></div>
+      <div class="plan-goal">Homework: 2024 OctNov Paper 22 and Paper 42</div>
       <ul>
-        <li>No new content; short mixed sets pulling from every sub-topic below 80% on <a href="tracker.html">the tracker</a></li>
+        <li>Class time reviews the pair once submitted, drilling whatever weak spots the marking surfaces</li>
+      </ul>
+    </div>
+
+    <div class="plan-week">
+      <div class="plan-head"><span class="plan-wk">Week 7</span><span class="plan-dates">21&ndash;27 Sep</span></div>
+      <div class="plan-goal">Homework: 2024 OctNov Paper 23 and Paper 43</div>
+      <ul>
+        <li>Class time reviews the pair once submitted, drilling whatever weak spots the marking surfaces</li>
+        <li>Her school's Further Maths calc practice test is 24 Sep this week &mdash; separate from 0580, but be aware of the extra workload</li>
+      </ul>
+    </div>
+
+    <div class="plan-week">
+      <div class="plan-head"><span class="plan-wk">Week 8</span><span class="plan-dates">28 Sep&ndash;4 Oct</span></div>
+      <div class="plan-goal">Homework: 2023 FebMarch Paper 22 and Paper 42</div>
+      <ul>
+        <li>Class time reviews the pair once submitted, drilling whatever weak spots the marking surfaces</li>
       </ul>
     </div>
 
     <div class="plan-week plan-final">
-      <div class="plan-head"><span class="plan-wk">Week 9 &middot; Final</span><span class="plan-dates">6&ndash;12 Oct</span></div>
-      <div class="plan-goal">Final full-length mocks, per her plan &mdash; light touch only, no new content</div>
+      <div class="plan-head"><span class="plan-wk">Week 9 &middot; Final</span><span class="plan-dates">5&ndash;11 Oct</span></div>
+      <div class="plan-goal">Homework: 2026 FebMarch Paper 22 and Paper 42 &mdash; final mocks, per her plan</div>
       <ul>
-        <li><b>FebMarch2026 Paper 22 and Paper 42</b>, both timed under strict exam conditions</li>
-        <li>Focus on exam technique and confidence, not cramming &mdash; keep it calm going into the 13 Oct sitting</li>
+        <li>Light touch only, no new content &mdash; focus on exam technique and confidence going into the 13 Oct sitting</li>
       </ul>
     </div>
 
@@ -238,7 +310,7 @@
 
   <div class="note">
     <span class="emoji">📌</span>
-    <div><b>Still to confirm</b>Her new weekly tutoring times once school term starts 21 Aug &mdash; the branch decision at the end of Week 1 (Paper 4 vs. remediation first) &mdash; update this page once either is known.</div>
+    <div><b>Note</b>Her school's own new Further Maths content (starting with Surds) doesn't begin until 21 Oct &mdash; after the 13 Oct exam &mdash; so there's no school-topic overlap to plan around during this 9-week window, other than the two practice tests flagged above. Still to confirm: her new weekly tutoring times once school term starts 21 Aug.</div>
   </div>
 
   <footer>Mildy &middot; class schedule &middot; update this page whenever a session is added, moved, or cancelled</footer>
