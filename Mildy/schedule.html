@@ -77,6 +77,27 @@
   .note .emoji { font-size: 18px; }
   .note b { display: block; margin-bottom: 3px; color: var(--ink); }
 
+  .plan-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+  .plan-week {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 20px;
+  }
+  .plan-week.plan-checkpoint { border-color: #cfe1f4; background: var(--tip-light); }
+  .plan-week.plan-final { border-color: #eddcb8; background: #faeeda; }
+  .plan-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+  .plan-wk { font-size: 13px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.02em; }
+  .plan-week.plan-checkpoint .plan-wk { color: var(--tip); }
+  .plan-week.plan-final .plan-wk { color: var(--amber, #854f0b); }
+  .plan-dates { font-size: 12.5px; color: var(--muted); }
+  .plan-goal { font-size: 13.5px; font-weight: 600; color: var(--ink); margin: 0 0 8px; }
+  .plan-week ul { margin: 0; padding-left: 20px; }
+  .plan-week li { font-size: 13px; color: var(--ink); margin-bottom: 4px; }
+  .plan-week li a { color: var(--tip); text-decoration: none; font-weight: 600; }
+  .plan-week li a:hover { text-decoration: underline; }
+  .plan-week li .code { color: var(--muted); font-size: 12px; }
+
   footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
 </style>
 </head>
@@ -120,7 +141,7 @@
     <div class="schedule-row"><span class="day-pill">21 Aug</span><span class="schedule-time">Term starts</span></div>
     <div class="schedule-row"><span class="day-pill">10 Sep</span><span class="schedule-time">Non-calc practice test</span></div>
     <div class="schedule-row"><span class="day-pill">24 Sep</span><span class="schedule-time">Calc practice test</span></div>
-    <div class="schedule-row"><span class="day-pill">13&ndash;17 Oct</span><span class="schedule-time">Half term</span><span class="schedule-note">13 Oct &ldquo;IGCSE Paper 2&rdquo;, 15 Oct &ldquo;IGCSE Paper 4&rdquo; on the school calendar &mdash; not yet confirmed whether these are her real Cambridge 0580 sitting or a school mock</span></div>
+    <div class="schedule-row"><span class="day-pill">13&ndash;17 Oct</span><span class="schedule-time">Half term &middot; real 0580 exam</span><span class="schedule-note">13 Oct Paper 2, 15 Oct Paper 4 &mdash; treating these as her real Cambridge 0580 sitting per the class plan below</span></div>
     <div class="schedule-row"><span class="day-pill">24&ndash;28 Nov</span><span class="schedule-time">Practice exam week</span><span class="schedule-note">no Further Maths assessment that week</span></div>
     <div class="schedule-row"><span class="day-pill">15 Dec&ndash;2 Jan</span><span class="schedule-time">Winter holiday</span></div>
     <div class="schedule-row"><span class="day-pill">28 Jan</span><span class="schedule-time">IA1 (Sequences)</span></div>
@@ -129,9 +150,95 @@
     <div class="schedule-row"><span class="day-pill">6&ndash;17 Apr</span><span class="schedule-time">Spring holiday</span></div>
   </div>
 
+  <div class="section-label">9-week class plan to the October exam</div>
+  <div class="plan-list">
+
+    <div class="plan-week plan-checkpoint">
+      <div class="plan-head"><span class="plan-wk">Week 1 &middot; Checkpoint</span><span class="plan-dates">11&ndash;17 Aug</span></div>
+      <div class="plan-goal">Review today's homework as a diagnostic, then decide the route for Week 2</div>
+      <ul>
+        <li>Go through <b>OctNov2025 Paper 22 and Paper 23</b> together (per her own plan for this session) &mdash; full papers, timed at home</li>
+        <li>Check whether errors are careless slips (as 10 Aug's homework mostly was) or land on the known weak spots: <span class="code">E8.3</span> Probability, <span class="code">E7.1</span> Transformations, <span class="code">E7.4</span> Vector geometry proofs</li>
+        <li><b>Branch point:</b> mostly clean &rarr; start Paper 4 in Week 2. Real gaps reappear &rarr; spend Week 2 on remediation first, push Paper 4 to Week 3</li>
+      </ul>
+    </div>
+
+    <div class="plan-week">
+      <div class="plan-head"><span class="plan-wk">Week 2</span><span class="plan-dates">18&ndash;24 Aug</span></div>
+      <div class="plan-goal">Start Paper 4 (calculator) practice, using the new topic breakdown</div>
+      <ul>
+        <li>School has 0580 revision days 18&ndash;20 Aug and term starts 21 Aug &mdash; her weekly times may shift this week, confirm once known</li>
+        <li>If Week 1 went well: begin Paper 4 practice via <a href="../0580-breakdown/topics4/algebra.html">Algebra and graphs</a> (33.6% of Paper 4) and <a href="../0580-breakdown/topics4/number.html">Number</a> (17.4%) &mdash; the two heaviest-weighted areas</li>
+        <li>If not: hold off on Paper 4, drill whatever Week 1's papers exposed instead</li>
+      </ul>
+    </div>
+
+    <div class="plan-week">
+      <div class="plan-head"><span class="plan-wk">Week 3</span><span class="plan-dates">25&ndash;31 Aug</span></div>
+      <div class="plan-goal">Targeted drill: Probability &mdash; the single weakest sub-topic right now (64.2%)</div>
+      <ul>
+        <li><a href="topic/8.html#sec-8"><span class="code">E8.3</span> Probability of combined events</a> &mdash; tree diagrams, replacement wording, &ldquo;exactly one&rdquo; phrasing</li>
+        <li>Cross-check against <a href="../0580-breakdown/topics4/probability.html">Paper 4's probability questions</a> so the practice matches calculator-paper style too</li>
+      </ul>
+    </div>
+
+    <div class="plan-week">
+      <div class="plan-head"><span class="plan-wk">Week 4</span><span class="plan-dates">1&ndash;7 Sep</span></div>
+      <div class="plan-goal">Targeted drill: Transformations and vector geometry proofs (52.4% and 56.3%, the two lowest sub-topics)</div>
+      <ul>
+        <li><a href="topic/7.html#sec-7"><span class="code">E7.1</span> Transformations</a> &mdash; naming the specific transformation, not the umbrella term; constructing (not just describing) an enlargement</li>
+        <li><a href="topic/7.html#sec-7"><span class="code">E7.4</span> Vector geometry proofs</a> &mdash; constructing an argument unprompted, not just following a given route</li>
+      </ul>
+    </div>
+
+    <div class="plan-week">
+      <div class="plan-head"><span class="plan-wk">Week 5</span><span class="plan-dates">8&ndash;14 Sep</span></div>
+      <div class="plan-goal">Targeted drill: Mensuration and Geometry (72.7% and 75.2%), interwoven with more Paper 4 practice</div>
+      <ul>
+        <li><a href="topic/5.html">Mensuration</a> and <a href="topic/4.html">Geometry</a> &mdash; circle theorems, surface area and volume</li>
+        <li>Continue Paper 4 practice via <a href="../0580-breakdown/topics4/trigonometry.html">Trigonometry</a> (13.6% weight) and <a href="../0580-breakdown/topics4/mensuration.html">Mensuration</a> (7.9%)</li>
+      </ul>
+    </div>
+
+    <div class="plan-week plan-checkpoint">
+      <div class="plan-head"><span class="plan-wk">Week 6 &middot; Checkpoint</span><span class="plan-dates">15&ndash;21 Sep</span></div>
+      <div class="plan-goal">First full timed mixed set under exam conditions</div>
+      <ul>
+        <li>One Paper 2 and one Paper 4, both timed and marked properly</li>
+        <li>Update <a href="tracker.html">the tracker</a> with the results and re-check which sub-topics are still below 70%</li>
+      </ul>
+    </div>
+
+    <div class="plan-week plan-checkpoint">
+      <div class="plan-head"><span class="plan-wk">Week 7 &middot; Checkpoint</span><span class="plan-dates">22&ndash;28 Sep</span></div>
+      <div class="plan-goal">Second full timed mixed set, targeting whatever Week 6 re-exposed</div>
+      <ul>
+        <li>Retake/redrill only the sub-topics still flagged after Week 6 &mdash; don't reopen ground that's already solid</li>
+      </ul>
+    </div>
+
+    <div class="plan-week">
+      <div class="plan-head"><span class="plan-wk">Week 8</span><span class="plan-dates">29 Sep&ndash;5 Oct</span></div>
+      <div class="plan-goal">Consolidation &mdash; lighter pace, mixed quick-fire questions across everything still under ~80%</div>
+      <ul>
+        <li>No new content; short mixed sets pulling from every sub-topic below 80% on <a href="tracker.html">the tracker</a></li>
+      </ul>
+    </div>
+
+    <div class="plan-week plan-final">
+      <div class="plan-head"><span class="plan-wk">Week 9 &middot; Final</span><span class="plan-dates">6&ndash;12 Oct</span></div>
+      <div class="plan-goal">Final full-length mocks, per her plan &mdash; light touch only, no new content</div>
+      <ul>
+        <li><b>FebMarch2026 Paper 22 and Paper 42</b>, both timed under strict exam conditions</li>
+        <li>Focus on exam technique and confidence, not cramming &mdash; keep it calm going into the 13 Oct sitting</li>
+      </ul>
+    </div>
+
+  </div>
+
   <div class="note">
     <span class="emoji">📌</span>
-    <div><b>Still to confirm</b>Whether the 13/15 Oct dates are Mildy's actual Cambridge 0580 exam sitting or a school mock, and her new weekly tutoring times once term starts &mdash; update this page once either is known.</div>
+    <div><b>Still to confirm</b>Her new weekly tutoring times once school term starts 21 Aug &mdash; the branch decision at the end of Week 1 (Paper 4 vs. remediation first) &mdash; update this page once either is known.</div>
   </div>
 
   <footer>Mildy &middot; class schedule &middot; update this page whenever a session is added, moved, or cancelled</footer>
