@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — 0580/22 October/November 2025 Marking Breakdown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 28px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .score-box { text-align: right; }
+  .score-box .num { font-size: 40px; font-weight: 700; color: var(--loss); line-height: 1; }
+  .score-box .pct { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .summary-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .summary-card .value { font-size: 22px; font-weight: 600; margin-top: 4px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13.5px;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.q { font-weight: 600; width: 48px; text-align: center; color: var(--ink); }
+  td.topic { width: 200px; color: var(--ink); }
+  td.topic .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tip);
+    background: var(--tip-light);
+    padding: 1px 7px;
+    border-radius: 20px;
+    margin-bottom: 4px;
+  }
+  td.topic .topic-name { display: block; }
+  td.marks { width: 85px; text-align: center; white-space: nowrap; }
+  td.reason { color: var(--muted); }
+  .full { color: var(--accent); font-weight: 600; }
+  .partial { color: var(--loss); font-weight: 600; }
+  .dash { color: var(--muted); }
+
+  .reason .note-line { display: block; margin-top: 6px; color: var(--ink); font-size: 13px; line-height: 1.45; }
+  .reason .mini-eq {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin: 7px 0;
+    font-size: 12.5px;
+  }
+  .reason .mini-eq .eln { padding: 2px 0; }
+  .reason .note-line.correct-line, .reason .mini-eq .eln.correct-line { color: var(--accent); font-weight: 600; }
+
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px; line-height: 1.05; font-size: 0.92em; position: relative; top: 0.1em; }
+  .frac .num, .frac .den { display: block; padding: 0 3px; }
+  .frac .num { border-bottom: 1.3px solid currentColor; padding-bottom: 1px; }
+  .frac .den { padding-top: 1px; }
+
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-hw { background: var(--loss-light); color: var(--loss); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  tr.total td { border-top: 2px solid var(--ink); font-weight: 700; background: var(--accent-light); color: var(--accent); }
+  tr.total td.reason { color: var(--accent); font-weight: 600; }
+
+  .legend { margin: 18px 0 40px; display: flex; gap: 20px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+  .legend span.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .dot.full-dot { background: var(--accent); }
+  .dot.partial-dot { background: var(--loss); }
+
+  h2.section-title { font-size: 17px; font-weight: 600; margin: 0 0 16px; padding-top: 8px; border-top: 2px solid var(--ink); }
+
+  .ladder { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 8px 20px; margin-bottom: 28px; }
+  .ladder-row { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .ladder-row:last-child { border-bottom: none; }
+  .ladder-score { font-size: 20px; font-weight: 700; min-width: 78px; color: var(--ink); }
+  .ladder-row.final .ladder-score { color: var(--accent); }
+  .ladder-desc { font-size: 13.5px; color: var(--muted); flex: 1; }
+  .ladder-desc b { color: var(--ink); font-weight: 600; }
+
+  .weak-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 12px; }
+  .weak-card { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--tip); border-radius: 8px; padding: 14px 16px; }
+  .weak-card h3 { margin: 0 0 6px; font-size: 14.5px; font-weight: 600; }
+  .weak-card p { margin: 0; font-size: 13px; color: var(--muted); }
+  .weak-card.blank { border-left-color: var(--purple); }
+  .weak-card.miscon { border-left-color: var(--pink); }
+  .weak-card.slip { border-left-color: var(--amber); }
+
+  .note-banner { background: var(--pink-light); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; font-size: 13.5px; color: var(--pink); margin-bottom: 28px; }
+
+  footer { margin-top: 28px; font-size: 12px; color: var(--muted); text-align: center; }
+
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; margin-right: 8px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../tracker.html">&larr; Back to dashboard</a>
+
+  <header>
+    <div>
+      <h1>Mildy — marking breakdown</h1>
+      <div class="meta">Cambridge IGCSE Mathematics 0580/22 (Extended, Non-calculator) &middot; October/November 2025</div>
+    </div>
+    <div class="score-box">
+      <div class="num">68<span style="font-size:20px;color:var(--muted);">/100</span></div>
+      <div class="pct">68%</div>
+    </div>
+  </header>
+
+  <div class="note-banner"><b>Her weakest paper of the seven marked so far &mdash; and most of it was careless, not a gap in understanding.</b> 12 of the 32 marks lost were slips where the working was already right and the wrong number or angle just got written in the final box (Q5a, Q6b, Q6c, Q8, Q12, Q14a, Q18, Q19). That's the pattern that needs to stop if the goal is A*: on a paper like this, careless slips cost more than any topic gap does, and they're also the easiest thing to fix with one habit &mdash; re-read the exact question, then re-check the final line, every time. The remaining loss is more genuine: two real gaps (Q17a, Q23b) and two blanks on material not yet taught (Q13b, Q22).</div>
+
+  <div class="summary-row">
+    <div class="summary-card">
+      <div class="label">Questions fully correct</div>
+      <div class="value">27 / 43</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Careless slips</div>
+      <div class="value">&minus;12</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Handwriting (no marks lost)</div>
+      <div class="value">0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Misconceptions</div>
+      <div class="value">&minus;15</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Left blank</div>
+      <div class="value">&minus;5</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:48px;">Q</th>
+        <th style="width:200px;">Topic</th>
+        <th style="width:85px;">Marks</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="q">1</td><td class="topic"><span class="tag">E1.6</span><span class="topic-name">The four operations</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">2</td><td class="topic"><span class="tag">E1.1</span><span class="topic-name">Types of number</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">3</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Surface area and volume</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">4</td><td class="topic"><span class="tag">E1.13</span><span class="topic-name">Percentages</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">5a</td><td class="topic"><span class="tag">E9.4</span><span class="topic-name">Statistical charts: pie chart</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">The pie chart's Walk sector is marked with a right-angle symbol, meaning 90&deg;.</div><div class="mini-eq"><div class="eln correct-line">600 &times; <span class="frac"><span class="num">90</span><span class="den">360</span></span> = 600 &times; <span class="frac"><span class="num">1</span><span class="den">4</span></span> = <b>150</b></div></div><div class="note-line">The 90&deg; and the simplifying to <span class="frac"><span class="num">1</span><span class="den">4</span></span> were both done correctly &mdash; the slip was in the very last step: 600&times;<span class="frac"><span class="num">1</span><span class="den">4</span></span> was written as <b>125</b> instead of 150.</div></td></tr>
+      <tr><td class="q">5b</td><td class="topic"><span class="tag">E9.4</span><span class="topic-name">Statistical charts: pie chart</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">6a</td><td class="topic"><span class="tag">E4.6</span><span class="topic-name">Angles</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">6b</td><td class="topic"><span class="tag">E4.6</span><span class="topic-name">Angles</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">Angle AEC was correctly worked out as 100&deg; (co-interior with the given 80&deg;) &mdash; but the question asked for angle <b>AED</b>, not AEC.</div><div class="note-line">Since angle AED and AEC are supplementary, they must add up to 180&deg;:</div><div class="mini-eq"><div class="eln correct-line">Angle AED = 180&minus;100 = <b>80&deg;</b></div></div><div class="note-line">Angle AED was calculated correctly and is in the diagram &mdash; but the wrong one (AEC) went in the answer box.</div></td></tr>
+      <tr><td class="q">6c</td><td class="topic"><span class="tag">E4.6</span><span class="topic-name">Angles</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line correct-line">Correctly used isosceles triangle DAE (EA=ED) to find the base angle: (180&minus;80)&divide;2=50&deg;. That step earns its own mark.</div><div class="note-line">But 50&deg; is angle DAE, the question asked for angle <b>DAB</b> &mdash; missing the last step of adding the given 75&deg;.</div><div class="mini-eq"><div class="eln correct-line">Angle DAB = 50+75 = <b>125&deg;</b></div></div><div class="note-line">Angle DAE was calculated correctly, but that's not the angle the question asked for &mdash; same pattern as 6(b).</div></td></tr>
+      <tr><td class="q">7</td><td class="topic"><span class="tag">E2.6</span><span class="topic-name">Inequalities</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">8</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">20&minus;0.4p is a correct expression &mdash; in <b>dollars</b>. The question asks for the answer in <b>cents</b>, so it needed converting first: $20 is 2000 cents.</div><div class="note-line correct-line">Correct answer: <b>2000&minus;40p</b>. The algebra itself is exactly right &mdash; check the units a question asks for before you start, not after.</div></td></tr>
+      <tr><td class="q">9</td><td class="topic"><span class="tag">E1.6</span><span class="topic-name">The four operations</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">10a</td><td class="topic"><span class="tag">E2.1</span><span class="topic-name">Substitution & rearranging formulae</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">10b</td><td class="topic"><span class="tag">E2.1</span><span class="topic-name">Substitution & rearranging formulae</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">11a</td><td class="topic"><span class="tag">E4.4</span><span class="topic-name">Similarity / congruence</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line"><b>Key ideas for similar shapes:</b> corresponding angles are equal (every matching angle is the same size between the two shapes), and corresponding sides are proportional (every matching side length is linked by the same ratio).</div><div class="note-line">The four points given &mdash; "ST and QR are parallel," "they have the same point of P," "S is a point on QP," "T is a point on RP" &mdash; are all true, but they're facts the question already gave, not reasons the triangles are similar. Since no side lengths are given before part (a), the proof has to run through <b>angles</b>:</div><div class="mini-eq"><div class="eln">Angle QPR = angle TPS (common angle).</div><div class="eln">Angle PQR = angle PST (corresponding, ST&nbsp;&#8741;&nbsp;QR).</div><div class="eln correct-line">Angle PRQ = angle PTS (corresponding, ST&nbsp;&#8741;&nbsp;QR).</div></div><div class="note-line">Three pairs of equal corresponding angles (AAA) is what proves the triangles are similar.</div></td></tr>
+      <tr><td class="q">11b</td><td class="topic"><span class="tag">E4.4</span><span class="topic-name">Similarity / congruence</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">11c</td><td class="topic"><span class="tag">E4.4</span><span class="topic-name">Similarity / congruence</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">12a</td><td class="topic"><span class="tag">E1.2</span><span class="topic-name">Sets</span></td><td class="marks partial">1/3</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line correct-line">The algebra was entirely correct: S-only=60&minus;x, overlap=x, C-only=70&minus;x, solving 25+(60&minus;x)+x+(70&minus;x)=100 gives x=<b>55</b>.</div><div class="note-line">But 55 went into the S-only circle and 5 went into the overlap &mdash; the two got swapped. Only C-only (70&minus;55=15) ended up in the right place.</div><div class="note-line correct-line">Should be: S-only=5, overlap=55, C-only=15. After solving for a letter, say out loud which region it belongs to before writing it in.</div></td></tr>
+      <tr><td class="q">12b(i)</td><td class="topic"><span class="tag">E1.2</span><span class="topic-name">Sets: probability</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">Didn't even need the diagram &mdash; the question already says 70 of the 100 cycle.</div><div class="mini-eq"><div class="eln correct-line">P(C) = <span class="frac"><span class="num">70</span><span class="den">100</span></span></div></div><div class="note-line">The answer given, <span class="frac"><span class="num">20</span><span class="den">100</span></span>, came from the diagram instead of the given number.</div></td></tr>
+      <tr><td class="q">12b(ii)</td><td class="topic"><span class="tag">E1.2</span><span class="topic-name">Sets: probability</span></td><td class="marks full">1/1</td><td class="reason dash">Follow-through: P(S&cap;C) correctly read off her own (swapped) diagram as <span class="frac"><span class="num">5</span><span class="den">100</span></span>, earning full credit even though the diagram itself was wrong.</td></tr>
+      <tr><td class="q">12b(iii)</td><td class="topic"><span class="tag">E1.2</span><span class="topic-name">Sets: probability</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">Even with the diagram filled in wrong, there was still a chance at the follow-through mark. S&cup;C&prime; is every part of the diagram except the C-only part (15, in the swapped diagram) &mdash; that's neither + S-only + overlap.</div><div class="mini-eq"><div class="eln">Answer given: <span class="frac"><span class="num">55+25</span><span class="den">100</span></span> = <span class="frac"><span class="num">80</span><span class="den">100</span></span> = <span class="frac"><span class="num">4</span><span class="den">5</span></span></div><div class="eln correct-line">Follow-through available: <span class="frac"><span class="num">55+25+5</span><span class="den">100</span></span> = <span class="frac"><span class="num">85</span><span class="den">100</span></span> = <b><span class="frac"><span class="num">17</span><span class="den">20</span></span></b></div></div><div class="note-line">The overlap (5) was left out of the sum even though it's still part of S.</div></td></tr>
+      <tr><td class="q">13a</td><td class="topic"><span class="tag">E1.1</span><span class="topic-name">Types of number</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">13b</td><td class="topic"><span class="tag">E1.1</span><span class="topic-name">Types of number</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-blank">Left blank</span><div class="note-line">Left blank ("forgot," written in pink ink) &mdash; a new type of question, worth going through together. Given M = 2&#8311;&times;3&sup3;&times;5&sup2;.</div><div class="mini-eq"><div class="eln">Biggest cube factor of M: 2&#8310;&times;3&sup3;</div><div class="eln correct-line">Smallest R: R = 2&times;5&sup2; = 2&times;25 = <b>50</b></div><div class="eln correct-line"><span class="frac"><span class="num">M</span><span class="den">R</span></span> = <span class="frac"><span class="num">2&#8311;&times;3&sup3;&times;5&sup2;</span><span class="den">2&times;5&sup2;</span></span> = 2&#8310;&times;3&sup3; = (2&sup2;&times;3)&sup3; = <b>12&sup3;</b></div></div><div class="note-line">Every prime's power in M/R needs to be a multiple of 3 for it to be a cube number &mdash; 3&sup3; was already fine, but 2&#8311; needed one 2 removed and 5&sup2; needed both 5s removed.</div></td></tr>
+      <tr><td class="q">14a</td><td class="topic"><span class="tag">E1.7</span><span class="topic-name">Indices I</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">The question is 3&sup2;&divide;3&#8315;&sup2;, not 3&sup2;&times;3&#8315;&sup2; &mdash; the &divide; sign was read as &times;.</div><div class="mini-eq"><div class="eln">Answer given (as if &times;): 3&sup2;&times;3&#8315;&sup2; = 3 to the power of (2+(&minus;2)) = 3&#8304; = 1</div><div class="eln correct-line">Correct (&divide;): 3&sup2;&divide;3&#8315;&sup2; = 3 to the power of (2&minus;(&minus;2)) = 3&#8308; = <b>81</b></div></div><div class="note-line">The index method itself is fine &mdash; this was a misread of the operation symbol, not the rule. Worth a slow, deliberate read of &divide; vs &times; before starting any indices question.</div></td></tr>
+      <tr><td class="q">14b</td><td class="topic"><span class="tag">E1.7</span><span class="topic-name">Indices I</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">15a</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">15b</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">Both terms in 5x(x&minus;2y)+6(x&minus;2y)&sup2; share a common bracket, (x&minus;2y). This question asks you to factorise, which works the same way as ab+ac=a(b+c) &mdash; you expanded instead of factorising.</div><div class="mini-eq"><div class="eln correct-line">5x(x&minus;2y)+6(x&minus;2y)&sup2; = (x&minus;2y)[5x+6(x&minus;2y)] = <b>(x&minus;2y)(11x&minus;12y)</b></div></div><div class="note-line">The full expansion (11x&sup2;&minus;34xy+24y&sup2;) was correctly reached along the way, worth partial credit &mdash; but a "factorise" question needs to end back in bracket form, not left expanded out.</div></td></tr>
+      <tr><td class="q">16</td><td class="topic"><span class="tag">E4.6</span><span class="topic-name">Angles</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">17a</td><td class="topic"><span class="tag">E3.4</span><span class="topic-name">Length and midpoint</span></td><td class="marks partial">0/5</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The <i>gradient</i> of BD was found twice, correctly (&minus;4) &mdash; but gradient tells you how steep a line is, not how long it is. The gradient was used in the ratio calculation instead of the <i>length</i> of BD, and that step was never done.</div><div class="note-line">(The boxed answer, 6, is actually c from part (c) &mdash; likely copied into the wrong box rather than an attempt at this part.)</div><div class="mini-eq"><div class="eln">length of BD = &radic;((&minus;5&minus;(&minus;3))&sup2;+(9&minus;1)&sup2;) = &radic;((&minus;2)&sup2;+8&sup2;) = &radic;68 = 2&radic;17</div><div class="eln correct-line">BD:AC = 2:3 &rarr; AC = <span class="frac"><span class="num">3</span><span class="den">2</span></span>&times;2&radic;17 = <b>3&radic;17</b></div></div><div class="note-line">Worth practising gradient and length on the same two points side by side, so they stay two separate calculations.</div></td></tr>
+      <tr><td class="q">17b</td><td class="topic"><span class="tag">E3.4</span><span class="topic-name">Length and midpoint</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">17c</td><td class="topic"><span class="tag">E3.5/E3.6/E3.7</span><span class="topic-name">Perpendicular lines</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">18</td><td class="topic"><span class="tag">E1.18</span><span class="topic-name">Surds</span></td><td class="marks partial">2/3</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line correct-line">Genuinely surprising that the wrong answer ended up in the box here &mdash; every step of the calculation is right, and it's exactly half the correct answer.</div><div class="mini-eq"><div class="eln"><span class="frac"><span class="num">20</span><span class="den">4+&radic;6</span></span> &times; <span class="frac"><span class="num">4&minus;&radic;6</span><span class="den">4&minus;&radic;6</span></span> = <span class="frac"><span class="num">20(4&minus;&radic;6)</span><span class="den">16&minus;6</span></span> = <span class="frac"><span class="num">20(4&minus;&radic;6)</span><span class="den">10</span></span></div><div class="eln correct-line">= 2(4&minus;&radic;6) = <b>8&minus;2&radic;6</b></div></div><div class="note-line">The last division was done by 20 instead of 10, giving 4&minus;&radic;6 &mdash; a slip in the very last line, not the method.</div></td></tr>
+      <tr><td class="q">19</td><td class="topic"><span class="tag">E6.6</span><span class="topic-name">Pythagoras in 3D</span></td><td class="marks partial">2/3</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line correct-line">Base diagonal = &radic;(5&sup2;+5&sup2;)=5&radic;2; space diagonal = &radic;((5&radic;2)&sup2;+7&sup2;)=&radic;99=3&radic;11 &mdash; exactly the value needed, both steps correct.</div><div class="note-line">But the question says "show that this rod does <b>not</b> fit" &mdash; the concluding sentence (3&radic;11&asymp;9.95cm, which is less than the 10cm rod, so it doesn't fit) was never written. Whenever a question says "show that&hellip;therefore," that sentence is itself worth a mark.</div></td></tr>
+      <tr><td class="q">20a(i)</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">20a(ii)</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">20a(iii)</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">20b</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations</span></td><td class="marks full">5/5</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">21a</td><td class="topic"><span class="tag">E6.4</span><span class="topic-name">Trigonometric functions</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">21b</td><td class="topic"><span class="tag">E6.4</span><span class="topic-name">Trigonometric functions</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">22</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-blank">Left blank</span><div class="note-line">Left blank &mdash; completing the square in reverse, a concept not yet taught, so worth a proper first lesson. Using vertex form y=(x&minus;h)&sup2;+k, where (h,k) is the turning point: the given minimum (&minus;5,12) means h=&minus;5, k=12.</div><div class="mini-eq"><div class="eln">y = (x&minus;(&minus;5))&sup2;+12 = (x+5)&sup2;+12</div><div class="eln correct-line">= x&sup2;+10x+25+12 = x&sup2;+10x+37</div></div><div class="note-line correct-line">So b = <b>10</b>, c = <b>37</b>.</div></td></tr>
+      <tr><td class="q">23a</td><td class="topic"><span class="tag">E5.3</span><span class="topic-name">Circles, arcs and sectors</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">23b</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Surface area and volume</span></td><td class="marks partial">0/6</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The method used (cos(60&deg;) = <span class="frac"><span class="num">a</span><span class="den">12</span></span>, then Pythagoras inside that flat triangle) is a real, correctly-carried-out calculation &mdash; just for the wrong shape. It treats the sector's own chord and apothem as if they were the cone's radius and height.</div><div class="note-line">When a sector is rolled into a cone, the <b>arc length becomes the circumference of the base circle</b> &mdash; that's the link that has to be used:</div><div class="mini-eq"><div class="eln">Arc length (part a) = 16&pi;cm = base circumference &rarr; 2&pi;r=16&pi; &rarr; r=8</div><div class="eln">The sector's radius, 12cm, becomes the cone's slant height &rarr; 12&sup2;=8&sup2;+h&sup2; &rarr; h=&radic;80</div><div class="eln correct-line">Volume = <span class="frac"><span class="num">1</span><span class="den">3</span></span>&times;&pi;&times;8&sup2;&times;&radic;80 = <b><span class="frac"><span class="num">256&radic;5</span><span class="den">3</span></span>&pi;</b> cm&sup3;</div></div><div class="note-line">Worth cutting out a sector and physically rolling it into a cone, so it's clear which measurement becomes which.</div></td></tr>
+      <tr><td class="q">24</td><td class="topic"><span class="tag">E2.4</span><span class="topic-name">Indices II</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr class="total"><td colspan="2">Total</td><td class="marks">68/100</td><td class="reason">68%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="legend">
+    <div><span class="dot full-dot"></span>Full marks</div>
+    <div><span class="dot partial-dot"></span>Marks dropped</div>
+  </div>
+
+  <div class="legend">
+    <span class="cat cat-slip">Careless slip</span>
+    <span class="cat cat-hw">Handwriting</span>
+    <span class="cat cat-miscon">Misconception</span>
+    <span class="cat cat-blank">Left blank</span>
+  </div>
+
+  <h2 class="section-title">What she could achieve &mdash; fixing each category in turn</h2>
+  <div class="ladder">
+    <div class="ladder-row">
+      <div class="ladder-score">68/100</div>
+      <div class="ladder-desc">Actual score.</div>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">80/100</div>
+      <div class="ladder-desc">+ careless slips fixed: <b>Q5a</b> (600&times;1/4 computed as 125, not 150), <b>Q6b</b> (boxed AEC's value instead of AED's), <b>Q6c</b> (stopped at DAE instead of continuing to DAB), <b>Q8</b> (converted dollars to cents), <b>Q12a/12b(i)/12b(iii)</b> (placed the Venn diagram values in the right circles), <b>Q14a</b> (read &divide; as &times;), <b>Q18</b> (divided by 10, not 20), <b>Q19</b> (wrote the "therefore it doesn't fit" conclusion) &mdash; in every case, the method used was correct.</div>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">80/100</div>
+      <div class="ladder-desc">+ handwriting fixed: none this paper.</div>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">95/100</div>
+      <div class="ladder-desc">+ misconceptions resolved: <b>Q11a</b> (proved similarity via angles, not restated facts), <b>Q15b</b> (factored out the common bracket instead of expanding), <b>Q17a</b> (found BD's length and applied the 2:3 ratio), <b>Q23b</b> (matched the arc length to the cone's base circumference).</div>
+    </div>
+    <div class="ladder-row final">
+      <div class="ladder-score">100/100</div>
+      <div class="ladder-desc">+ blanks completed: <b>Q13b</b> (cube numbers via prime factors), <b>Q22</b> (completing the square in reverse) &mdash; worth 5 marks lost purely to two not-yet-taught sub-skills.</div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Weak topics to target next session</h2>
+  <div class="weak-grid">
+    <div class="weak-card slip">
+      <h3>Answer the exact angle the question names, not just a correct one</h3>
+      <p>Q6(b) and Q6(c) both show the right intermediate angle appearing in the working (AEC=100&deg; correctly found; the isosceles base angle correctly found as 50&deg;) but a different, related angle gets written in the final answer box instead of the one the question actually asked for. This is the single clearest repeating pattern on this paper &mdash; worth a habit of underlining the exact letters of the angle being asked for before writing a final answer.</p>
+    </div>
+    <div class="weak-card miscon">
+      <h3>Q17(a) &mdash; gradient was calculated instead of length (5 marks)</h3>
+      <p>The gradient of BD was found twice, correctly, but the question needed BD's <i>length</i> (via the distance formula) to apply the 2:3 ratio and find AC. The two calculations &mdash; "how steep" vs "how long" &mdash; seem to be merging into one in her mind. Worth a side-by-side drill: given two coordinates, find the gradient AND the length as two separate labelled answers.</p>
+    </div>
+    <div class="weak-card miscon">
+      <h3>Q23(b) &mdash; folding a sector into a cone (6 marks, the single biggest loss)</h3>
+      <p>The method used (cos(60)=a/12, then Pythagoras within the flat sector triangle) is a real, coherent calculation &mdash; just for the wrong shape. Turning a sector into a cone specifically requires matching the sector's arc length to the cone's base circumference (2&pi;r), not using the sector's own internal chord/apothem geometry. Worth building this physically &mdash; rolling a paper sector into an actual cone &mdash; before the next question of this type.</p>
+    </div>
+    <div class="weak-card miscon">
+      <h3>Q11(a) &mdash; a similarity proof needs angle equalities, not restated facts</h3>
+      <p>All four answers given ("ST and QR are parallel," "same point of P," "S is a point on QP," "T is a point on RP") repeat information already stated in the question rather than proving similarity. With no side lengths given, the only route is through angles: one shared angle plus two pairs of equal corresponding angles (from the parallel lines). Worth a few practice proofs that specifically forbid restating the question's own setup as a "reason."</p>
+    </div>
+    <div class="weak-card blank">
+      <h3>Two blanks on topics not yet taught</h3>
+      <p>Q13(b) (finding R so that M/R is a cube number, via prime factorisation) and Q22 (completing the square in reverse, given a minimum point) were both left blank. Neither looks like a slip or a forgotten method &mdash; both are new sub-skills that haven't had a dedicated lesson yet, worth scheduling short, focused introductions for each rather than treating them as gaps in known material.</p>
+    </div>
+  </div>
+
+  <footer>0580/22 &middot; Cambridge IGCSE Mathematics &middot; October/November 2025 &middot; marked against the official mark scheme</footer>
+
+</div>
+</body>
+</html>
