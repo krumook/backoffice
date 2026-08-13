@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy &mdash; Feedback 13 Aug 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
+    --accent: #0f6e56; --accent-light: #e1f5ee;
+    --tip: #185fa5; --tip-light: #e6f1fb;
+    --amber: #854f0b; --amber-light: #faeeda;
+    --loss: #993c1d; --loss-light: #faece7;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
+    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.55; }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+  header { padding-bottom: 18px; border-bottom: 2px solid var(--ink); margin-bottom: 22px; }
+  header h1 { margin: 0 0 6px; font-size: 21px; font-weight: 700; }
+  header .meta { color: var(--muted); font-size: 13.5px; }
+  .sess-nav { display:flex; justify-content:space-between; align-items:center; margin: 22px 0 4px; font-size: 13px; }
+  .sess-nav a { color: var(--tip); text-decoration:none; font-weight:600; }
+  .sess-nav a:hover { text-decoration:underline; }
+  .sess-nav .spacer { color: var(--muted); }
+  .fb-section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
+  .fb-title { font-size: 14px; font-weight: 700; color: var(--ink); margin: 0 0 10px; }
+  .fb-sub { font-size: 13.5px; font-weight: 700; color: var(--accent); margin: 14px 0 6px; }
+  .fb-sub:first-of-type { margin-top: 0; }
+  .fb-section p { margin: 0 0 8px; font-size: 13.5px; color: var(--ink); }
+  .fb-section ul { margin: 0 0 4px; padding-left: 20px; }
+  .fb-section li { font-size: 13.5px; color: var(--ink); margin-bottom: 5px; }
+  .fb-section.homework .fb-title { color: var(--accent); }
+  .fb-section.next .fb-title { color: var(--tip); }
+  .fb-section.today-hw { background: var(--amber-light); border-color: #eddcb8; }
+  .fb-section.today-hw .fb-title { color: var(--amber); }
+  .fb-section.next { background: var(--tip-light); border-color: #cfe1f4; }
+  .status-note { font-size: 12px; color: var(--muted); font-style: italic; }
+  .score-line { display: flex; align-items: baseline; gap: 10px; margin: 4px 0 6px; }
+  .score-line .num { font-size: 22px; font-weight: 700; }
+  .score-line .num.good { color: var(--accent); }
+  .score-line .num.mid { color: var(--amber); }
+  .score-line .pct { font-size: 12.5px; color: var(--muted); }
+  .full-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; }
+  .full-link:hover { text-decoration: underline; }
+  .paper-block { margin-bottom: 14px; }
+  .paper-block:last-child { margin-bottom: 0; }
+  .paper-block .paper-label { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 2px; }
+  .hw-list { margin: 0; padding-left: 20px; }
+  .hw-list li { font-size: 13.5px; margin-bottom: 6px; }
+  .hw-list .code { font-weight: 700; color: var(--amber); }
+  footer { margin-top: 28px; font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="tracker.html">&larr; Back to progress tracker</a>
+
+  <header>
+    <h1>Mildy &mdash; Class Feedback</h1>
+    <div class="meta">Thursday 13 Aug 2026 &middot; 16:00&ndash;17:30</div>
+  </header>
+
+  <div class="fb-section homework">
+    <div class="fb-title">📬 Homework Result</div>
+    <p>Mildy submitted her retake homework for both papers.</p>
+
+    <div class="paper-block">
+      <div class="paper-label">0580 October/November 2025 &middot; Paper 22</div>
+      <div class="score-line"><span class="num mid">68<span style="font-size:14px;color:var(--muted);">/100</span></span><span class="pct">68%</span></div>
+      <p>Most of the lost marks came from careless calculation and misreading errors rather than gaps in understanding.</p>
+      <a class="full-link" href="pm/on25-22.html">Full question-by-question marking breakdown &rarr;</a>
+    </div>
+
+    <div class="paper-block">
+      <div class="paper-label">0580 October/November 2025 &middot; Paper 23</div>
+      <div class="score-line"><span class="num good">89<span style="font-size:14px;color:var(--muted);">/100</span></span><span class="pct">89%</span></div>
+      <p>A big jump &mdash; and a great sign that emphasizing double-checking her work after the Paper 22 result is already paying off.</p>
+      <a class="full-link" href="pm/on25-23.html">Full question-by-question marking breakdown &rarr;</a>
+    </div>
+  </div>
+
+  <div class="fb-section">
+    <div class="fb-title">📚 In-Class Today &mdash; Past Paper Retake Review, Multiple Topics (0580 W25 P22)</div>
+
+    <div class="fb-sub">📊 Statistical Charts (E9.4)</div>
+    <ul>
+      <li>Reviewed pie chart problems &mdash; working out sector angles and quantities from given percentages and fractions</li>
+    </ul>
+
+    <div class="fb-sub">📐 Angles (E4.6)</div>
+    <ul>
+      <li>Practised angle reasoning with parallel lines, isosceles triangles, and quadrilaterals, using correct geometric reasons (alternate, corresponding, straight line, base angles)</li>
+    </ul>
+
+    <div class="fb-sub">🔤 Algebraic Manipulation (E2.2)</div>
+    <ul>
+      <li>Worked on writing algebraic expressions for word problems involving cost and change, and factorising expressions with a common bracket factor</li>
+    </ul>
+
+    <div class="fb-sub">🔺 Similarity (E4.4)</div>
+    <ul>
+      <li>Practised proving triangles similar using AAA reasoning, identifying corresponding angles via parallel lines (alternate/corresponding/vertically opposite)</li>
+    </ul>
+
+    <div class="fb-sub">🎲 Sets &amp; Probability (E1.2)</div>
+    <ul>
+      <li>Used Venn diagrams and probability notation (union, intersection, complement) to solve set problems</li>
+    </ul>
+
+    <div class="fb-sub">🔢 Types of Number (E1.1)</div>
+    <ul>
+      <li>Practised prime factorisation, finding smallest values for square/cube number conditions</li>
+    </ul>
+
+    <div class="fb-sub">📈 Indices I (E1.7)</div>
+    <ul>
+      <li>Solved index equations and simplified expressions with fractional/negative indices</li>
+    </ul>
+
+    <p class="status-note">Note: a couple of questions (one on angles, one on indices) were flagged as beyond the 0580 syllabus difficulty &mdash; we looked at them together just to check her reasoning, without requiring full mastery.</p>
+
+    <div class="fb-sub">🎯 Focus &amp; Understanding</div>
+    <ul>
+      <li>Fully focused throughout</li>
+      <li>Understood the material well overall</li>
+      <li>Better pace than last session &mdash; the double-checking habit is showing real results</li>
+      <li>Great attitude, as always</li>
+    </ul>
+  </div>
+
+  <div class="fb-section today-hw">
+    <div class="fb-title">🏠 Today's Homework &mdash; Retake questions from 0580 W25 Paper 22</div>
+    <ul class="hw-list">
+      <li><span class="code">Pie Charts (Q5)</span> &mdash; Page 3, Questions 3 &amp; 4</li>
+      <li><span class="code">Angles (Q6)</span> &mdash; Page 5, Question 2; Page 6, Question 3</li>
+      <li><span class="code">Algebraic Manipulation &mdash; word problems (Q8)</span> &mdash; Page 8, Questions 1&ndash;3</li>
+      <li><span class="code">Sets &amp; Probability (Q12)</span> &mdash; Page 13, Questions 2&ndash;5</li>
+      <li><span class="code">Types of Number (Q13)</span> &mdash; Page 18, Question 2</li>
+      <li><span class="code">Indices I (Q14)</span> &mdash; Page 20, Questions 3 &amp; 4</li>
+      <li><span class="code">Factorising (Q15)</span> &mdash; Page 21, Questions 1&ndash;8; Page 22, Questions 2&ndash;6 &amp; 8</li>
+    </ul>
+    <p><b>Explanation:</b></p>
+    <ul>
+      <li>For the pie chart and probability questions, draw a quick diagram or table first &mdash; most become straightforward once you can see how the pieces fit together and add up to the whole</li>
+      <li>For angles, always state the geometric reason (alternate, corresponding, isosceles base angles, etc.) alongside your answer</li>
+      <li>For factorising, look for the shared bracket across every term first (even if one term needs expanding a squared bracket to reveal it), then factor it out before simplifying what's left inside</li>
+      <li>For indices, rewrite every term with the same base individually before combining exponents</li>
+    </ul>
+  </div>
+
+  <div class="fb-section next">
+    <div class="fb-title">🗓️ Plan for Next Session</div>
+    <ul>
+      <li>Go through this homework together</li>
+      <li>Continue with the remaining 0580 W25 Paper 22 retake questions we didn't get to today</li>
+      <li>Begin retake work on 0580 W25 Paper 23</li>
+    </ul>
+  </div>
+
+  <div class="sess-nav">
+    <a href="fb0810.html">&larr; Previous session</a>
+    <a href="tracker.html">Progress tracker</a>
+    <a href="fb0814.html">Next session &rarr;</a>
+  </div>
+
+  <footer>Mildy &middot; Cambridge IGCSE 0580 Extended &middot; class feedback log</footer>
+
+</div>
+</body>
+</html>
