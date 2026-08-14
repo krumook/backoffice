@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Trial Classes — Conversion Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
+    --accent: #0f6e56; --accent-light: #e1f5ee;
+    --tip: #185fa5; --tip-light: #e6f1fb;
+    --amber: #854f0b; --amber-light: #faeeda;
+    --loss: #993c1d; --loss-light: #faece7;
+    --purple: #3c3489; --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  header { padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 24px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .summary-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .summary-card .value { font-size: 24px; font-weight: 700; margin-top: 4px; color: var(--ink); }
+  .summary-card.rate .value { color: var(--accent); }
+
+  .section-label { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  .reason-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+  .reason-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; text-align: center; }
+  .reason-card .rname { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .reason-card .rcount { font-size: 20px; font-weight: 700; color: var(--ink); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13.5px;
+    margin-bottom: 24px;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  tbody td.empty-row { color: var(--muted); font-style: italic; text-align: center; padding: 24px; }
+
+  .status-pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+  .status-converted { background: var(--accent-light); color: var(--accent); }
+  .status-notconverted { background: var(--loss-light); color: var(--loss); }
+  .status-pending { background: var(--amber-light); color: var(--amber); }
+
+  .reason-tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 20px; white-space: nowrap; }
+  .reason-price { background: var(--loss-light); color: var(--loss); }
+  .reason-fit { background: var(--purple-light); color: var(--purple); }
+  .reason-schedule { background: var(--amber-light); color: var(--amber); }
+  .reason-elsewhere { background: #eef0f6; color: var(--muted); }
+  .reason-unclear { background: #eef0f6; color: var(--muted); }
+
+  .detail-link { color: var(--tip); text-decoration: none; font-weight: 600; }
+  .detail-link:hover { text-decoration: underline; }
+
+  .note {
+    background: var(--accent-light);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 13.5px;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+  .note b { display: block; margin-bottom: 4px; color: var(--ink); }
+
+  .legend { display: flex; gap: 16px; font-size: 12px; color: var(--muted); flex-wrap: wrap; margin-bottom: 28px; }
+
+  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../teacher-hub.html">&larr; Back to teacher hub</a>
+
+  <header>
+    <h1>Trial classes &mdash; conversion tracker</h1>
+    <div class="meta">Every 30-minute trial class, whether they went on to book 1:1 tutoring, and why when they didn't &middot; updated after each trial and again once the outcome is known</div>
+  </header>
+
+  <div class="summary-row">
+    <div class="summary-card">
+      <div class="label">Trials logged</div>
+      <div class="value">0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Converted</div>
+      <div class="value">0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Didn't convert</div>
+      <div class="value">0</div>
+    </div>
+    <div class="summary-card rate">
+      <div class="label">Conversion rate</div>
+      <div class="value">&mdash;</div>
+    </div>
+  </div>
+
+  <div class="section-label">Reasons for not converting, so far</div>
+  <div class="reason-grid">
+    <div class="reason-card"><div class="rname">Price / too expensive</div><div class="rcount">0</div></div>
+    <div class="reason-card"><div class="rname">Teaching fit</div><div class="rcount">0</div></div>
+    <div class="reason-card"><div class="rname">Schedule conflict</div><div class="rcount">0</div></div>
+    <div class="reason-card"><div class="rname">Went elsewhere / no response</div><div class="rcount">0</div></div>
+  </div>
+
+  <div class="section-label">All trials</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:140px;">Name</th>
+        <th style="width:110px;">Trial date</th>
+        <th style="width:200px;">Subject / level</th>
+        <th style="width:130px;">Outcome</th>
+        <th style="width:180px;">Reason (if not converted)</th>
+        <th>Detail</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="6" class="empty-row">No trials logged yet &mdash; tell me about the next one (name, date, subject/level, how the 30 minutes went) and I'll add a row here plus a detail page.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="legend">
+    <div><span class="status-pill status-converted">Converted</span> went on to book 1:1</div>
+    <div><span class="status-pill status-notconverted">Didn't convert</span> decided not to continue</div>
+    <div><span class="status-pill status-pending">Pending</span> trial done, outcome not known yet</div>
+  </div>
+
+  <div class="note"><b>How to add a trial</b>After a trial class, tell me the same way you log regular class feedback &mdash; name, date, subject/level, and how the 30 minutes went. I'll create a detail page and add a row here marked <span class="status-pill status-pending">Pending</span>. Once you know whether they're continuing, tell me the outcome and, if they didn't convert, which of the reasons above fits best (based on what they told you or how the conversation went) &mdash; no form needed, just your own read of it. That's what feeds the conversion rate and reason breakdown above, so patterns (e.g. most drop-offs being price, not teaching) show up over time instead of getting lost.</div>
+
+  <footer>Trial class tracker &middot; not tied to any one student &middot; a student who converts gets their own folder and dashboard, linked from the <a href="../teacher-hub.html" style="color:var(--tip);">teacher hub</a></footer>
+
+</div>
+</body>
+</html>
