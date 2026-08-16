@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tenten &mdash; 5. Circles &mdash; Topic Detail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
+    --accent: #0f6e56; --accent-light: #e1f5ee;
+    --loss: #993c1d; --loss-light: #faece7;
+    --tip: #185fa5; --tip-light: #e6f1fb;
+    --amber: #854f0b; --amber-light: #faeeda;
+    --grade-astar: #1BA755; --grade-a: #1B88A7; --grade-b: #DD800E; --grade-below: #A71B46;
+    --grade-astar-light: #E2F8EB; --grade-a-light: #E2F3F8; --grade-b-light: #F8EEE2; --grade-below-light: #F8E2E9;
+    --untested: #8b978f; --untested-light: #eef1ef;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
+    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header { padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 20px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); font-size: 13px; table-layout: fixed; margin-bottom: 8px; }
+  thead th { background: var(--ink); color: #fff; text-align: left; padding: 10px 12px; font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
+  tbody td { padding: 10px 12px; border-top: 1px solid var(--line); vertical-align: top; }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.code { font-weight: 600; width: 70px; color: var(--accent); word-break: break-word; line-height: 1.3; font-size: 11.5px; }
+  td.topic { width: 300px; }
+  td.comment { color: var(--muted); width: auto; }
+  td.improve { color: var(--ink); width: 220px; }
+  .cat { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 20px; margin-right: 6px; white-space: nowrap; }
+  .cat-correct { background: var(--accent-light); color: var(--accent); }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  tr.untested td { color: var(--muted); }
+  tr.untested td.code { color: var(--muted); }
+  tr.untested td.dash { text-align: center; }
+  .sub-bullets { font-size: 11.5px; color: var(--muted); display: block; margin-top: 3px; }
+  .comment-line { display: block; margin-bottom: 6px; }
+  .comment-line:last-child { margin-bottom: 0; }
+  .legend { display: flex; gap: 18px; font-size: 12px; color: var(--muted); flex-wrap: wrap; align-items: center; margin: 10px 0 30px; }
+  .improve-summary { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 18px 0 6px; }
+  .improve-title { font-size: 13px; font-weight: 700; color: var(--ink); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 12px; }
+  .improve-row { font-size: 13px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+  .improve-row:last-child { margin-bottom: 0; }
+  .improve-row b { color: var(--ink); }
+  .improve-row .cat { margin-right: 8px; }
+  .topic-nav { display:flex; justify-content:space-between; align-items:center; margin: 20px 0; font-size: 13px; }
+  .topic-nav a { color: var(--tip); text-decoration:none; font-weight:600; }
+  .topic-nav a:hover { text-decoration:underline; }
+  .topic-nav .spacer { color: var(--muted); width: 33%; }
+  .score-badge { display:inline-block; font-size:20px; font-weight:700; margin-left:14px; vertical-align:middle; }
+  .score-badge.good { color: var(--accent); } .score-badge.mid { color: var(--amber); } .score-badge.low { color: var(--loss); }
+  .score-frac { font-size:13px; color: var(--muted); margin-left:6px; }
+  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>5&nbsp;&middot;&nbsp;Circles <span class="score-badge low">0.0%</span><span class="score-frac">0/8 learned</span></h1>
+    <div class="meta">Integrated Math II (Reveal Math) &middot; Module 5 &middot; rebuilt from the Reveal Math / IXL skill alignment table of contents</div>
+  </header>
+
+  <a class="back-link" href="dash.html">&larr; Back to dashboard</a>
+
+  <div class="legend">
+    <div><span class="cat cat-correct">Learned</span></div>
+    <div><span class="cat cat-slip">Need to revise</span></div>
+    <div>&mdash; Not yet covered</div>
+  </div>
+
+  <table>
+    <colgroup><col style="width:70px;"><col style="width:300px;"><col><col style="width:220px;"></colgroup>
+    <thead><tr><th>Code</th><th>Lesson</th><th>Status</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr class="untested"><td class="code">5.1</td><td class="topic">Circles and Circumference<span class="sub-bullets">Parts of a circle: radii, diameters, chords &middot; Circumference of circles</span></td><td class="comment dash">&mdash; not yet covered</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">5.2</td><td class="topic">Measuring Angles and Arcs<span class="sub-bullets">Central angles and arc measures &middot; Arc length &middot; Radians and degrees</span></td><td class="comment dash">&mdash; not yet covered</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">5.3</td><td class="topic">Arcs and Chords</td><td class="comment dash">&mdash; not yet covered</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">5.4</td><td class="topic">Inscribed Angles<span class="sub-bullets">Inscribed angles &middot; Angles in inscribed right triangles/quadrilaterals</span></td><td class="comment dash">&mdash; not yet covered</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">5.5</td><td class="topic">Tangents<span class="sub-bullets">Tangent lines &middot; Perimeter of polygons with an inscribed circle</span></td><td class="comment dash">&mdash; not yet covered</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">5.6</td><td class="topic">Tangents, Secants, and Angle Measures<span class="sub-bullets">Angles formed by chords, secants, and tangents</span></td><td class="comment dash">&mdash; not yet covered</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">5.7</td><td class="topic">Equations of Circles<span class="sub-bullets">Standard form from graphs/properties &middot; Graph circles from general form</span></td><td class="comment dash">&mdash; not yet covered</td><td class="improve dash">&mdash;</td></tr>
+      <tr class="untested"><td class="code">5.8</td><td class="topic">Equations of Parabolas<span class="sub-bullets">Vertex form using focus and directrix</span></td><td class="comment dash">&mdash; not yet covered</td><td class="improve dash">&mdash;</td></tr>
+    </tbody>
+  </table>
+
+  <div class="improve-summary">
+    <div class="improve-title">Areas to improve in this topic</div>
+    <div class="improve-row"><span class="cat cat-slip">Need to revise</span>None tagged for revision in this topic right now.</div>
+    <div class="improve-row"><span class="cat cat-correct" style="background:var(--untested-light);color:var(--untested);">Not covered</span>Not yet covered: 5.1 Circles and Circumference; 5.2 Measuring Angles and Arcs; 5.3 Arcs and Chords; 5.4 Inscribed Angles; 5.5 Tangents; 5.6 Tangents, Secants, and Angle Measures; 5.7 Equations of Circles; 5.8 Equations of Parabolas.</div>
+  </div>
+
+  <div class="topic-nav">
+    <a href="t4.html">&larr; 4. Right Triangles and Trigonometry</a>
+    <a href="dash.html">Dashboard</a>
+    <a href="t6.html">6. Measurement &rarr;</a>
+  </div>
+
+  <footer>Tenten &middot; Integrated Math II (Reveal Math) &middot; Modules follow the Reveal Math / IXL skill alignment table of contents &middot; update after each session</footer>
+
+</div>
+</body>
+</html>

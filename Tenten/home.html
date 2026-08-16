@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tenten &mdash; Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
+    --accent: #0f6e56; --accent-light: #e1f5ee; --tip: #185fa5; --tip-light: #e6f1fb; --amber: #854f0b; --amber-light: #faeeda; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
+    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+  header { padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 24px; }
+  header h1 { margin: 0 0 6px; font-size: 24px; font-weight: 700; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .hub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .hub-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px; transition: box-shadow 0.15s ease, transform 0.15s ease; }
+  .hub-card:hover { box-shadow: 0 4px 16px rgba(31,42,36,0.12); transform: translateY(-2px); }
+  .hub-card .icon { font-size: 26px; }
+  .hub-card .title { font-size: 15px; font-weight: 700; }
+  .hub-card .desc { font-size: 12.5px; color: var(--muted); }
+  .hub-card.schedule { border-top: 3px solid var(--tip); }
+  .hub-card.fees { border-top: 3px solid var(--amber); }
+  .hub-card.progress { border-top: 3px solid var(--accent); }
+  @media (max-width: 700px) { .hub-grid { grid-template-columns: 1fr; } }
+  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../teacher-hub.html">&larr; Back to teacher hub</a>
+
+  <header>
+    <h1>Tenten</h1>
+    <div class="meta">KPIS &middot; Integrated Math II (Reveal Math, McGraw Hill) &middot; Grade 9 &middot; converted from a free trial on 16 Aug 2026</div>
+  </header>
+
+  <div class="hub-grid">
+    <a class="hub-card schedule" href="sched.html">
+      <div class="icon">🗓️</div>
+      <div class="title">Class Schedule</div>
+      <div class="desc">Mon 17:00&ndash;18:00, starting 17 Aug 2026.</div>
+    </a>
+    <a class="hub-card fees" href="mo/index.html">
+      <div class="icon">💵</div>
+      <div class="title">Fee Summary</div>
+      <div class="desc">฿800 / hour &middot; monthly session log and totals.</div>
+    </a>
+    <a class="hub-card progress" href="dash.html">
+      <div class="icon">📊</div>
+      <div class="title">Progress Tracker</div>
+      <div class="desc">Coverage across all 13 Integrated Math II modules.</div>
+    </a>
+  </div>
+
+  <footer>Tenten &middot; Integrated Math II &middot; converted trial student</footer>
+
+</div>
+</body>
+</html>
