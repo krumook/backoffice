@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — 0580/42 October/November 2025 Marking Breakdown</title>
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 28px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .score-box { text-align: right; }
+  .score-box .num { font-size: 40px; font-weight: 700; color: var(--accent); line-height: 1; }
+  .score-box .pct { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .summary-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .summary-card .value { font-size: 22px; font-weight: 600; margin-top: 4px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13.5px;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.q { font-weight: 600; width: 48px; text-align: center; color: var(--ink); }
+  td.topic { width: 200px; color: var(--ink); }
+  td.topic .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tip);
+    background: var(--tip-light);
+    padding: 1px 7px;
+    border-radius: 20px;
+    margin-bottom: 4px;
+  }
+  td.topic .topic-name { display: block; }
+  td.marks { width: 85px; text-align: center; white-space: nowrap; }
+  td.reason { color: var(--muted); }
+  .full { color: var(--accent); font-weight: 600; }
+  .partial { color: var(--loss); font-weight: 600; }
+  .dash { color: var(--muted); }
+  .tip-label { color: var(--tip); font-weight: 600; }
+
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px; line-height: 1.05; font-size: 0.92em; position: relative; top: 0.28em; }
+  .frac .num, .frac .den { display: block; padding: 0 3px; }
+  .frac .num { border-bottom: 1.3px solid currentColor; padding-bottom: 1px; }
+  .frac .den { padding-top: 1px; }
+
+  .reason .note-line { display: block; margin-top: 6px; color: var(--ink); font-size: 13px; line-height: 1.45; }
+  .reason .mini-eq {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin: 7px 0;
+    font-size: 12.5px;
+  }
+  .reason .mini-eq .eln { padding: 2px 0; }
+  .reason .note-line.correct-line, .reason .mini-eq .eln.correct-line { color: var(--accent); font-weight: 600; }
+
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-hw { background: var(--loss-light); color: var(--loss); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  .pill-good, .pill-mid, .pill-blue {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    margin-bottom: 4px;
+  }
+  .pill-good { background: var(--accent-light); color: var(--accent); }
+  .pill-mid { background: var(--amber-light); color: var(--amber); }
+  .pill-blue { background: var(--tip-light); color: var(--tip); }
+  .mini-retake { display: inline-block; font-size: 10px; font-weight: 700; color: var(--tip); background: var(--tip-light); padding: 1px 7px; border-radius: 8px; margin-top: 6px; white-space: nowrap; }
+  .mini-hw { display: inline-block; font-size: 10px; font-weight: 700; color: var(--amber); background: var(--amber-light); padding: 1px 7px; border-radius: 8px; margin-top: 6px; white-space: nowrap; }
+
+  tr.total td {
+    border-top: 2px solid var(--ink);
+    font-weight: 700;
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+  tr.total td.reason { color: var(--accent); font-weight: 600; }
+
+  .legend {
+    margin: 18px 0 40px;
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .legend span.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .dot.full-dot { background: var(--accent); }
+  .dot.partial-dot { background: var(--loss); }
+  .dot.tip-dot { background: var(--tip); }
+
+  h2.section-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    padding-top: 8px;
+    border-top: 2px solid var(--ink);
+  }
+
+  .ladder {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 8px 20px;
+    margin-bottom: 28px;
+  }
+  .ladder-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .ladder-row:last-child { border-bottom: none; }
+  .ladder-score {
+    font-size: 20px;
+    font-weight: 700;
+    min-width: 78px;
+    color: var(--ink);
+  }
+  .ladder-row.final .ladder-score { color: var(--accent); }
+  .ladder-desc { font-size: 13.5px; color: var(--muted); flex: 1; }
+  .ladder-desc b { color: var(--ink); font-weight: 600; }
+  .ladder-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .tag-slip { background: var(--amber-light); color: var(--amber); }
+  .tag-hand { background: var(--loss-light); color: var(--loss); }
+  .tag-miscon { background: var(--pink-light); color: var(--pink); }
+  .tag-blank { background: var(--purple-light); color: var(--purple); }
+
+  .weak-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .weak-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--tip);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .weak-card h3 { margin: 0 0 6px; font-size: 14.5px; font-weight: 600; }
+  .weak-card p { margin: 0; font-size: 13px; color: var(--muted); }
+  .weak-card.hand { border-left-color: var(--amber); }
+
+  footer {
+    margin-top: 28px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tip);
+    text-decoration: none;
+    background: var(--tip-light);
+    padding: 7px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .back-link:hover { background: var(--tip); color: #fff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../tracker.html">&larr; Back to dashboard</a>
+
+  <header>
+    <div>
+      <h1>Mildy — marking breakdown</h1>
+      <div class="meta">Cambridge IGCSE Mathematics 0580/42 (Extended, calculator) &middot; October/November 2025</div>
+    </div>
+    <div class="score-box">
+      <div class="num">72<span style="font-size:20px;color:var(--muted);">/100</span></div>
+      <div class="pct">72%</div>
+    </div>
+  </header>
+
+  <div class="summary-row">
+    <div class="summary-card">
+      <div class="label">Questions fully correct</div>
+      <div class="value">19 / 35</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Careless slips</div>
+      <div class="value">&minus;9</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Handwriting</div>
+      <div class="value">&minus;0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Misconceptions</div>
+      <div class="value">&minus;18</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Left blank</div>
+      <div class="value">&minus;1</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:48px;">Q</th>
+        <th style="width:190px;">Topic</th>
+        <th style="width:85px;">Marks</th>
+        <th>Marks deducted &amp; reason</th>
+        <th style="width:150px;">Retake</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="q">1</td><td class="topic"><span class="tag">E1.11</span><span class="topic-name">Ratio and proportion</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">2</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations: linear</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">3</td><td class="topic"><span class="tag">E4.5</span><span class="topic-name">Symmetry: order of rotational symmetry</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">A regular decagon has 10 sides, and for a regular polygon the order of rotational symmetry always equals the number of sides:</div><div class="mini-eq"><div class="eln correct-line">Order of rotational symmetry = 10</div></div><div class="note-line"><b>6</b> was given instead &mdash; worth double-checking this rule (order = number of sides, for any regular polygon) since it's an easy single mark to bank.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">4a</td><td class="topic"><span class="tag">E1.12</span><span class="topic-name">Rates: cards per hour</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">4b</td><td class="topic"><span class="tag">E1.13</span><span class="topic-name">Percentages: percentage profit</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">5</td><td class="topic"><span class="tag">E1.16</span><span class="topic-name">Money: currency conversion</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">6</td><td class="topic"><span class="tag">E9.3</span><span class="topic-name">Averages and spread: mean &amp; range from a stem-and-leaf diagram</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">7a</td><td class="topic"><span class="tag">E5.2</span><span class="topic-name">Perimeter: parallelogram = circle circumference</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">7b</td><td class="topic"><span class="tag">E5.2</span><span class="topic-name">Area of a parallelogram &rarr; tiling cost</span></td><td class="marks partial">0/4</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">No working was shown for this part, just the final answer on the line. The area of this parallelogram needs the <b>perpendicular height</b>, not the slant side itself. From the diagram, height = 6.06&times;cos36&deg;:</div><div class="mini-eq"><div class="eln correct-line">Area = 6.51 &times; (6.06 &times; cos36&deg;) &asymp; 31.9 m&sup2;</div><div class="eln correct-line">Cost = 31.9 &times; 18 &asymp; $574</div></div><div class="note-line">The answer given, <b>$710.11</b>, is consistent with 6.51&times;6.06&times;18 (using the slant side as if it were the height), but with no working on the page there's nothing to award method marks against &mdash; on the real mark scheme, the &times;18 step only earns credit if it's actually <i>seen</i> leading to the answer, not inferred backwards from a wrong final number. This scores 0/4, not partial credit: an unsupported wrong answer can't earn the method marks that showing the working would have protected, even though the final &times;18 step itself was almost certainly done correctly.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">8a(i)</td><td class="topic"><span class="tag">E7.1</span><span class="topic-name">Transformations: translation</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">8a(ii)</td><td class="topic"><span class="tag">E7.1</span><span class="topic-name">Transformations: reflection in y=x+1</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">8b</td><td class="topic"><span class="tag">E7.1</span><span class="topic-name">Transformations: describing a single transformation</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">Shape A maps onto shape B by a <b>rotation</b>, not a reflection:</div><div class="mini-eq"><div class="eln correct-line">Rotation, 90&deg; anticlockwise, centre (&minus;2, 6)</div></div><div class="note-line">&ldquo;Reflection in line x=&minus;2&rdquo; was given instead. Interesting that x=&minus;2 is close to the true centre's x-coordinate &mdash; worth practising the visual check for rotation vs. reflection: a reflection always produces a mirror image (flipped orientation), while a rotation keeps the shape's orientation the same but turned. Tracing the shape's outline with a finger between A and B, rather than assuming from a single feature, would help catch this.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">9</td><td class="topic"><span class="tag">E2.9</span><span class="topic-name">Graphs in practical situations: distance from a speed&ndash;time graph</span></td><td class="marks partial">2/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The area calculation itself was exactly right:</div><div class="mini-eq"><div class="eln">(60+80)/2 &times; 15 + 80/2 &times; 10 = 1450</div></div><div class="note-line">But speed is in km/<b>h</b> while time was read straight off the graph in <b>minutes</b> &mdash; 1450 is correct only once converted from (km/h)&times;min into real km, by dividing by 60:</div><div class="mini-eq"><div class="eln correct-line">1450 &divide; 60 &asymp; 24.2 km</div></div><div class="note-line">1450 was left as the final answer without this conversion. This is a classic speed&ndash;time graph trap worth flagging specifically: whenever the time axis is in minutes but speed is per hour, the area needs &divide;60 at the very end.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">10a</td><td class="topic"><span class="tag">E2.7</span><span class="topic-name">Sequences: linear nth term</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">10b</td><td class="topic"><span class="tag">E2.7</span><span class="topic-name">Sequences: quadratic nth term</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">11a</td><td class="topic"><span class="tag">E2.10</span><span class="topic-name">Graphs of functions: completing a table of values</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">11b</td><td class="topic"><span class="tag">E2.10</span><span class="topic-name">Graphs of functions: drawing a cubic curve</span></td><td class="marks partial">3/4</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">The table (part a) was correct and the overall curve shape and smooth line through the points is right, but two of the nine plotted points don't match her own table:</div><div class="mini-eq"><div class="eln">At x=&minus;2: table says y=&minus;1, plotted at (&minus;2, 1) &nbsp;&larr;&nbsp; negative sign lost</div><div class="eln">At x=1.5: table says y=3.38, plotted at (1.5, 3.8) &nbsp;&larr;&nbsp; decimal-place transcription slip</div></div><div class="note-line">7 of 9 points correctly plotted, with a smooth curve still drawn through them, earns credit for the points and the curve but falls short of the top band (which needs 8 or more correct) &mdash; losing 1 of the 4 marks. Both errors happened at the plotting stage, not the table stage, so this is a copying/transcription slip rather than a misunderstanding of the cubic.</div></td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">11c</td><td class="topic"><span class="tag">E2.10</span><span class="topic-name">Graphs of functions: solving by drawing a line</span></td><td class="marks partial">2/4</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">The method here was fully correct &mdash; rearranging x&sup3;&minus;2.5x+1=0 into a line to draw against the given cubic:</div><div class="mini-eq"><div class="eln correct-line">y = 0.5x + 2, i.e. x&sup3; &minus; 2x + 3 = 0.5x + 2</div></div><div class="note-line">and the line was drawn correctly on the grid. The three x-values read off (&minus;2, 0.8, 1.45) are all outside the accepted ranges (&minus;1.85 to &minus;1.7, 0.4 to 0.5, 1.25 to 1.4) though close in two cases &mdash; this looks like an imprecise reading of where the line and curve actually cross, rather than a wrong method. Worth practising reading intersection points to the nearest half-square rather than estimating.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">12a</td><td class="topic"><span class="tag">E4.7/E4.8</span><span class="topic-name">Circle theorems: angle at the centre</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">12b</td><td class="topic"><span class="tag">E4.7/E4.8</span><span class="topic-name">Circle theorems: tangent &amp; alternate segment</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">No working was shown for this part, just the final answer (<b>26</b> given; correct answer is <b>27</b>). Here's the working to get there:</div><div class="mini-eq"><div class="eln">Angle AOC is double angle ABC (part (a)): 52&times;2 = 104&deg;</div><div class="eln">Angle OCB and angle BCE add up to 90&deg; (radius OC &perp; tangent DE): OCB = 90&minus;65 = 25&deg;</div><div class="eln">Obtuse angle AOC and reflex angle AOC add up to 360&deg;: reflex AOC = 360&minus;104 = 256&deg;</div><div class="eln correct-line">y = 360 &minus; (52+25+256) = 27&deg; (angle sum of quadrilateral OABC)</div></div><div class="note-line">Given how close the given answer is (26 vs 27) and that part (a)'s harder circle-theorem reasoning was solid, this looks like a small arithmetic slip in the final step rather than a new misunderstanding &mdash; but without working shown it's not possible to pin down exactly where.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">13</td><td class="topic"><span class="tag">E2.3</span><span class="topic-name">Algebraic fractions: adding with a common denominator</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">14a</td><td class="topic"><span class="tag">E1.13</span><span class="topic-name">Percentages: compound interest</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">14b</td><td class="topic"><span class="tag">E1.13</span><span class="topic-name">Percentages: reverse percentage (profit)</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The correct working:</div><div class="mini-eq"><div class="eln">He makes a profit of 34%, so $40870 is 134% of the cost price x:</div><div class="eln correct-line">1.34x = 40870 &rArr; x = 30500</div><div class="eln correct-line">Profit = 40870 &minus; 30500 = $10370</div></div><div class="note-line">34 was used instead of 1.34 in the equation, and the working stopped at x (the cost price) instead of continuing to find the profit the question actually asks for.</div></td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">14c</td><td class="topic"><span class="tag">E1.17</span><span class="topic-name">Exponential growth and decay: formula for value of a car</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">15a</td><td class="topic"><span class="tag">E6.5</span><span class="topic-name">Non-right-angled triangles: cosine rule for BC</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">15b</td><td class="topic"><span class="tag">E6.5</span><span class="topic-name">Non-right-angled triangles: sine rule for angle DBC</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">15c</td><td class="topic"><span class="tag">E6.5</span><span class="topic-name">Non-right-angled triangles: shortest distance from D to AB</span></td><td class="marks partial">2/4</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">Excellent method all the way through. Full working:</div><div class="mini-eq"><div class="eln">Area of triangle BCD = <span class="frac"><span class="num">1</span><span class="den">2</span></span> &times; 300 &times; 112 &times; sin140&deg; = 10798.83</div><div class="eln">Area of triangle ABD = total area &minus; area BCD = 35900 &minus; 10798.83 = 25101.17</div><div class="eln">The shortest distance from D to AB is the perpendicular height of triangle ABD from D:</div><div class="eln"><span class="frac"><span class="num">1</span><span class="den">2</span></span> &times; 180 &times; height = 25101.17 &rArr; height = 278.90</div><div class="eln correct-line">Answer = 279 m (3 s.f.)</div></div><div class="note-line">Every step up to and including finding the height (278.90&asymp;279) was carried out correctly, but 112 was written in the answer box instead &mdash; that's the length DC from earlier in the question, not the result of this calculation. Looks like a stray number got carried into the final box rather than a new error in the method. Worth a habit of double-checking the final boxed answer actually comes from the last line of working.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">16a</td><td class="topic"><span class="tag">E9.7</span><span class="topic-name">Histograms: frequency from frequency density</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">16b</td><td class="topic"><span class="tag">E8.3</span><span class="topic-name">Combined events: both coconuts from category D</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">Category C has 17 coconuts and category D has 10, found correctly in part (a), so there are 27 in the combined pool to choose 2 from, without replacement:</div><div class="mini-eq"><div class="eln correct-line"><span class="frac"><span class="num">10</span><span class="den">27</span></span> &times; <span class="frac"><span class="num">9</span><span class="den">26</span></span> = <span class="frac"><span class="num">5</span><span class="den">39</span></span></div></div><div class="note-line"><span class="frac"><span class="num">17</span><span class="den">32</span></span> &times; <span class="frac"><span class="num">17</span><span class="den">32</span></span> was used instead. The denominator 32 comes from adding category B's count (15) to category C's count (17), not the C+D pool (27) the question is actually about; and the numerator repeated category C's count (17) for both picks instead of category D's count (10) &mdash; with the same fraction used unchanged on the second pick, meaning the picks were also treated as with replacement rather than without.</div></td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">16c</td><td class="topic"><span class="tag">E9.3</span><span class="topic-name">Averages and spread: estimating the mean from a histogram</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">17</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation: expanding three brackets</span></td><td class="marks partial">2/3</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">(x&minus;2)(2x+3) was correctly expanded to 2x&sup2;&minus;x&minus;6, and the grouping/multiplying-out method for the second bracket was right throughout. The one error was a sign slip multiplying 2x&sup2; by (x+4):</div><div class="mini-eq"><div class="eln">2x&sup2; &times; (x+4) = 2x&sup3; + 8x&sup2; &nbsp;&larr;&nbsp; written as &minus;8x&sup2;</div></div><div class="note-line">That single sign flip turned the correct <b>+7x&sup2;</b> into <b>&minus;9x&sup2;</b> in the final answer (2x&sup3;&minus;9x&sup2;&minus;10x&minus;24 instead of 2x&sup3;+7x&sup2;&minus;10x&minus;24); the x&sup3;, x, and constant terms are all correct, so this is an isolated sign error rather than a method problem.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">18a</td><td class="topic"><span class="tag">E7.2/E7.3</span><span class="topic-name">Vectors: AB in terms of a and b</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">18b</td><td class="topic"><span class="tag">E7.2/E7.3</span><span class="topic-name">Vectors: AM using a given ratio</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">OA is parallel to CB with OA:CB=4:3, so CB isn't the same length as OA. Full working:</div><div class="mini-eq"><div class="eln">OA:CB = 4:3 &rArr; OA:CB = 4a:3a &rArr; CB = <span class="frac"><span class="num">3</span><span class="den">4</span></span>a</div><div class="eln correct-line">Vector OC = OB &minus; CB = b &minus; <span class="frac"><span class="num">3</span><span class="den">4</span></span>a</div><div class="eln correct-line">Vector OM = <span class="frac"><span class="num">1</span><span class="den">2</span></span>OC (M is the midpoint of OC) = <span class="frac"><span class="num">1</span><span class="den">2</span></span>b &minus; <span class="frac"><span class="num">3</span><span class="den">8</span></span>a</div><div class="eln correct-line">Vector AM = AO + OM = &minus;a + <span class="frac"><span class="num">1</span><span class="den">2</span></span>b &minus; <span class="frac"><span class="num">3</span><span class="den">8</span></span>a = &minus;<span class="frac"><span class="num">11</span><span class="den">8</span></span>a + <span class="frac"><span class="num">1</span><span class="den">2</span></span>b</div></div><div class="note-line">OC = b&minus;a was used instead, treating CB as equal in length to OA (ignoring the given 4:3 ratio entirely). Everything downstream (halving for the midpoint, subtracting a for AM) followed correctly from that starting point, so the one thing to fix is remembering to actually apply a given ratio when writing a parallel side as a multiple of a vector, not just copying the direction.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">19</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations: linear and quadratic simultaneous</span></td><td class="marks partial">5/6</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">Both x-values are right (2.92 and &minus;1.25) and the first y-value (&minus;0.84) is correct. The question asks for answers <b>correct to 2 decimal places</b>, and that's exactly where the second y-value slipped:</div><div class="mini-eq"><div class="eln">y = 5&minus;2(&minus;1.25) = 7.5 &nbsp;&larr;&nbsp; rounded x used too early</div><div class="eln correct-line">y = 5&minus;2(&minus;1.2549&hellip;) = 7.51 &nbsp;&larr;&nbsp; full x used, then rounded to 2 d.p. at the end</div></div><div class="note-line">Rounding x to &minus;1.25 before finding the second y-value gave 7.5 instead of the required 2 d.p. answer, 7.51. Round only at the very last step.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">20</td><td class="topic"><span class="tag">E1.10</span><span class="topic-name">Limits of accuracy: lower bound of a volume</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">21</td><td class="topic"><span class="tag">E2.8</span><span class="topic-name">Proportion: combining inverse and direct proportion</span></td><td class="marks partial">3/4</td><td class="reason"><span class="cat cat-blank">Left blank</span><div class="note-line">Both proportionality constants were found correctly, but the two pieces were never combined into a final answer. Full working:</div><div class="mini-eq"><div class="eln">y = <span class="frac"><span class="num">k</span><span class="den">(x+2)&sup2;</span></span> &rArr; 8 = <span class="frac"><span class="num">k</span><span class="den">(3.5+2)&sup2;</span></span> &rArr; k=242, so y = <span class="frac"><span class="num">242</span><span class="den">(x+2)&sup2;</span></span></div><div class="eln">w=kx &rArr; 15=k(90) &rArr; k=<span class="frac"><span class="num">1</span><span class="den">6</span></span>, so w=<span class="frac"><span class="num">1</span><span class="den">6</span></span>x &rArr; x=6w</div><div class="eln correct-line">Substitute x=6w: y = <span class="frac"><span class="num">242</span><span class="den">(6w+2)&sup2;</span></span></div></div><div class="note-line">The answer box was left empty despite having everything needed to finish. Worth a habit of writing down the substitution step explicitly once both constants are found, even under time pressure, since the hard part of this question was already done.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr class="total"><td colspan="2">Total</td><td class="marks">72/100</td><td class="reason">72%</td><td class="reason dash">&mdash;</td></tr>
+    </tbody>
+  </table>
+
+  <div class="legend">
+    <div><span class="dot full-dot"></span>Full marks</div>
+    <div><span class="dot partial-dot"></span>Marks dropped</div>
+    <div><span class="dot tip-dot"></span>Technique tip (no marks lost)</div>
+  </div>
+
+  <div class="legend">
+    <span class="cat cat-slip">Careless slip</span>
+    <span class="cat cat-hw">Handwriting</span>
+    <span class="cat cat-miscon">Misconception</span>
+    <span class="cat cat-blank">Left blank</span>
+  </div>
+
+  <h2 class="section-title">What she could achieve</h2>
+  <div class="ladder">
+    <div class="ladder-row">
+      <div class="ladder-score">72/100</div>
+      <div class="ladder-desc">Actual mark obtained on this paper.</div>
+      <span></span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">81/100</div>
+      <div class="ladder-desc">Achievable by correcting the <b>9 careless slips</b>: Q11b's two mistranscribed plotted points (a lost negative sign and a decimal slip, against her own correct table), Q11c's imprecise graph reading, Q12b's near-miss (26 vs 27, no working shown), Q15c's unfinished final step (wrote 112 instead of completing 300&times;sin68&deg;), Q17's sign error expanding 2x&sup2;(x+4), and Q19's premature rounding on the second y-value.</div>
+      <span class="ladder-tag tag-slip">slips</span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">81/100</div>
+      <div class="ladder-desc">No handwriting-related losses on this paper.</div>
+      <span class="ladder-tag tag-hand">handwriting</span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">99/100</div>
+      <div class="ladder-desc">Achievable by additionally resolving the <b>7 underlying misconceptions</b>: the decagon's order of symmetry (Q3), forgetting the cos36&deg; height factor in a parallelogram's area (Q7b, worth 4 marks here since no working was shown to earn partial credit), confusing rotation with reflection (Q8b), the minutes&rarr;hours conversion on a speed&ndash;time graph (Q9), not converting a percentage to a decimal before using it in an equation (Q14b), the category-D probability without replacement (Q16b), and not applying the given 4:3 ratio to a parallel vector (Q18b).</div>
+      <span class="ladder-tag tag-miscon">misconceptions</span>
+    </div>
+    <div class="ladder-row final">
+      <div class="ladder-score">100/100</div>
+      <div class="ladder-desc">Achievable by additionally completing the <b>1 left-blank</b> answer (Q21 &mdash; both constants were already found correctly, just never combined into a final substituted answer).</div>
+      <span class="ladder-tag tag-blank">blank</span>
+    </div>
+  </div>
+
+  <h2 class="section-title">Weak topics to target next session</h2>
+  <div class="weak-grid">
+    <div class="weak-card">
+      <h3>Unit/precision traps: minutes vs hours, percent vs decimal</h3>
+      <p>Two separate questions lost marks to the exact same shape of error &mdash; a fully correct method broken by not converting a value into the right form before using it. Q9's speed&ndash;time graph area (1450) needed &divide;60 to turn km/h&times;min into real km; Q14b's profit equation used 34 instead of 0.34. Worth a standing habit of underlining any percentage or mismatched unit in a question before starting the working.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Applying given ratios/scale factors to parallel or similar quantities</h3>
+      <p>Q18b treated CB as equal to OA despite the question explicitly stating OA:CB=4:3, and Q7b treated the parallelogram's slant side as its height without applying the cos36&deg; factor the diagram gave (worth all 4 marks here, since no working was shown to earn partial credit either). Both are the same underlying habit &mdash; when a diagram or question gives a ratio or angle connecting two related lengths, it has to be used, not just the direction/shape copied across.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Finishing the final step</h3>
+      <p>Q15c and Q21 both show fully correct method with all the hard work done, but the very last combining/calculating step was never carried out &mdash; 112 was boxed instead of computing 300&times;sin68&deg; in Q15c, and Q21 stopped after finding both constants without substituting them into a final expression. Worth a check at the end of every multi-step question: does the boxed answer actually follow from the last line of working?</p>
+    </div>
+    <div class="weak-card">
+      <h3>Transformation vocabulary: rotation vs reflection</h3>
+      <p>Q8b named the single transformation mapping shape A onto shape B as a reflection in x=&minus;2, when it's actually a 90&deg; anticlockwise rotation about (&minus;2,6) &mdash; the x=&minus;2 detail suggests the centre of rotation was spotted but the transformation type itself wasn't checked. A quick visual test (does the shape flip/mirror, or does it turn while keeping the same orientation?) before naming the transformation would catch this.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Copying values accurately from table to graph</h3>
+      <p>Q11b's table (part a) was completely correct, but two of the nine points plotted from it didn't match: (&minus;2,&minus;1) became (&minus;2,1) &mdash; the negative sign was lost &mdash; and (1.5,3.38) became (1.5,3.8) &mdash; a digit dropped when transcribing the decimal. The curve itself was still drawn smoothly, so this isn't a plotting-skill issue, just a habit of double-checking each point against the table row by row before moving to the next.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Combined probability without replacement</h3>
+      <p>Q16b mixed up which category's count to use (17 from C instead of 10 from D) and didn't reduce the denominator on the second pick, both suggesting the &ldquo;choose 2 from a combined pool, without replacement&rdquo; structure needs more practice &mdash; specifically identifying the right numerator for the actual event asked about, and the numerator-and-denominator-both-drop-by-one pattern.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Showing working, even for short final answers</h3>
+      <p>Q12b (26 vs the correct 27, off by just 1&deg;) and Q7b ($710.11 vs the correct ~$574) both had no working shown at all, which meant no partial credit was available for either &mdash; even though Q7b's wrong answer implies the final &times;18 step was done correctly, examiners mark what's on the page, not what can be reverse-engineered from a number. A quick, minimal working line even for short answers protects marks when a small slip (or a bigger one) creeps in.</p>
+    </div>
+  </div>
+
+  <footer>0580/42 &middot; Cambridge IGCSE Mathematics &middot; October/November 2025 &middot; marked against the official mark scheme</footer>
+
+</div>
+</body>
+</html>
