@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — 0580/41 October/November 2025 Marking Breakdown</title>
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 28px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .score-box { text-align: right; }
+  .score-box .num { font-size: 40px; font-weight: 700; color: var(--accent); line-height: 1; }
+  .score-box .pct { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .summary-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .summary-card .value { font-size: 22px; font-weight: 600; margin-top: 4px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13.5px;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.q { font-weight: 600; width: 48px; text-align: center; color: var(--ink); }
+  td.topic { width: 200px; color: var(--ink); }
+  td.topic .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tip);
+    background: var(--tip-light);
+    padding: 1px 7px;
+    border-radius: 20px;
+    margin-bottom: 4px;
+  }
+  td.topic .topic-name { display: block; }
+  td.marks { width: 85px; text-align: center; white-space: nowrap; }
+  td.reason { color: var(--muted); }
+  .full { color: var(--accent); font-weight: 600; }
+  .partial { color: var(--loss); font-weight: 600; }
+  .dash { color: var(--muted); }
+  .excluded { color: var(--muted); font-weight: 600; }
+  .tip-label { color: var(--tip); font-weight: 600; }
+
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px; line-height: 1.05; font-size: 0.92em; position: relative; top: 0.28em; }
+  .frac .num, .frac .den { display: block; padding: 0 3px; }
+  .frac .num { border-bottom: 1.3px solid currentColor; padding-bottom: 1px; }
+  .frac .den { padding-top: 1px; }
+
+  .reason .note-line { display: block; margin-top: 6px; color: var(--ink); font-size: 13px; line-height: 1.45; }
+  .reason .mini-eq {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin: 7px 0;
+    font-size: 12.5px;
+  }
+  .reason .mini-eq .eln { padding: 2px 0; }
+  .reason .note-line.correct-line, .reason .mini-eq .eln.correct-line { color: var(--accent); font-weight: 600; }
+
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-hw { background: var(--loss-light); color: var(--loss); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+  .cat-excluded { background: var(--line); color: var(--muted); }
+
+  .pill-good, .pill-mid, .pill-blue {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    margin-bottom: 4px;
+  }
+  .pill-good { background: var(--accent-light); color: var(--accent); }
+  .pill-mid { background: var(--amber-light); color: var(--amber); }
+  .pill-blue { background: var(--tip-light); color: var(--tip); }
+  .mini-retake { display: inline-block; font-size: 10px; font-weight: 700; color: var(--tip); background: var(--tip-light); padding: 1px 7px; border-radius: 8px; margin-top: 6px; white-space: nowrap; }
+  .mini-hw { display: inline-block; font-size: 10px; font-weight: 700; color: var(--amber); background: var(--amber-light); padding: 1px 7px; border-radius: 8px; margin-top: 6px; white-space: nowrap; }
+
+  tr.total td {
+    border-top: 2px solid var(--ink);
+    font-weight: 700;
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+  tr.total td.reason { color: var(--accent); font-weight: 600; }
+
+  .legend {
+    margin: 18px 0 40px;
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .legend span.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .dot.full-dot { background: var(--accent); }
+  .dot.partial-dot { background: var(--loss); }
+  .dot.tip-dot { background: var(--tip); }
+
+  h2.section-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    padding-top: 8px;
+    border-top: 2px solid var(--ink);
+  }
+
+  .ladder {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 8px 20px;
+    margin-bottom: 28px;
+  }
+  .ladder-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .ladder-row:last-child { border-bottom: none; }
+  .ladder-score {
+    font-size: 20px;
+    font-weight: 700;
+    min-width: 78px;
+    color: var(--ink);
+  }
+  .ladder-row.final .ladder-score { color: var(--accent); }
+  .ladder-desc { font-size: 13.5px; color: var(--muted); flex: 1; }
+  .ladder-desc b { color: var(--ink); font-weight: 600; }
+  .ladder-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .tag-slip { background: var(--amber-light); color: var(--amber); }
+  .tag-hand { background: var(--loss-light); color: var(--loss); }
+  .tag-miscon { background: var(--pink-light); color: var(--pink); }
+  .tag-blank { background: var(--purple-light); color: var(--purple); }
+
+  .weak-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .weak-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--tip);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .weak-card h3 { margin: 0 0 6px; font-size: 14.5px; font-weight: 600; }
+  .weak-card p { margin: 0; font-size: 13px; color: var(--muted); }
+  .weak-card.hand { border-left-color: var(--amber); }
+
+  footer {
+    margin-top: 28px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tip);
+    text-decoration: none;
+    background: var(--tip-light);
+    padding: 7px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .back-link:hover { background: var(--tip); color: #fff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../tracker.html">&larr; Back to dashboard</a>
+
+  <header>
+    <div>
+      <h1>Mildy — marking breakdown</h1>
+      <div class="meta">Cambridge IGCSE Mathematics 0580/41 (Extended, calculator) &middot; October/November 2025</div>
+    </div>
+    <div class="score-box">
+      <div class="num">68<span style="font-size:20px;color:var(--muted);">/97</span></div>
+      <div class="pct">70.10%</div>
+    </div>
+  </header>
+
+  <div class="summary-row">
+    <div class="summary-card">
+      <div class="label">Questions fully correct</div>
+      <div class="value">28 / 44</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Careless slips</div>
+      <div class="value">&minus;8</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Handwriting</div>
+      <div class="value">&minus;0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Misconceptions</div>
+      <div class="value">&minus;15</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Left blank</div>
+      <div class="value">&minus;6</div>
+    </div>
+  </div>
+  <div style="font-size:12.5px;color:var(--muted);margin:-24px 0 28px;">Q5(a)/(b) &mdash; 3 marks, a compass construction &mdash; are excluded from the score above (see the note on that row); the total is out of 97, not 100.</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:48px;">Q</th>
+        <th style="width:190px;">Topic</th>
+        <th style="width:85px;">Marks</th>
+        <th>Marks deducted &amp; reason</th>
+        <th style="width:150px;">Retake</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="q">1</td><td class="topic"><span class="tag">E4.5</span><span class="topic-name">Symmetry</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">2</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations: linear</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">3</td><td class="topic"><span class="tag">E4.6</span><span class="topic-name">Angles</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">4</td><td class="topic"><span class="tag">E1.14</span><span class="topic-name">Using a calculator: reading off a time</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">The question asks to find the time the train journey finishes &mdash; the answer needs to be given as a time, but <b>4.08</b> was written instead of the time format the question calls for:</div><div class="mini-eq"><div class="eln correct-line">04:08 (or 4:08)</div></div><div class="note-line">The numeric value itself is right (the calculation to reach it was correct), but a decimal isn't a valid way to express a time on this style of question &mdash; the mark scheme awards this mark only when the final answer is actually given in time format. Worth a standing check on any "find the time" question: write the final answer with a colon, not a decimal point.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">5a</td><td class="topic"><span class="tag">E4.2</span><span class="topic-name">Geometrical constructions</span></td><td class="marks excluded">excl. / 2</td><td class="reason"><span class="cat cat-excluded">Excluded</span>Left blank, but not counted against her &mdash; a compass-and-straightedge construction directly on the diagram needs real compasses on paper, which isn't possible working from a screen. Same treatment as FebMarch2025 P42's Q8. Redo on paper.</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">5b</td><td class="topic"><span class="tag">E4.2</span><span class="topic-name">Geometrical constructions</span></td><td class="marks excluded">excl. / 1</td><td class="reason"><span class="cat cat-excluded">Excluded</span>Second part of the same construction &mdash; excluded for the same reason as 5(a). Redo alongside it on paper.</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">5c(i)</td><td class="topic"><span class="tag">E4.3</span><span class="topic-name">Scale drawings</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-blank">Left blank</span><div class="note-line">Unlike 5(a)&ndash;(b), this part didn't need the construction to be drawn &mdash; it can be read straight from the given information (AB=8cm on the diagram, scale 1:10000), so this is a genuine gap worth practising, not a tooling limitation:</div><div class="mini-eq"><div class="eln">8 &times; 10000 = 80000 cm</div><div class="eln correct-line">80000 cm = 800 m = 0.8 km</div></div></td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">5c(ii)</td><td class="topic"><span class="tag">E4.3</span><span class="topic-name">Scale drawings</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-blank">Left blank</span><div class="note-line">Also answerable without the construction: the diagram gives AB as a horizontal line with B due east of A, and a bearing of 270&deg; (due west) is the exact reverse direction &mdash; the bearing of A from B, which is what's asked for here, follows directly from that without needing anything drawn:</div><div class="mini-eq"><div class="eln correct-line">Bearing of A from B = 270&deg;</div></div><div class="note-line">Both 5(c) parts show the same pattern: she may be treating the whole of Q5 as "needs paper" and skipping it entirely, when the (c) parts don't actually depend on the construction. Worth pointing out explicitly that a question can be partly on-paper and partly answerable on screen.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">6</td><td class="topic"><span class="tag">E2.1</span><span class="topic-name">Substitution &amp; rearranging formulae</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">7a</td><td class="topic"><span class="tag">E2.6</span><span class="topic-name">Inequalities: solving</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">7b</td><td class="topic"><span class="tag">E2.6</span><span class="topic-name">Inequalities: listing integer solutions</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">The inequality itself was solved correctly:</div><div class="mini-eq"><div class="eln correct-line">&minus;2 &lt; x &le; 4</div></div><div class="note-line">but the question asks for the integer values satisfying it (&minus;1, 0, 1, 2, 3, 4), and that final listing step was never written down &mdash; the inequality is right, the answer just stops one step short of what was actually asked for.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">8</td><td class="topic"><span class="tag">E1.7</span><span class="topic-name">Indices I</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">9</td><td class="topic"><span class="tag">E1.15</span><span class="topic-name">Time</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">10</td><td class="topic"><span class="tag">E7.2/E7.3</span><span class="topic-name">Vectors: writing a position vector</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The vector OB was needed. The correct route travels from O to A first, then adds the given vector AB to continue on to B:</div><div class="mini-eq"><div class="eln">OB = OA + AB</div><div class="eln">OB = (2, 1) + (2, 4)</div><div class="eln correct-line">OB = (4, 5)</div></div><div class="note-line">Instead, AO was written where OA was needed &mdash; the two are exact opposites of each other, so every component going into the sum ended up with the wrong sign from the very first term. Worth a standing habit before writing any position vector: say the direction out loud ("from O to A") and check it matches the letters, since OA and AO look almost identical on the page but point opposite ways.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">11a</td><td class="topic"><span class="tag">E1.13</span><span class="topic-name">Percentages</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">11b</td><td class="topic"><span class="tag">E1.13</span><span class="topic-name">Percentages</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">12a</td><td class="topic"><span class="tag">E1.2</span><span class="topic-name">Sets</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">The correct value, 37, was found &mdash; but it was written as a fraction, <b>37/50</b>, instead of the plain number the question asked for:</div><div class="mini-eq"><div class="eln correct-line">37</div></div><div class="note-line">The working and the number itself are both right; it's the final answer's format that didn't match what was actually asked for. Worth a quick re-read of exactly what form an answer needs to be in before boxing it.</div></td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">12b</td><td class="topic"><span class="tag">E1.2</span><span class="topic-name">Sets</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">13</td><td class="topic"><span class="tag">E6.1/E6.2</span><span class="topic-name">Right-angled triangles: angle of elevation</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">This is an angle-of-elevation question where the observer's eye height (1.5m) has to be subtracted from the object's height before the triangle is set up &mdash; the triangle's opposite side is the extra height <i>above eye level</i>, not the object's full height off the ground:</div><div class="mini-eq"><div class="eln">tan&theta; = <span class="frac"><span class="num">12.6</span><span class="den">33</span></span> &nbsp;&larr;&nbsp; uses the full height</div><div class="eln correct-line">tan&theta; = <span class="frac"><span class="num">12.6&minus;1.5</span><span class="den">33</span></span></div></div><div class="note-line">The full 12.6m was used directly instead of the reduced 11.1m, so the observer's own height was effectively ignored. This is a specific, nameable trap in elevation/depression questions worth flagging directly: always check whether the question gives an observer's height and, if so, subtract it before setting up tan&theta;.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">14a</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Surface area and volume</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">14b</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Surface area and volume: frustum</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">The frustum-volume setup (a cone's volume minus a smaller similar cone) was on the right track, but &pi; was dropped from the expression partway through:</div><div class="mini-eq"><div class="eln">512 &minus; <span class="frac"><span class="num">256</span><span class="den">3</span></span> &nbsp;&larr;&nbsp; missing &pi;</div><div class="eln correct-line">&pi;&times;(512 &minus; <span class="frac"><span class="num">256</span><span class="den">3</span></span>)</div></div><div class="note-line">The overall method (big cone minus small cone) is correct; losing &pi; partway through a multi-step working line is the specific slip here, worth a habit of re-writing the full expression (including constants like &pi;) at the start of every new line rather than carrying it silently in your head.</div></td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">14c</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Surface area and volume: density/mass</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">The mass calculation itself was carried out correctly:</div><div class="mini-eq"><div class="eln">2107.13 g</div></div><div class="note-line">but the question asks for the answer in <b>kg</b>, and the final &divide;1000 conversion was never applied:</div><div class="mini-eq"><div class="eln correct-line">2107.13 &divide; 1000 = 2.11 kg</div></div><div class="note-line">Same family of mistake as this paper's Q9 speed&ndash;time issue on the earlier paper &mdash; the number itself is right, but the units asked for in the question weren't checked before finishing.</div></td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">14d</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Surface area and volume: similar cones</span></td><td class="marks partial">3/4</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">The similar-cones method (using the height ratio to scale between the two cones) was set up correctly, earning the method marks. The slip was in which volume value got carried into that step: part (a) had already calculated the correct volume, but part (d)'s working used a different, incorrect figure instead of that value:</div><div class="mini-eq"><div class="eln">used: <span class="frac"><span class="num">253</span><span class="den">3</span></span>&pi; &nbsp;&larr;&nbsp; doesn't match the volume correctly found in part (a)</div><div class="eln correct-line">should reuse the volume already found correctly in part (a)</div></div><div class="note-line">That mismatched value carried through the similar-cones scaling and produced the wrong height (8.78 instead of the correct 8.88), which in turn gave a final answer of 231.31 instead of the correct 233.3. Since the method itself and every other step were sound, this earns follow-through credit for everything built correctly on top of the mismatched figure &mdash; only the final accuracy mark is lost. Worth a habit of copying a value straight from an earlier part's boxed answer rather than re-typing or half-remembering it a few lines later.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">15</td><td class="topic"><span class="tag">E4.7/E4.8</span><span class="topic-name">Circle theorems</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">16</td><td class="topic"><span class="tag">E9.3</span><span class="topic-name">Averages and measures of spread</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">17</td><td class="topic"><span class="tag">E3.2</span><span class="topic-name">Drawing linear graphs</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">18a</td><td class="topic"><span class="tag">E2.9</span><span class="topic-name">Graphs in practical situations</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">18b</td><td class="topic"><span class="tag">E2.9</span><span class="topic-name">Graphs in practical situations</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-blank">Left blank</span><div class="note-line">Follow-on part from 18(a), which was answered correctly &mdash; this part was left blank entirely, despite the groundwork from part (a) already being in place to build on. Worked solution:</div><div class="mini-eq"><div class="eln">Distance left = 100 &minus; 72 = 28</div><div class="eln">Time taken = <span class="frac"><span class="num">28</span><span class="den">8</span></span> = 3.5 s</div><div class="eln correct-line">Total time = 10 + 3.5 = 13.5 s</div></div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">19</td><td class="topic"><span class="tag">E1.17</span><span class="topic-name">Exponential growth and decay</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">20a</td><td class="topic"><span class="tag">E2.7</span><span class="topic-name">Sequences</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">20b</td><td class="topic"><span class="tag">E2.7</span><span class="topic-name">Sequences: geometric nth term</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">For a geometric sequence, the nth term needs the correct starting coefficient in front of the ratio's power &mdash; here the coefficient itself was under by a factor of 2:</div><div class="mini-eq"><div class="eln">48&times;<span class="frac"><span class="num">1</span><span class="den">2</span></span>&#8319; &nbsp;&larr;&nbsp; coefficient too small</div><div class="eln correct-line">96&times;<span class="frac"><span class="num">1</span><span class="den">2</span></span>&#8319;</div></div><div class="note-line">The ratio (<span class="frac"><span class="num">1</span><span class="den">2</span></span>) and the overall geometric structure were identified correctly &mdash; this earns the method mark the mark scheme allows for that partial form &mdash; but the coefficient needs to come from the very first term of the sequence divided appropriately by the ratio, and that step wasn't carried out correctly.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">21</td><td class="topic"><span class="tag">E6.5</span><span class="topic-name">Non-right-angled triangles</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">22</td><td class="topic"><span class="tag">E1.16</span><span class="topic-name">Money</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">23</td><td class="topic"><span class="tag">E2.8</span><span class="topic-name">Proportion</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">24a</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations: forming from a word problem</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">24b</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations: forming from a word problem</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">24c</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations: forming from a word problem</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">24d</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations: forming from a word problem</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">Only the setup formulas were written down &mdash; no substitution of actual numbers was shown on the page &mdash; and the final answer given was <b>2h 17min</b>, when the correct answer is <b>2h 10min</b>. Since the earlier parts of this same question (a, b, c) were all answered correctly with full working, the formulas themselves are understood; what's missing is the substituted working that would show exactly where it went wrong. No working means no method marks are available to award, even though the final answer is close.</div><div class="note-line">Nothing on the page confirms it, but "2h 17min" is a textbook example of one of the most common mistakes on this question type: reaching the correct decimal value in hours and then reading the digits after the decimal point directly as minutes, instead of converting them:</div><div class="mini-eq"><div class="eln">2.17 hours &nbsp;&larr;&nbsp; if this was the decimal reached</div><div class="eln">0.17 &times; 60 = 10.2 &nbsp;&larr;&nbsp; the correct way to turn the decimal part into minutes</div><div class="eln correct-line">2.17 hours = 2 h 10 min (2.17 hours, not "2 hours 17 minutes")</div></div><div class="note-line">Worth asking her directly to show this step next time &mdash; if she reaches a decimal number of hours, whether this exact minutes-conversion trap is what happened here, or something else, will only be clear once the working is actually written down.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">25a</td><td class="topic"><span class="tag">E9.7</span><span class="topic-name">Histograms</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">25b</td><td class="topic"><span class="tag">E9.7</span><span class="topic-name">Histograms</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">26</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">27</td><td class="topic"><span class="tag">E6.6</span><span class="topic-name">Pythagoras in 3D: angle between a diagonal and a base</span></td><td class="marks partial">1/4</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">This question asks for the angle between the diagonal AG and the base plane of a trapezoidal prism. Marking angle &theta; correctly at A on the diagram earns the one method mark available for that step. The calculation that followed assumes a right angle at F that the shape doesn't actually have:</div><div class="mini-eq"><div class="eln">tan&theta; = <span class="frac"><span class="num">&radic;34</span><span class="den">5&radic;65</span></span> &rArr; &theta; &asymp; 17.9&deg; &nbsp;&larr;&nbsp; assumes a 90&deg; angle at F</div></div><div class="note-line">Checking with the dot product of the two edges meeting at F shows they aren't actually perpendicular, so the triangle used for that tan ratio isn't a valid right-angled triangle in the first place. The correct route projects G straight down onto the base to get the true horizontal run, then uses that in the tangent ratio:</div><div class="mini-eq"><div class="eln">horizontal run = &radic;(15&sup2;+7&sup2;) = &radic;274</div><div class="eln correct-line">tan&theta; = <span class="frac"><span class="num">5</span><span class="den">&radic;274</span></span> &rArr; &theta; &asymp; 16.8&deg;</div></div><div class="note-line">This is a genuinely hard 3D-geometry setup &mdash; correctly identifying and marking the angle itself is a real step in the right direction, but the triangle chosen to calculate it from wasn't a valid one for this shape. Worth working through together with a physical or drawn 3D sketch, checking each face's actual angles rather than assuming one looks like 90&deg;.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">28a</td><td class="topic"><span class="tag">E2.11</span><span class="topic-name">Sketching curves</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">28b</td><td class="topic"><span class="tag">E2.11</span><span class="topic-name">Sketching curves</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-blank">Left blank</span><div class="note-line">Left blank, despite part (a) on the same curve being answered correctly &mdash; worth checking whether this was a time-pressure skip near the end of the paper or a specific gap in this part of the curve-sketching skill.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">29a</td><td class="topic"><span class="tag">E6.5</span><span class="topic-name">Non-right-angled triangles: sine rule</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">29b</td><td class="topic"><span class="tag">E6.5</span><span class="topic-name">Non-right-angled triangles: sine and cosine rule combined</span></td><td class="marks partial">2/5</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The sine rule step paired side AD with the wrong angle &mdash; 45&deg; was used instead of the 38&deg; that's actually opposite AD in this triangle:</div><div class="mini-eq"><div class="eln"><span class="frac"><span class="num">AD</span><span class="den">sin45&deg;</span></span> = &hellip; &nbsp;&larr;&nbsp; wrong angle paired with AD</div><div class="eln correct-line"><span class="frac"><span class="num">AD</span><span class="den">sin38&deg;</span></span> = &hellip; &rArr; AD &asymp; 8.68</div></div><div class="note-line">giving AD=9.97 instead of the correct 8.68. From there, though, the cosine rule step correctly used her own AD value together with the correctly-found 108&deg; angle, and that internally-consistent follow-through earns credit even though the starting AD was wrong &mdash; giving a final answer of 16.2 instead of the correct 15.1. The one thing to fix is specifically the sine-rule side/angle pairing: always double check that the side and the angle used together in <span class="frac"><span class="num">sin(angle)</span><span class="den">side</span></span> are actually opposite each other in the same triangle before setting up the ratio.</div></td><td class="reason dash">&mdash;</td></tr>
+
+      <tr class="total"><td colspan="2">Total</td><td class="marks">68/97</td><td class="reason">70.10% &mdash; Q5a/5b (3 marks) excluded from marking, see note above</td><td class="reason dash">&mdash;</td></tr>
+    </tbody>
+  </table>
+
+  <div class="legend">
+    <div><span class="dot full-dot"></span>Full marks</div>
+    <div><span class="dot partial-dot"></span>Marks dropped</div>
+    <div><span class="dot tip-dot"></span>Technique tip (no marks lost)</div>
+  </div>
+
+  <div class="legend">
+    <span class="cat cat-slip">Careless slip</span>
+    <span class="cat cat-hw">Handwriting</span>
+    <span class="cat cat-miscon">Misconception</span>
+    <span class="cat cat-blank">Left blank</span>
+  </div>
+
+  <h2 class="section-title">What she could achieve</h2>
+  <div class="ladder">
+    <div class="ladder-row">
+      <div class="ladder-score">68/97</div>
+      <div class="ladder-desc">Actual mark obtained on this paper (Q5a/5b excluded, see note above).</div>
+      <span></span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">76/97</div>
+      <div class="ladder-desc">Achievable by correcting the <b>6 careless slips</b>: Q4's decimal-instead-of-time answer format, Q7b's unfinished list of integer solutions, Q12a's wrong-format answer (37/50 instead of 37), Q14b's dropped &pi;, Q14c's missing g&rarr;kg conversion, and Q14d's mismatched volume value carried into the height calculation.</div>
+      <span class="ladder-tag tag-slip">slips</span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">76/97</div>
+      <div class="ladder-desc">No handwriting-related losses on this paper.</div>
+      <span class="ladder-tag tag-hand">handwriting</span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">91/97</div>
+      <div class="ladder-desc">Achievable by additionally resolving the <b>6 underlying misconceptions</b>: confusing OA with AO on a vector question (Q10), forgetting to subtract the observer's eye height in an angle-of-elevation problem (Q13), the geometric sequence's coefficient being half what it should be (Q20b), the decimal-hours-to-minutes conversion trap on a word problem (Q24d), the invalid right-angle assumption on the 3D angle question (Q27), and pairing the wrong angle with a side in the sine rule (Q29b).</div>
+      <span class="ladder-tag tag-miscon">misconceptions</span>
+    </div>
+    <div class="ladder-row final">
+      <div class="ladder-score">97/97</div>
+      <div class="ladder-desc">Achievable by additionally completing the <b>4 left-blank</b> parts: Q5c(i) and Q5c(ii) (both answerable from given information without needing the excluded construction), Q18b (left blank despite part (a) being correct), and Q28b (also left blank despite part (a) being correct).</div>
+      <span class="ladder-tag tag-blank">blank</span>
+    </div>
+  </div>
+
+  <h2 class="section-title">Weak topics to target next session</h2>
+  <div class="weak-grid">
+    <div class="weak-card">
+      <h3>Vector and vocabulary direction: OA vs AO</h3>
+      <p>Q10 wrote AO where OA was needed &mdash; the two vectors are exact opposites, so every component flips sign. Worth a standing habit of saying the direction out loud ("from O to A") before writing any position vector, since the two labels look nearly identical on the page.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Angle of elevation/depression: observer height matters</h3>
+      <p>Q13 used an object's full height directly in the tan ratio instead of subtracting the observer's 1.5m eye height first. This is a specific, nameable trap worth flagging directly &mdash; whenever a question gives an observer's own height, check whether it needs subtracting before setting up the right-angled triangle.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Sine rule: pairing each side with the angle actually opposite it</h3>
+      <p>Q29b paired side AD with 45&deg; instead of the 38&deg; that's actually opposite it in the triangle, dropping 3 marks even though everything downstream (the cosine rule step, using her own AD) was carried out correctly. Worth a quick double-check habit: before writing sin(angle)/side, trace the triangle to confirm the two are actually opposite each other.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Q5(c): answerable without the construction, but skipped anyway</h3>
+      <p>Q5(a)/(b) (the actual compass construction) are excluded from her score &mdash; they genuinely need real compasses on paper, not a screen. But Q5(c)(i) and (c)(ii) don't depend on the construction at all: (i) is a straight scale calculation from the given AB=8cm and 1:10000 scale, and (ii) follows directly from AB being horizontal with B due east of A. Both were left blank anyway, suggesting she may be treating the whole of Q5 as "needs paper" without checking whether each part actually does. Worth pointing out explicitly next time: read every part of a construction question separately before skipping the whole thing.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Carrying values correctly from one part (or line) to the next</h3>
+      <p>Q14b dropped &pi; partway through a frustum-volume expression, Q14c's mass calculation was exactly right but never converted from grams to the kilograms the question asked for, and Q14d used a mismatched volume value (<span class="frac"><span class="num">253</span><span class="den">3</span></span>&pi;) instead of correctly reusing the volume she'd already found in part (a). All three are the same underlying habit within one multi-part question &mdash; re-write the full expression (including constants and units) at the start of each new line, and copy values straight from an earlier boxed answer rather than re-deriving or half-remembering them.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Geometric sequences: finding the correct starting coefficient</h3>
+      <p>Q20b identified the ratio (<span class="frac"><span class="num">1</span><span class="den">2</span></span>) correctly but used a coefficient that was half the value it should have been (48 instead of 96). The ratio itself is secure; the gap is specifically deriving the coefficient from the sequence's actual first term.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Giving the answer in the form the question asks for</h3>
+      <p>Two separate questions had the right number but the wrong presentation: Q4 wrote a time as a decimal (4.08) instead of h:min (04:08), and Q12a wrote a plain number as a fraction (37/50) instead of just 37. In both cases the maths was already done correctly &mdash; the mark was lost purely on format. Worth a standing final check: does the answer's <i>form</i> (time, fraction, plain number, units) match exactly what the question is asking for?</p>
+    </div>
+    <div class="weak-card hand">
+      <h3>Tracked pattern: correct part (a), blank part (b) &mdash; watch for this going forward</h3>
+      <p>Three different questions on this paper follow the same shape: part (a) was answered correctly, and the very next part was left blank entirely rather than attempted &mdash; Q7b (solved the inequality but never listed the integers), Q18b (correct in (a), nothing in (b)), and Q28b (correct in (a), nothing in (b)). Q24d is a related but distinct case: parts (a)&ndash;(c) were all correct, and (d) had a final answer but no supporting working. This is now flagged as a recurring shape worth actively watching for in future papers &mdash; if it keeps showing up, it points to a pacing or confidence issue on multi-part questions specifically, not a knowledge gap in any one topic.</p>
+    </div>
+  </div>
+
+  <footer>0580/41 &middot; Cambridge IGCSE Mathematics &middot; October/November 2025 &middot; marked against the official mark scheme &middot; Q27 marked using the completed working from her original submission (the corrected copy's own Q27 page had no completed calculation)</footer>
+
+</div>
+</body>
+</html>
