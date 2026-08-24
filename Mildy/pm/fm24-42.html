@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — 0580/42 February/March 2024 Marking Breakdown</title>
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 28px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .score-box { text-align: right; }
+  .score-box .num { font-size: 40px; font-weight: 700; color: var(--loss); line-height: 1; }
+  .score-box .pct { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .summary-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .summary-card .value { font-size: 22px; font-weight: 600; margin-top: 4px; }
+
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px; line-height: 1.05; font-size: 0.92em; position: relative; top: 0.28em; }
+  .frac .num, .frac .den { display: block; padding: 0 3px; }
+  .frac .num { border-bottom: 1.3px solid currentColor; padding-bottom: 1px; }
+  .frac .den { padding-top: 1px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13.5px;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.q { font-weight: 600; width: 48px; text-align: center; color: var(--ink); }
+  td.topic { width: 200px; color: var(--ink); }
+  td.topic .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tip);
+    background: var(--tip-light);
+    padding: 1px 7px;
+    border-radius: 20px;
+    margin-bottom: 4px;
+  }
+  td.topic .topic-name { display: block; }
+  td.marks { width: 85px; text-align: center; white-space: nowrap; }
+  td.reason { color: var(--muted); }
+  .full { color: var(--accent); font-weight: 600; }
+  .partial { color: var(--loss); font-weight: 600; }
+  .dash { color: var(--muted); }
+
+  .reason .note-line { display: block; margin-top: 6px; color: var(--ink); font-size: 13px; line-height: 1.45; }
+  .reason .mini-eq {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin: 7px 0;
+    font-size: 12.5px;
+  }
+  .reason .mini-eq .eln { padding: 2px 0; }
+  .reason .ans { color: var(--accent); font-weight: 700; }
+
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-hw { background: var(--loss-light); color: var(--loss); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  tr.total td {
+    border-top: 2px solid var(--ink);
+    font-weight: 700;
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+  tr.total td.reason { color: var(--accent); font-weight: 600; }
+
+  .legend {
+    margin: 18px 0 40px;
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .legend span.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .dot.full-dot { background: var(--accent); }
+  .dot.partial-dot { background: var(--loss); }
+
+  h2.section-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    padding-top: 8px;
+    border-top: 2px solid var(--ink);
+  }
+
+  .ladder {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 8px 20px;
+    margin-bottom: 28px;
+  }
+  .ladder-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .ladder-row:last-child { border-bottom: none; }
+  .ladder-score {
+    font-size: 20px;
+    font-weight: 700;
+    min-width: 78px;
+    color: var(--ink);
+  }
+  .ladder-row.final .ladder-score { color: var(--accent); }
+  .ladder-desc { font-size: 13.5px; color: var(--muted); flex: 1; }
+  .ladder-desc b { color: var(--ink); font-weight: 600; }
+
+  .weak-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .weak-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--tip);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .weak-card h3 { margin: 0 0 6px; font-size: 14.5px; font-weight: 600; }
+  .weak-card p { margin: 0; font-size: 13px; color: var(--muted); }
+  .weak-card.blank { border-left-color: var(--purple); }
+  .weak-card.miscon { border-left-color: var(--pink); }
+  .weak-card.slip { border-left-color: var(--amber); }
+
+  .note-banner {
+    background: var(--accent-light);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13.5px;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+
+  footer {
+    margin-top: 28px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tip);
+    text-decoration: none;
+    background: var(--tip-light);
+    padding: 7px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .back-link:hover { background: var(--tip); color: #fff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../tracker-p4.html">&larr; Back to dashboard</a>
+
+  <header>
+    <div>
+      <h1>Mildy — marking breakdown</h1>
+      <div class="meta">Cambridge IGCSE Mathematics 0580/42 (Extended, Calculator) &middot; February/March 2024 &middot; homework, submitted 20 Aug 2026</div>
+    </div>
+    <div class="score-box">
+      <div class="num">102<span style="font-size:20px;color:var(--muted);">/130</span></div>
+      <div class="pct">78.5%</div>
+    </div>
+  </header>
+
+  <div class="note-banner">A strong, fully-attempted paper &mdash; every single question was answered, no blanks at all. Two mistake patterns repeat <b>within this same paper</b>, so they're worth flagging as habits rather than one-off slips: (1) finding the right x-value from a derivative but never substituting it back into the original function for the actual y-value/k-value (Q8c and Q10d, 5 marks combined), and (2) using the full circle instead of the correct fraction of 360&deg; for a shape with a sector removed (Q12a and Q12b, 6 marks combined &mdash; both parts of the same question). Q2 (similar triangles) lost 4 marks to mixing up which sides correspond, and Q8a lost 1 mark to an incorrect x-intercept. Two clean careless slips (Q5c, Q11cii) cost 3 marks despite otherwise-correct working.</div>
+
+  <div class="summary-row">
+    <div class="summary-card">
+      <div class="label">Questions fully correct</div>
+      <div class="value">36 / 50</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Careless slips</div>
+      <div class="value">&minus;3</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Handwriting (no marks lost)</div>
+      <div class="value">0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Misconceptions</div>
+      <div class="value">&minus;25</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Left blank</div>
+      <div class="value">0</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:48px;">Q</th>
+        <th style="width:200px;">Topic</th>
+        <th style="width:85px;">Marks</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="q">1a</td><td class="topic"><span class="tag">E1.16</span><span class="topic-name">Money</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">1bi</td><td class="topic"><span class="tag">E1.11</span><span class="topic-name">Ratio: mushrooms as % of total</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">1bii</td><td class="topic"><span class="tag">E1.11</span><span class="topic-name">Ratio: mass of carrots</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">1biii</td><td class="topic"><span class="tag">E1.11</span><span class="topic-name">Ratio: profit from carrots</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">1biv</td><td class="topic"><span class="tag">E1.13</span><span class="topic-name">Percentages: reverse percentage</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">1c</td><td class="topic"><span class="tag">E1.10</span><span class="topic-name">Limits of accuracy: upper bound</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">2a</td><td class="topic"><span class="tag">E4.6</span><span class="topic-name">Angles: cyclic quadrilateral reasoning</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">2b</td><td class="topic"><span class="tag">E4.4</span><span class="topic-name">Similarity: showing two triangles similar</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">"Both share common point of X" earns the idea of the shared angle at X, but the next two lines &mdash; "lines AX &#8741; DX are proportional" and "lines BX &#8741; CX are proportional" &mdash; aren't valid reasoning for similarity. AX and DX aren't parallel, and the &#8741; symbol shouldn't stand in for "these sides are in the same ratio." Since no side lengths are given in this part, the proof has to run entirely through angles (AAA):</div><div class="mini-eq"><div class="eln">Angle CXD = angle AXB (common angle)</div><div class="eln">Angle XAB = angle XCD (=x&deg;=y&deg;, from part (a))</div><div class="eln">Angle XBA = angle XDC (angles in a triangle sum to 180&deg;, and the other two pairs already match, so the third pair must too)</div></div><div class="note-line">With all three angle pairs matching, <span class="ans">triangle ABX is similar to triangle CDX (AAA)</span> &mdash; needs a second matched angle pair found through reasoning like this, not a statement about sides being proportional or parallel.</div></td></tr>
+      <tr><td class="q">2ci</td><td class="topic"><span class="tag">E4.4</span><span class="topic-name">Similarity: finding a missing side (BC)</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The corresponding sides between the two similar triangles are AX&harr;CX, BX&harr;DX, and AB&harr;CD &mdash; so <span class="frac"><span class="num">AX</span><span class="den">CX</span></span> = <span class="frac"><span class="num">BX</span><span class="den">DX</span></span>. The working instead paired AX with DX.</div><div class="mini-eq"><div class="eln">AX = AD + DX = 15 + 9 = 24</div><div class="eln"><span class="frac"><span class="num">AX</span><span class="den">CX</span></span> = <span class="frac"><span class="num">BX</span><span class="den">DX</span></span> &rarr; <span class="frac"><span class="num">24</span><span class="den">12</span></span> = <span class="frac"><span class="num">BX</span><span class="den">9</span></span> &rarr; BX = 18</div><div class="eln">BC = BX &minus; CX = 18 &minus; 12 = <span class="ans">6 cm</span></div></div><div class="note-line">Working shown mixes AX with DX rather than CX, which is what led to 20 instead of 6.</div></td></tr>
+      <tr><td class="q">2cii</td><td class="topic"><span class="tag">E4.4</span><span class="topic-name">Similarity: ratio of areas</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">Same root cause as 2(c)(i) &mdash; square the <i>length</i> ratio to get the <i>area</i> ratio.</div><div class="mini-eq"><div class="eln">Length ratio, triangle ABX : triangle CDX = 2 : 1</div><div class="eln">Area ratio = 2&sup2; : 1&sup2; = <span class="ans">4 : 1</span></div></div></td></tr>
+      <tr><td class="q">3ai</td><td class="topic"><span class="tag">E9.3</span><span class="topic-name">Averages: range</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">3aii</td><td class="topic"><span class="tag">E9.3</span><span class="topic-name">Averages: mean from a frequency table</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">3aiii</td><td class="topic"><span class="tag">E9.3</span><span class="topic-name">Averages: median (even number of values)</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">With 10 values, the median is the <b>average of the 5th and 6th</b> values once ordered (16 and 17), not just the 5th value on its own.</div><div class="mini-eq"><div class="eln">Ordered: 15,15,15,15,16,17,17,18,20,20</div><div class="eln">Median = (16+17) &divide; 2 = <span class="ans">16.5</span></div></div><div class="note-line">Answer given was 16 &mdash; the 5th value only, with no averaging step.</div></td></tr>
+      <tr><td class="q">3aiv</td><td class="topic"><span class="tag">E9.3</span><span class="topic-name">Averages: mode</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">3b</td><td class="topic"><span class="tag">E9.3</span><span class="topic-name">Averages: finding a missing value from the mean</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">3c</td><td class="topic"><span class="tag">E9.7</span><span class="topic-name">Histograms: unequal class widths</span></td><td class="marks full">4/4</td><td class="reason dash">All five frequency densities correct (0.4, 0.9, 3.5, 2, 0.5) and the histogram drawn to match.</td></tr>
+      <tr><td class="q">4ai</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Surface area and volume: pyramid volume</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">4aii</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Surface area and volume: pyramid surface area</span></td><td class="marks partial">2/5</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The slant height of a triangular face was found correctly:</div><div class="mini-eq"><div class="eln">&radic;(9&sup2;+6&sup2;) = &radic;117 = <span class="ans">3&radic;13 cm</span></div></div><div class="note-line">But then this height was used <i>as if it were the whole face's area</i> &mdash; the working jumps straight to "144 + 4(3&radic;13)," skipping the <span class="frac"><span class="num">1</span><span class="den">2</span></span>&times;base step that turns a height into a triangle's area.</div><div class="mini-eq"><div class="eln">Area of one triangular face = <span class="frac"><span class="num">1</span><span class="den">2</span></span> &times; base &times; height = <span class="frac"><span class="num">1</span><span class="den">2</span></span> &times; 12 &times; 3&radic;13 = 18&radic;13 cm&sup2;</div><div class="eln">Total surface area = (12&times;12) + (4 &times; 18&radic;13) = 144 + 72&radic;13 &asymp; <span class="ans">404 cm&sup2;</span> (3 s.f.)</div></div><div class="note-line">There was also a one-digit copying slip on top of this (187.3 in the working became 177.3 in the answer box), but the bigger issue is the missing <span class="frac"><span class="num">1</span><span class="den">2</span></span>&times;base step &mdash; that's worth the dedicated practice.</div></td></tr>
+      <tr><td class="q">4b</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Surface area and volume: cone + hemisphere, solve for r</span></td><td class="marks full">4/4</td><td class="reason dash">Clean, well-organised algebra &mdash; correctly split the total surface area into &pi;rl and 2&pi;r&sup2; and solved for r.</td></tr>
+      <tr><td class="q">5ai</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation: factorising</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">5aii</td><td class="topic"><span class="tag">E2.3</span><span class="topic-name">Algebraic fractions: simplifying</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">5b</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation: expanding and simplifying</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">5c</td><td class="topic"><span class="tag">E2.3</span><span class="topic-name">Algebraic fractions: combining into one fraction</span></td><td class="marks partial">3/4</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">The whole method is right &mdash; common denominator (x+1)(x&minus;3), correct expansion, correct numerator x&sup2;&minus;3x&minus;12.</div><div class="mini-eq"><div class="eln">Your answer: <span class="frac"><span class="num">x&sup2;&minus;3x&minus;12</span><span class="den">(x+1)(x+3)</span></span></div><div class="eln">Correct answer: <span class="ans frac"><span class="num">x&sup2;&minus;3x&minus;12</span><span class="den">(x+1)(x&minus;3)</span></span></div></div><div class="note-line">The denominator was written correctly as (x+1)(x&minus;3) all through the working, then the sign flipped to (x+3) only in the very last line where the final answer was written out.</div></td></tr>
+      <tr><td class="q">5d</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation: expanding three brackets</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">5e</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations: linear&ndash;quadratic simultaneous equations</span></td><td class="marks full">6/6</td><td class="reason">Both solution pairs correct: x=7, y=&minus;2 and x=&minus;5<span class="frac"><span class="num">1</span><span class="den">2</span></span>, y=&minus;6<span class="frac"><span class="num">5</span><span class="den">6</span></span>.</td></tr>
+      <tr><td class="q">6a</td><td class="topic"><span class="tag">E6.5</span><span class="topic-name">Non-right-angled triangles: sine rule</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">6b</td><td class="topic"><span class="tag">E6.5</span><span class="topic-name">Non-right-angled triangles: cosine rule</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">6c</td><td class="topic"><span class="tag">E6.5</span><span class="topic-name">Non-right-angled triangles: shortest distance to a side</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">7ai</td><td class="topic"><span class="tag">E7.2/E7.3</span><span class="topic-name">Vectors: scalar multiple</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">7aiia</td><td class="topic"><span class="tag">E7.2/E7.3</span><span class="topic-name">Vectors: subtracting vectors</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">7aiib</td><td class="topic"><span class="tag">E7.2/E7.3</span><span class="topic-name">Vectors: magnitude</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">7b</td><td class="topic"><span class="tag">E7.2/E7.3</span><span class="topic-name">Vectors: position vector from a ratio</span></td><td class="marks full">3/3</td><td class="reason"><div class="mini-eq"><div class="eln">MS = <span class="frac"><span class="num">5</span><span class="den">8</span></span>(b&minus;a)</div><div class="eln">OS = a + MS = <span class="ans"><span class="frac"><span class="num">3</span><span class="den">8</span></span>a + <span class="frac"><span class="num">5</span><span class="den">8</span></span>b</span></div></div></td></tr>
+      <tr><td class="q">8a</td><td class="topic"><span class="tag">E2.10</span><span class="topic-name">Graphs of functions: sketching a linear graph</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The y-intercept was correctly placed at (0, 4), but the x-intercept was plotted at (5, 0) instead of the correct point.</div><div class="mini-eq"><div class="eln">4 &minus; 3x = 0</div><div class="eln">3x = 4 &rarr; x = <span class="ans"><span class="frac"><span class="num">4</span><span class="den">3</span></span></span></div></div><div class="note-line">Correct x-intercept: <span class="ans">(<span class="frac"><span class="num">4</span><span class="den">3</span></span>, 0)</span> &mdash; worth checking every intercept by substituting it back into the original equation before drawing the line through it.</div></td></tr>
+      <tr><td class="q">8b</td><td class="topic"><span class="tag">E2.10</span><span class="topic-name">Graphs of functions: sketching a quadratic graph</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">8ci</td><td class="topic"><span class="tag">E2.12</span><span class="topic-name">Differentiation: turning points of a cubic</span></td><td class="marks partial">3/5</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The derivative itself was correct:</div><div class="mini-eq"><div class="eln">dy/dx = <span class="ans">&minus;6x&sup2;+18x</span></div></div><div class="note-line">But factorising it went wrong &mdash; "&minus;6x(x+3)" doesn't expand back to &minus;6x&sup2;+18x (it gives &minus;6x&sup2;&minus;18x). The correct factorisation is:</div><div class="mini-eq"><div class="eln">&minus;6x(x&minus;3) = 0 &rarr; x = <span class="ans">0 or x = 3</span></div></div><div class="note-line">On top of the sign slip, neither x-value was substituted back into the <i>original</i> cubic y=10+9x&sup2;&minus;2x&sup3; to find the matching y-coordinate &mdash; the answer given was (0,0) and (&minus;3,&minus;17):</div><div class="mini-eq"><div class="eln">x = 0: y = 10+9(0)&sup2;&minus;2(0)&sup3; = 10+0&minus;0 = <span class="ans">10</span> &rarr; (0, 10)</div><div class="eln">x = 3: y = 10+9(3)&sup2;&minus;2(3)&sup3; = 10+81&minus;54 = <span class="ans">37</span> &rarr; (3, 37)</div></div><div class="note-line">Turning points: <span class="ans">(0, 10) and (3, 37)</span>.</div></td></tr>
+      <tr><td class="q">8cii</td><td class="topic"><span class="tag">E2.12</span><span class="topic-name">Differentiation: classifying max/min</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The cubic got rewritten with its signs flipped partway through (from y=&minus;2x&sup3;+9x&sup2;+10 to y=2x&sup3;&minus;9x&sup2;&minus;10, with no reason given), so the second derivative that followed (12x&minus;18) doesn't match the original function.</div><div class="mini-eq"><div class="eln">d&sup2;y/dx&sup2; = &minus;12x+18</div><div class="eln">x = 0: &minus;12(0)+18 = 18 (positive) &rarr; <span class="ans">minimum</span>, matching (0,10)</div><div class="eln">x = 3: &minus;12(3)+18 = &minus;18 (negative) &rarr; <span class="ans">maximum</span>, matching (3,37)</div></div><div class="note-line">Only a single "Minimum" conclusion was written, without treating the two turning points separately &mdash; each stationary point needs its own classification.</div></td></tr>
+      <tr><td class="q">9ai</td><td class="topic"><span class="tag">E1.17</span><span class="topic-name">Exponential growth and decay: simple interest rate</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">9aii</td><td class="topic"><span class="tag">E1.17</span><span class="topic-name">Exponential growth and decay: compound interest rate</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">9b</td><td class="topic"><span class="tag">E1.17</span><span class="topic-name">Exponential growth and decay: population growth</span></td><td class="marks full">3/3</td><td class="reason dash">Correct final answer (9 years) from the right compound-growth setup.</td></tr>
+      <tr><td class="q">10a</td><td class="topic"><span class="tag">E2.10</span><span class="topic-name">Graphs of functions: completing a table of values</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">10b</td><td class="topic"><span class="tag">E2.10</span><span class="topic-name">Graphs of functions: drawing a cubic curve</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">10c</td><td class="topic"><span class="tag">E2.10</span><span class="topic-name">Graphs of functions: solving by drawing a line</span></td><td class="marks full">3/3</td><td class="reason dash">Line y=2 drawn correctly; all three readings (&minus;2.68, &minus;1.05, 0.8) within the accepted range.</td></tr>
+      <tr><td class="q">10d</td><td class="topic"><span class="tag">E2.12</span><span class="topic-name">Differentiation: k-values for a repeated root</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">Same gap as Q8(c)(i): dy/dx=6x&sup2;+18x is wrong (should be 6x&sup2;+12x, giving x=0 or x=&minus;2), and even so, the x-values themselves (0 and &minus;3) were written as the final k answers, without ever substituting back into y=2x&sup3;+6x&sup2;&minus;2.5 to find the actual y-value at each turning point.</div><div class="note-line">The question asks for values of k where y=2x&sup3;+6x&sup2;&minus;2.5=k has <b>exactly two solutions</b> &mdash; this happens exactly at each turning point, where the line y=k touches the curve there and crosses it once more elsewhere.</div><div class="mini-eq"><div class="eln"><span class="ans">k = &minus;2.5</span>: line meets the curve at exactly 2 points, (&minus;3, &minus;2.5) and (0, &minus;2.5)</div><div class="eln"><span class="ans">k = 5.5</span>: line meets the curve at exactly 2 points, (&minus;2, 5.5) and (1, 5.5)</div></div></td></tr>
+      <tr><td class="q">11ai</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: composite function gf(2)</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">11aii</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: inverse function</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">11b</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: g(x&minus;2) simplified</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">11ci</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: solving fg(x) = 0.1</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The 0.1 in "fg(x)=0.1" is the <i>output</i> the equation should be solved for &mdash; it isn't a value to plug in for x. The working substitutes x=0.1 directly into 3x&minus;5, which answers a different question (evaluating fg(0.1)) rather than solving the equation.</div><div class="mini-eq"><div class="eln"><span class="frac"><span class="num">1</span><span class="den">3x&minus;5</span></span> = 0.1</div><div class="eln">1 = 0.1(3x&minus;5)</div><div class="eln">1 = 0.3x&minus;0.5</div><div class="eln">1.5 = 0.3x &rarr; x = <span class="ans">5</span></div></div></td></tr>
+      <tr><td class="q">11cii</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: solving h(x) &minus; g(7) = 0</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">g(7) = 3(7)&minus;5 = 21&minus;5 = 16, but the working used 21+5=26 instead &mdash; the subtraction became an addition partway through.</div><div class="mini-eq"><div class="eln">g(7) = 3(7)&minus;5 = 21&minus;5 = 16</div><div class="eln">h(x) &minus; g(7) = 0 &rarr; 2<sup>x</sup> &minus; 16 = 0</div><div class="eln">2<sup>x</sup> = 16 = 2&#8308; &rarr; x = <span class="ans">4</span></div></div><div class="note-line">No final numeric answer was written after "2<sup>x</sup>=26" &mdash; worth going back to finish this one with the corrected value.</div></td></tr>
+      <tr><td class="q">12a</td><td class="topic"><span class="tag">E5.3</span><span class="topic-name">Circles, arcs and sectors: perimeter of a shape with a sector removed</span></td><td class="marks partial">1/4</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The diagram correctly notes 360&minus;50=310&deg; for the remaining (shaded) part, but the arc-length calculation then uses the <span class="frac"><span class="num"><b>50</b></span><span class="den">360</span></span> fraction instead of <span class="frac"><span class="num"><b>310</b></span><span class="den">360</span></span> &mdash; the arc of the small removed sector, not the arc of the large remaining shape (the question asks for the perimeter of the remaining shaded shape, not the removed sector).</div><div class="mini-eq"><div class="eln">2 straight edges: 2&times;12 = 24 cm</div><div class="eln">Major arc: <span class="frac"><span class="num">310</span><span class="den">360</span></span> &times; 2&pi;&times;12 = <span class="ans"><span class="frac"><span class="num">62</span><span class="den">3</span></span>&pi; cm</span></div><div class="eln">Perimeter = 24 + <span class="frac"><span class="num">62</span><span class="den">3</span></span>&pi; &asymp; <span class="ans">88.9 cm</span> (3 s.f.)</div></div><div class="note-line">The <span class="frac"><span class="num">50</span><span class="den">360</span></span> arc length itself (10.47 cm) was calculated correctly, which is why 1 mark was still earned here.</div></td></tr>
+      <tr><td class="q">12b</td><td class="topic"><span class="tag">E5.3</span><span class="topic-name">Circles, arcs and sectors: volume of a shape with a sector removed</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">Same gap as 12(a): the cake has the same 50&deg; slice missing, but the volume equation used the <b>full</b> circle instead of the <span class="frac"><span class="num">310</span><span class="den">360</span></span> fraction of it &mdash; volume of the cake remaining = area of the sector &times; height.</div><div class="mini-eq"><div class="eln">3510 = (<span class="frac"><span class="num">310</span><span class="den">360</span></span> &times; &pi; &times; 12&sup2;) &times; h</div><div class="eln">h = 3510 &divide; (<span class="frac"><span class="num">310</span><span class="den">360</span></span> &times; &pi; &times; 12&sup2;) &asymp; <span class="ans">9.01 cm</span> (3 s.f.)</div></div><div class="note-line">Using the full circle instead gives 7.8 cm, which is what was written &mdash; worth revisiting both parts of Q12 together, since they share the exact same missing step.</div></td></tr>
+      <tr class="total"><td colspan="2">Total</td><td class="marks">102/130</td><td class="reason">78.5%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="legend">
+    <div><span class="dot full-dot"></span>Full marks</div>
+    <div><span class="dot partial-dot"></span>Marks dropped</div>
+  </div>
+
+  <div class="legend">
+    <span class="cat cat-slip">Careless slip</span>
+    <span class="cat cat-hw">Handwriting</span>
+    <span class="cat cat-miscon">Misconception</span>
+    <span class="cat cat-blank">Left blank</span>
+  </div>
+
+  <h2 class="section-title">What she could achieve &mdash; fixing each category in turn</h2>
+  <div class="ladder">
+    <div class="ladder-row">
+      <div class="ladder-score">102/130</div>
+      <div class="ladder-desc">Actual score.</div>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">105/130</div>
+      <div class="ladder-desc">+ careless slips fixed: <b>Q5c</b> (denominator sign carried correctly into the final answer), <b>Q11cii</b> (g(7) computed as 21&minus;5, not 21+5).</div>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">105/130</div>
+      <div class="ladder-desc">+ handwriting fixed: none this paper &mdash; every legible answer was already read correctly.</div>
+    </div>
+    <div class="ladder-row final">
+      <div class="ladder-score">130/130 (100%)</div>
+      <div class="ladder-desc">+ misconceptions resolved: <b>Q2b/2ci/2cii</b> (matching the correct corresponding sides in similar triangles), <b>Q3aiii</b> (median = average of the two middle values), <b>Q4aii</b> (triangle face area = <span class="frac"><span class="num">1</span><span class="den">2</span></span>&times;base&times;height, not the height alone), <b>Q8a</b> (checking the x-intercept by substituting it back into the equation), <b>Q8ci/Q8cii</b> (correct factorising, then substituting x back into the original cubic and classifying each turning point separately), <b>Q10d</b> (same substitution step for k), <b>Q11ci</b> (solving the equation for x rather than substituting the target value), <b>Q12a/12b</b> (using <span class="frac"><span class="num">310</span><span class="den">360</span></span>, not the full circle or the wrong <span class="frac"><span class="num">50</span><span class="den">360</span></span> sector).</div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Topics to target next session</h2>
+  <div class="weak-grid">
+    <div class="weak-card miscon">
+      <h3>Tracked pattern: solving for x, then forgetting to substitute back</h3>
+      <p>Twice on this paper (Q8c and Q10d, 5 marks combined), the derivative was set to zero and solved for x correctly in spirit, but the resulting x-value(s) were written directly into the answer box instead of being substituted back into the <i>original</i> function to find the actual y-value or k-value asked for. Worth a few quick drills on "solve dy/dx=0, then don't stop &mdash; plug x back into y=..." as a fixed two-step habit.</p>
+    </div>
+    <div class="weak-card miscon">
+      <h3>Tracked pattern: which fraction of the circle is left?</h3>
+      <p>Q12a and Q12b are the same shape (a circle with a 50&deg; sector removed), and both used the wrong fraction &mdash; the removed 50&deg; instead of the remaining 310&deg; in (a), and the full circle instead of the <span class="frac"><span class="num">310</span><span class="den">360</span></span> fraction in (b). Worth a quick habit check: shade the region actually being asked about first, then write "removed" or "remaining" next to whichever fraction is used.</p>
+    </div>
+    <div class="weak-card miscon">
+      <h3>Similar triangles: matching corresponding sides</h3>
+      <p>In "triangle ABX ~ triangle CDX," AX corresponds to CX (not DX) &mdash; mixing this up cost all of Q2ci and Q2cii (4 marks), and Q2b's proof also fell short of the full AAA angle chain needed. When a similarity statement is given, it's worth writing the correspondence out letter-by-letter (A&harr;C, B&harr;D, X&harr;X) before picking which sides go in a ratio, or which angles to pair.</p>
+    </div>
+    <div class="weak-card slip">
+      <h3>Checking the final answer before moving on</h3>
+      <p>Q5c's denominator was correct as (x+1)(x&minus;3) all through the working, then flipped to (x+3) only in the final answer line; Q11cii's g(7) briefly became 21+5 instead of 21&minus;5. Both are one-line slips in otherwise clean, correct methods &mdash; a quick check that the final answer matches the last line of working would catch both.</p>
+    </div>
+    <div class="weak-card miscon">
+      <h3>Checking an intercept by substituting back</h3>
+      <p>Q8a's y-intercept was right, but the x-intercept was plotted at (5, 0) rather than the correct (<span class="frac"><span class="num">4</span><span class="den">3</span></span>, 0) &mdash; substituting x back into 4&minus;3x=0 would have caught this before the line was drawn. Worth pairing with the same "solve for x, then substitute back" habit already flagged for Q8c and Q10d, since it's the same style of missing final check.</p>
+    </div>
+  </div>
+
+  <footer>0580/42 &middot; Cambridge IGCSE Mathematics &middot; February/March 2024 &middot; marked against the official mark scheme</footer>
+
+</div>
+</body>
+</html>

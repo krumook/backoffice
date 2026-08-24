@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — 4. Geometry (Paper 2) — Topic Detail</title>
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header {
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 20px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tip);
+    text-decoration: none;
+    background: var(--tip-light);
+    padding: 7px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .back-link:hover { background: var(--tip); color: #fff; }
+
+  h2.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 30px 0 14px;
+    padding-top: 6px;
+    color: var(--ink);
+    scroll-margin-top: 16px;
+  }
+  h2.section-title:first-of-type { margin-top: 0; }
+  h2.section-title .count { font-weight: 400; color: var(--muted); font-size: 13px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13px;
+    table-layout: fixed;
+    margin-bottom: 8px;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 10px 12px;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 10px 12px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.code { font-weight: 600; width: 88px; color: var(--accent); word-break: break-word; line-height: 1.3; }
+  td.topic { width: 150px; }
+  td.papers { width: 130px; }
+  td.papers span.paper-tag {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 3px;
+    white-space: nowrap;
+  }
+  td.comment { color: var(--muted); width: auto; }
+  td.improve { color: var(--ink); width: 220px; }
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .cat-correct { background: var(--accent-light); color: var(--accent); }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-hw { background: var(--loss-light); color: var(--loss); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  .score { font-weight: 700; margin-bottom: 6px; font-size: 12.5px; }
+  .sc-good { color: var(--accent); }
+  .sc-mid { color: var(--amber); }
+  .sc-low { color: var(--loss); }
+
+  .qline { margin-bottom: 6px; }
+  .qline:last-child { margin-bottom: 0; }
+  .qline b { color: var(--ink); font-weight: 600; }
+  .qmarks { font-weight: 600; color: var(--tip); background: var(--tip-light); padding: 1px 6px; border-radius: 10px; font-size: 11.5px; white-space: nowrap; }
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px; line-height: 1.05; font-size: 0.92em; position: relative; top: 0.1em; }
+  .frac .num, .frac .den { display: block; padding: 0 3px; }
+  .frac .num { border-bottom: 1.3px solid currentColor; padding-bottom: 1px; }
+  .frac .den { padding-top: 1px; }
+  .qline .mini-eq { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; margin: 5px 0; font-size: 12.5px; }
+  .qline .mini-eq .eln { padding: 2px 0; }
+  .qline .mini-eq .eln.correct-line { color: var(--accent); font-weight: 600; }
+
+  tr.untested td { color: var(--muted); }
+  tr.untested td.code { color: var(--muted); }
+  tr.untested td.dash { text-align: center; }
+
+  .legend {
+    display: flex;
+    gap: 18px;
+    font-size: 12px;
+    color: var(--muted);
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px 0 30px;
+  }
+
+  footer {
+    margin-top: 30px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .topic-nav { display:flex; justify-content:space-between; align-items:center; margin: 20px 0; font-size: 13px; }
+  .topic-nav a { color: var(--tip); text-decoration:none; font-weight:600; }
+  .topic-nav a:hover { text-decoration:underline; }
+  .topic-nav .spacer { color: var(--muted); }
+  .score-badge { display:inline-block; font-size:20px; font-weight:700; margin-left:14px; vertical-align:middle; }
+  .score-badge.ts-good { color: var(--accent); }
+  .score-badge.ts-mid { color: var(--amber); }
+  .score-badge.ts-low { color: var(--loss); }
+  .score-frac { font-size:13px; color: var(--muted); margin-left:6px; }
+
+  .improve-summary { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 18px 0 6px; }
+  .improve-title { font-size: 13px; font-weight: 700; color: var(--ink); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 12px; }
+  .improve-row { font-size: 13px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+  .improve-row:last-child { margin-bottom: 0; }
+  .improve-row b { color: var(--ink); }
+  .improve-row .cat { margin-right: 8px; }
+  .mini-retake { display: inline-block; font-size: 10px; font-weight: 700; color: var(--tip); background: var(--tip-light); padding: 1px 7px; border-radius: 8px; margin-left: 6px; white-space: nowrap; }
+  .mini-hw { display: inline-block; font-size: 10px; font-weight: 700; color: var(--amber); background: var(--amber-light); padding: 1px 7px; border-radius: 8px; margin-left: 6px; white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>4&nbsp;&middot;&nbsp;Geometry <span class="score-badge ts-good">87.25%</span><span class="score-frac">89/102</span></h1>
+    <div class="meta">Every geometry question from every marked Paper 2 paper (short-answer, non-calculator) so far</div>
+  </header>
+
+  <a class="back-link" href="../tracker-p2.html">&larr; Back to dashboard</a>
+
+  <div class="legend">
+    <div><span class="cat cat-correct">Correct</span></div>
+    <div><span class="cat cat-slip">Careless slip</span></div>
+    <div><span class="cat cat-hw">Handwriting</span></div>
+    <div><span class="cat cat-miscon">Misconception</span></div>
+    <div><span class="cat cat-blank">Left blank</span></div>
+    <div>&mdash; Not yet tested in a marked paper</div>
+    <div><span class="score sc-good">Score</span> &ge;85% &nbsp; <span class="score sc-mid">Score</span> 60&ndash;84% &nbsp; <span class="score sc-low">Score</span> &lt;60%</div>
+  </div>
+
+  <h2 class="section-title" id="sec-4">4&nbsp;&middot;&nbsp;Geometry</h2>
+  <table>
+    <colgroup><col style="width:88px;"><col style="width:150px;"><col style="width:130px;"><col><col style="width:220px;"></colgroup>
+    <thead><tr><th>Code</th><th>Topic</th><th>Paper(s)</th><th>Comment (per paper)</th><th>How to improve</th></tr></thead>
+    <tbody><tr><td class="code">E4.1</td><td class="topic">Geometrical terms</td><td class="papers"><span class="paper-tag">FebMarch2025 P22</span><span class="paper-tag">OctNov2025 P23</span></td><td class="comment"><div class="score sc-good">Score: 2/2 (100.00%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P22</b> Q3 <span class="qmarks">(1/1)</span> &mdash; Naming quadrilaterals (a kite from its properties), correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P23</b> Q3 <span class="qmarks">(1/1)</span> &mdash; completing a dice net so opposite faces sum to 7, correct.</div></td><td class="improve">No action needed.</td></tr><tr><td class="code">E4.4</td><td class="topic">Similarity / congruence</td><td class="papers"><span class="paper-tag">MayJune2022 P21</span><span class="paper-tag">OctNov2025 P21</span><span class="paper-tag">OctNov2025 P22</span></td><td class="comment"><div class="score sc-mid">Score: 26/33 (78.79%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2022 P21</b> Q11a <span class="qmarks">(2/2)</span> &mdash; Similarity, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2022 P21</b> Q11b <span class="qmarks">(2/2)</span> &mdash; Similarity (volume of similar solids), correct.</div><div class="qline"><span class="cat cat-blank">Left blank</span><b>MayJune2022 P21</b> Q19 <span class="qmarks">(3/4)</span> &mdash; angle reasoning and final side correct; only the congruency criterion name (ASA) left blank.<span class="mini-hw">&#8987; hw pending</span></div><div class="qline"><span class="cat cat-correct">Retake</span> An external worksheet on the 5 congruence criteria (SSS/SAS/ASA/AAS/RHS) was set as homework on 2 Aug but hasn't been submitted yet &mdash; not yet scored.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P21</b> Q14bi <span class="qmarks">(2/2)</span> &mdash; similar triangles CXD~BXA, finding CX=5.4cm from the ratio, correct.</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>OctNov2025 P21</b> Q14bii <span class="qmarks">(0/1)</span> &mdash; area of triangle CXD : area of triangle BXA given as 2:1, using the linear scale factor (CX:BX) directly. Area scales with the <i>square</i> of the linear scale factor, so the correct ratio is 2&sup2;:1&sup2;=4:1 &mdash; the same "forgot to square/cube the ratio" gap seen in OctNov2025 P43's Q22b (which needed cubing for volume).</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>OctNov2025 P22</b> Q11a <span class="qmarks">(0/3)</span> &mdash; asked to explain why two triangles are similar, giving a geometrical reason for each statement. The answer given &mdash; "ST and QR are parallel," "they have the same point of P," "S is a point on QP," "T is a point on RP" &mdash; restates facts already given in the question rather than proving similarity. Since no side lengths are given in this part, the proof has to run through <b>angles</b>: angle P is common to both triangles; angle PST = angle PQR and angle PTS = angle PRQ (corresponding angles, since ST is parallel to QR). Two matching angle pairs (plus the shared one) is what establishes AA similarity &mdash; naming parallel lines and points on a line isn't itself a similarity reason.<span class="mini-retake">&#8635; retaken</span></div><div class="qline"><span class="cat cat-correct">Retake</span><b>13 Aug</b> <span class="qmarks">(13/15)</span> &mdash; 5 fresh similarity-proof problems. Three "determine if similar and explain why" questions were fully independent (3/3 each, including correctly identifying one "not similar" case); a fourth (two straight lines crossing to form overlapping triangles, no parallelogram) started with a side-ratio approach before switching to angle reasoning with help (2/3); a fifth (parallelogram diagonal) needed help on the final statement, since opposite angles in a parallelogram equal wasn't yet known (2/3). The AAA angle-reasoning method itself (common angle, alternate, corresponding) is now landing consistently across unfamiliar diagrams &mdash; the two dropped marks were both new angle facts, not the original mistake reappearing. Counted at full weight: <b>+13/15</b> into this sub-topic's score.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P22</b> Q11b <span class="qmarks">(2/2)</span> &mdash; found PQ=15 using the 1:3 side-length scale factor, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P22</b> Q11c <span class="qmarks">(2/2)</span> &mdash; found the area of quadrilateral QRTS as 16k given area PST=2k, correctly using the area scale factor (length ratio 1:3 &rarr; area ratio 1:9, so area PQR=18k, minus area PST=2k).</div></td><td class="improve">Understands why triangles are congruent but doesn't reliably name the criterion &mdash; drill SSS/SAS/ASA/RHS as vocabulary alongside the reasoning. A second, now confirmed pattern across two papers: the linear scale factor itself is always found correctly, but it isn't squared for area or cubed for volume before being applied &mdash; make "square for area, cube for volume" a standing final step on every similar-shapes ratio question. The 13 Aug retake confirms AAA angle-reasoning for similarity proofs is now solid across unfamiliar diagrams &mdash; the two remaining gaps are narrower: recognising when a proof needs angles vs. sides, and knowing opposite angles in a parallelogram are equal. This paper adds a third, distinct gap in the same sub-topic: matching corresponding sides correctly in a similarity statement (Q2b/2ci/2cii all traced back to pairing AX with DX instead of CX) &mdash; worth writing the letter-by-letter correspondence out explicitly (A&harr;C, B&harr;D, X&harr;X) before picking any side ratio, on top of the existing "square/cube the ratio" habit.</td></tr><tr><td class="code">E4.6</td><td class="topic">Angles</td><td class="papers"><span class="paper-tag">MayJune2025 P21</span><span class="paper-tag">FebMarch2025 P22</span><span class="paper-tag">MayJune2022 P21</span><span class="paper-tag">OctNov2025 P21</span><span class="paper-tag">OctNov2025 P22</span><span class="paper-tag">OctNov2025 P23</span></td><td class="comment"><div class="score sc-good">Score: 30/34 (88.24%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q2 <span class="qmarks">(4/4)</span> &mdash; Angles in parallel lines, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q5 <span class="qmarks">(2/2)</span> &mdash; Interior angles of a polygon, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P22</b> Q10 <span class="qmarks">(5/5)</span> &mdash; Polygons meeting at a point (show that), correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2022 P21</b> Q12 <span class="qmarks">(3/3)</span> &mdash; Angles (polygons, in ratio), correct.</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>OctNov2025 P21</b> Q2 <span class="qmarks">(1/3)</span> &mdash; correctly found angle ACB=130&deg; (angles round a point: 360&minus;148&minus;82), earning the method mark &mdash; but wrote 130&deg; as the final answer for angle CAB instead of continuing. Since AC=BC, triangle ABC is isosceles with the 130&deg; angle at the apex, so the base angles are (180&minus;130)&divide;2=25&deg; each &mdash; the wrong vertex's angle was given as the answer. See the worked example on this paper's marking page.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P21</b> Q3 <span class="qmarks">(2/2)</span> &mdash; interior angle of a regular 20-sided polygon, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P22</b> Q6a <span class="qmarks">(1/1)</span> &mdash; angle ABC=105&deg; (180&minus;75, co-interior angles since AE is parallel to BC), correct.</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>OctNov2025 P22</b> Q6b <span class="qmarks">(0/1)</span> &mdash; asked for angle AED; the diagram shows angle AEC (co-interior with angle BCE=80&deg;, since AE is parallel to BC) correctly worked out as 100&deg;, but that value was boxed as the answer to angle AED instead of taking the extra step: since D, E, C lie on a straight line, angle AED=180&minus;100=<b>80&deg;</b>. The right angle was found and drawn on the diagram; the wrong one was written in the answer box.<span class="mini-retake">&#8635; retaken</span></div><div class="qline"><span class="cat cat-correct">Retake</span><b>13 Aug</b> <span class="qmarks">(3/3)</span> &mdash; a fresh angle-reasoning problem (isosceles triangle formed between two parallel lines, base angle then a straight-line angle), with every reason correctly stated (alternate, isosceles, straight line) and the final answer matched to the exact angle the question named. No wrong-angle-in-the-box mix-up this time. Covers both this row and 6(c) below. Counted at full weight: <b>+3/3</b> into this sub-topic's score.</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>OctNov2025 P22</b> Q6c <span class="qmarks">(1/2)</span> &mdash; asked for the full angle DAB. Correctly used the isosceles triangle AED (EA=ED) to find the base angle EAD=(180&minus;80)&divide;2=50&deg; &mdash; earning credit for that step &mdash; but boxed 50&deg; as the final answer instead of adding the given 75&deg; (angle EAB) to get the full angle DAB=50+75=<b>125&deg;</b>. Same pattern as 6(b): answered a real intermediate angle rather than the specific one the question named.<span class="mini-retake">&#8635; retaken</span> See 6(b) &mdash; same 13 Aug retake covers this row too.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P22</b> Q16 <span class="qmarks">(4/4)</span> &mdash; found n, the number of sides of a second regular polygon, from a shared side with a regular 15-gon and a 14&deg; angle between them: interior angle of the 15-gon=156&deg;, so angle DBC=180&minus;156&minus;14=... via 170(n&minus;2)/n=170 &rarr; n=36, correct throughout, including the two-polygon setup.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P23</b> Q1 <span class="qmarks">(2/2)</span> &mdash; isosceles triangle, find x from a given base angle, correct (130).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P23</b> Q5 <span class="qmarks">(2/2)</span> &mdash; equilateral triangle touching a rectangle at two points, find x and y, correct (108, 72).</div></td><td class="improve">Polygon-angle reasoning is consistently strong, including OctNov2025 P23's two clean angle questions and now FebMarch2024 P42's clean cyclic-quadrilateral reasoning question. Q6(b) and 6(c) (Paper 22) both show the geometry itself lands correctly (the right intermediate angle appears in the working both times) but the final answer written down is a different, related angle to the one actually asked for &mdash; worth a habit of underlining the exact angle name in the question before writing a final answer. Retaken 13 Aug: 3/3, no wrong-angle mix-up &mdash; looks resolved. Two further gaps: bearings (Q17a/17c &mdash; explained 5 Aug as a careless slip rather than a gap; PhysicsAndMathsTutor worksheet Q1, 4, 9, 13 set as homework &mdash; Q1 and Q9 submitted and checked 8 Aug: Q1 2/3 (gave the bearing "the other way around" &mdash; needs the back bearing, not the original direction), Q9 1/1 correct; Q4 and Q13 still not submitted), and the earlier miss of finishing an angle-chase by re-reading which vertex's angle was actually asked for, especially in isosceles-triangle setups where two related angles are easy to mix up.</td></tr><tr><td class="code">E4.7/E4.8</td><td class="topic">Circle theorems</td><td class="papers"><span class="paper-tag">MayJune2025 P21</span><span class="paper-tag">FebMarch2025 P22</span><span class="paper-tag">MayJune2022 P21</span><span class="paper-tag">OctNov2025 P21</span><span class="paper-tag">OctNov2025 P23</span></td><td class="comment"><div class="score sc-good">Score: 31/33 (93.94%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q10a <span class="qmarks">(1/1)</span> &mdash; Circle theorems: angle AOC, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q10b <span class="qmarks">(1/1)</span> &mdash; Circle theorems: angle ABC, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>MayJune2025 P21</b> Q10c <span class="qmarks">(1/1)</span> &mdash; Circle theorems: angle DAC, correct.</div><div class="qline"><span class="cat cat-hw">Handwriting</span><b>MayJune2025 P21</b> Q10d <span class="qmarks">(0/1)</span> &mdash; the digit written is ambiguous (could read as 15 or 75); marked wrong for illegibility, not maths.<span class="mini-retake">&#8635; retaken</span></div><div class="qline"><span class="cat cat-correct">Retake</span><b>29 Jul</b> <span class="qmarks">(5/5)</span> &mdash; clearly written, confirms it was a legibility issue not a gap in understanding, counted at full weight: <b>+5/5</b> into this sub-topic's score.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P22</b> Q14a <span class="qmarks">(2/2)</span> &mdash; Circle theorems: cyclic quadrilateral, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P22</b> Q14b(i) <span class="qmarks">(2/2)</span> &mdash; Circle theorems: angle DBC, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P22</b> Q14b(ii) <span class="qmarks">(1/1)</span> &mdash; Circle theorems: tangent angle, correct.</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>MayJune2022 P21</b> Q18 <span class="qmarks">(2/3)</span> &mdash; x correct; y matched a different labelled angle (42) rather than the one asked for (22).<span class="mini-retake">&#8635; retaken</span></div><div class="qline"><span class="cat cat-correct">Retake</span><b>2 Aug</b> <span class="qmarks">(2/2)</span> &mdash; retested with 1 fresh circle-theorem diagram asking for two different named angles. Both correct and independent, counted at full weight: <b>+2/2</b> into this sub-topic's score.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P21</b> Q14a <span class="qmarks">(6/6)</span> &mdash; three circle-theorem statements with reasons (angle CDB=37&deg;, angles in a triangle; angle ABD=55&deg;, angles in the same segment; angle AED=125&deg;, opposite angles in a cyclic quadrilateral), all correct including the named reasons.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P23</b> Q13 <span class="qmarks">(4/4)</span> &mdash; tangent/angle-at-centre circle theorem problem (E, D, B, tangents ED and EB, AC parallel to EB, angle AOD=44&deg;), finding x=23 via 2x+44+90=180, correct throughout.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P23</b> Q21 <span class="qmarks">(4/4)</span> &mdash; cyclic quadrilateral with a 2:3 angle ratio, finding p=72, m=108, then y=180&minus;(m+10)=62, correct throughout.</div></td><td class="improve">Strong overall, and OctNov2025 P23's two circle-theorem questions (a tangent problem and a cyclic quadrilateral) were both clean, confirming the vocabulary and angle-chasing are secure. The two earlier misses were a legibility issue and picking the wrong angle off a busy diagram, both retaken and resolved &mdash; Q10d 29 Jul (5 of 5, clearly written) and Q18 2 Aug (2 of 2, independent). OctNov2025 P42's angle-at-the-centre reasoning (Q12a) was excellent, correctly named reason included; Q12b's near-miss (26 vs 27) had no working shown, so it's worth asking her to always jot at least one line of working even on short circle-theorem answers.</td></tr></tbody>
+  </table>
+
+  <div class="improve-summary"><div class="improve-title">Areas to improve in this topic &middot; Paper 2 only</div><div class="improve-row"><span class="cat cat-slip">Careless slip</span>2 in this topic: <b>E4.6</b> OctNov2025 P22 Q6b, <b>E4.6</b> OctNov2025 P22 Q6c.</div><div class="improve-row"><span class="cat cat-hw">Handwriting</span>1 in this topic: <b>E4.7/E4.8</b> MayJune2025 P21 Q10d.</div><div class="improve-row"><span class="cat cat-miscon">Misconception</span>4 in this topic: <b>E4.4</b> OctNov2025 P21 Q14bii, <b>E4.4</b> OctNov2025 P22 Q11a, <b>E4.6</b> OctNov2025 P21 Q2, <b>E4.7/E4.8</b> MayJune2022 P21 Q18.</div><div class="improve-row"><span class="cat cat-blank">Left blank</span>1 in this topic: <b>E4.4</b> MayJune2022 P21 Q19.</div></div>
+
+
+  <div class="topic-nav">
+    <a href="3-p2.html">&larr; 3. Coordinate geometry</a>
+    <a href="../tracker-p2.html">Dashboard</a>
+    <a href="5-p2.html">5. Mensuration &rarr;</a>
+  </div>
+
+  <footer>Cambridge IGCSE Mathematics 0580 (Extended) &middot; syllabus codes reference the current (2025&ndash;2027) subject content &middot; update after each new paper</footer>
+
+</div>
+</body>
+</html>

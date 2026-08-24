@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — 1. Number (Paper 4) — Topic Detail</title>
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header {
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 20px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tip);
+    text-decoration: none;
+    background: var(--tip-light);
+    padding: 7px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .back-link:hover { background: var(--tip); color: #fff; }
+
+  h2.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 30px 0 14px;
+    padding-top: 6px;
+    color: var(--ink);
+    scroll-margin-top: 16px;
+  }
+  h2.section-title:first-of-type { margin-top: 0; }
+  h2.section-title .count { font-weight: 400; color: var(--muted); font-size: 13px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13px;
+    table-layout: fixed;
+    margin-bottom: 8px;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 10px 12px;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 10px 12px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.code { font-weight: 600; width: 88px; color: var(--accent); word-break: break-word; line-height: 1.3; }
+  td.topic { width: 150px; }
+  td.papers { width: 130px; }
+  td.papers span.paper-tag {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 3px;
+    white-space: nowrap;
+  }
+  td.comment { color: var(--muted); width: auto; }
+  td.improve { color: var(--ink); width: 220px; }
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .cat-correct { background: var(--accent-light); color: var(--accent); }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-hw { background: var(--loss-light); color: var(--loss); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  .score { font-weight: 700; margin-bottom: 6px; font-size: 12.5px; }
+  .sc-good { color: var(--accent); }
+  .sc-mid { color: var(--amber); }
+  .sc-low { color: var(--loss); }
+
+  .qline { margin-bottom: 6px; }
+  .qline:last-child { margin-bottom: 0; }
+  .qline b { color: var(--ink); font-weight: 600; }
+  .qmarks { font-weight: 600; color: var(--tip); background: var(--tip-light); padding: 1px 6px; border-radius: 10px; font-size: 11.5px; white-space: nowrap; }
+
+  tr.untested td { color: var(--muted); }
+  tr.untested td.code { color: var(--muted); }
+  tr.untested td.dash { text-align: center; }
+
+  .legend {
+    display: flex;
+    gap: 18px;
+    font-size: 12px;
+    color: var(--muted);
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px 0 30px;
+  }
+
+  footer {
+    margin-top: 30px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .topic-nav { display:flex; justify-content:space-between; align-items:center; margin: 20px 0; font-size: 13px; }
+  .topic-nav a { color: var(--tip); text-decoration:none; font-weight:600; }
+  .topic-nav a:hover { text-decoration:underline; }
+  .topic-nav .spacer { color: var(--muted); }
+  .score-badge { display:inline-block; font-size:20px; font-weight:700; margin-left:14px; vertical-align:middle; }
+  .score-badge.ts-good { color: var(--accent); }
+  .score-badge.ts-mid { color: var(--amber); }
+  .score-badge.ts-low { color: var(--loss); }
+  .score-frac { font-size:13px; color: var(--muted); margin-left:6px; }
+
+  .improve-summary { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 18px 0 6px; }
+  .improve-title { font-size: 13px; font-weight: 700; color: var(--ink); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 12px; }
+  .improve-row { font-size: 13px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+  .improve-row:last-child { margin-bottom: 0; }
+  .improve-row b { color: var(--ink); }
+  .improve-row .cat { margin-right: 8px; }
+  .mini-retake { display: inline-block; font-size: 10px; font-weight: 700; color: var(--tip); background: var(--tip-light); padding: 1px 7px; border-radius: 8px; margin-left: 6px; white-space: nowrap; }
+  .mini-hw { display: inline-block; font-size: 10px; font-weight: 700; color: var(--amber); background: var(--amber-light); padding: 1px 7px; border-radius: 8px; margin-left: 6px; white-space: nowrap; }
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px; line-height: 1.05; font-size: 0.92em; position: relative; top: 0.1em; }
+  .frac .num, .frac .den { display: block; padding: 0 3px; }
+  .frac .num { border-bottom: 1.3px solid currentColor; padding-bottom: 1px; }
+  .frac .den { padding-top: 1px; }
+  .qline .mini-eq { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; margin: 5px 0; font-size: 12.5px; }
+  .qline .mini-eq .eln { padding: 2px 0; }
+  .qline .mini-eq .eln.correct-line { color: var(--accent); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>1&nbsp;&middot;&nbsp;Number <span class="score-badge ts-mid">84.16%</span><span class="score-frac">85/101</span></h1>
+    <div class="meta">Every number question from every marked Paper 4 paper (structured, calculator) so far</div>
+  </header>
+
+  <a class="back-link" href="../tracker-p4.html">&larr; Back to dashboard</a>
+
+  <div class="legend">
+    <div><span class="cat cat-correct">Correct</span></div>
+    <div><span class="cat cat-slip">Careless slip</span></div>
+    <div><span class="cat cat-hw">Handwriting</span></div>
+    <div><span class="cat cat-miscon">Misconception</span></div>
+    <div><span class="cat cat-blank">Left blank</span></div>
+    <div>&mdash; Not yet tested in a marked paper</div>
+    <div><span class="score sc-good">Score</span> &ge;85% &nbsp; <span class="score sc-mid">Score</span> 60&ndash;84% &nbsp; <span class="score sc-low">Score</span> &lt;60%</div>
+  </div>
+
+  <h2 class="section-title" id="sec-1">1&nbsp;&middot;&nbsp;Number</h2>
+  <table>
+    <colgroup><col style="width:88px;"><col style="width:150px;"><col style="width:130px;"><col><col style="width:220px;"></colgroup>
+    <thead><tr><th>Code</th><th>Topic</th><th>Paper(s)</th><th>Comment (per paper)</th><th>How to improve</th></tr></thead>
+    <tbody><tr><td class="code">E1.1</td><td class="topic">Types of number</td><td class="papers"><span class="paper-tag">FebMarch2025 P42</span></td><td class="comment"><div class="score sc-good">Score: 1/1 (100.00%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q1 <span class="qmarks">(1/1)</span> &mdash; Factor of 28 that is prime, correct.</div></td><td class="improve">Prime factorisation itself (Q13a) is completely secure, and this paper's prime-sum questions were both clean. Q13b was a new sub-skill (cube numbers via prime factorisation) that hadn't been taught yet &mdash; retaken 13 Aug, 10/10 across two fresh problems, now looks fully secure. This paper's new miss (Q2) is a different angle on the same "prime" idea &mdash; retaken 14 Aug, 2/2 across two fresh problems, the non-prime-divisor mistake didn't reappear and this now looks resolved too.</td></tr><tr><td class="code">E1.2</td><td class="topic">Sets</td><td class="papers"><span class="paper-tag">OctNov2025 P43</span><span class="paper-tag">OctNov2025 P41</span></td><td class="comment"><div class="score sc-mid">Score: 5/6 (83.33%)</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>OctNov2025 P41</b> Q12a <span class="qmarks">(0/1)</span> &mdash; the correct value, 37, was found, but written as a fraction (37/50) instead of the plain number the question asked for &mdash; the working and the number are both right, only the answer's format is wrong.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q12b <span class="qmarks">(1/1)</span> &mdash; correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q2a <span class="qmarks">(1/1)</span> &mdash; Sets: Venn diagram region, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q2b <span class="qmarks">(1/1)</span> &mdash; Sets: Venn diagram region, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q2c <span class="qmarks">(2/2)</span> &mdash; Sets: probability from a Venn diagram, correct.</div></td><td class="improve">The Venn-diagram algebra (setting up and solving for x) is fully secure &mdash; this was a placement/transcription slip, not a gap in the method. Worth a quick habit: after solving for x, say out loud which labelled region it belongs to before writing it in. Q12(b)(iii) also flags a real gap worth a five-minute check: remembering that the overlap region counts as part of <i>both</i> sets when reading a union off a diagram.</td></tr><tr><td class="code">E1.3</td><td class="topic">Powers and roots</td><td class="papers"><span class="paper-tag">FebMarch2025 P42</span></td><td class="comment"><div class="score sc-good">Score: 2/2 (100.00%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q4 <span class="qmarks">(2/2)</span> &mdash; Calculate (20.24&minus;&#8731;30)/6.5, correct, including the cube root.</div></td><td class="improve">No action needed.</td></tr><tr><td class="code">E1.5</td><td class="topic">Ordering</td><td class="papers"><span class="paper-tag">OctNov2025 P43</span></td><td class="comment"><div class="score sc-low">Score: 2/4 (50.00%)</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>OctNov2025 P43</b> Q8 <span class="qmarks">(0/2)</span> &mdash; ordered m, 33% of m, 1/3 of m, 320% of m/10 &mdash; the exact reverse of the correct smallest-to-largest order, since 320% of m/10 (0.32m) is actually the smallest and m itself the largest.<span class="mini-retake">&#8635; retaken</span></div><div class="qline"><span class="cat cat-correct">Retake</span><b>3 Aug</b> <span class="qmarks">(2/2)</span> &mdash; retested with 2 fresh ordering problems (percentages/fractions of an unknown), both correct and independent, counted at full weight: <b>+2/2</b> into this sub-topic's score.</div></td><td class="improve">Legibility of similar digits (Q5) and the reversed-order mistake (Q8) &mdash; the retake confirms Q8's mistake is resolved, not a recurring pattern.</td></tr><tr><td class="code">E1.6</td><td class="topic">The four operations</td><td class="papers"><span class="paper-tag">OctNov2025 P43</span></td><td class="comment"><div class="score sc-good">Score: 3/3 (100.00%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q1a <span class="qmarks">(1/1)</span> &mdash; Directed numbers, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q1b <span class="qmarks">(1/1)</span> &mdash; Directed numbers, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q9 <span class="qmarks">(1/1)</span> &mdash; Dividing by a mixed number, correct.</div></td><td class="improve">No action needed.</td></tr><tr><td class="code">E1.7</td><td class="topic">Indices I</td><td class="papers"><span class="paper-tag">OctNov2025 P41</span></td><td class="comment"><div class="score sc-good">Score: 1/1 (100.00%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q8 <span class="qmarks">(1/1)</span> &mdash; correct.</div></td><td class="improve">Three solid papers on the core rules now, including this paper's full run of numeric index questions (zero index, negative index, combining powers to one base). Q14a's index method was actually fine &mdash; the miss was reading &divide; as &times;, so that was a reading slip, not a rule gap. Worth a slow, deliberate read of the operation symbol before starting any indices question. Retaken 13 Aug: 2/2, no misread this time &mdash; looks resolved.</td></tr><tr><td class="code">E1.8</td><td class="topic">Standard form</td><td class="papers"><span class="paper-tag">OctNov2025 P43</span><span class="paper-tag">FebMarch2025 P42</span></td><td class="comment"><div class="score sc-mid">Score: 4/5 (80.00%)</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>OctNov2025 P43</b> Q11 <span class="qmarks">(1/2)</span> &mdash; picked 9&times;10&sup1;&sup9; as the largest over the true largest, 1.3&times;10&sup1;&sup2;, by comparing coefficients (9 vs 1.3) without first checking that the exponents differ.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q9a <span class="qmarks">(1/1)</span> &mdash; Writing 0.00709 in standard form, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q9b <span class="qmarks">(2/2)</span> &mdash; (4&times;10&#8308;)&sup2; in standard form, correct.</div></td><td class="improve">Two different gaps remain from earlier papers: aligning exponents before subtracting (MJ22), and comparing exponents before coefficients when judging size (ON25 P43). This paper's questions (writing standard form, adding two standard-form numbers) were both secure &mdash; keep an eye out for a comparing-size question to confirm the ON25 P43 gap is closed.</td></tr><tr><td class="code">E1.10</td><td class="topic">Limits of accuracy</td><td class="papers"><span class="paper-tag">OctNov2025 P43</span><span class="paper-tag">FebMarch2025 P42</span><span class="paper-tag">OctNov2025 P42</span><span class="paper-tag">FebMarch2024 P42</span></td><td class="comment"><div class="score sc-mid">Score: 10/12 (83.33%)</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>OctNov2025 P43</b> Q25 <span class="qmarks">(1/3)</span> &mdash; found correct bounds for two cut pieces of wire, but treated the original 68cm length as an exact 680mm instead of a 675&ndash;685mm range &mdash; the same &plusmn;0.5 rule wasn't applied to every rounded quantity in the question.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q20 <span class="qmarks">(3/3)</span> &mdash; Lower bound of density, correctly combined the mass lower bound with the volume <i>upper</i> bound.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P42</b> Q20 <span class="qmarks">(3/3)</span> &mdash; lower bound of a prism's volume from density=mass&divide;volume, correctly paired the mass <i>lower</i> bound (4805g) with the density <i>upper</i> bound (7.75) to minimise the result (620cm&sup3;).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q1c <span class="qmarks">(3/3)</span> &mdash; upper bound of average speed, correctly paired the distance upper bound with the time lower bound, correct (140).</div></td><td class="improve">The ON25 P43 gap (bounding every rounded value) hasn't reappeared across four further papers, all of which tested knowing which bound (upper or lower) to pair with which quantity &mdash; handled correctly every time since, including this paper's speed question. This sub-topic looks secure now.</td></tr><tr><td class="code">E1.11</td><td class="topic">Ratio and proportion</td><td class="papers"><span class="paper-tag">OctNov2025 P42</span><span class="paper-tag">FebMarch2024 P42</span></td><td class="comment"><div class="score sc-good">Score: 7/7 (100.00%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P42</b> Q1 <span class="qmarks">(2/2)</span> &mdash; Writing 60g:3kg in the form 1:n, correct (1:50).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q1bi <span class="qmarks">(2/2)</span> &mdash; mushrooms as a percentage of total pizza toppings from a given ratio, correct (32%).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q1bii <span class="qmarks">(2/2)</span> &mdash; mass of carrots from a ratio share of 1500g, correct (360g).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q1biii <span class="qmarks">(1/1)</span> &mdash; profit on the carrots (75% of the 360g cost figure), correct (270).</div></td><td class="improve">No action needed &mdash; clean across all three papers testing this sub-topic so far, including a three-part ratio/percentage chain this paper.</td></tr><tr><td class="code">E1.12</td><td class="topic">Rates</td><td class="papers"><span class="paper-tag">OctNov2025 P42</span></td><td class="comment"><div class="score sc-good">Score: 2/2 (100.00%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P42</b> Q4a <span class="qmarks">(2/2)</span> &mdash; cards made per hour scaled up to 8 hours (9 cards per 20 min &rarr; 216 cards), correct.</div></td><td class="improve">Currency-rate version is secure, and a straightforward rate-scaling question (cards per hour) on OctNov2025 P42 was clean too. Both retakes show real progress on the linked-step speed/distance/time method &mdash; the Q14 retest in particular landed a full fresh word problem independently. One more homework variant is still outstanding before this is fully closed out.</td></tr><tr><td class="code">E1.13</td><td class="topic">Percentages</td><td class="papers"><span class="paper-tag">OctNov2025 P43</span><span class="paper-tag">FebMarch2025 P42</span><span class="paper-tag">OctNov2025 P42</span><span class="paper-tag">OctNov2025 P41</span><span class="paper-tag">FebMarch2024 P42</span></td><td class="comment"><div class="score sc-mid">Score: 16/23 (69.57%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q11a <span class="qmarks">(2/2)</span> &mdash; correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q11b <span class="qmarks">(2/2)</span> &mdash; correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P42</b> Q4b <span class="qmarks">(2/2)</span> &mdash; percentage profit on a card (cost 12&cent;, sold 50&cent;), correct (316.67%, accepted rounded to 317%).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P42</b> Q14a <span class="qmarks">(2/2)</span> &mdash; compound interest, $24000 at 3.2% for 4 years, correct.</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>OctNov2025 P42</b> Q14b <span class="qmarks">(0/3)</span> &mdash; reverse percentage (34% profit, sold for $40870, find the profit). 34% was used as <b>34</b> instead of <b>0.34</b> in the equation (40870&minus;x=34x instead of 40870&minus;x=0.34x), giving a wrong cost price; on top of that, the value asked for is the <i>profit</i> (40870&minus;x=$10370), and even the (incorrect) x itself was given as the final answer instead.</div><div class="qline"><span class="cat cat-blank">Left blank</span><b>OctNov2025 P43</b> Q21 <span class="qmarks">(0/4)</span> &mdash; percentage increase in an hourly rate, built from two linked rate calculations &mdash; left blank entirely.<span class="mini-retake">&#8635; retaken</span></div><div class="qline"><span class="cat cat-correct">Retake</span><b>3 Aug</b> <span class="qmarks">(3/3)</span> &mdash; retested with 3 fresh two-week hourly-rate problems, all correct and independent, counted at full weight: <b>+3/3</b> into this sub-topic's score.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q6 <span class="qmarks">(3/3)</span> &mdash; Weekly wage with a 30% overtime rate for extra hours, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q1biv <span class="qmarks">(2/2)</span> &mdash; reverse percentage: original selling price before an 8% discount led to a $1.15 selling price, correct ($1.25).</div></td><td class="improve">Method is right on most questions attempted &mdash; the earlier retake confirms the Q21 blank was about not attempting the two-step linked calculation, not a gap in the percentage method itself. OctNov2025 P42 adds a new, specific gap though: Q14b used a percentage as a raw number (34) rather than converting to a decimal (0.34) before it went into an equation, and separately answered with the wrong quantity (cost price instead of profit) &mdash; worth a couple of reverse-percentage word problems where the answer required isn't the first thing solved for. This paper's reverse-percentage question (Q1biv) was handled cleanly, a good sign for that pattern.</td></tr><tr><td class="code">E1.14</td><td class="topic">Using a calculator</td><td class="papers"><span class="paper-tag">OctNov2025 P41</span></td><td class="comment"><div class="score sc-low">Score: 0/1 (0.00%)</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>OctNov2025 P41</b> Q4 <span class="qmarks">(0/1)</span> &mdash; asked to find the time a train journey finishes; the calculation itself was right, but the answer was written as a decimal (4.08) instead of the time format the question needed (04:08).</div></td><td class="improve">First paper testing this sub-topic. The calculation was correct &mdash; the miss was purely presentation, writing a time as a decimal instead of with a colon. Worth a standing check on any "find the time" question: the final answer needs a colon, not a decimal point.</td></tr><tr><td class="code">E1.15</td><td class="topic">Time</td><td class="papers"><span class="paper-tag">OctNov2025 P41</span></td><td class="comment"><div class="score sc-good">Score: 2/2 (100.00%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q9 <span class="qmarks">(2/2)</span> &mdash; correct.</div></td><td class="improve">No action needed.</td></tr><tr><td class="code">E1.16</td><td class="topic">Money</td><td class="papers"><span class="paper-tag">OctNov2025 P42</span><span class="paper-tag">OctNov2025 P41</span><span class="paper-tag">FebMarch2024 P42</span></td><td class="comment"><div class="score sc-good">Score: 7/7 (100.00%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P42</b> Q5 <span class="qmarks">(2/2)</span> &mdash; comparing a phone price in Yuan (converted at 1 Yuan=$0.152) against a price already in dollars, correct ($3.86 difference).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q22 <span class="qmarks">(3/3)</span> &mdash; correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q1a <span class="qmarks">(2/2)</span> &mdash; total cost of 3 adult and 4 child tickets, correct ($8.24).</div></td><td class="improve">No action needed &mdash; clean across all three papers testing this sub-topic so far.</td></tr><tr><td class="code">E1.17</td><td class="topic">Exponential growth and decay</td><td class="papers"><span class="paper-tag">OctNov2025 P43</span><span class="paper-tag">FebMarch2025 P42</span><span class="paper-tag">OctNov2025 P42</span><span class="paper-tag">OctNov2025 P41</span><span class="paper-tag">FebMarch2024 P42</span></td><td class="comment"><div class="score sc-good">Score: 23/25 (92.00%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q19 <span class="qmarks">(3/3)</span> &mdash; correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P42</b> Q14c <span class="qmarks">(3/3)</span> &mdash; formula for the value of a car depreciating exponentially by 23% each year, V=32500(1&minus;23/100)&#8319;, correct &mdash; the word &ldquo;exponentially&rdquo; (not &ldquo;compound&rdquo;) was correctly recognised as needing this formula, annotated in the working.</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>OctNov2025 P43</b> Q15a <span class="qmarks">(2/3)</span> &mdash; wrote 54000&times;(1+2/100)&#8308; instead of 54000&times;(1&minus;2/100)&#8308; &mdash; should be minus, since the population is decreasing. Correct working: 54000&times;(1&minus;0.02)&#8308;=49808 (new population), decrease=54000&minus;49808=<b>4192</b>; the final subtraction was also never carried out.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q15b <span class="qmarks">(2/2)</span> &mdash; Exponential decrease: number of years to fall below a target, correct.</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>FebMarch2025 P42</b> Q11a <span class="qmarks">(1/2)</span> &mdash; compound interest method (1500&times;1.042&#8309;) entirely correct, but the final answer, an amount of money, needs 2 decimal places: 1842.59. She wrote 1842.6 (1 decimal place), which doesn't match and loses the accuracy mark.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q11b <span class="qmarks">(3/3)</span> &mdash; Compound interest, finding the rate given a doubling time, correct &mdash; a genuinely harder reverse problem, handled well.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q9ai <span class="qmarks">(3/3)</span> &mdash; simple interest rate from a given interest amount, correct (5%).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q9aii <span class="qmarks">(3/3)</span> &mdash; compound interest rate from a given ratio of amounts, correct (4%).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q9b <span class="qmarks">(3/3)</span> &mdash; population growth: number of years to reach a target, correct (9 years).</div></td><td class="improve">Growth and decay formula itself is secure across three papers now, including working backwards to find a rate in both directions (simple and compound interest) and a full growth-to-target problem this paper. Two small habits still worth keeping: checking which quantity a question actually asks for (Q15a), and rounding money answers to exactly 2 decimal places rather than however the calculator display breaks (Q11a).</td></tr></tbody>
+  </table>
+
+  <div class="improve-summary"><div class="improve-title">Areas to improve in this topic &middot; Paper 4 only</div><div class="improve-row"><span class="cat cat-slip">Careless slip</span>3 in this topic: <b>E1.2</b> OctNov2025 P41 Q12a, <b>E1.14</b> OctNov2025 P41 Q4, <b>E1.17</b> FebMarch2025 P42 Q11a.</div><div class="improve-row"><span class="cat cat-hw">Handwriting</span>None recorded in this topic so far.</div><div class="improve-row"><span class="cat cat-miscon">Misconception</span>5 in this topic: <b>E1.5</b> OctNov2025 P43 Q8, <b>E1.8</b> OctNov2025 P43 Q11, <b>E1.10</b> OctNov2025 P43 Q25, <b>E1.13</b> OctNov2025 P42 Q14b, <b>E1.17</b> OctNov2025 P43 Q15a.</div><div class="improve-row"><span class="cat cat-blank">Left blank</span>1 in this topic: <b>E1.13</b> OctNov2025 P43 Q21.</div></div>
+
+
+  <div class="topic-nav">
+    <span class="spacer"></span>
+    <a href="../tracker-p4.html">Dashboard</a>
+    <a href="2-p4.html">2. Algebra and graphs &rarr;</a>
+  </div>
+
+  <footer>Cambridge IGCSE Mathematics 0580 (Extended) &middot; syllabus codes reference the current (2025&ndash;2027) subject content &middot; update after each new paper</footer>
+
+</div>
+</body>
+</html>

@@ -66,42 +66,6 @@
     color: var(--muted);
   }
   .legend-box b { color: var(--ink); }
-  .legend-box .paper-list { margin-top: 6px; margin-bottom: 12px; }
-  .legend-box .paper-list:last-child { margin-bottom: 0; }
-  .paper-year { font-size: 21px; font-weight: 700; color: var(--ink); margin: 20px 0 8px; letter-spacing: normal; }
-  .paper-year:first-of-type { margin-top: 4px; }
-  .legend-box .paper-list a { display: inline-block; padding: 2px 10px; border-radius: 20px; margin: 2px 6px 2px 0; font-size: 12.5px; font-weight: 600; text-decoration: none; cursor: pointer; transition: background 0.15s, color 0.15s, transform 0.1s; }
-  .legend-box .paper-list a:hover { transform: translateY(-1px); }
-  .legend-box .paper-list a .p-score { font-weight: 700; }
-
-  .paper-list a.grade-astar { background: var(--grade-astar-light); color: var(--grade-astar); }
-  .paper-list a.grade-astar:hover { background: var(--grade-astar); color: #fff; }
-  .paper-list a.grade-a { background: var(--grade-a-light); color: var(--grade-a); }
-  .paper-list a.grade-a:hover { background: var(--grade-a); color: #fff; }
-  .paper-list a.grade-b { background: var(--grade-b-light); color: var(--grade-b); }
-  .paper-list a.grade-b:hover { background: var(--grade-b); color: #fff; }
-  .paper-list a.grade-below { background: var(--grade-below-light); color: var(--grade-below); }
-  .paper-list a.grade-below:hover { background: var(--grade-below); color: #fff; }
-  .paper-list span.grade-pending { display: inline-block; padding: 2px 10px; border-radius: 20px; margin: 2px 6px 2px 0; font-size: 12.5px; font-weight: 600; background: var(--card); border: 1px dashed var(--line); color: var(--muted); font-style: italic; }
-  .paper-list span.grade-cleared { display: inline-block; padding: 2px 10px; border-radius: 20px; margin: 2px 6px 2px 0; font-size: 12.5px; font-weight: 600; background: var(--card); border: 1px solid var(--line); color: var(--muted); }
-  .paper-list span.grade-undone { display: inline-block; padding: 2px 10px; border-radius: 20px; margin: 2px 6px 2px 0; font-size: 12.5px; font-weight: 700; background: #fff; border: 1.5px solid var(--grade-below); color: var(--grade-below); }
-
-  .session-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
-  .session-row:last-child { margin-bottom: 0; }
-  .session-row .session-label { flex: 0 0 68px; font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; padding-top: 5px; }
-  .session-row .paper-lines { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
-  .session-row .paper-lines .paper-list { margin: 0; }
-  .papers-note { font-size: 11.5px; color: var(--muted); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
-  .papers-note b { color: var(--ink); }
-  .paper-list a.sess { background: var(--tip-light); color: var(--tip); }
-  .paper-list a.sess:hover { background: var(--tip); color: #fff; }
-  .session-months { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
-  .month-card-sess { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
-  .mcs-title { display: block; font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
-  .mcs-sub { font-size: 11.5px; color: var(--muted); margin-bottom: 8px; }
-  .month-card-sess .paper-list { margin-top: 0; }
-  @media (max-width: 720px) { .session-months { grid-template-columns: 1fr; } }
-
   .section-label {
     font-size: 13px;
     font-weight: 600;
@@ -111,57 +75,46 @@
     letter-spacing: 0.04em;
   }
 
-  .topic-summary {
+  .session-months { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
+  .month-card-sess { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .mcs-title { display: block; font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+  .mcs-sub { font-size: 11.5px; color: var(--muted); margin-bottom: 8px; }
+  .month-card-sess .paper-list { margin-top: 0; }
+  .paper-list a.sess { display: inline-block; padding: 2px 10px; border-radius: 20px; margin: 2px 6px 2px 0; font-size: 12.5px; font-weight: 600; text-decoration: none; background: var(--tip-light); color: var(--tip); }
+  .paper-list a.sess:hover { background: var(--tip); color: #fff; }
+  @media (max-width: 720px) { .session-months { grid-template-columns: 1fr; } }
+
+  .paper-hub-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 30px;
   }
-  .ts-card {
+  .paper-hub-card {
     background: var(--card);
     border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 14px 16px;
+    border-radius: 14px;
+    padding: 24px 26px;
     display: block;
     text-decoration: none;
     color: inherit;
-    cursor: pointer;
     transition: box-shadow 0.15s ease, transform 0.15s ease;
+    border-top: 4px solid var(--accent);
   }
-  .ts-card:hover {
-    box-shadow: 0 3px 14px rgba(31,42,36,0.14);
-    transform: translateY(-2px);
-  }
-  .ts-card .ts-name { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 9px; text-transform: uppercase; white-space: nowrap; }
-  .ts-row { display: flex; align-items: baseline; justify-content: space-between; }
-  .ts-row .ts-label { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
-  .ts-card .ts-pct { font-size: 20px; font-weight: 700; }
-  .ts-card .ts-frac { font-size: 12px; color: var(--muted); margin-left: 6px; }
-  .ts-card .ts-goto { float: right; font-size: 11px; color: var(--tip); font-weight: 600; margin-top: 4px; }
-  .ts-bar { height: 5px; border-radius: 3px; background: #fff; margin-top: 4px; margin-bottom: 12px; overflow: hidden; }
-  .ts-bar-fill { height: 100%; border-radius: 3px; }
-  .ts-astar { background: var(--grade-astar-light); }
-  .ts-astar .ts-pct { color: var(--grade-astar); }
-  .ts-astar .ts-bar-fill { background: var(--grade-astar); }
-  .ts-a { background: var(--grade-a-light); }
-  .ts-a .ts-pct { color: var(--grade-a); }
-  .ts-a .ts-bar-fill { background: var(--grade-a); }
-  .ts-b { background: var(--grade-b-light); }
-  .ts-b .ts-pct { color: var(--grade-b); }
-  .ts-b .ts-bar-fill { background: var(--grade-b); }
-  .ts-below { background: var(--grade-below-light); }
-  .ts-below .ts-pct { color: var(--grade-below); }
-  .ts-below .ts-bar-fill { background: var(--grade-below); }
-
-  .ts-weight-row { margin-top: 2px; }
-  .ts-card .ts-wpct { font-size: 14px; font-weight: 700; color: var(--weight); }
-  .ts-card .ts-wfrac { font-size: 11.5px; color: var(--muted); margin-left: 6px; }
-  .ts-wbar { margin-bottom: 0; }
-  .ts-wbar .ts-bar-fill.ts-wbar-fill { background: var(--weight) !important; }
-
-  .overall-line { font-size: 12.5px; color: var(--muted); margin: 4px 0 0; }
-  .topic-box .topic-summary { margin-bottom: 14px; }
-  .overall-line b { color: var(--ink); }
+  .paper-hub-card:hover { box-shadow: 0 4px 18px rgba(31,42,36,0.16); transform: translateY(-2px); }
+  .paper-hub-card.p4 { border-top-color: var(--tip); }
+  .phc-name { font-size: 19px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .phc-meta { font-size: 12.5px; color: var(--muted); margin-bottom: 16px; }
+  .phc-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px; }
+  .phc-label { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+  .phc-pct { font-size: 26px; font-weight: 700; color: var(--accent); }
+  .paper-hub-card.p4 .phc-pct { color: var(--tip); }
+  .phc-frac { font-size: 12.5px; color: var(--muted); margin-left: 8px; }
+  .phc-bar { height: 6px; border-radius: 3px; background: var(--bg); margin: 8px 0 14px; overflow: hidden; }
+  .phc-bar-fill { height: 100%; border-radius: 3px; background: var(--accent); }
+  .paper-hub-card.p4 .phc-bar-fill { background: var(--tip); }
+  .phc-go { font-size: 13px; color: var(--tip); font-weight: 600; }
+  .paper-hub-card.p4 .phc-go { color: var(--tip); }
 
   .note {
     background: var(--accent-light);
@@ -172,63 +125,6 @@
     color: var(--accent);
     margin-bottom: 28px;
   }
-
-  .band-legend {
-    display: flex;
-    justify-content: center;
-    gap: 18px;
-    font-size: 12px;
-    color: var(--muted);
-    flex-wrap: wrap;
-    align-items: center;
-    margin: 0 0 30px;
-  }
-  .band-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
-  .dot-astar { background: var(--grade-astar); }
-  .dot-a { background: var(--grade-a); }
-  .dot-b { background: var(--grade-b); }
-  .dot-below { background: var(--grade-below); }
-
-  .cat {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 20px;
-    white-space: nowrap;
-  }
-  .cat-slip { background: var(--amber-light); color: var(--amber); }
-  .cat-miscon { background: var(--pink-light); color: var(--pink); }
-  .cat-blank { background: var(--purple-light); color: var(--purple); }
-
-  .mistake-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-top: 4px;
-  }
-  .mistake-table th { background: var(--ink); padding: 10px 14px; text-align: left; }
-  .mistake-table td { padding: 9px 14px; font-size: 13px; color: var(--ink); border-top: 1px solid var(--line); }
-  .mistake-table tr:nth-child(even) td { background: #fafaf8; }
-  .mistake-table td:empty::after { content: "\2013"; color: var(--line); }
-  .mini-retake { display: inline-block; font-size: 10px; font-weight: 700; color: var(--tip); background: var(--tip-light); padding: 1px 7px; border-radius: 8px; margin-left: 6px; white-space: nowrap; }
-  .mini-hw { display: inline-block; font-size: 10px; font-weight: 700; color: var(--grade-b); background: var(--grade-b-light); padding: 1px 7px; border-radius: 8px; margin-left: 6px; white-space: nowrap; }
-  .mistake-note { font-size: 11.5px; color: var(--muted); margin-top: 10px; }
-
-  .details-link {
-    display: inline-block;
-    background: var(--ink);
-    color: #fff;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 10px 18px;
-    border-radius: 8px;
-    margin-bottom: 30px;
-  }
-  .details-link:hover { background: var(--accent); }
 
   footer {
     margin-top: 30px;
@@ -260,206 +156,29 @@
     </div>
   </div>
 
-  <div class="legend-box">
-    <div class="section-label" style="margin-bottom: 6px;">Papers covered so far</div>
-
-    <div class="paper-year">2025</div>
-    <div class="session-row">
-      <span class="session-label">FebMarch</span>
-      <div class="paper-lines">
-        <div class="paper-list">
-          <a href="pm/fm25-22.html" class="grade-astar">Paper 22 &middot; <span class="p-score">96/100 (96%)</span></a>
-        </div>
-        <div class="paper-list">
-          <a href="pm/fm25-42.html" class="grade-b">Paper 42 &middot; <span class="p-score">72/95 (75.8%)</span></a>
-        </div>
-      </div>
-    </div>
-    <div class="session-row">
-      <span class="session-label">MayJune</span>
-      <div class="paper-lines">
-        <div class="paper-list">
-          <a href="pm/mj25-21.html" class="grade-b">Paper 21 &middot; <span class="p-score">81/100 (81%)</span></a>
-          <span class="grade-cleared">Paper 22 &middot; Cleared</span>
-          <span class="grade-cleared">Paper 23 &middot; Cleared</span>
-        </div>
-        <div class="paper-list">
-          <span class="grade-cleared">Paper 41 &middot; Cleared</span>
-          <span class="grade-cleared">Paper 42 &middot; Cleared</span>
-          <span class="grade-cleared">Paper 43 &middot; Cleared</span>
-        </div>
-      </div>
-    </div>
-    <div class="session-row">
-      <span class="session-label">OctNov</span>
-      <div class="paper-lines">
-        <div class="paper-list">
-          <a href="pm/on25-21.html" class="grade-b">Paper 21 &middot; <span class="p-score">73/100 (73%)</span></a>
-          <a href="pm/on25-22.html" class="grade-below">Paper 22 &middot; <span class="p-score">68/100 (68%)</span></a>
-          <a href="pm/on25-23.html" class="grade-a">Paper 23 &middot; <span class="p-score">89/100 (89%)</span></a>
-        </div>
-        <div class="paper-list">
-          <a href="pm/w25-41.html" class="grade-below">Paper 41 &middot; <span class="p-score">68/97 (70.1%)</span></a>
-          <a href="pm/on25-42.html" class="grade-b">Paper 42 &middot; <span class="p-score">72/100 (72%)</span></a>
-          <a href="pm/on25-43.html" class="grade-b">Paper 43 &middot; <span class="p-score">74/100 (74%)</span></a>
-        </div>
-      </div>
-    </div>
-
-    <div class="paper-year">2024</div>
-    <div class="session-row">
-      <span class="session-label">MayJune</span>
-      <div class="paper-lines">
-        <div class="paper-list">
-          <span class="grade-cleared">Paper 21 &middot; Cleared</span>
-          <span class="grade-undone">Paper 22 &middot; not yet done</span>
-          <span class="grade-undone">Paper 23 &middot; not yet done</span>
-        </div>
-        <div class="paper-list">
-          <span class="grade-undone">Paper 41 &middot; not yet done</span>
-          <span class="grade-undone">Paper 42 &middot; not yet done</span>
-          <span class="grade-undone">Paper 43 &middot; not yet done</span>
-        </div>
-      </div>
-    </div>
-    <div class="session-row">
-      <span class="session-label">OctNov</span>
-      <div class="paper-lines">
-        <div class="paper-list">
-          <span class="grade-undone">Paper 21 &middot; not yet done</span>
-          <span class="grade-undone">Paper 22 &middot; not yet done</span>
-          <span class="grade-undone">Paper 23 &middot; not yet done</span>
-        </div>
-        <div class="paper-list">
-          <span class="grade-undone">Paper 41 &middot; not yet done</span>
-          <span class="grade-undone">Paper 42 &middot; not yet done</span>
-          <span class="grade-undone">Paper 43 &middot; not yet done</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="paper-year">2023</div>
-    <div class="session-row">
-      <span class="session-label">FebMarch</span>
-      <div class="paper-lines">
-        <div class="paper-list"><span class="grade-undone">Paper 22 &middot; not yet done</span></div>
-        <div class="paper-list"><span class="grade-undone">Paper 42 &middot; not yet done</span></div>
-      </div>
-    </div>
-    <div class="session-row">
-      <span class="session-label">MayJune</span>
-      <div class="paper-lines">
-        <div class="paper-list"></div>
-        <div class="paper-list">
-          <span class="grade-cleared">Paper 42 &middot; Cleared</span>
-        </div>
-      </div>
-    </div>
-    <div class="session-row">
-      <span class="session-label">OctNov</span>
-      <div class="paper-lines">
-        <div class="paper-list"></div>
-        <div class="paper-list">
-          <span class="grade-cleared">Paper 41 &middot; Cleared</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="paper-year">2022</div>
-    <div class="session-row">
-      <span class="session-label">MayJune</span>
-      <div class="paper-lines">
-        <div class="paper-list">
-          <a href="pm/mj22-21.html" class="grade-b">Paper 21 &middot; <span class="p-score">49/70 (70%)</span></a>
-        </div>
-      </div>
-    </div>
-
-    <div class="papers-note"><b>Cleared</b> &mdash; covered together in class before this tracking system started, or (2025 MayJune 22/23/41/42/43) covered at school with mistakes cleared in class in June 2026; no detailed marking record exists for these. <b>Pink outline</b> pills are papers not yet attempted. Papers not part of the 9-week exam plan have been removed from this list to keep it focused &mdash; see <a href="schedule.html">the class plan</a> for what's actually being used.</div>
-  </div>
-
-  <div class="legend-box topic-box">
-  <div class="section-label">Coverage by topic &middot; click a card for the full question-by-question detail</div>
-  <div class="topic-summary">
-    <a href="topic/1.html" class="ts-card ts-b">
-      <div class="ts-name">1&nbsp;&middot;&nbsp;Number</div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">83.74%</span><span class="ts-frac">203.5/243</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:83.74%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">19.95%</span><span class="ts-wfrac">243/1218</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:19.95%;"></div></div>
+  <div class="section-label">Progress by paper &middot; choose a dashboard</div>
+  <div class="paper-hub-grid">
+    <a href="tracker-p2.html" class="paper-hub-card p2">
+      <div class="phc-name">Paper 2 progress</div>
+      <div class="phc-meta">Short-answer, non-calculator &middot; papers 21/22/23 &middot; 6 papers marked</div>
+      <div class="phc-row"><span class="phc-label">Overall score</span></div>
+      <div><span class="phc-pct">83.92%</span><span class="phc-frac">668/796</span></div>
+      <div class="phc-bar"><div class="phc-bar-fill" style="width:83.92%;"></div></div>
+      <div class="phc-go">Open Paper 2 dashboard &rarr;</div>
     </a>
-    <a href="topic/2.html" class="ts-card ts-b">
-      <div class="ts-name">2&nbsp;&middot;&nbsp;Algebra and graphs</div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">82.21%</span><span class="ts-frac">316.5/385</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:82.21%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">31.61%</span><span class="ts-wfrac">385/1218</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:31.61%;"></div></div>
-    </a>
-    <a href="topic/3.html" class="ts-card ts-a">
-      <div class="ts-name">3&nbsp;&middot;&nbsp;Coordinate geometry</div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">85.45%</span><span class="ts-frac">47/55</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:85.45%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">4.52%</span><span class="ts-wfrac">55/1218</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:4.52%;"></div></div>
-    </a>
-    <a href="topic/4.html" class="ts-card ts-b">
-      <div class="ts-name">4&nbsp;&middot;&nbsp;Geometry</div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">77.78%</span><span class="ts-frac">105/135</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:77.78%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">11.08%</span><span class="ts-wfrac">135/1218</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:11.08%;"></div></div>
-    </a>
-    <a href="topic/5.html" class="ts-card ts-b">
-      <div class="ts-name">5&nbsp;&middot;&nbsp;Mensuration</div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">74.47%</span><span class="ts-frac">70/94</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:74.47%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">7.72%</span><span class="ts-wfrac">94/1218</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:7.72%;"></div></div>
-    </a>
-    <a href="topic/6.html" class="ts-card ts-b">
-      <div class="ts-name">6&nbsp;&middot;&nbsp;Trigonometry</div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">81.40%</span><span class="ts-frac">70/86</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:81.40%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">7.06%</span><span class="ts-wfrac">86/1218</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:7.06%;"></div></div>
-    </a>
-    <a href="topic/7.html" class="ts-card ts-below">
-      <div class="ts-name">7&nbsp;&middot;&nbsp;Transformations and vectors</div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">69.47%</span><span class="ts-frac">66/95</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:69.47%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">7.80%</span><span class="ts-wfrac">95/1218</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:7.80%;"></div></div>
-    </a>
-    <a href="topic/8.html" class="ts-card ts-below">
-      <div class="ts-name">8&nbsp;&middot;&nbsp;Probability</div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">65.38%</span><span class="ts-frac">34/52</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:65.38%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">4.27%</span><span class="ts-wfrac">52/1218</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:4.27%;"></div></div>
-    </a>
-    <a href="topic/9.html" class="ts-card ts-a">
-      <div class="ts-name">9&nbsp;&middot;&nbsp;Statistics</div>
-      <div class="ts-row"><span class="ts-label">Score</span><span><span class="ts-pct">91.78%</span><span class="ts-frac">67/73</span></span></div>
-      <div class="ts-bar"><div class="ts-bar-fill" style="width:91.78%;"></div></div>
-      <div class="ts-row ts-weight-row"><span class="ts-label">Weight in papers</span><span><span class="ts-wpct">5.99%</span><span class="ts-wfrac">73/1218</span></span></div>
-      <div class="ts-bar ts-wbar"><div class="ts-bar-fill ts-wbar-fill" style="width:5.99%;"></div></div>
+    <a href="tracker-p4.html" class="paper-hub-card p4">
+      <div class="phc-name">Paper 4 progress</div>
+      <div class="phc-meta">Structured, calculator &middot; papers 41/42/43 &middot; 5 papers marked</div>
+      <div class="phc-row"><span class="phc-label">Overall score</span></div>
+      <div><span class="phc-pct">74.82%</span><span class="phc-frac">413/552</span></div>
+      <div class="phc-bar"><div class="phc-bar-fill" style="width:74.82%;"></div></div>
+      <div class="phc-go">Open Paper 4 dashboard &rarr;</div>
     </a>
   </div>
-  <div class="overall-line">Overall across all ten papers: <b>979/1218 (80.38%)</b> &mdash; every question tested so far, plus retaken questions now counted at full weight (same as a first attempt on a real paper), grouped by main syllabus section. (5 marks from FebMarch2025 P42's Q8 and 3 marks from OctNov2025 P41's Q5a/5b &mdash; both scale drawing/construction questions that couldn't be done on screen &mdash; are excluded throughout. Weight-in-papers fractions were also recalculated against this same total, correcting an earlier mismatch between the Score and Weight denominators.)</div>
-  </div>
 
-  <div class="band-legend">
-    <div><span class="band-dot dot-astar"></span>A* target &ge;95%</div>
-    <div><span class="band-dot dot-a"></span>A 85&ndash;94%</div>
-    <div><span class="band-dot dot-b"></span>B 70&ndash;84%</div>
-    <div><span class="band-dot dot-below"></span>&lt;70%</div>
-  </div>
+  <div class="note">Each dashboard tracks its own paper family end to end &mdash; topic scores, weight-in-papers, and papers-covered are all scoped to that paper only, since Paper 2 (short-answer, non-calculator) and Paper 4 (structured, calculator) test the same syllabus very differently. Add a new paper on the matching dashboard, not here.</div>
 
-  <a class="details-link" href="topic/1.html">Open full question-by-question detail &rarr;</a>
-
-  <div class="note">Add a new paper: append its short name to the list above, then open the relevant topic page and add a row (or extend an existing row) with every question from that paper, and recalculate the Score line there and the section summary here. Every question from a marked paper should appear somewhere in the tracker. Retaken questions count at full weight, the same as a first attempt on a real paper (e.g. a 7/10 retake adds 7/10 into that sub-topic's Score).</div>
-
-  <footer>Cambridge IGCSE Mathematics 0580 (Extended) &middot; syllabus codes reference the current (2025&ndash;2027) subject content &middot; every question from all ten marked papers is accounted for &middot; update after each new paper</footer>
+  <footer>Cambridge IGCSE Mathematics 0580 (Extended) &middot; syllabus codes reference the current (2025&ndash;2027) subject content &middot; every question from all eleven marked papers is accounted for across the two dashboards &middot; update after each new paper</footer>
 
 </div>
 </body>

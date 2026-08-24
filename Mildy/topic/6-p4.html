@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — 6. Trigonometry (Paper 4) — Topic Detail</title>
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header {
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 20px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tip);
+    text-decoration: none;
+    background: var(--tip-light);
+    padding: 7px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .back-link:hover { background: var(--tip); color: #fff; }
+
+  h2.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 30px 0 14px;
+    padding-top: 6px;
+    color: var(--ink);
+    scroll-margin-top: 16px;
+  }
+  h2.section-title:first-of-type { margin-top: 0; }
+  h2.section-title .count { font-weight: 400; color: var(--muted); font-size: 13px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13px;
+    table-layout: fixed;
+    margin-bottom: 8px;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 10px 12px;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 10px 12px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.code { font-weight: 600; width: 88px; color: var(--accent); word-break: break-word; line-height: 1.3; }
+  td.topic { width: 150px; }
+  td.papers { width: 130px; }
+  td.papers span.paper-tag {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 3px;
+    white-space: nowrap;
+  }
+  td.comment { color: var(--muted); width: auto; }
+  td.improve { color: var(--ink); width: 220px; }
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .cat-correct { background: var(--accent-light); color: var(--accent); }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-hw { background: var(--loss-light); color: var(--loss); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  .score { font-weight: 700; margin-bottom: 6px; font-size: 12.5px; }
+  .sc-good { color: var(--accent); }
+  .sc-mid { color: var(--amber); }
+  .sc-low { color: var(--loss); }
+
+  .qline { margin-bottom: 6px; }
+  .qline:last-child { margin-bottom: 0; }
+  .qline b { color: var(--ink); font-weight: 600; }
+  .qmarks { font-weight: 600; color: var(--tip); background: var(--tip-light); padding: 1px 6px; border-radius: 10px; font-size: 11.5px; white-space: nowrap; }
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px; line-height: 1.05; font-size: 0.92em; position: relative; top: 0.1em; }
+  .frac .num, .frac .den { display: block; padding: 0 3px; }
+  .frac .num { border-bottom: 1.3px solid currentColor; padding-bottom: 1px; }
+  .frac .den { padding-top: 1px; }
+  .qline .mini-eq { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; margin: 5px 0; font-size: 12.5px; }
+  .qline .mini-eq .eln { padding: 2px 0; }
+  .qline .mini-eq .eln.correct-line { color: var(--accent); font-weight: 600; }
+
+  tr.untested td { color: var(--muted); }
+  tr.untested td.code { color: var(--muted); }
+  tr.untested td.dash { text-align: center; }
+
+  .legend {
+    display: flex;
+    gap: 18px;
+    font-size: 12px;
+    color: var(--muted);
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px 0 30px;
+  }
+
+  footer {
+    margin-top: 30px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .topic-nav { display:flex; justify-content:space-between; align-items:center; margin: 20px 0; font-size: 13px; }
+  .topic-nav a { color: var(--tip); text-decoration:none; font-weight:600; }
+  .topic-nav a:hover { text-decoration:underline; }
+  .topic-nav .spacer { color: var(--muted); }
+  .score-badge { display:inline-block; font-size:20px; font-weight:700; margin-left:14px; vertical-align:middle; }
+  .score-badge.ts-good { color: var(--accent); }
+  .score-badge.ts-mid { color: var(--amber); }
+  .score-badge.ts-low { color: var(--loss); }
+  .score-frac { font-size:13px; color: var(--muted); margin-left:6px; }
+
+  .improve-summary { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 18px 0 6px; }
+  .improve-title { font-size: 13px; font-weight: 700; color: var(--ink); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 12px; }
+  .improve-row { font-size: 13px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+  .improve-row:last-child { margin-bottom: 0; }
+  .improve-row b { color: var(--ink); }
+  .improve-row .cat { margin-right: 8px; }
+  .mini-retake { display: inline-block; font-size: 10px; font-weight: 700; color: var(--tip); background: var(--tip-light); padding: 1px 7px; border-radius: 8px; margin-left: 6px; white-space: nowrap; }
+  .mini-hw { display: inline-block; font-size: 10px; font-weight: 700; color: var(--amber); background: var(--amber-light); padding: 1px 7px; border-radius: 8px; margin-left: 6px; white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>6&nbsp;&middot;&nbsp;Trigonometry <span class="score-badge ts-mid">79.63%</span><span class="score-frac">43/54</span></h1>
+    <div class="meta">Every trigonometry question from every marked Paper 4 paper (structured, calculator) so far</div>
+  </header>
+
+  <a class="back-link" href="../tracker-p4.html">&larr; Back to dashboard</a>
+
+  <div class="legend">
+    <div><span class="cat cat-correct">Correct</span></div>
+    <div><span class="cat cat-slip">Careless slip</span></div>
+    <div><span class="cat cat-hw">Handwriting</span></div>
+    <div><span class="cat cat-miscon">Misconception</span></div>
+    <div><span class="cat cat-blank">Left blank</span></div>
+    <div>&mdash; Not yet tested in a marked paper</div>
+    <div><span class="score sc-good">Score</span> &ge;85% &nbsp; <span class="score sc-mid">Score</span> 60&ndash;84% &nbsp; <span class="score sc-low">Score</span> &lt;60%</div>
+  </div>
+
+  <h2 class="section-title" id="sec-6">6&nbsp;&middot;&nbsp;Trigonometry</h2>
+  <table>
+    <colgroup><col style="width:88px;"><col style="width:150px;"><col style="width:130px;"><col><col style="width:220px;"></colgroup>
+    <thead><tr><th>Code</th><th>Topic</th><th>Paper(s)</th><th>Comment (per paper)</th><th>How to improve</th></tr></thead>
+    <tbody><tr><td class="code">E6.1/E6.2</td><td class="topic">Right-angled triangles</td><td class="papers"><span class="paper-tag">OctNov2025 P41</span></td><td class="comment"><div class="score sc-low">Score: 0/3 (0.00%)</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>OctNov2025 P41</b> Q13 <span class="qmarks">(0/3)</span> &mdash; an angle-of-elevation question with the observer's eye height (1.5m) given; the full object height was used directly in the tan ratio (12.6&#8260;33) instead of subtracting the observer's height first ((12.6&minus;1.5)&#8260;33) &mdash; a specific, nameable trap in elevation/depression questions.</div></td><td class="improve">Two clean papers on the core tangent/sine ratio skill, but this paper's elevation question adds a new, specific gap: when a question gives an observer's own height, that height needs subtracting from the object's height before the triangle is set up. Worth flagging directly and drilling with a couple of dedicated elevation/depression-with-observer-height problems.</td></tr><tr><td class="code">E6.4</td><td class="topic">Trigonometric functions</td><td class="papers"><span class="paper-tag">FebMarch2025 P42</span></td><td class="comment"><div class="score sc-good">Score: 3/3 (100.00%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q19 <span class="qmarks">(3/3)</span> &mdash; solving cos&nbsp;x=k for x, correct.</div></td><td class="improve">Solving trig equations and sketching the graph over a range is secure across four papers. This paper's Q17b reference-angle-but-no-conversion gap was retaken 14 Aug &mdash; 4/4 across 2 fresh problems, the reflex-angle finishing step is now automatic.</td></tr><tr><td class="code">E6.5</td><td class="topic">Non-right-angled triangles</td><td class="papers"><span class="paper-tag">OctNov2025 P43</span><span class="paper-tag">FebMarch2025 P42</span><span class="paper-tag">OctNov2025 P42</span><span class="paper-tag">OctNov2025 P41</span><span class="paper-tag">FebMarch2024 P42</span></td><td class="comment"><div class="score sc-good">Score: 33/38 (86.84%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q21 <span class="qmarks">(2/2)</span> &mdash; correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q29a <span class="qmarks">(3/3)</span> &mdash; sine rule, correct.</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>OctNov2025 P41</b> Q29b <span class="qmarks">(2/5)</span> &mdash; the sine rule step paired side AD with the wrong angle (45&deg; instead of the 38&deg; actually opposite AD), giving AD=9.97 instead of the correct 8.68. The cosine rule step that followed correctly used her own (wrong) AD together with the correctly-found 108&deg; angle, earning follow-through credit for that internally-consistent step; final answer 16.2 instead of the correct 15.1.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P42</b> Q15a <span class="qmarks">(3/3)</span> &mdash; cosine rule to find BC in a quadrilateral field (BD=300, DC=112, angle BDC=140&deg;), correct (392.46m).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P42</b> Q15b <span class="qmarks">(3/3)</span> &mdash; sine rule to find angle DBC using her own BC from part (a), correct (10.6&deg;).</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>OctNov2025 P42</b> Q15c <span class="qmarks">(2/4)</span> &mdash; shortest distance from D to AB, using the field's total area. Correctly split off the area of triangle ABD (35900&minus;10799=25101), set up 27000&times;sin&theta;=25101, and solved &theta;&asymp;68&deg; &mdash; all fully correct. The final step, perpendicular distance=300&times;sin68&deg;&asymp;279m, was never carried out; 112 (the length DC from earlier in the question) was written in the answer box instead, suggesting a stray number rather than a new error in the method.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q18a <span class="qmarks">(3/3)</span> &mdash; Sine rule, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q18b <span class="qmarks">(3/3)</span> &mdash; Cosine rule, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q17b <span class="qmarks">(3/3)</span> &mdash; cosine rule (show that), correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q6a <span class="qmarks">(3/3)</span> &mdash; sine rule to find AC, correct (&asymp;15.0).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q6b <span class="qmarks">(3/3)</span> &mdash; cosine rule to find AM using her own AC from part (a), correct (&asymp;15.7).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q6c <span class="qmarks">(3/3)</span> &mdash; shortest (perpendicular) distance from a point to a line, correctly kept separate from the AM found in part (b), correct (AC&times;sin68&deg;&asymp;13.9).</div></td><td class="improve">Consistently strong across five papers on all three rules (sine, cosine, area). OctNov2025 P42's multi-part field question shows the cosine and sine rule steps both landing perfectly even chained together (using her own answer from (a) inside (b)) &mdash; the only miss was the very last arithmetic step of a long part (c), where a stray earlier number got boxed instead of finishing 300&times;sin68&deg;. This paper's own three-part chained question (Q6a/b/c) was entirely clean, including correctly recognising that the shortest-distance question in part (c) needed a fresh calculation rather than reusing AM from part (b).</td></tr><tr><td class="code">E6.6</td><td class="topic">Pythagoras in 3D</td><td class="papers"><span class="paper-tag">OctNov2025 P43</span><span class="paper-tag">OctNov2025 P41</span></td><td class="comment"><div class="score sc-mid">Score: 7/10 (70.00%)</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>OctNov2025 P41</b> Q27 <span class="qmarks">(1/4)</span> &mdash; finding the angle between a diagonal and the base of a trapezoidal prism. Marking the angle correctly on the diagram earned the one method mark available; the calculation that followed assumed a right angle at a point that the shape doesn't actually have (checked independently via the dot product of the two edges meeting there, which isn't zero), so the triangle used for the tangent ratio wasn't valid for this shape. The correct route projects the top vertex straight down onto the base to find the true horizontal run: tan&theta;=5&#8260;&radic;274&asymp;16.8&deg;, versus the 17.9&deg; reached via the invalid triangle. A genuinely hard 3D setup &mdash; correctly identifying and marking the angle is real progress, but worth working through together with a drawn or physical 3D model, checking each face's actual angles rather than assuming one is 90&deg;.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q24a <span class="qmarks">(3/3)</span> &mdash; 3D Pythagoras: finding EF, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q24b <span class="qmarks">(3/3)</span> &mdash; 3D angle between a diagonal and the base, correct.</div></td><td class="improve">Method is right &mdash; when three terms need adding (not two), write all three in a column before adding. OctNov2025's full-marks pair, plus a fully independent 2 Aug retake, confirm this has settled. This paper's Q19 adds a different, non-maths habit to build: on any "show that... therefore..." question, the final comparison sentence is itself worth a mark and needs to be written out, not just implied by the correct number.</td></tr></tbody>
+  </table>
+
+  <div class="improve-summary"><div class="improve-title">Areas to improve in this topic &middot; Paper 4 only</div><div class="improve-row"><span class="cat cat-slip">Careless slip</span>1 in this topic: <b>E6.5</b> OctNov2025 P42 Q15c.</div><div class="improve-row"><span class="cat cat-hw">Handwriting</span>None recorded in this topic so far.</div><div class="improve-row"><span class="cat cat-miscon">Misconception</span>3 in this topic: <b>E6.1/E6.2</b> OctNov2025 P41 Q13, <b>E6.5</b> OctNov2025 P41 Q29b, <b>E6.6</b> OctNov2025 P41 Q27.</div><div class="improve-row"><span class="cat cat-blank">Left blank</span>None recorded in this topic so far.</div></div>
+
+
+  <div class="topic-nav">
+    <a href="5-p4.html">&larr; 5. Mensuration</a>
+    <a href="../tracker-p4.html">Dashboard</a>
+    <a href="7-p4.html">7. Transformations and vectors &rarr;</a>
+  </div>
+
+  <footer>Cambridge IGCSE Mathematics 0580 (Extended) &middot; syllabus codes reference the current (2025&ndash;2027) subject content &middot; update after each new paper</footer>
+
+</div>
+</body>
+</html>

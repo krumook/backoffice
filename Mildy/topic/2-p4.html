@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — 2. Algebra and graphs (Paper 4) — Topic Detail</title>
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header {
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 20px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tip);
+    text-decoration: none;
+    background: var(--tip-light);
+    padding: 7px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .back-link:hover { background: var(--tip); color: #fff; }
+
+  h2.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 30px 0 14px;
+    padding-top: 6px;
+    color: var(--ink);
+    scroll-margin-top: 16px;
+  }
+  h2.section-title:first-of-type { margin-top: 0; }
+  h2.section-title .count { font-weight: 400; color: var(--muted); font-size: 13px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13px;
+    table-layout: fixed;
+    margin-bottom: 8px;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 10px 12px;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 10px 12px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.code { font-weight: 600; width: 88px; color: var(--accent); word-break: break-word; line-height: 1.3; }
+  td.topic { width: 150px; }
+  td.papers { width: 130px; }
+  td.papers span.paper-tag {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 3px;
+    white-space: nowrap;
+  }
+  td.comment { color: var(--muted); width: auto; }
+  td.improve { color: var(--ink); width: 220px; }
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .cat-correct { background: var(--accent-light); color: var(--accent); }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-hw { background: var(--loss-light); color: var(--loss); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  .score { font-weight: 700; margin-bottom: 6px; font-size: 12.5px; }
+  .sc-good { color: var(--accent); }
+  .sc-mid { color: var(--amber); }
+  .sc-low { color: var(--loss); }
+
+  .qline { margin-bottom: 6px; }
+  .qline:last-child { margin-bottom: 0; }
+  .qline b { color: var(--ink); font-weight: 600; }
+  .qmarks { font-weight: 600; color: var(--tip); background: var(--tip-light); padding: 1px 6px; border-radius: 10px; font-size: 11.5px; white-space: nowrap; }
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px; line-height: 1.05; font-size: 0.92em; position: relative; top: 0.1em; }
+  .frac .num, .frac .den { display: block; padding: 0 3px; }
+  .frac .num { border-bottom: 1.3px solid currentColor; padding-bottom: 1px; }
+  .frac .den { padding-top: 1px; }
+  .qline .mini-eq { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; margin: 5px 0; font-size: 12.5px; }
+  .qline .mini-eq .eln { padding: 2px 0; }
+  .qline .mini-eq .eln.correct-line { color: var(--accent); font-weight: 600; }
+
+  tr.untested td { color: var(--muted); }
+  tr.untested td.code { color: var(--muted); }
+  tr.untested td.dash { text-align: center; }
+
+  .legend {
+    display: flex;
+    gap: 18px;
+    font-size: 12px;
+    color: var(--muted);
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px 0 30px;
+  }
+
+  footer {
+    margin-top: 30px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .topic-nav { display:flex; justify-content:space-between; align-items:center; margin: 20px 0; font-size: 13px; }
+  .topic-nav a { color: var(--tip); text-decoration:none; font-weight:600; }
+  .topic-nav a:hover { text-decoration:underline; }
+  .topic-nav .spacer { color: var(--muted); }
+  .score-badge { display:inline-block; font-size:20px; font-weight:700; margin-left:14px; vertical-align:middle; }
+  .score-badge.ts-good { color: var(--accent); }
+  .score-badge.ts-mid { color: var(--amber); }
+  .score-badge.ts-low { color: var(--loss); }
+  .score-frac { font-size:13px; color: var(--muted); margin-left:6px; }
+
+  .improve-summary { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 18px 0 6px; }
+  .improve-title { font-size: 13px; font-weight: 700; color: var(--ink); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 12px; }
+  .improve-row { font-size: 13px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+  .improve-row:last-child { margin-bottom: 0; }
+  .improve-row b { color: var(--ink); }
+  .improve-row .cat { margin-right: 8px; }
+  .mini-retake { display: inline-block; font-size: 10px; font-weight: 700; color: var(--tip); background: var(--tip-light); padding: 1px 7px; border-radius: 8px; margin-left: 6px; white-space: nowrap; }
+  .mini-hw { display: inline-block; font-size: 10px; font-weight: 700; color: var(--amber); background: var(--amber-light); padding: 1px 7px; border-radius: 8px; margin-left: 6px; white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>2&nbsp;&middot;&nbsp;Algebra and graphs <span class="score-badge ts-mid">80.61%</span><span class="score-frac">158/196</span></h1>
+    <div class="meta">Every algebra and graphs question from every marked Paper 4 paper (structured, calculator) so far</div>
+  </header>
+
+  <a class="back-link" href="../tracker-p4.html">&larr; Back to dashboard</a>
+
+  <div class="legend">
+    <div><span class="cat cat-correct">Correct</span></div>
+    <div><span class="cat cat-slip">Careless slip</span></div>
+    <div><span class="cat cat-hw">Handwriting</span></div>
+    <div><span class="cat cat-miscon">Misconception</span></div>
+    <div><span class="cat cat-blank">Left blank</span></div>
+    <div>&mdash; Not yet tested in a marked paper</div>
+    <div><span class="score sc-good">Score</span> &ge;85% &nbsp; <span class="score sc-mid">Score</span> 60&ndash;84% &nbsp; <span class="score sc-low">Score</span> &lt;60%</div>
+  </div>
+
+  <h2 class="section-title" id="sec-2">2&nbsp;&middot;&nbsp;Algebra and graphs</h2>
+  <table>
+    <colgroup><col style="width:88px;"><col style="width:150px;"><col style="width:130px;"><col><col style="width:220px;"></colgroup>
+    <thead><tr><th>Code</th><th>Topic</th><th>Paper(s)</th><th>Comment (per paper)</th><th>How to improve</th></tr></thead>
+    <tbody><tr><td class="code">E2.1</td><td class="topic">Substitution & rearranging formulae</td><td class="papers"><span class="paper-tag">OctNov2025 P43</span><span class="paper-tag">OctNov2025 P41</span></td><td class="comment"><div class="score sc-good">Score: 5/5 (100.00%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q6 <span class="qmarks">(1/1)</span> &mdash; correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q3 <span class="qmarks">(1/1)</span> &mdash; Substitution into a formula, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q17 <span class="qmarks">(3/3)</span> &mdash; Change of subject with an algebraic fraction, correct.</div></td><td class="improve">Method is understood &mdash; re-read given values before substituting, and remember to complete the <i>last</i> inverse operation (a &plusmn; square root) when a formula ends in a squared term, not just the linear rearranging steps.</td></tr><tr><td class="code">E2.2</td><td class="topic">Algebraic manipulation</td><td class="papers"><span class="paper-tag">OctNov2025 P43</span><span class="paper-tag">FebMarch2025 P42</span><span class="paper-tag">OctNov2025 P42</span><span class="paper-tag">FebMarch2024 P42</span></td><td class="comment"><div class="score sc-good">Score: 25/29 (86.21%)</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>OctNov2025 P42</b> Q17 <span class="qmarks">(2/3)</span> &mdash; expanding (x&minus;2)(2x+3)(x+4): the first pair correctly gave 2x&sup2;&minus;x&minus;6, but multiplying 2x&sup2;&times;(x+4) was written as &minus;8x&sup2; instead of +8x&sup2; &mdash; a sign slip carrying a term into the second multiplication. Same specific pattern already flagged below for this sub-topic (losing a term/sign when carrying one expansion into a second).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q16a <span class="qmarks">(2/2)</span> &mdash; Expanding brackets (linear), correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q16b <span class="qmarks">(2/2)</span> &mdash; Expanding brackets (quadratic), correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q2 <span class="qmarks">(2/2)</span> &mdash; Simplify 4y&sup2;+3y&minus;y&sup2;+2y, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q18a <span class="qmarks">(2/2)</span> &mdash; Factorise 18a&sup2;&minus;98, correct.</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>FebMarch2025 P42</b> Q18b <span class="qmarks">(2/3)</span> &mdash; expanding three brackets (x+4)(2x&minus;1)(x&minus;2): correctly found 2x&sup2;+7x&minus;4 for the first pair, but the sign flipped to &minus;7x when carried into the second multiplication, giving 2x&sup3;&minus;11x&sup2;&minus;18x+8 instead of 2x&sup3;+3x&sup2;&minus;18x+8. Same "drop the +2x-style term" pattern as the earlier MJ25 Q16 slip &mdash; a sign or term goes missing specifically when carrying a multi-term result into a second expansion.<span class="mini-retake">&#8635; retaken</span></div><div class="qline"><span class="cat cat-correct">Retake</span><b>8 Aug</b> <span class="qmarks">(5/7)</span> &mdash; 6 retake questions (expanding three linear brackets) set as homework 5 Aug, submitted and checked: 5/7, still some careless slips carrying a term/sign into the second multiplication (e.g. dropped an x&sup2; term in one, sign slip in another) &mdash; same pattern as Q18b, improving but not yet fully resolved. Counted at full weight: <b>+5/7</b> into this sub-topic's score.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q5ai <span class="qmarks">(2/2)</span> &mdash; factorise x&sup2;&minus;x&minus;12, correct ((x&minus;4)(x+3)).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q5b <span class="qmarks">(3/3)</span> &mdash; expand and simplify (2x&minus;3)&sup2;&minus;(x+1)&sup2;, correct (3x&sup2;&minus;14x+8).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q5d <span class="qmarks">(3/3)</span> &mdash; expand three brackets (x&minus;3)(x&minus;5)(2x+1), correct (2x&sup3;&minus;15x&sup2;+22x+15) &mdash; a clean, independent run through the exact "carry a result into a second multiplication" step this sub-topic has flagged before.</div></td><td class="improve">The recurring pattern across four papers now (MJ25 Q16, FebMarch2025 P42's Q18b, and now OctNov2025 P42's Q17) is losing a term or sign specifically when carrying one expansion's result into a second multiplication &mdash; worth a specific drill: expand the first pair, write the full result on its own line, then re-copy it before starting the second multiplication. This paper's factorising questions were both clean; the vertex-form pair (Q14a/b) is the same not-yet-taught gap flagged on Paper 22's Q22, both retaken 14 Aug (6/6 and 4/4 on fresh minimum-point problems) &mdash; now looks fully secure. Q15b's expand-vs-factorise mix-up was retaken 13 Aug &mdash; 2/2 on a fresh common-bracket problem, looks resolved. This paper's own three-bracket expansion (Q5d) was fully clean &mdash; a good sign the carrying-sign pattern is easing.</td></tr><tr><td class="code">E2.3</td><td class="topic">Algebraic fractions</td><td class="papers"><span class="paper-tag">OctNov2025 P42</span><span class="paper-tag">FebMarch2024 P42</span></td><td class="comment"><div class="score sc-good">Score: 7/8 (87.50%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P42</b> Q13 <span class="qmarks">(2/2)</span> &mdash; simplifying 7/(2m)+3/(8m) over a common denominator, correct (31/8m).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q5aii <span class="qmarks">(2/2)</span> &mdash; simplify (x&sup2;&minus;16)&#8260;((x&minus;4)(x+3)), correct ((x+4)&#8260;(x+3)) &mdash; built directly on this paper's own Q5(a)(i) factorisation.</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>FebMarch2024 P42</b> Q5c <span class="qmarks">(3/4)</span> &mdash; combining two algebraic fractions into one over (x+1)(x&minus;3): every step of the working &mdash; common denominator, numerator expansion, simplifying to x&sup2;&minus;3x&minus;12 &mdash; used (x&minus;3) correctly throughout, but the final boxed answer's denominator was written as (x+3) instead, a sign flip only in the very last transcription step.</div></td><td class="improve">Very strong overall across five papers now &mdash; the recurring miss is distributing a negative sign or multiplying a bracket correctly, all in the final numerator step after the common-denominator setup is already right (this paper's Q26b and Q5c both fit this exact pattern &mdash; correct working, a slip landing only in the final answer). Make "re-check every bracket expansion, and the final answer itself, against the original numbers" a standing final step before combining fractions.</td></tr><tr><td class="code">E2.4</td><td class="topic">Indices II</td><td class="papers"><span class="paper-tag">OctNov2025 P43</span></td><td class="comment"><div class="score sc-good">Score: 6/6 (100.00%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q6a <span class="qmarks">(1/1)</span> &mdash; Simplifying y&#8309;/y&sup2;, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q6b <span class="qmarks">(2/2)</span> &mdash; Simplifying 3x&sup3;&times;5x&#8309;, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q13 <span class="qmarks">(3/3)</span> &mdash; Exponential curve: finding c from c&#8309;=1024, then evaluating c&#8315;&sup2;, correct.</div></td><td class="improve">Fine with one power term; the "combine to one base first" gap (seen in both FM25 Q23b and this paper's blank Q19) was retaken 10 Aug across 8 fresh index-equation questions, including quadratic-factorising cases &mdash; all correct, resolved.</td></tr><tr><td class="code">E2.5</td><td class="topic">Equations</td><td class="papers"><span class="paper-tag">OctNov2025 P43</span><span class="paper-tag">FebMarch2025 P42</span><span class="paper-tag">OctNov2025 P42</span><span class="paper-tag">OctNov2025 P41</span><span class="paper-tag">FebMarch2024 P42</span></td><td class="comment"><div class="score sc-good">Score: 40/44 (90.91%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q2 <span class="qmarks">(2/2)</span> &mdash; solving a linear equation, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q24a <span class="qmarks">(1/1)</span> &mdash; forming an equation from a word problem, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q24b <span class="qmarks">(4/4)</span> &mdash; correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q24c <span class="qmarks">(3/3)</span> &mdash; correct.</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>OctNov2025 P41</b> Q24d <span class="qmarks">(0/3)</span> &mdash; the same word problem's final part. Only the setup formulas were written, with no substitution of actual numbers shown, and the final answer (2h 17min) doesn't match the correct one (2h 10min). Parts (a)&ndash;(c) of the same question were all correct with full working, so the formulas are understood &mdash; the gap is carrying them through to a checkable final line; with nothing substituted on the page, no method marks were available to award.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q26 <span class="qmarks">(4/4)</span> &mdash; correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P42</b> Q2 <span class="qmarks">(2/2)</span> &mdash; solving 8x&minus;17=27, correct (x=5.5).</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>OctNov2025 P42</b> Q19 <span class="qmarks">(5/6)</span> &mdash; simultaneous linear/quadratic equations, solved cleanly by substitution and the quadratic formula (3x&sup2;&minus;5x&minus;11=0). Both x-values correct (2.92, &minus;1.25) and the first y-value correct (&minus;0.84). The second y-value used the already-rounded x=&minus;1.25 instead of the full unrounded value, giving y=7.5 instead of 7.51 &mdash; premature rounding partway through a calculation, not a method error.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q10 <span class="qmarks">(2/2)</span> &mdash; Simultaneous equations, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q14 <span class="qmarks">(5/5)</span> &mdash; Three linked expressions set equal, solving for x then y, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q22 <span class="qmarks">(6/6)</span> &mdash; finding where a line and curve intersect, using the quadratic formula, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q5e <span class="qmarks">(6/6)</span> &mdash; solving x&minus;3y=13 and 2x&sup2;&minus;9y=116 simultaneously via substitution and the quadratic formula, correct throughout: x=7,y=&minus;2 and x=&minus;5&#189;,y=&minus;6&#8541;.</div></td><td class="improve">Forms and solves equations reliably once a problem is already set up as an equation (including OctNov2025 P42's and this paper's linear-quadratic simultaneous equations, both handled cleanly start to finish) &mdash; the recurring drop-off is at the very first step of a worded problem: translating two sentences into two simultaneous equations. Practise "name the two unknowns, then write one equation per sentence" as a standalone first step before solving.</td></tr><tr><td class="code">E2.6</td><td class="topic">Inequalities</td><td class="papers"><span class="paper-tag">OctNov2025 P41</span></td><td class="comment"><div class="score sc-mid">Score: 3/4 (75.00%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q7a <span class="qmarks">(2/2)</span> &mdash; solving the inequality, correct (&minus;2&lt;x&le;4).</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>OctNov2025 P41</b> Q7b <span class="qmarks">(1/2)</span> &mdash; the inequality &minus;2&lt;x&le;4 was solved correctly in part (a), but the question then asks for the integer values satisfying it (&minus;1, 0, 1, 2, 3, 4), and that final listing step was never written down.</div></td><td class="improve">The number-line and endpoint-type work (open vs. closed circle) is secure across two papers. This paper's new miss is different: solving the inequality correctly but not finishing the follow-on step of actually listing the integer solutions &mdash; worth a standing check that every part of a multi-part inequality question gets a written answer, not just the algebra.</td></tr><tr><td class="code">E2.7</td><td class="topic">Sequences</td><td class="papers"><span class="paper-tag">FebMarch2025 P42</span><span class="paper-tag">OctNov2025 P42</span><span class="paper-tag">OctNov2025 P41</span></td><td class="comment"><div class="score sc-good">Score: 12/13 (92.31%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q20a <span class="qmarks">(1/1)</span> &mdash; correct.</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>OctNov2025 P41</b> Q20b <span class="qmarks">(1/2)</span> &mdash; geometric sequence nth term. The ratio (&frac12;) was identified correctly, earning the method mark, but the coefficient in front of it was half what it should be (48 instead of the correct 96) &mdash; the coefficient needs to be derived from the sequence's actual first term, which wasn't carried out correctly.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P42</b> Q10a <span class="qmarks">(2/2)</span> &mdash; nth term of a linear sequence (17,9,1,&minus;7,&minus;15,&hellip;), correct (25&minus;8n).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P42</b> Q10b <span class="qmarks">(2/2)</span> &mdash; nth term of a quadratic sequence (3,12,27,48,75,&hellip;), correct (3n&sup2;), including finding the second difference to confirm the quadratic form.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q13 <span class="qmarks">(6/6)</span> &mdash; three nth terms in one question (n&sup3;+4, (11&minus;n)/(2+n), 4&times;2&#8319;&#8315;&sup1;), all correct.</div></td><td class="improve">No action needed &mdash; consistently strong across three papers.</td></tr><tr><td class="code">E2.8</td><td class="topic">Proportion</td><td class="papers"><span class="paper-tag">OctNov2025 P42</span><span class="paper-tag">OctNov2025 P41</span></td><td class="comment"><div class="score sc-mid">Score: 5/6 (83.33%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q23 <span class="qmarks">(2/2)</span> &mdash; correct.</div><div class="qline"><span class="cat cat-blank">Left blank</span><b>OctNov2025 P42</b> Q21 <span class="qmarks">(3/4)</span> &mdash; combining y&prop;1/(x+2)&sup2; with w&prop;x. Both constants were correctly found (k=242 for the y-relationship, w=x/6 from the second) &mdash; the final substitution into y=242/(6w+2)&sup2; was simply never written down, leaving the answer box empty despite the hard work being done.</div></td><td class="improve">Combines two proportionality rules in one question. The 2 Aug retake showed she can get there with support; OctNov2025 P42's Q21 is a further data point in the right direction &mdash; both individual constants were found correctly and independently this time, the only miss was never writing the final combined substitution down. Worth explicitly practising "write the final answer" as its own last step once both constants are in hand.</td></tr><tr><td class="code">E2.9</td><td class="topic">Graphs in practical situations</td><td class="papers"><span class="paper-tag">FebMarch2025 P42</span><span class="paper-tag">OctNov2025 P42</span><span class="paper-tag">OctNov2025 P41</span></td><td class="comment"><div class="score sc-low">Score: 10/17 (58.82%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q18a <span class="qmarks">(2/2)</span> &mdash; correct.</div><div class="qline"><span class="cat cat-blank">Left blank</span><b>OctNov2025 P41</b> Q18b <span class="qmarks">(0/2)</span> &mdash; follow-on part from 18(a), which was correct &mdash; left blank entirely.</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>OctNov2025 P42</b> Q9 <span class="qmarks">(2/3)</span> &mdash; total distance from a speed&ndash;time graph. The area calculation itself was exactly right ((60+80)/2&times;15 + 80/2&times;10 = 1450), but speed was in km/h while time was read in <i>minutes</i> off the graph &mdash; 1450 needed &divide;60 to become 24.2km, and that conversion was never applied. A specific, nameable trap worth flagging directly: whenever a speed&ndash;time graph's time axis is in minutes, the area needs converting to hours before it's a real distance.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q16a <span class="qmarks">(1/1)</span> &mdash; reading a value directly from a distance&ndash;time graph, correct.</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>FebMarch2025 P42</b> Q16b <span class="qmarks">(1/2)</span> &mdash; finding the gradient of the tangent to estimate speed at a point &mdash; method correct, but the value read off was outside the range the mark scheme accepts.<span class="mini-retake">&#8635; retaken</span></div><div class="qline"><span class="cat cat-correct">Retake</span><b>4 Aug</b> <span class="qmarks">(1/1)</span> &mdash; picked two well-spread points on a fresh tangent (0.8, in range). Point-spacing issue resolved, counted at full weight: <b>+1/1</b> into this sub-topic's score.</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>FebMarch2025 P42</b> Q16c <span class="qmarks">(0/3)</span> &mdash; asked to estimate acceleration; instead recalculated average speed over the interval (distance &divide; time) and gave &minus;1.6, the same type of confusion as Q20b on the earlier paper: treating a distance&ndash;time/speed&ndash;time graph question as "read off one section" rather than identifying which quantity (distance, speed, or the rate of change of speed) the question is actually asking for.<span class="mini-retake">&#8635; retaken</span></div><div class="qline"><span class="cat cat-correct">Retake</span><b>4 Aug</b> <span class="qmarks">(2/2)</span> &mdash; average-speed-from-a-graph retested on 2 fresh scenarios (car: 5 m/s, train: 6.67 m/s), both correct and independent. Misconception resolved, counted at full weight: <b>+3/3</b> into this sub-topic's score.</div></td><td class="improve">The "wrong quantity extracted" pattern (one section instead of the total, or average speed instead of acceleration) is now resolved on direct retest &mdash; both Q16b and Q16c came back clean on 4 Aug. One new, unrelated slip turned up in the same homework batch: on a straight-line deceleration question (20&rarr;4 m/s over 10s), the speed difference was right (16) but it was divided by 21 instead of 10 &mdash; worth a quick check on reading start/end times correctly off a graph before subtracting.</td></tr><tr><td class="code">E2.10</td><td class="topic">Graphs of functions</td><td class="papers"><span class="paper-tag">OctNov2025 P42</span><span class="paper-tag">FebMarch2024 P42</span></td><td class="comment"><div class="score sc-mid">Score: 20/24 (83.33%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P42</b> Q11a <span class="qmarks">(2/2)</span> &mdash; completing a table of values for y=x&sup3;&minus;2x+3, correct.</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>OctNov2025 P42</b> Q11b <span class="qmarks">(3/4)</span> &mdash; plotting the cubic curve. The table (part a) was completed correctly and the overall shape and smooth curve were right, but two of the nine plotted points don't match her own correct table: at x=&minus;2 the table gives y=&minus;1, but the point was plotted at (&minus;2, 1) &mdash; the negative sign was lost; at x=1.5 her own table correctly reads y=3.38, but the point was plotted at (1.5, 3.8) &mdash; a decimal-place transcription slip. 7 of 9 points correctly plotted still earns credit for the points and the smooth curve through them, but falls short of full marks.</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>OctNov2025 P42</b> Q11c <span class="qmarks">(2/4)</span> &mdash; solving x&sup3;&minus;2.5x+1=0 by drawing a suitable line. The rearrangement and line (y=0.5x+2) were exactly right and correctly drawn on the grid, but the three x-values read off (&minus;2, 0.8, 1.45) all fell outside the accepted ranges, though close in two cases &mdash; an imprecise reading of the intersection points rather than a wrong method.</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>FebMarch2024 P42</b> Q8a <span class="qmarks">(1/2)</span> &mdash; sketch y=4&minus;3x. The y-intercept was correctly placed at (0, 4), but the x-intercept was plotted at (5, 0) instead of the correct <span class="frac"><span class="num">4</span><span class="den">3</span></span> (from 4&minus;3x=0 &rarr; x=<span class="frac"><span class="num">4</span><span class="den">3</span></span>) &mdash; worth checking any intercept by substituting it back into the equation before drawing the line through it.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q8b <span class="qmarks">(2/2)</span> &mdash; sketch y=&minus;x&sup2;, correct shape (downward parabola through the origin).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q10a <span class="qmarks">(3/3)</span> &mdash; completing a table of values for y=2x&sup3;+6x&sup2;&minus;2.5, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q10b <span class="qmarks">(4/4)</span> &mdash; drawing the cubic curve, correct shape through all plotted points &mdash; every point matched her own table this time.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q10c <span class="qmarks">(3/3)</span> &mdash; drawing y=2 and reading off three intersection x-values, all within the accepted ranges (&minus;2.68, &minus;1.05, 0.8) &mdash; a clean, precise reading this time.</div></td><td class="improve">This paper closes out both of the OctNov2025 P42 gaps cleanly: the plotting/reading precision issues (Q11b/Q11c) didn't reappear at all in Q10b/Q10c &mdash; every point matched the table, and every intersection reading fell inside range. One new, different miss: Q8a's x-intercept wasn't checked by substitution before drawing (the y-intercept was fine) &mdash; the same "solve, then check by substituting back" habit already flagged for this paper's Q8c and Q10d in E2.12 below.</td></tr><tr><td class="code">E2.11</td><td class="topic">Sketching curves</td><td class="papers"><span class="paper-tag">OctNov2025 P41</span></td><td class="comment"><div class="score sc-low">Score: 1/3 (33.33%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P41</b> Q28a <span class="qmarks">(1/1)</span> &mdash; correct.</div><div class="qline"><span class="cat cat-blank">Left blank</span><b>OctNov2025 P41</b> Q28b <span class="qmarks">(0/2)</span> &mdash; left blank, despite part (a) on the same curve being correct.</div></td><td class="improve">First paper testing this sub-topic. Part (a) was handled correctly, but part (b) was left blank entirely &mdash; worth checking with her whether this was a time-pressure skip near the end of the paper or a specific gap in this part of the curve-sketching skill, since there isn't enough data yet to tell which.</td></tr><tr><td class="code">E2.12</td><td class="topic">Differentiation</td><td class="papers"><span class="paper-tag">OctNov2025 P43</span><span class="paper-tag">FebMarch2024 P42</span></td><td class="comment"><div class="score sc-low">Score: 6/14 (42.86%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q20a <span class="qmarks">(2/2)</span> &mdash; Finding dy/dx, correct.</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>OctNov2025 P43</b> Q20b <span class="qmarks">(1/2)</span> &mdash; correctly evaluated 3x&sup2;+6x&minus;13 at x=3 to get 32, but the final answer was written as the coordinate pair (3,32) instead of just the gradient value 32, and the working briefly set dy/dx=0 (the turning-point method) beforehand &mdash; mixing up "find the gradient at a point" with "find a turning point."</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>FebMarch2024 P42</b> Q8ci <span class="qmarks">(3/5)</span> &mdash; turning points of y=10+9x&sup2;&minus;2x&sup3;. dy/dx=&minus;6x&sup2;+18x was found correctly and set to 0 (3 marks earned), but factorised as &minus;6x(x+3) instead of the correct &minus;6x(x&minus;3), giving x=0 or x=&minus;3 instead of x=0 or x=3. Neither x-value was then substituted back into the original cubic &mdash; the final answer (0,0) and (&minus;3,&minus;17) was written directly from the (wrong) x-values rather than computed. Correct: (0,10) and (3,37).</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>FebMarch2024 P42</b> Q8cii <span class="qmarks">(0/3)</span> &mdash; classifying the two turning points from 8(c)(i) as max/min. The cubic was rewritten with an unexplained sign flip before differentiating a second time, so d&sup2;y/dx&sup2; came out as 12x&minus;18 instead of the correct &minus;12x+18; only a single unqualified "Minimum" was given, without classifying both turning points separately (the correct read is a minimum at (0,10) and a maximum at (3,37)).</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>FebMarch2024 P42</b> Q10d <span class="qmarks">(0/2)</span> &mdash; same gap as Q8(c)(i), on a different cubic (y=2x&sup3;+6x&sup2;&minus;2.5, from Q10a/b). dy/dx was written as 6x&sup2;+18x (should be 6x&sup2;+12x), and even the resulting x-values (0, &minus;3) were given directly as the final k-answers rather than substituted back into the original cubic. Correct k-values (from the table already built in Q10a/b): k=&minus;2.5 or k=5.5.</div></td><td class="improve">Mechanics are strong on finding dy/dx itself and using it to locate a stationary point (OctNov2025 P21's Q23, this paper's own correct derivatives before the factorising slip). This paper surfaces a clear, twice-repeated gap though: after solving dy/dx=0 for x, the x-value(s) need to be substituted back into the <i>original</i> function to get the actual turning-point coordinate or k-value &mdash; both Q8(c)(i) and Q10(d) skipped this step and used the x-value itself as the final answer. Worth drilling as a fixed two-step habit: "solve for x, then always plug back into y=...". Also worth reinforcing classifying each turning point separately with the second derivative (Q8cii), and keeping "find the gradient at a point" separate from "find a turning point" (OctNov2025 P43 Q20b), since the two methods got mixed together mid-question there.</td></tr><tr><td class="code">E2.13</td><td class="topic">Functions</td><td class="papers"><span class="paper-tag">OctNov2025 P43</span><span class="paper-tag">FebMarch2025 P42</span><span class="paper-tag">FebMarch2024 P42</span></td><td class="comment"><div class="score sc-mid">Score: 18/23 (78.26%)</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q19a <span class="qmarks">(1/1)</span> &mdash; Functions: f(5), correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q19b <span class="qmarks">(1/1)</span> &mdash; Functions: g(8x), correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q19c <span class="qmarks">(2/2)</span> &mdash; Functions: inverse g&supminus;&sup1;(x), correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>OctNov2025 P43</b> Q19d <span class="qmarks">(3/3)</span> &mdash; Functions: solving gh(x)=364 for the positive root, correct (final answer written as &ldquo;&plusmn;11&rdquo; rather than isolating 11, but the correct value is clearly present).</div><div class="qline"><span class="cat cat-blank">Left blank</span><b>OctNov2025 P43</b> Q19e <span class="qmarks">(0/1)</span> &mdash; ff&supminus;&sup1;(12) &mdash; left blank; didn't recognise that a function and its inverse always undo each other.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q14a <span class="qmarks">(1/1)</span> &mdash; Functions: evaluating f(x) at a given value, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q14b <span class="qmarks">(2/2)</span> &mdash; Functions: inverse function, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2025 P42</b> Q14c <span class="qmarks">(2/2)</span> &mdash; Functions: composite function, correct.</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q11ai <span class="qmarks">(2/2)</span> &mdash; gf(2), correct (&minus;3.5).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q11aii <span class="qmarks">(2/2)</span> &mdash; g&supminus;&sup1;(x), correct ((x+5)/3).</div><div class="qline"><span class="cat cat-correct">Correct</span><b>FebMarch2024 P42</b> Q11b <span class="qmarks">(2/2)</span> &mdash; g(x&minus;2) simplified, correct (3x&minus;11).</div><div class="qline"><span class="cat cat-miscon">Misconception</span><b>FebMarch2024 P42</b> Q11ci <span class="qmarks">(0/2)</span> &mdash; solve fg(x)=0.1 for x, where f(x)=1/(3x&minus;5). 0.1 is the target <i>output</i> to solve for, not a value to substitute as x &mdash; the working instead plugged x=0.1 directly into 3x&minus;5, which evaluates fg(0.1) rather than solving the equation. Correct: 1/(3x&minus;5)=0.1 &rarr; 3x&minus;5=10 &rarr; x=5.</div><div class="qline"><span class="cat cat-slip">Careless slip</span><b>FebMarch2024 P42</b> Q11cii <span class="qmarks">(0/2)</span> &mdash; find x so that h(x)=g(7), where g(x)=3x&minus;5. g(7) was computed as 21+5=26 instead of 21&minus;5=16 &mdash; a sign error on the last step of an otherwise correct substitution, and no final numeric x was reached from the resulting (wrong) equation.</div></td><td class="improve">Very strong on direct evaluation, composition and inverses across five papers, including this paper's gf(2), inverse, and g(x&minus;2) all handled cleanly. This paper adds two new, different misses in the same question though: confusing "solve the equation for x" with "evaluate the function at x" (Q11ci &mdash; a genuine conceptual mix-up, worth a couple of practice problems that contrast "find f(3)" against "solve f(x)=3"), and a plain sign slip on a substitution (Q11cii). Also still worth recognising ff&supminus;&sup1;(x)=x as a free mark (OctNov2025 P43), and re-checking every sign when a result is carried onto a new line (OctNov2025 P21's Q18).</td></tr></tbody>
+  </table>
+
+  <div class="improve-summary"><div class="improve-title">Areas to improve in this topic &middot; Paper 4 only</div><div class="improve-row"><span class="cat cat-slip">Careless slip</span>9 in this topic: <b>E2.2</b> OctNov2025 P42 Q17, <b>E2.2</b> FebMarch2025 P42 Q18b, <b>E2.3</b> FebMarch2024 P42 Q5c, <b>E2.5</b> OctNov2025 P42 Q19, <b>E2.6</b> OctNov2025 P41 Q7b, <b>E2.9</b> FebMarch2025 P42 Q16b, <b>E2.10</b> OctNov2025 P42 Q11b, <b>E2.10</b> OctNov2025 P42 Q11c, <b>E2.13</b> FebMarch2024 P42 Q11cii.</div><div class="improve-row"><span class="cat cat-hw">Handwriting</span>None recorded in this topic so far.</div><div class="improve-row"><span class="cat cat-miscon">Misconception</span>10 in this topic: <b>E2.5</b> OctNov2025 P41 Q24d, <b>E2.7</b> OctNov2025 P41 Q20b, <b>E2.9</b> OctNov2025 P42 Q9, <b>E2.9</b> FebMarch2025 P42 Q16c, <b>E2.10</b> FebMarch2024 P42 Q8a, <b>E2.12</b> OctNov2025 P43 Q20b, <b>E2.12</b> FebMarch2024 P42 Q8ci, <b>E2.12</b> FebMarch2024 P42 Q8cii, <b>E2.12</b> FebMarch2024 P42 Q10d, <b>E2.13</b> FebMarch2024 P42 Q11ci.</div><div class="improve-row"><span class="cat cat-blank">Left blank</span>4 in this topic: <b>E2.8</b> OctNov2025 P42 Q21, <b>E2.9</b> OctNov2025 P41 Q18b, <b>E2.11</b> OctNov2025 P41 Q28b, <b>E2.13</b> OctNov2025 P43 Q19e.</div></div>
+
+
+  <div class="topic-nav">
+    <a href="1-p4.html">&larr; 1. Number</a>
+    <a href="../tracker-p4.html">Dashboard</a>
+    <a href="3-p4.html">3. Coordinate geometry &rarr;</a>
+  </div>
+
+  <footer>Cambridge IGCSE Mathematics 0580 (Extended) &middot; syllabus codes reference the current (2025&ndash;2027) subject content &middot; update after each new paper</footer>
+
+</div>
+</body>
+</html>
