@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0580/43 Oct/Nov 2023 &mdash; Paper Breakdown</title>
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --card-bg: #ffffff;
+    --border: #e2e5ec;
+    --text: #1f2430;
+    --muted: #6b7280;
+    --accent: #5a4fc2;
+    --num: #2f7d5c; --num-bg: #e7f5ee;
+    --alg: #b8590a; --alg-bg: #fdf0e2;
+    --cog: #1c6fb0; --cog-bg: #e6f2fb;
+    --geo: #a8317a; --geo-bg: #fbe8f3;
+    --men: #6d5bd0; --men-bg: #eeecfb;
+    --trig: #c0392b; --trig-bg: #fbeae8;
+    --vec: #0e8a8a; --vec-bg: #e3f6f6;
+    --prob: #8a7315; --prob-bg: #f7f2df;
+    --stat: #5c6b1f; --stat-bg: #eef2df;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    padding: 32px 24px 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  header .back {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  header .back:hover { text-decoration: underline; }
+  header h1 {
+    margin: 10px 0 4px;
+    font-size: 24px;
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 8px 24px 48px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 13.5px;
+    margin-top: 16px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: #f0f1f7;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+  }
+  tr:last-child td { border-bottom: none; }
+  td.q { font-weight: 700; width: 42px; }
+  td.marks { width: 60px; color: var(--muted); }
+  .tag {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .tag-num { color: var(--num); background: var(--num-bg); }
+  .tag-alg { color: var(--alg); background: var(--alg-bg); }
+  .tag-cog { color: var(--cog); background: var(--cog-bg); }
+  .tag-geo { color: var(--geo); background: var(--geo-bg); }
+  .tag-men { color: var(--men); background: var(--men-bg); }
+  .tag-trig { color: var(--trig); background: var(--trig-bg); }
+  .tag-vec { color: var(--vec); background: var(--vec-bg); }
+  .tag-prob { color: var(--prob); background: var(--prob-bg); }
+  .tag-stat { color: var(--stat); background: var(--stat-bg); }
+  .note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .summary {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-top: 20px;
+    font-size: 13.5px;
+  }
+  .summary h3 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px 16px; }
+  footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="index.html">&larr; 0580 Paper Breakdown &mdash; Pre-2025 Papers</a>
+  <h1>0580/43 &mdash; Oct/Nov 2023</h1>
+  <p>Paper 4, Calculator (Extended) &middot; 130 marks &middot; 11 questions</p>
+</header>
+
+<main>
+  <table>
+    <thead>
+      <tr><th>Q</th><th>Marks</th><th>Topic</th><th>What it tests</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="q">1</td><td class="marks">12</td><td><span class="tag tag-num">Number</span></td>
+        <td>(a) Converting a dollar amount to rupees using an exchange rate [2]<div class="note">(b) Converting yuan to dollars, rounding to the nearest cent [2] (c)(i) Splitting a euro amount by a given ratio [2] (ii) Converting a share of the ratio into pounds [3] (iii) Lower bound of a flight time from a distance and speed each rounded to a given accuracy [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">2</td><td class="marks">11</td><td><span class="tag tag-stat">Statistics</span></td>
+        <td>(a) Percentage of birds that are Starlings from a frequency table [2]<div class="note">(b)(i) Completing pie chart sector angles [2] (ii) Completing the pie chart [2] (c) Number of Goldfinches after a percentage increase &mdash; <span class="tag tag-num" style="margin-top:2px;">Number</span> [2] (d)(i) Writing 1500 million in standard form &mdash; <span class="tag tag-num" style="margin-top:2px;">Number</span> [1] (ii) Average number of birds per square kilometre &mdash; <span class="tag tag-num" style="margin-top:2px;">Number</span> [2]</div></td>
+      </tr>
+      <tr>
+        <td class="q">3</td><td class="marks">9</td><td><span class="tag tag-vec">Transformations &amp; vectors</span></td>
+        <td>(a) Describing a single transformation mapping one triangle onto another [3]<div class="note">(b)(i) Reflecting a triangle in a horizontal line [2] (ii) Translating a triangle by a vector [2] (iii) Enlarging a triangle by a positive scale factor about a given centre [2]</div></td>
+      </tr>
+      <tr>
+        <td class="q">4</td><td class="marks">7</td><td><span class="tag tag-geo">Geometry</span></td>
+        <td>(a) Interior angle of a regular 10-sided polygon [2]<div class="note">(b) Finding four angles on a circle using tangent, cyclic and parallel-line properties [5]</div></td>
+      </tr>
+      <tr>
+        <td class="q">5</td><td class="marks">14</td><td><span class="tag tag-stat">Statistics</span></td>
+        <td>(a) Completing a grouped frequency table and histogram [5]<div class="note">(b) Estimating the mean travel time [4] (c) Explaining why a claimed maximum value may be wrong, given rounded class boundaries [1] (d) Probability that, of three randomly chosen workers, one takes 60 minutes or less and the other two each take more &mdash; <span class="tag tag-prob" style="margin-top:2px;">Probability</span> [4]</div></td>
+      </tr>
+      <tr>
+        <td class="q">6</td><td class="marks">12</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
+        <td>(a)(i) Evaluating a linear function [1]<div class="note">(ii) Evaluating a composite function [2] (b) Finding the inverse of a reciprocal-type function [3] (c) Solving an index equation formed from an exponential function [2] (d) Writing a combined fraction of two functions in simplest form [4]</div></td>
+      </tr>
+      <tr>
+        <td class="q">7</td><td class="marks">11</td><td><span class="tag tag-trig">Trigonometry</span></td>
+        <td>(a) Completing a table of values for y&thinsp;=&thinsp;3cos2x&deg; [3]<div class="note">(b) Drawing the graph of y&thinsp;=&thinsp;3cos2x&deg; [4] (c) Using the graph to solve a cosine equation [1] (d) Solving a related equation by drawing a suitable straight line on the graph [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">8</td><td class="marks">17</td><td><span class="tag tag-men">Mensuration</span></td>
+        <td>(a)(i) Showing an angle in a right-angled triangle using trigonometry &mdash; <span class="tag tag-trig" style="margin-top:2px;">Trigonometry</span> [2]<div class="note">(ii) Area of a major sector [3] (iii) Calculating a length using the cosine rule, after finding a midpoint distance &mdash; <span class="tag tag-trig" style="margin-top:2px;">Trigonometry</span> [5] (iv) Total area of a composite shape made from a sector and triangles [4] (b) Area of a similar sector using a linear scale factor [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">9</td><td class="marks">14</td><td><span class="tag tag-cog">Coordinate geometry</span></td>
+        <td>(a) Determining whether a triangle is scalene, isosceles or equilateral using distances [4]<div class="note">(b)(i) Equation of a line through two points, in the form y&thinsp;=&thinsp;mx&thinsp;+&thinsp;c [3] (ii) Equation of the perpendicular bisector of the line [4] (iii) Finding the coordinates of a fourth vertex of a kite [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">10</td><td class="marks">14</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
+        <td>(a) Expanding and simplifying an expression with two brackets [2]<div class="note">(b)(i) Factorising by taking out a common factor [2] (ii) Factorising completely by grouping and difference of two squares [3] (c)(i) Showing a quadratic equation from a two-part journey with speed and time [4] (ii) Solving the quadratic to find a speed, to 1 d.p. [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">11</td><td class="marks">9</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
+        <td>(a) Finding the coordinates of the intercepts and turning point of a quadratic graph [4]<div class="note">(b) Differentiating a quadratic expression [2] (c) Finding the coordinates of the point with a given gradient [3]</div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="summary">
+    <h3>Marks by topic</h3>
+    <div class="summary-grid">
+      <div><span class="tag tag-alg">Algebra &amp; graphs</span> 35</div>
+      <div><span class="tag tag-trig">Trigonometry</span> 18</div>
+      <div><span class="tag tag-num">Number</span> 17</div>
+      <div><span class="tag tag-stat">Statistics</span> 16</div>
+      <div><span class="tag tag-cog">Coordinate geometry</span> 14</div>
+      <div><span class="tag tag-men">Mensuration</span> 10</div>
+      <div><span class="tag tag-vec">Transformations &amp; vectors</span> 9</div>
+      <div><span class="tag tag-geo">Geometry</span> 7</div>
+      <div><span class="tag tag-prob">Probability</span> 4</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Pre-2025 papers &mdash; 0580 Paper 4. Personal reference &mdash; not linked to any student tracker. Topic codes are approximate stand-ins from the current 2025&ndash;2027 syllabus (see dashboard note).
+</footer>
+
+</body>
+</html>
