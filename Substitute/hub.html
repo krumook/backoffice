@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Substitute Teacher — Cost Log Hub</title>
+<title>Substitute Teacher — Fee Summary Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -30,24 +30,6 @@
   .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
   .back-link:hover { background: var(--tip); color: #fff; }
 
-  .summary-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-  .summary-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 14px 16px;
-  }
-  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
-  .summary-card .value { font-size: 24px; font-weight: 700; margin-top: 4px; color: var(--ink); }
-  .summary-card.collected .value { color: var(--amber); }
-  .summary-card.paid .value { color: var(--tip); }
-  .summary-card.kept .value { color: var(--accent); }
-
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 16px; }
   .card {
     background: var(--card);
@@ -64,7 +46,7 @@
   .card:hover { box-shadow: 0 4px 16px rgba(31,42,36,0.12); transform: translateY(-2px); }
   .card h2 { margin: 0; font-size: 17px; }
   .card .info { margin: 0; font-size: 13.5px; color: var(--muted); }
-  .card .kept-val { font-size: 20px; font-weight: 700; color: var(--accent); margin-top: 4px; }
+  .card .collected-val { font-size: 20px; font-weight: 700; color: var(--amber); margin-top: 4px; }
   .card .open { margin-top: auto; display: inline-block; text-align: center; background: var(--accent); color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; padding: 8px 12px; border-radius: 8px; }
 
   .note {
@@ -87,46 +69,31 @@
   <a class="back-link" href="../teacher-hub.html">&larr; Back to teacher hub</a>
 
   <header>
-    <h1>Substitute teacher &mdash; cost log</h1>
-    <div class="meta">One dashboard per paying parent &mdash; what's collected for their child's class(es) and what's paid to whoever covers it</div>
+    <h1>Substitute teacher &mdash; fee summaries</h1>
+    <div class="meta">One dashboard per paying parent, tracking what's collected for their child's class(es) &middot; substitute pay and margin are tracked separately on the Chertam ledger</div>
   </header>
-
-  <div class="summary-row">
-    <div class="summary-card collected">
-      <div class="label">Collected from parents (all-time)</div>
-      <div class="value">&#3647;4,650</div>
-    </div>
-    <div class="summary-card paid">
-      <div class="label">Paid to substitutes (all-time)</div>
-      <div class="value">&#3647;3,375</div>
-    </div>
-    <div class="summary-card kept">
-      <div class="label">Kept (margin, all-time)</div>
-      <div class="value">&#3647;1,275</div>
-    </div>
-  </div>
 
   <div class="grid">
     <a class="card" href="index.html">
       <h2>Grace</h2>
-      <p class="info">Mathematics &middot; substitute: Farah &middot; &#3647;350/hr collected, &#3647;250/hr paid</p>
-      <div class="kept-val">&#3647;700 kept</div>
+      <p class="info">Mathematics &middot; &#3647;350/hr collected</p>
+      <div class="collected-val">&#3647;2,450 collected (Aug)</div>
       <span class="open">Open dashboard</span>
     </a>
     <a class="card" href="harrison-kaldan/index.html">
       <h2>Harrison &amp; Kaldan</h2>
-      <p class="info">Siblings, same parent &middot; Harrison: Thai (substitute Asia) &middot; Kaldan: Mathematics (substitutes Q, Farah) &middot; &#3647;250/hr paid to all substitutes</p>
-      <div class="kept-val">&#3647;575 kept</div>
+      <p class="info">Siblings, same parent &middot; Harrison: Thai &#3647;320/hr &middot; Kaldan: Mathematics &#3647;350/hr</p>
+      <div class="collected-val">&#3647;2,200 collected (Aug)</div>
       <span class="open">Open dashboard</span>
     </a>
   </div>
 
   <div class="note">
     <b>Adding a new family</b>
-    Tell me the student(s), subject, the rate collected from the parent, who substitutes and what they're paid, and the sessions covered &mdash; I'll build a new dashboard here, same as these two. Siblings billed to the same parent go in one shared dashboard; otherwise each gets its own.
+    Tell me the student(s), subject, the rate collected from the parent, and the sessions covered &mdash; I'll build a new dashboard here, same as these two. Siblings billed to the same parent go in one shared dashboard; otherwise each gets its own. Substitute pay and margin are logged on the <a href="../Chertam/index.html" style="color:var(--accent);">Chertam ledger</a>, not shown here.
   </div>
 
-  <footer>Substitute teacher cost log &middot; not tied to any one student's own tutoring tracker</footer>
+  <footer>Substitute teacher fee summaries &middot; not tied to any one student's own tutoring tracker</footer>
 
 </div>
 </body>

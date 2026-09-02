@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Harrison &amp; Kaldan — Monthly Fee Summaries</title>
+<title>Chertam — Running Ledger</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,6 +12,7 @@
     --accent: #0f6e56; --accent-light: #e1f5ee;
     --tip: #185fa5; --tip-light: #e6f1fb;
     --amber: #854f0b; --amber-light: #faeeda;
+    --loss: #993c1d; --loss-light: #faece7;
   }
   * { box-sizing: border-box; }
   body {
@@ -29,6 +30,25 @@
 
   .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
   .back-link:hover { background: var(--tip); color: #fff; }
+
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .summary-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .summary-card .value { font-size: 24px; font-weight: 700; margin-top: 4px; color: var(--ink); }
+  .summary-card.received .value { color: var(--accent); }
+  .summary-card.owed .value { color: var(--tip); }
+  .summary-card.net .value { color: var(--loss); }
+  .summary-card.net.positive .value { color: var(--accent); }
 
   .section-label { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.04em; }
 
@@ -49,7 +69,8 @@
   .month-card:hover { box-shadow: 0 4px 16px rgba(31,42,36,0.12); transform: translateY(-2px); }
   .month-name { font-size: 15.5px; font-weight: 700; }
   .month-sub { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
-  .month-total { font-size: 18px; font-weight: 700; color: var(--amber); text-align: right; white-space: nowrap; }
+  .month-total { font-size: 18px; font-weight: 700; color: var(--loss); text-align: right; white-space: nowrap; }
+  .month-total.positive { color: var(--accent); }
   .month-goto { font-size: 12px; color: var(--tip); font-weight: 600; margin-top: 3px; text-align: right; }
 
   .note {
@@ -71,33 +92,53 @@
 <body>
 <div class="wrap">
 
-  <a class="back-link" href="../hub.html">&larr; Back to substitute hub</a>
+  <a class="back-link" href="../teacher-hub.html">&larr; Back to teacher hub</a>
 
   <header>
-    <h1>Harrison &amp; Kaldan &mdash; monthly fee summaries</h1>
-    <div class="meta">Siblings, same parent &middot; Harrison: Thai (&#3647;320/hr) &middot; Kaldan: Mathematics (&#3647;350/hr) &middot; pick a month to see the full session list and total</div>
+    <h1>Chertam &mdash; running ledger</h1>
+    <div class="meta">Net balance with agent Chertam &middot; what's received (from Imboon &amp; Chilli) minus what's owed (substitute pay for Grace, Harrison &amp; Kaldan) &middot; updated monthly</div>
   </header>
+
+  <div class="summary-row">
+    <div class="summary-card received">
+      <div class="label">Received (all-time)</div>
+      <div class="value">&#3647;1,750</div>
+    </div>
+    <div class="summary-card owed">
+      <div class="label">Owed (all-time)</div>
+      <div class="value">&#3647;3,375</div>
+    </div>
+    <div class="summary-card net">
+      <div class="label">Net (all-time)</div>
+      <div class="value">&minus;&#3647;1,625</div>
+    </div>
+  </div>
 
   <div class="section-label">Months</div>
   <div class="month-list">
     <a class="month-card" href="2026-08.html">
       <div>
         <div class="month-name">August 2026</div>
-        <div class="month-sub">Harrison 5 sessions &middot; Kaldan 4 sessions &middot; 9 total, all charged</div>
+        <div class="month-sub">Received &#3647;1,750 (Imboon, Chilli) &middot; Owed &#3647;3,375 (Grace, Harrison &amp; Kaldan)</div>
       </div>
       <div>
-        <div class="month-total">&#3647;2,200</div>
+        <div class="month-total">&minus;&#3647;1,625</div>
         <div class="month-goto">Open &rarr;</div>
       </div>
     </a>
   </div>
 
   <div class="note">
-    <b>Logging a new session</b>
-    Tell me the date, which of the two students, start/finish time, and whether it was a normal charged session or a no-charge. I'll add it to that month's shared table and update the total above.
+    <b>How this ledger works</b>
+    <ul>
+      <li><b>Received</b> pulls from Imboon's and Chilli's monthly fee totals (their own fee pages)</li>
+      <li><b>Owed</b> pulls from the substitute pay totals on the Grace and Harrison &amp; Kaldan dashboards</li>
+      <li>A negative net means you owe Chertam that amount; a positive net means Chertam owes you</li>
+      <li>Tell me when a new month closes for any of those four students and I'll add the next month here</li>
+    </ul>
   </div>
 
-  <footer>Harrison &amp; Kaldan &middot; monthly fee summary &middot; a new page like this is made for each month</footer>
+  <footer>Chertam ledger &middot; net of Imboon/Chilli receipts against Grace/Harrison/Kaldan substitute pay</footer>
 
 </div>
 </body>

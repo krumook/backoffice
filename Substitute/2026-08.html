@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Substitute Teacher &mdash; August 2026 Cost Log</title>
+<title>Grace &mdash; August 2026 Fee Summary</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -14,58 +14,27 @@
     --amber: #854f0b; --amber-light: #faeeda;
   }
   * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    padding: 40px 48px 64px;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-  }
+  body { margin: 0; padding: 40px 48px 64px; background: var(--bg); color: var(--ink);
+    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
   .wrap { max-width: 1180px; margin: 0 auto; }
   header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 24px; }
   header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
   header .meta { color: var(--muted); font-size: 14px; }
   .total-box { text-align: right; }
-  .total-box .num { font-size: 32px; font-weight: 700; color: var(--accent); line-height: 1; }
+  .total-box .num { font-size: 32px; font-weight: 700; color: var(--amber); line-height: 1; }
   .total-box .sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
-
   .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
   .back-link:hover { background: var(--tip); color: #fff; }
-
-  .summary-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-  .summary-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 14px 16px;
-  }
-  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
-  .summary-card .value { font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--ink); }
-  .summary-card.collected .value { color: var(--amber); }
-  .summary-card.paid .value { color: var(--tip); }
-  .summary-card.kept .value { color: var(--accent); }
-
   table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); font-size: 13px; margin-bottom: 24px; }
   thead th { background: var(--ink); color: #fff; text-align: left; padding: 11px 12px; font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
   tbody td { padding: 10px 12px; border-top: 1px solid var(--line); vertical-align: middle; }
   tbody tr:nth-child(even) { background: #fafaf8; }
   td.cost { text-align: right; font-weight: 700; }
-  td.cost.collected { color: var(--amber); }
-  td.cost.paid { color: var(--tip); }
-  td.cost.kept { color: var(--accent); }
-  tbody td:nth-child(1), tbody td:nth-child(2), tbody td:nth-child(3), tbody td:nth-child(4), tbody td:nth-child(7) { white-space: nowrap; }
-
-  tr.total td { border-top: 2px solid var(--ink); font-weight: 700; background: var(--accent-light); }
-  tr.total td.cost.collected { color: var(--amber); }
-  tr.total td.cost.paid { color: var(--tip); }
-  tr.total td.cost.kept { color: var(--accent); }
-
+  tbody td:nth-child(1), tbody td:nth-child(2), tbody td:nth-child(3), tbody td:nth-child(4), tbody td:nth-child(6), tbody td:nth-child(7) { white-space: nowrap; }
+  .status-pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+  .status-charged { background: var(--accent-light); color: var(--accent); }
+  .status-nocharge { background: var(--amber-light); color: var(--amber); }
+  tr.total td { border-top: 2px solid var(--ink); font-weight: 700; background: var(--accent-light); color: var(--accent); }
   footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
 </style>
 </head>
@@ -76,59 +45,30 @@
 
   <header>
     <div>
-      <h1>August 2026 &mdash; substitute cost log</h1>
-      <div class="meta">Grace &middot; Mathematics &middot; substitute: Farah &middot; &#3647;350/hr collected from parent, &#3647;250/hr paid to substitute &middot; 7 sessions logged</div>
+      <h1>August 2026 &mdash; fee summary</h1>
+      <div class="meta">Mathematics tutoring &middot; &#3647;350 / hour &middot; 7 sessions logged, 7 charged</div>
     </div>
     <div class="total-box">
-      <div class="num">&#3647;700</div>
-      <div class="sub">kept this month</div>
+      <div class="num">&#3647;2,450</div>
+      <div class="sub">total due this month</div>
     </div>
   </header>
 
-  <div class="summary-row">
-    <div class="summary-card collected">
-      <div class="label">Collected from parent</div>
-      <div class="value">&#3647;2,450</div>
-    </div>
-    <div class="summary-card paid">
-      <div class="label">Paid to substitute</div>
-      <div class="value">&#3647;1,750</div>
-    </div>
-    <div class="summary-card kept">
-      <div class="label">Kept (margin)</div>
-      <div class="value">&#3647;700</div>
-    </div>
-  </div>
-
   <table>
-    <thead>
-      <tr>
-        <th>Day</th>
-        <th>Date</th>
-        <th>Start</th>
-        <th>Finish</th>
-        <th>Student</th>
-        <th>Subject</th>
-        <th>Duration</th>
-        <th>Substitute</th>
-        <th>Collected</th>
-        <th>Paid</th>
-        <th>Kept</th>
-      </tr>
-    </thead>
+    <thead><tr><th>Day</th><th>Date</th><th>Start</th><th>Finish</th><th>Subject</th><th>Duration</th><th>Rate</th><th>Status</th><th>Cost</th><th>Remark</th></tr></thead>
     <tbody>
-      <tr><td>Sat</td><td>2026-08-01</td><td>21:00</td><td>22:00</td><td>Grace</td><td>Mathematics</td><td>1 hr</td><td>Farah</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td></tr>
-      <tr><td>Mon</td><td>2026-08-03</td><td>20:30</td><td>21:30</td><td>Grace</td><td>Mathematics</td><td>1 hr</td><td>Farah</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td></tr>
-      <tr><td>Sat</td><td>2026-08-08</td><td>21:00</td><td>22:00</td><td>Grace</td><td>Mathematics</td><td>1 hr</td><td>Farah</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td></tr>
-      <tr><td>Mon</td><td>2026-08-10</td><td>20:30</td><td>21:30</td><td>Grace</td><td>Mathematics</td><td>1 hr</td><td>Farah</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td></tr>
-      <tr><td>Sun</td><td>2026-08-16</td><td>21:30</td><td>22:30</td><td>Grace</td><td>Mathematics</td><td>1 hr</td><td>Farah</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td></tr>
-      <tr><td>Sun</td><td>2026-08-23</td><td>21:30</td><td>22:30</td><td>Grace</td><td>Mathematics</td><td>1 hr</td><td>Farah</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td></tr>
-      <tr><td>Sun</td><td>2026-08-30</td><td>21:30</td><td>22:30</td><td>Grace</td><td>Mathematics</td><td>1 hr</td><td>Farah</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td></tr>
-      <tr class="total"><td colspan="8">Total (7 sessions)</td><td class="cost collected">&#3647;2,450</td><td class="cost paid">&#3647;1,750</td><td class="cost kept">&#3647;700</td></tr>
+      <tr><td>Sat</td><td>2026-08-01</td><td>21:00</td><td>22:00</td><td>Mathematics</td><td>1 hr</td><td>&#3647;350</td><td><span class="status-pill status-charged">Charged</span></td><td class="cost">&#3647;350</td><td></td></tr>
+      <tr><td>Mon</td><td>2026-08-03</td><td>20:30</td><td>21:30</td><td>Mathematics</td><td>1 hr</td><td>&#3647;350</td><td><span class="status-pill status-charged">Charged</span></td><td class="cost">&#3647;350</td><td></td></tr>
+      <tr><td>Sat</td><td>2026-08-08</td><td>21:00</td><td>22:00</td><td>Mathematics</td><td>1 hr</td><td>&#3647;350</td><td><span class="status-pill status-charged">Charged</span></td><td class="cost">&#3647;350</td><td></td></tr>
+      <tr><td>Mon</td><td>2026-08-10</td><td>20:30</td><td>21:30</td><td>Mathematics</td><td>1 hr</td><td>&#3647;350</td><td><span class="status-pill status-charged">Charged</span></td><td class="cost">&#3647;350</td><td></td></tr>
+      <tr><td>Sun</td><td>2026-08-16</td><td>21:30</td><td>22:30</td><td>Mathematics</td><td>1 hr</td><td>&#3647;350</td><td><span class="status-pill status-charged">Charged</span></td><td class="cost">&#3647;350</td><td></td></tr>
+      <tr><td>Sun</td><td>2026-08-23</td><td>21:30</td><td>22:30</td><td>Mathematics</td><td>1 hr</td><td>&#3647;350</td><td><span class="status-pill status-charged">Charged</span></td><td class="cost">&#3647;350</td><td></td></tr>
+      <tr><td>Sun</td><td>2026-08-30</td><td>21:30</td><td>22:30</td><td>Mathematics</td><td>1 hr</td><td>&#3647;350</td><td><span class="status-pill status-charged">Charged</span></td><td class="cost">&#3647;350</td><td></td></tr>
+      <tr class="total"><td colspan="8">Total (7 charged sessions, 0 no-charge)</td><td class="cost">&#3647;2,450</td><td></td></tr>
     </tbody>
   </table>
 
-  <footer>Substitute teacher cost log &middot; a new page like this is made for each month</footer>
+  <footer>Grace &middot; monthly fee summary &middot; &#3647;350 / hour &middot; a new page is made for each month</footer>
 
 </div>
 </body>

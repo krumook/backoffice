@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Grace — Substitute Cost Log</title>
+<title>Grace — Monthly Fee Summaries</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -30,24 +30,6 @@
   .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
   .back-link:hover { background: var(--tip); color: #fff; }
 
-  .summary-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-  .summary-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 14px 16px;
-  }
-  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
-  .summary-card .value { font-size: 24px; font-weight: 700; margin-top: 4px; color: var(--ink); }
-  .summary-card.collected .value { color: var(--amber); }
-  .summary-card.paid .value { color: var(--tip); }
-  .summary-card.kept .value { color: var(--accent); }
-
   .section-label { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.04em; }
 
   .month-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
@@ -67,19 +49,8 @@
   .month-card:hover { box-shadow: 0 4px 16px rgba(31,42,36,0.12); transform: translateY(-2px); }
   .month-name { font-size: 15.5px; font-weight: 700; }
   .month-sub { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
-  .month-total { font-size: 18px; font-weight: 700; color: var(--accent); text-align: right; white-space: nowrap; }
+  .month-total { font-size: 18px; font-weight: 700; color: var(--amber); text-align: right; white-space: nowrap; }
   .month-goto { font-size: 12px; color: var(--tip); font-weight: 600; margin-top: 3px; text-align: right; }
-
-  .empty-state {
-    background: var(--card);
-    border: 1px dashed var(--line);
-    border-radius: 12px;
-    padding: 28px 24px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 13.5px;
-    margin-bottom: 28px;
-  }
 
   .note {
     background: var(--accent-light);
@@ -103,53 +74,30 @@
   <a class="back-link" href="hub.html">&larr; Back to substitute hub</a>
 
   <header>
-    <h1>Grace &mdash; substitute cost log</h1>
-    <div class="meta">Mathematics &middot; substitute: Farah &middot; &#3647;350/hr collected from parent, &#3647;250/hr paid to substitute &middot; one page per month, running totals below</div>
+    <h1>Grace &mdash; monthly fee summaries</h1>
+    <div class="meta">Mathematics tutoring &middot; &#3647;350 / hour &middot; pick a month to see the full session list and total</div>
   </header>
-
-  <div class="summary-row">
-    <div class="summary-card collected">
-      <div class="label">Collected from parents</div>
-      <div class="value">&#3647;2,450</div>
-    </div>
-    <div class="summary-card paid">
-      <div class="label">Paid to substitutes</div>
-      <div class="value">&#3647;1,750</div>
-    </div>
-    <div class="summary-card kept">
-      <div class="label">Kept (margin)</div>
-      <div class="value">&#3647;700</div>
-    </div>
-  </div>
 
   <div class="section-label">Months</div>
   <div class="month-list">
     <a class="month-card" href="2026-08.html">
       <div>
         <div class="month-name">August 2026</div>
-        <div class="month-sub">Mathematics &middot; 7 sessions &middot; substitute: Farah</div>
+        <div class="month-sub">7 sessions logged, 7 charged</div>
       </div>
       <div>
-        <div class="month-total">&#3647;700 kept</div>
+        <div class="month-total">&#3647;2,450</div>
         <div class="month-goto">Open &rarr;</div>
       </div>
     </a>
   </div>
 
   <div class="note">
-    <b>How to add a substitute session</b>
-    Tell me, for each session a substitute covers:
-    <ul>
-      <li>Date and which student's class it was</li>
-      <li>Hours covered (or start/finish time)</li>
-      <li>Amount collected from the parent for that session</li>
-      <li>Amount paid to the substitute teacher</li>
-      <li>Substitute's name, and any remark (e.g. reason for the cover)</li>
-    </ul>
-    I'll create that month's page with a running table (collected, paid, and the difference kept) and add it to the list above. No form needed &mdash; just tell me in a message, the same way you log regular class feedback.
+    <b>Logging a new session</b>
+    Tell me the date, start/finish time, and whether it was a normal charged session or a no-charge (e.g. cancelled). I'll add it to that month's table and update the total above.
   </div>
 
-  <footer>Grace &middot; substitute cost log &middot; a new page like this is made for each month</footer>
+  <footer>Grace &middot; monthly fee summary &middot; &#3647;350 / hour &middot; a new page like this is made for each month</footer>
 
 </div>
 </body>

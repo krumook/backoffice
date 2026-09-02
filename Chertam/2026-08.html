@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chertam — August 2026 Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
+    --accent: #0f6e56; --accent-light: #e1f5ee;
+    --tip: #185fa5; --tip-light: #e6f1fb;
+    --amber: #854f0b; --amber-light: #faeeda;
+    --loss: #993c1d; --loss-light: #faece7;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 48px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 24px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .total-box { text-align: right; }
+  .total-box .num { font-size: 32px; font-weight: 700; color: var(--loss); line-height: 1; }
+  .total-box .sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+  .col-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+  .col-card h2 { margin: 0 0 12px; font-size: 15px; }
+  .col-card.received h2 { color: var(--accent); }
+  .col-card.owed h2 { color: var(--tip); }
+  .line-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+  .line-row:last-of-type { border-bottom: none; }
+  .line-row .amt { font-weight: 700; }
+  .col-card.received .line-row .amt { color: var(--accent); }
+  .col-card.owed .line-row .amt { color: var(--tip); }
+  .col-total { display: flex; justify-content: space-between; padding-top: 10px; margin-top: 6px; border-top: 2px solid var(--ink); font-weight: 700; font-size: 14.5px; }
+
+  .net-box {
+    background: var(--loss-light);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .net-box .num { font-size: 30px; font-weight: 700; color: var(--loss); }
+  .net-box .label { font-size: 13.5px; color: var(--ink); margin-top: 4px; }
+
+  .source-link { color: var(--tip); text-decoration: none; font-weight: 600; }
+  .source-link:hover { text-decoration: underline; }
+
+  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="index.html">&larr; Back to all months</a>
+
+  <header>
+    <div>
+      <h1>August 2026 &mdash; Chertam ledger</h1>
+      <div class="meta">Received (Imboon, Chilli) minus owed (Grace, Harrison &amp; Kaldan substitute pay)</div>
+    </div>
+    <div class="total-box">
+      <div class="num">&minus;&#3647;1,625</div>
+      <div class="sub">net &mdash; you owe Chertam</div>
+    </div>
+  </header>
+
+  <div class="two-col">
+    <div class="col-card received">
+      <h2>Received</h2>
+      <div class="line-row"><span>Imboon &mdash; August fees</span><span class="amt">&#3647;750</span></div>
+      <div class="line-row"><span>Chilli &mdash; August fees</span><span class="amt">&#3647;1,000</span></div>
+      <div class="col-total"><span>Total received</span><span>&#3647;1,750</span></div>
+    </div>
+    <div class="col-card owed">
+      <h2>Owed</h2>
+      <div class="line-row"><span>Grace &mdash; substitute pay (Farah)</span><span class="amt">&#3647;1,750</span></div>
+      <div class="line-row"><span>Harrison &amp; Kaldan &mdash; substitute pay (Asia, Q, Farah)</span><span class="amt">&#3647;1,625</span></div>
+      <div class="col-total"><span>Total owed</span><span>&#3647;3,375</span></div>
+    </div>
+  </div>
+
+  <div class="net-box">
+    <div class="num">&#3647;1,750 &minus; &#3647;3,375 = &minus;&#3647;1,625</div>
+    <div class="label">Substitute pay for Grace, Harrison &amp; Kaldan exceeded what came in from Imboon &amp; Chilli this month &mdash; you owe Chertam &#3647;1,625 net.</div>
+  </div>
+
+  <p style="font-size:13px;color:var(--muted);">Sources: <a class="source-link" href="../Imboon/mo/2026-08.html">Imboon's August fee page</a>, <a class="source-link" href="../Chilli/mo/2026-08.html">Chilli's August fee page</a>, <a class="source-link" href="../Substitute/2026-08.html">Grace's substitute log</a>, <a class="source-link" href="../Substitute/harrison-kaldan/2026-08.html">Harrison &amp; Kaldan's substitute log</a>.</p>
+
+  <footer>Chertam ledger &middot; a new page like this is made for each month</footer>
+
+</div>
+</body>
+</html>
