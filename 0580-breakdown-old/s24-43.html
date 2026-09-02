@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0580/43 May/June 2024 &mdash; Paper Breakdown</title>
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --card-bg: #ffffff;
+    --border: #e2e5ec;
+    --text: #1f2430;
+    --muted: #6b7280;
+    --accent: #5a4fc2;
+    --num: #2f7d5c; --num-bg: #e7f5ee;
+    --alg: #b8590a; --alg-bg: #fdf0e2;
+    --cog: #1c6fb0; --cog-bg: #e6f2fb;
+    --geo: #a8317a; --geo-bg: #fbe8f3;
+    --men: #6d5bd0; --men-bg: #eeecfb;
+    --trig: #c0392b; --trig-bg: #fbeae8;
+    --vec: #0e8a8a; --vec-bg: #e3f6f6;
+    --prob: #8a7315; --prob-bg: #f7f2df;
+    --stat: #5c6b1f; --stat-bg: #eef2df;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    padding: 32px 24px 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  header .back {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  header .back:hover { text-decoration: underline; }
+  header h1 {
+    margin: 10px 0 4px;
+    font-size: 24px;
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 8px 24px 48px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 13.5px;
+    margin-top: 16px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: #f0f1f7;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+  }
+  tr:last-child td { border-bottom: none; }
+  td.q { font-weight: 700; width: 42px; }
+  td.marks { width: 60px; color: var(--muted); }
+  .tag {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .tag-num { color: var(--num); background: var(--num-bg); }
+  .tag-alg { color: var(--alg); background: var(--alg-bg); }
+  .tag-cog { color: var(--cog); background: var(--cog-bg); }
+  .tag-geo { color: var(--geo); background: var(--geo-bg); }
+  .tag-men { color: var(--men); background: var(--men-bg); }
+  .tag-trig { color: var(--trig); background: var(--trig-bg); }
+  .tag-vec { color: var(--vec); background: var(--vec-bg); }
+  .tag-prob { color: var(--prob); background: var(--prob-bg); }
+  .tag-stat { color: var(--stat); background: var(--stat-bg); }
+  .note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .summary {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-top: 20px;
+    font-size: 13.5px;
+  }
+  .summary h3 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px 16px; }
+  footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="index.html">&larr; 0580 Paper Breakdown &mdash; Pre-2025 Papers</a>
+  <h1>0580/43 &mdash; May/June 2024</h1>
+  <p>Paper 4, Calculator (Extended) &middot; 130 marks &middot; 11 questions</p>
+</header>
+
+<main>
+  <table>
+    <thead>
+      <tr><th>Q</th><th>Marks</th><th>Topic</th><th>What it tests</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="q">1</td><td class="marks">13</td><td><span class="tag tag-num">Number</span></td>
+        <td>(a)(i) Total membership fees from two rates [2]<div class="note">(ii) A cost as a percentage of the fees [1] (iii) Reverse percentage to find a prior year's total [2] (iv)(a) Total members after a ratio change [2] (b) Percentage increase between two years [2] (b)(i) Population after 3 years of exponential decrease [2] (ii) Years until the population first falls below a target [2]</div></td>
+      </tr>
+      <tr>
+        <td class="q">2</td><td class="marks">12</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
+        <td>(a)(i)&ndash;(ii) 4th term of a cubic-type sequence; solving for n given a term value [3]<div class="note">(b) 5th term of a geometric sequence [1] (c) Completing a table of three sequences (linear, unit-fraction-type, quadratic-type) with 5th and nth terms [8]</div></td>
+      </tr>
+      <tr>
+        <td class="q">3</td><td class="marks">11</td><td><span class="tag tag-stat">Statistics</span></td>
+        <td>(a) Mode, median, and mean from a frequency table [5]<div class="note">(b)(i) Estimating the mean speed from a grouped frequency table [4] (ii) Histogram bar heights for two intervals [2]</div></td>
+      </tr>
+      <tr>
+        <td class="q">4</td><td class="marks">9</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
+        <td>(a) Showing a quadratic equation from equal areas of a triangle and a square [4]<div class="note">(b) Solving the quadratic to 2 d.p. [3] (c) Perimeter of the square &mdash; <span class="tag tag-men" style="margin-top:2px;">Mensuration</span> [2]</div></td>
+      </tr>
+      <tr>
+        <td class="q">5</td><td class="marks">13</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
+        <td>(a) Reading f(2) and solving f(x)&thinsp;=&thinsp;5 from a graph; identifying k for two solutions; naming the asymptote [6]<div class="note">(b) Drawing y&thinsp;=&thinsp;x&minus;2 and solving f(x)&thinsp;=&thinsp;x&minus;2 graphically [3] (c) Showing c&thinsp;=&thinsp;2 using the graph [2] (d) Finding p and q by matching coefficients [2]</div></td>
+      </tr>
+      <tr>
+        <td class="q">6</td><td class="marks">15</td><td><span class="tag tag-trig">Trigonometry</span></td>
+        <td>(a) Length of a ladder using Pythagoras&rsquo; theorem [2]<div class="note">(b) Bearing of one point from another, using right-angle trigonometry [3] (c) Perimeter of a kite-shaped quadrilateral using the sine rule [5] (d) An angle in a quadrilateral split into two triangles, using the cosine rule [5]</div></td>
+      </tr>
+      <tr>
+        <td class="q">7</td><td class="marks">11</td><td><span class="tag tag-num">Number</span></td>
+        <td>(a)(i) Time taken for a journey, in minutes [2]<div class="note">(ii) Lower bound of a time, from two rounded quantities [3] (b) Average speed for a journey split into two stages with related times [6]</div></td>
+      </tr>
+      <tr>
+        <td class="q">8</td><td class="marks">14</td><td><span class="tag tag-men">Mensuration</span></td>
+        <td>(a)(i)&ndash;(iii) Surface area and volume of a cylinder-and-cone solid; empty space when 10 are packed in a box [11]<div class="note">(b) Volume of a similar solid from a surface area ratio &mdash; <span class="tag tag-geo" style="margin-top:2px;">Geometry</span> [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">9</td><td class="marks">12</td><td><span class="tag tag-prob">Probability</span></td>
+        <td>(a)(i)&ndash;(ii) Probability of picking a given letter card [2]<div class="note">(b) Probability both of two cards (with replacement) show a letter [2] (c)(i)&ndash;(ii) Probability of specific letters, and of different letters, without replacement [6] (d) Finding n from the probability of first success on the nth pick [2]</div></td>
+      </tr>
+      <tr>
+        <td class="q">10</td><td class="marks">11</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
+        <td>(a) Derivative of a polynomial [2]<div class="note">(b) Equation of the tangent at a given point [4] (c) Coordinates of the two turning points [5]</div></td>
+      </tr>
+      <tr>
+        <td class="q">11</td><td class="marks">9</td><td><span class="tag tag-men">Mensuration</span></td>
+        <td>(a) Showing x&thinsp;=&thinsp;108 from a minor:major arc length ratio [3]<div class="note">(b)(i) Showing an equation from a triangle being half the area of its sector [2] (ii) Completing a table of values [3] (iii) Reading off the solution to 1 d.p. [1]</div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="summary">
+    <h3>Marks by topic</h3>
+    <div class="summary-grid">
+      <div><span class="tag tag-alg">Algebra &amp; graphs</span> 43</div>
+      <div><span class="tag tag-num">Number</span> 24</div>
+      <div><span class="tag tag-men">Mensuration</span> 22</div>
+      <div><span class="tag tag-trig">Trigonometry</span> 15</div>
+      <div><span class="tag tag-prob">Probability</span> 12</div>
+      <div><span class="tag tag-stat">Statistics</span> 11</div>
+      <div><span class="tag tag-geo">Geometry</span> 3</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Pre-2025 papers &mdash; 0580 Paper 4. Personal reference &mdash; not linked to any student tracker. Topic codes are approximate stand-ins from the current 2025&ndash;2027 syllabus (see dashboard note).
+</footer>
+
+</body>
+</html>

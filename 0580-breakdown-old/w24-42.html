@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0580/42 Oct/Nov 2024 &mdash; Paper Breakdown</title>
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --card-bg: #ffffff;
+    --border: #e2e5ec;
+    --text: #1f2430;
+    --muted: #6b7280;
+    --accent: #5a4fc2;
+    --num: #2f7d5c; --num-bg: #e7f5ee;
+    --alg: #b8590a; --alg-bg: #fdf0e2;
+    --cog: #1c6fb0; --cog-bg: #e6f2fb;
+    --geo: #a8317a; --geo-bg: #fbe8f3;
+    --men: #6d5bd0; --men-bg: #eeecfb;
+    --trig: #c0392b; --trig-bg: #fbeae8;
+    --vec: #0e8a8a; --vec-bg: #e3f6f6;
+    --prob: #8a7315; --prob-bg: #f7f2df;
+    --stat: #5c6b1f; --stat-bg: #eef2df;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    padding: 32px 24px 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  header .back {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  header .back:hover { text-decoration: underline; }
+  header h1 {
+    margin: 10px 0 4px;
+    font-size: 24px;
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 8px 24px 48px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 13.5px;
+    margin-top: 16px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: #f0f1f7;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+  }
+  tr:last-child td { border-bottom: none; }
+  td.q { font-weight: 700; width: 42px; }
+  td.marks { width: 60px; color: var(--muted); }
+  .tag {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .tag-num { color: var(--num); background: var(--num-bg); }
+  .tag-alg { color: var(--alg); background: var(--alg-bg); }
+  .tag-cog { color: var(--cog); background: var(--cog-bg); }
+  .tag-geo { color: var(--geo); background: var(--geo-bg); }
+  .tag-men { color: var(--men); background: var(--men-bg); }
+  .tag-trig { color: var(--trig); background: var(--trig-bg); }
+  .tag-vec { color: var(--vec); background: var(--vec-bg); }
+  .tag-prob { color: var(--prob); background: var(--prob-bg); }
+  .tag-stat { color: var(--stat); background: var(--stat-bg); }
+  .note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .summary {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-top: 20px;
+    font-size: 13.5px;
+  }
+  .summary h3 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px 16px; }
+  footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="index.html">&larr; 0580 Paper Breakdown &mdash; Pre-2025 Papers</a>
+  <h1>0580/42 &mdash; Oct/Nov 2024</h1>
+  <p>Paper 4, Calculator (Extended) &middot; 130 marks &middot; 10 questions</p>
+</header>
+
+<main>
+  <table>
+    <thead>
+      <tr><th>Q</th><th>Marks</th><th>Topic</th><th>What it tests</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="q">1</td><td class="marks">12</td><td><span class="tag tag-num">Number</span></td>
+        <td>(a)(i) Price after a 7.5% discount [2]<div class="note">(ii) Reverse percentage for a fuel tank capacity [2] (b) Deposit as a percentage of the car's price, from a finance plan [4] (c) Fuel-use rate in litres per 100km [2] (d) Value after two successive percentage decreases [2]</div></td>
+      </tr>
+      <tr>
+        <td class="q">2</td><td class="marks">13</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
+        <td>(a) Completing a table of values for a cubic [2]<div class="note">(b) Drawing the graph of the cubic [4] (c)(i) Drawing a tangent at a point [1] (ii) Estimating the gradient from the tangent [2] (d) Solving a related cubic equation by drawing a straight line [4]</div></td>
+      </tr>
+      <tr>
+        <td class="q">3</td><td class="marks">17</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
+        <td>(a)(i)&ndash;(iii) Simplifying a linear expression, a power expression, and algebraic fractions [6]<div class="note">(b) Finding a from an isosceles triangle's perimeter equation [3] (c) Solving a quadratic using the quadratic formula [3] (d) Solving simultaneous equations (one linear, one quadratic) [5]</div></td>
+      </tr>
+      <tr>
+        <td class="q">4</td><td class="marks">15</td><td><span class="tag tag-geo">Geometry</span></td>
+        <td>(a) Value of w from an angle ratio in a quadrilateral [2]<div class="note">(b)(i) Angle BAM using the tangent-chord angle and triangle angle sum [2] (ii)(a) Angle BAD using circle theorems [2] (b) Reason BD is not a diameter, from the angle-in-a-semicircle theorem [1] (c)(i) Showing angle AOC&thinsp;=&thinsp;108.12&deg; using right-angle trigonometry in the tangent kite &mdash; <span class="tag tag-trig" style="margin-top:2px;">Trigonometry</span> [3] (ii) Length of the minor arc ABC &mdash; <span class="tag tag-men" style="margin-top:2px;">Mensuration</span> [2] (iii) Area of the major sector OCDA &mdash; <span class="tag tag-men" style="margin-top:2px;">Mensuration</span> [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">5</td><td class="marks">15</td><td><span class="tag tag-stat">Statistics</span></td>
+        <td>(a)(i)(a)&ndash;(b) Median and interquartile range from a cumulative frequency diagram [3]<div class="note">(ii) Probability a motorist travels more than 1800km, from the diagram &mdash; <span class="tag tag-prob" style="margin-top:2px;">Probability</span> [2] (b) Average speed of a car around a track, in km/h &mdash; <span class="tag tag-num" style="margin-top:2px;">Number</span> [3] (c)(i) Showing there are 8 cars in an interval, from a histogram [1] (ii) Estimating the mean top speed from the histogram [6]</div></td>
+      </tr>
+      <tr>
+        <td class="q">6</td><td class="marks">13</td><td><span class="tag tag-vec">Transformations &amp; vectors</span></td>
+        <td>(a) Combining two column vectors [2]<div class="note">(b)(i) Coordinates of N from a point and a vector [1] (ii) Magnitude of a vector [2] (c)(i) Writing AB, CB, OP and QP in terms of a and c [6] (ii) Two statements about the relationship between QP and CB [2]</div></td>
+      </tr>
+      <tr>
+        <td class="q">7</td><td class="marks">20</td><td><span class="tag tag-trig">Trigonometry</span></td>
+        <td>(a)(i) Showing angle CBD&thinsp;=&thinsp;81&deg; by angle sum in a triangle &mdash; <span class="tag tag-geo" style="margin-top:2px;">Geometry</span> [1]<div class="note">(ii) Calculating CD using the sine rule [3] (iii) Showing angle ABD&thinsp;=&thinsp;31.6&deg; using the cosine rule [4] (iv) Shortest distance from A to BD [3] (v) Bearing of B from C [2] (vi) Total trees planted, from the field's area (found via the triangle area formula) and a hectare conversion [4] (b) Upper bound of a rectangle's width, from two rounded quantities &mdash; <span class="tag tag-num" style="margin-top:2px;">Number</span> [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">8</td><td class="marks">8</td><td><span class="tag tag-prob">Probability</span></td>
+        <td>(a)(i)&ndash;(ii) Probability a bead is yellow, and not yellow [2]<div class="note">(b)(i) Probability first marble black, second white, without replacement [2] (ii) Probability both marbles have different colours [4]</div></td>
+      </tr>
+      <tr>
+        <td class="q">9</td><td class="marks">8</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
+        <td>(a)(i)&ndash;(iii) f(7); gf(7); f&#8315;&sup1;(x) [4]<div class="note">(b) Finding gf(x)&minus;3g(x) in the form ax&sup2;+bx+c [4]</div></td>
+      </tr>
+      <tr>
+        <td class="q">10</td><td class="marks">9</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
+        <td>(a) Differentiating a cubic [2]<div class="note">(b) Coordinates of the turning points [4] (c) Determining whether each turning point is a maximum or minimum, with reasons [3]</div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="summary">
+    <h3>Marks by topic</h3>
+    <div class="summary-grid">
+      <div><span class="tag tag-alg">Algebra &amp; graphs</span> 47</div>
+      <div><span class="tag tag-trig">Trigonometry</span> 19</div>
+      <div><span class="tag tag-num">Number</span> 18</div>
+      <div><span class="tag tag-vec">Transformations &amp; vectors</span> 13</div>
+      <div><span class="tag tag-stat">Statistics</span> 10</div>
+      <div><span class="tag tag-prob">Probability</span> 10</div>
+      <div><span class="tag tag-geo">Geometry</span> 8</div>
+      <div><span class="tag tag-men">Mensuration</span> 5</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Pre-2025 papers &mdash; 0580 Paper 4. Personal reference &mdash; not linked to any student tracker. Topic codes are approximate stand-ins from the current 2025&ndash;2027 syllabus (see dashboard note).
+</footer>
+
+</body>
+</html>
