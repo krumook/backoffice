@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Substitute Teacher &mdash; August 2026 Cost Log</title>
+<title>Harrison &amp; Kaldan — August 2026 Cost Log</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -59,7 +59,11 @@
   td.cost.collected { color: var(--amber); }
   td.cost.paid { color: var(--tip); }
   td.cost.kept { color: var(--accent); }
-  tbody td:nth-child(1), tbody td:nth-child(2), tbody td:nth-child(3), tbody td:nth-child(4), tbody td:nth-child(7) { white-space: nowrap; }
+  tbody td:nth-child(1), tbody td:nth-child(2), tbody td:nth-child(3), tbody td:nth-child(4), tbody td:nth-child(8) { white-space: nowrap; }
+
+  .student-pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+  .student-harrison { background: var(--tip-light); color: var(--tip); }
+  .student-kaldan { background: var(--amber-light); color: var(--amber); }
 
   tr.total td { border-top: 2px solid var(--ink); font-weight: 700; background: var(--accent-light); }
   tr.total td.cost.collected { color: var(--amber); }
@@ -77,10 +81,10 @@
   <header>
     <div>
       <h1>August 2026 &mdash; substitute cost log</h1>
-      <div class="meta">Grace &middot; Mathematics &middot; substitute: Farah &middot; &#3647;350/hr collected from parent, &#3647;250/hr paid to substitute &middot; 7 sessions logged</div>
+      <div class="meta">Harrison (Thai) &amp; Kaldan (Mathematics) &middot; siblings, same parent &middot; &#3647;250/hr paid to substitute for all sessions &middot; 9 sessions logged</div>
     </div>
     <div class="total-box">
-      <div class="num">&#3647;700</div>
+      <div class="num">&#3647;575</div>
       <div class="sub">kept this month</div>
     </div>
   </header>
@@ -88,15 +92,15 @@
   <div class="summary-row">
     <div class="summary-card collected">
       <div class="label">Collected from parent</div>
-      <div class="value">&#3647;2,450</div>
+      <div class="value">&#3647;2,200</div>
     </div>
     <div class="summary-card paid">
-      <div class="label">Paid to substitute</div>
-      <div class="value">&#3647;1,750</div>
+      <div class="label">Paid to substitutes</div>
+      <div class="value">&#3647;1,625</div>
     </div>
     <div class="summary-card kept">
       <div class="label">Kept (margin)</div>
-      <div class="value">&#3647;700</div>
+      <div class="value">&#3647;575</div>
     </div>
   </div>
 
@@ -114,21 +118,24 @@
         <th>Collected</th>
         <th>Paid</th>
         <th>Kept</th>
+        <th>Remark</th>
       </tr>
     </thead>
     <tbody>
-      <tr><td>Sat</td><td>2026-08-01</td><td>21:00</td><td>22:00</td><td>Grace</td><td>Mathematics</td><td>1 hr</td><td>Farah</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td></tr>
-      <tr><td>Mon</td><td>2026-08-03</td><td>20:30</td><td>21:30</td><td>Grace</td><td>Mathematics</td><td>1 hr</td><td>Farah</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td></tr>
-      <tr><td>Sat</td><td>2026-08-08</td><td>21:00</td><td>22:00</td><td>Grace</td><td>Mathematics</td><td>1 hr</td><td>Farah</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td></tr>
-      <tr><td>Mon</td><td>2026-08-10</td><td>20:30</td><td>21:30</td><td>Grace</td><td>Mathematics</td><td>1 hr</td><td>Farah</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td></tr>
-      <tr><td>Sun</td><td>2026-08-16</td><td>21:30</td><td>22:30</td><td>Grace</td><td>Mathematics</td><td>1 hr</td><td>Farah</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td></tr>
-      <tr><td>Sun</td><td>2026-08-23</td><td>21:30</td><td>22:30</td><td>Grace</td><td>Mathematics</td><td>1 hr</td><td>Farah</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td></tr>
-      <tr><td>Sun</td><td>2026-08-30</td><td>21:30</td><td>22:30</td><td>Grace</td><td>Mathematics</td><td>1 hr</td><td>Farah</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td></tr>
-      <tr class="total"><td colspan="8">Total (7 sessions)</td><td class="cost collected">&#3647;2,450</td><td class="cost paid">&#3647;1,750</td><td class="cost kept">&#3647;700</td></tr>
+      <tr><td>Sun</td><td>2026-08-02</td><td>23:00</td><td>23:30</td><td><span class="student-pill student-harrison">Harrison</span></td><td>Thai</td><td>0.5 hr</td><td>Asia</td><td class="cost collected">&#3647;160</td><td class="cost paid">&#3647;125</td><td class="cost kept">&#3647;35</td><td></td></tr>
+      <tr><td>Thu</td><td>2026-08-06</td><td>06:00</td><td>07:00</td><td><span class="student-pill student-kaldan">Kaldan</span></td><td>Mathematics</td><td>1 hr</td><td>Q</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td><td></td></tr>
+      <tr><td>Sun</td><td>2026-08-09</td><td>23:00</td><td>23:30</td><td><span class="student-pill student-harrison">Harrison</span></td><td>Thai</td><td>0.5 hr</td><td>Asia</td><td class="cost collected">&#3647;160</td><td class="cost paid">&#3647;125</td><td class="cost kept">&#3647;35</td><td></td></tr>
+      <tr><td>Sun</td><td>2026-08-16</td><td>23:00</td><td>23:30</td><td><span class="student-pill student-harrison">Harrison</span></td><td>Thai</td><td>0.5 hr</td><td>Asia</td><td class="cost collected">&#3647;160</td><td class="cost paid">&#3647;125</td><td class="cost kept">&#3647;35</td><td></td></tr>
+      <tr><td>Thu</td><td>2026-08-20</td><td>06:00</td><td>07:00</td><td><span class="student-pill student-kaldan">Kaldan</span></td><td>Mathematics</td><td>1 hr</td><td>Q</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td><td></td></tr>
+      <tr><td>Sun</td><td>2026-08-23</td><td>06:00</td><td>07:00</td><td><span class="student-pill student-kaldan">Kaldan</span></td><td>Mathematics</td><td>1 hr</td><td>Farah</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td><td>Rescheduled from Thu 13/8 (cancelled)</td></tr>
+      <tr><td>Sun</td><td>2026-08-23</td><td>23:00</td><td>23:30</td><td><span class="student-pill student-harrison">Harrison</span></td><td>Thai</td><td>0.5 hr</td><td>Asia</td><td class="cost collected">&#3647;160</td><td class="cost paid">&#3647;125</td><td class="cost kept">&#3647;35</td><td></td></tr>
+      <tr><td>Wed</td><td>2026-08-26</td><td>06:00</td><td>07:00</td><td><span class="student-pill student-kaldan">Kaldan</span></td><td>Mathematics</td><td>1 hr</td><td>Farah</td><td class="cost collected">&#3647;350</td><td class="cost paid">&#3647;250</td><td class="cost kept">&#3647;100</td><td></td></tr>
+      <tr><td>Sun</td><td>2026-08-30</td><td>23:00</td><td>23:30</td><td><span class="student-pill student-harrison">Harrison</span></td><td>Thai</td><td>0.5 hr</td><td>Asia</td><td class="cost collected">&#3647;160</td><td class="cost paid">&#3647;125</td><td class="cost kept">&#3647;35</td><td></td></tr>
+      <tr class="total"><td colspan="8">Total (9 sessions &mdash; Harrison 5, Kaldan 4)</td><td class="cost collected">&#3647;2,200</td><td class="cost paid">&#3647;1,625</td><td class="cost kept">&#3647;575</td><td></td></tr>
     </tbody>
   </table>
 
-  <footer>Substitute teacher cost log &middot; a new page like this is made for each month</footer>
+  <footer>Harrison &amp; Kaldan &middot; substitute cost log &middot; a new page like this is made for each month</footer>
 
 </div>
 </body>
