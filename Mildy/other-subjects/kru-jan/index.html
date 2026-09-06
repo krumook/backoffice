@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kru Jan — Business &amp; Economics Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
+    --accent: #0f6e56; --accent-light: #e1f5ee;
+    --tip: #185fa5; --tip-light: #e6f1fb;
+    --amber: #854f0b; --amber-light: #faeeda;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  header { padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 24px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+
+  .summary-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+  .summary-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .summary-card .value { font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--ink); }
+  .summary-card.collected .value { color: var(--amber); }
+  .summary-card.paid .value { color: var(--tip); }
+  .summary-card.kept .value { color: var(--accent); }
+
+  .section-label { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  .schedule-list { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin-bottom: 28px; }
+  .schedule-row { display: flex; align-items: center; gap: 16px; padding: 14px 18px; border-top: 1px solid var(--line); }
+  .schedule-row:first-child { border-top: none; }
+  .day-pill { display: inline-block; min-width: 52px; text-align: center; font-size: 12.5px; font-weight: 700; color: var(--accent); background: var(--accent-light); padding: 5px 10px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.02em; }
+  .schedule-time { font-size: 14.5px; font-weight: 600; color: var(--ink); flex: 1; }
+  .schedule-note { font-size: 12px; color: var(--muted); }
+
+  .empty-state { background: var(--card); border: 1px dashed var(--line); border-radius: 12px; padding: 28px 24px; text-align: center; color: var(--muted); font-size: 13.5px; margin-bottom: 28px; }
+
+  .note { background: var(--accent-light); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; font-size: 13.5px; color: var(--accent); margin-bottom: 28px; }
+  .note b { display: block; margin-bottom: 4px; color: var(--ink); }
+  .note ul { margin: 8px 0 0; padding-left: 20px; }
+  .note li { margin-bottom: 4px; }
+
+  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../index.html">&larr; Back to other-subjects ledger</a>
+
+  <header>
+    <h1>Kru Jan &mdash; Business &amp; Economics</h1>
+    <div class="meta">฿800/hr collected from parent, ฿700/hr paid to Kru Jan &middot; independent arrangement, not through Chertam</div>
+  </header>
+
+  <div class="summary-row">
+    <div class="summary-card collected">
+      <div class="label">Collected (all-time)</div>
+      <div class="value">&#3647;0</div>
+    </div>
+    <div class="summary-card paid">
+      <div class="label">Paid to Kru Jan (all-time)</div>
+      <div class="value">&#3647;0</div>
+    </div>
+    <div class="summary-card kept">
+      <div class="label">Kept (margin, all-time)</div>
+      <div class="value">&#3647;0</div>
+    </div>
+  </div>
+
+  <div class="section-label">Recurring schedule</div>
+  <div class="schedule-list">
+    <div class="schedule-row">
+      <span class="day-pill">Wed</span>
+      <span class="schedule-time">19:30 &ndash; 20:30</span>
+      <span class="schedule-note">1 hr &middot; Business &middot; starts week of 13 Sep 2026</span>
+    </div>
+    <div class="schedule-row">
+      <span class="day-pill">Thu</span>
+      <span class="schedule-time">19:00 &ndash; 20:30</span>
+      <span class="schedule-note">1.5 hrs &middot; Economics &middot; starts 10 Sep 2026 &middot; swapped with Mildy's old Math slot</span>
+    </div>
+    <div class="schedule-row">
+      <span class="day-pill">Sun</span>
+      <span class="schedule-time">14:00 &ndash; 15:00</span>
+      <span class="schedule-note">1 hr &middot; Business &middot; starts week of 13 Sep 2026</span>
+    </div>
+  </div>
+
+  <div class="empty-state">No sessions logged yet &mdash; the first one should be Economics on 10 Sep 2026, then Business the week of 13 Sep 2026.</div>
+
+  <div class="note">
+    <b>How to add a session</b>
+    Once a Business or Economics session actually happens, tell me:
+    <ul>
+      <li>Date and which subject (Business or Economics)</li>
+      <li>Start/finish time</li>
+      <li>Anything unusual (rescheduled, cancelled, no-charge)</li>
+    </ul>
+    I'll create that month's page with a running table (collected, paid, kept) and add it to this ledger, plus add the collected amount to Mildy's own monthly fee summary as a separate line item.
+  </div>
+
+  <footer>Kru Jan &middot; Business &amp; Economics ledger &middot; not shown to the parent &middot; a new page like this is made for each month once sessions start</footer>
+
+</div>
+</body>
+</html>

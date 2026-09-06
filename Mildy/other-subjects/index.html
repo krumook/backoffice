@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — Business, Economics &amp; Biology Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
+    --accent: #0f6e56; --accent-light: #e1f5ee;
+    --tip: #185fa5; --tip-light: #e6f1fb;
+    --amber: #854f0b; --amber-light: #faeeda;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  header { padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 24px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 16px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .card:hover { box-shadow: 0 4px 16px rgba(31,42,36,0.12); transform: translateY(-2px); }
+  .card h2 { margin: 0; font-size: 17px; }
+  .card .info { margin: 0; font-size: 13.5px; color: var(--muted); }
+  .card .rate-row { display: flex; gap: 14px; font-size: 12.5px; margin-top: 4px; }
+  .card .rate-row .r-collected { color: var(--amber); font-weight: 700; }
+  .card .rate-row .r-paid { color: var(--tip); font-weight: 700; }
+  .card .rate-row .r-kept { color: var(--accent); font-weight: 700; }
+  .card .open { margin-top: auto; display: inline-block; text-align: center; background: var(--accent); color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; padding: 8px 12px; border-radius: 8px; }
+
+  .note {
+    background: var(--accent-light);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 13.5px;
+    color: var(--accent);
+    margin-top: 28px;
+  }
+  .note b { display: block; margin-bottom: 4px; color: var(--ink); }
+
+  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../home.html">&larr; Back to Mildy's home</a>
+
+  <header>
+    <h1>Business, Economics &amp; Biology &mdash; ledger</h1>
+    <div class="meta">Mildy's mom pays you for these subjects; you pay Kru Jan and Kru Prim &mdash; independent arrangements, not routed through Chertam. Not shown to the parent.</div>
+  </header>
+
+  <div class="grid">
+    <a class="card" href="kru-jan/index.html">
+      <h2>Kru Jan</h2>
+      <p class="info">Business &amp; Economics</p>
+      <div class="rate-row">
+        <span class="r-collected">฿800/hr collected</span>
+        <span class="r-paid">฿700/hr paid</span>
+        <span class="r-kept">฿100/hr kept</span>
+      </div>
+      <p class="info">Business: Wed 19:30&ndash;20:30 &amp; Sun 14:00&ndash;15:00, starting the week of 13 Sep 2026. Economics: Thu 19:00&ndash;20:30, starting 10 Sep 2026 (swapped with Math's old slot).</p>
+      <span class="open">Open ledger</span>
+    </a>
+    <a class="card" href="kru-prim/index.html">
+      <h2>Kru Prim</h2>
+      <p class="info">Biology</p>
+      <div class="rate-row">
+        <span class="r-collected">฿700/hr collected</span>
+        <span class="r-paid">฿500/hr paid</span>
+        <span class="r-kept">฿200/hr kept</span>
+      </div>
+      <p class="info">Schedule still pending &mdash; waiting on Kru Prim to respond.</p>
+      <span class="open">Open ledger</span>
+    </a>
+  </div>
+
+  <div class="note">
+    <b>How this works</b>
+    Once a Business, Economics, or Biology session actually happens, tell me the date/time and I'll log it here (collected, paid, kept) and add the collected amount to Mildy's own monthly fee summary &mdash; same as her Math sessions, just a different subject row. The parent only ever sees the collected amount on her fee page; what's paid to Kru Jan/Kru Prim and the margin kept stays on this page.
+  </div>
+
+  <footer>Mildy &middot; other subjects ledger &middot; not tied to Chertam &middot; not shown to the parent</footer>
+
+</div>
+</body>
+</html>
