@@ -7,21 +7,64 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root { --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
-    --accent: #0f6e56; --accent-light: #e1f5ee; --tip: #185fa5; --tip-light: #e6f1fb; }
+  :root {
+    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
+    --accent: #0f6e56; --accent-light: #e1f5ee;
+    --loss: #993c1d; --loss-light: #faece7;
+    --tip: #185fa5; --tip-light: #e6f1fb;
+    --amber: #854f0b; --amber-light: #faeeda;
+    --grade-astar: #1BA755; --grade-a: #1B88A7; --grade-b: #DD800E; --grade-below: #A71B46;
+    --grade-astar-light: #E2F8EB; --grade-a-light: #E2F3F8; --grade-b-light: #F8EEE2; --grade-below-light: #F8E2E9;
+    --untested: #8b978f; --untested-light: #eef1ef;
+  }
   * { box-sizing: border-box; }
   body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
     font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
-  .wrap { max-width: 900px; margin: 0 auto; }
-  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
-  .back-link:hover { background: var(--tip); color: #fff; }
-  header { padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 24px; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header { padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 20px; }
   header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
   header .meta { color: var(--muted); font-size: 14px; }
-  .empty-state { background: var(--card); border: 1px dashed var(--line); border-radius: 12px; padding: 28px 24px; text-align: center; color: var(--muted); font-size: 13.5px; margin-bottom: 28px; }
-  .note { background: var(--accent-light); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; font-size: 13.5px; color: var(--accent); margin-bottom: 28px; }
-  .note b { display: block; margin-bottom: 4px; color: var(--ink); }
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+  .legend-box { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; margin-bottom: 22px; font-size: 13px; color: var(--muted); }
+  .legend-box b { color: var(--ink); }
+  .legend-box .paper-list { margin-top: 6px; }
+  .legend-box .paper-list a { display: inline-block; padding: 2px 10px; border-radius: 20px; margin: 2px 6px 2px 0; font-size: 12.5px; font-weight: 600; text-decoration: none; }
+  .legend-box .paper-list a.sess { background: var(--tip-light); color: var(--tip); }
+  .legend-box .paper-list a.sess:hover { background: var(--tip); color: #fff; }
+  .session-months { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
+  .month-card-sess { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .mcs-title { display: block; font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+  .mcs-sub { font-size: 11.5px; color: var(--muted); margin-bottom: 8px; }
+  .month-card-sess .paper-list { margin-top: 0; }
+  @media (max-width: 720px) { .session-months { grid-template-columns: 1fr; } }
+  .section-label { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .topic-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
+  .semester-box { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px 20px; margin-bottom: 16px; }
+  .semester-box .topic-summary { margin-bottom: 0; }
+  .semester-title { font-size: 13px; font-weight: 700; color: var(--ink); text-transform: uppercase; letter-spacing: 0.03em; margin: 0 0 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .ts-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: block; text-decoration: none; color: inherit; cursor: pointer; transition: box-shadow 0.15s ease, transform 0.15s ease; }
+  .ts-card:hover { box-shadow: 0 3px 14px rgba(31,42,36,0.14); transform: translateY(-2px); }
+  .ts-card .ts-name { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 9px; text-transform: uppercase; }
+  .ts-row { display: flex; align-items: baseline; justify-content: space-between; }
+  .ts-row .ts-label { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+  .ts-card .ts-pct { font-size: 20px; font-weight: 700; }
+  .ts-card .ts-frac { font-size: 12px; color: var(--muted); margin-left: 6px; }
+  .ts-bar { height: 5px; border-radius: 3px; background: #fff; margin-top: 4px; margin-bottom: 0; overflow: hidden; }
+  .ts-bar-fill { height: 100%; border-radius: 3px; }
+  .ts-astar { background: var(--grade-astar-light); } .ts-astar .ts-pct { color: var(--grade-astar); } .ts-astar .ts-bar-fill { background: var(--grade-astar); }
+  .ts-b { background: var(--grade-b-light); } .ts-b .ts-pct { color: var(--grade-b); } .ts-b .ts-bar-fill { background: var(--grade-b); }
+  .ts-below { background: var(--grade-below-light); } .ts-below .ts-pct { color: var(--grade-below); } .ts-below .ts-bar-fill { background: var(--grade-below); }
+  .ts-untested { background: var(--untested-light); } .ts-untested .ts-pct { color: var(--untested); } .ts-untested .ts-bar-fill { background: var(--untested); }
+  .term-note { font-size: 12px; color: var(--muted); font-style: italic; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line); }
+  .overall-line { font-size: 12.5px; color: var(--muted); margin: 4px 0 0; }
+  .overall-line b { color: var(--ink); }
+  .band-legend { display: flex; justify-content: center; gap: 18px; font-size: 12px; color: var(--muted); flex-wrap: wrap; align-items: center; margin: 0 0 30px; }
+  .band-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+  .dot-astar { background: var(--grade-astar); } .dot-b { background: var(--grade-b); } .dot-below { background: var(--grade-below); } .dot-untested { background: var(--untested); }
   footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
+  @media (max-width: 900px) { .topic-summary { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .topic-summary { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -31,17 +74,125 @@
 
   <header>
     <h1>Gina &mdash; syllabus coverage tracker</h1>
-    <div class="meta">Year 6 Mathematics &middot; Brighton College Bangkok &middot; not built yet &mdash; waiting on curriculum details</div>
+    <div class="meta">Year 6 Mathematics &middot; Brighton College Bangkok &middot; built around the White Rose Maths Year 6 scheme of learning (Version 3) &middot; &ldquo;Learned&rdquo; % reflects real class feedback, not a graded test &mdash; no papers marked yet</div>
   </header>
 
-  <div class="empty-state">No topics set up yet.</div>
+  <div class="legend-box">
+    <div class="section-label" style="margin-bottom: 6px;">Class sessions &middot; 1 logged since Sep 2026</div>
 
-  <div class="note">
-    <b>What this needs before it can be built</b>
-    Tell me which curriculum/framework Gina's Year 6 maths follows at Brighton College Bangkok (e.g. English National Curriculum Key Stage 2, Cambridge Primary Checkpoint, or another scheme), and I'll build out the same kind of topic-by-topic tracker the other students have &mdash; topic cards with coverage %, a detail page per topic, and everything linked to her class feedback log as sessions happen.
+    <div class="session-months">
+      <div class="month-card-sess">
+        <div class="mcs-title">September 2026</div>
+        <div class="mcs-sub">1 session (trial)</div>
+        <div class="paper-list"><a class="sess" href="../Trials/gina-0906.html">Sun 6 Sep (trial)</a></div>
+      </div>
+    </div>
   </div>
 
-  <footer>Gina &middot; Year 6 Mathematics &middot; updated as classes happen</footer>
+  <div class="legend-box" id="teaching-notes">
+    <b>Teaching notes</b>
+    <p style="margin:8px 0 0;font-size:12.5px;">The trial surfaced some foundational gaps below Year 6 level &mdash; specifically multiplication (counting up instead of using known facts) and division (relying on repeated subtraction rather than a more efficient method). The plan agreed after the trial is to spend the first couple of regular sessions on place value and integer operations to shore this up before pushing further into new Year 6 content, since several White Rose Year 6 blocks (the four operations, fractions) assume this fluency.</p>
+  </div>
+
+  <div class="section-label">Coverage by block &middot; click a card for full detail</div>
+  <div class="legend-box" style="margin-top:-8px;">Each block is scored against every one of its own White Rose small steps &mdash; &ldquo;Learned&rdquo; counts as 1 and &ldquo;Need to revise&rdquo; counts as 0.5, out of every small step in that block, whether covered yet or not. Week numbers shown are where each block falls in White Rose&rsquo;s suggested 12-week termly overview &mdash; useful as a guide, not a fixed deadline.</div>
+
+  <div class="semester-box">
+    <div class="semester-title">Autumn term</div>
+    <div class="topic-summary">
+      <a href="topic/1.html" class="ts-card ts-untested">
+        <div class="ts-name">1&nbsp;&middot;&nbsp;Place value</div>
+        <div class="ts-row"><span class="ts-label">Weeks 1–2</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/8</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="topic/2.html" class="ts-card ts-untested">
+        <div class="ts-name">2&nbsp;&middot;&nbsp;Addition, subtraction, multiplication and division</div>
+        <div class="ts-row"><span class="ts-label">Weeks 2–5</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/15</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="topic/3.html" class="ts-card ts-below">
+        <div class="ts-name">3&nbsp;&middot;&nbsp;Fractions A</div>
+        <div class="ts-row"><span class="ts-label">Week 6</span><span><span class="ts-pct">11.1%</span><span class="ts-frac">1/9</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:11.1%;"></div></div>
+      </a>
+      <a href="topic/4.html" class="ts-card ts-untested">
+        <div class="ts-name">4&nbsp;&middot;&nbsp;Fractions B</div>
+        <div class="ts-row"><span class="ts-label">Week 7</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/7</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="topic/5.html" class="ts-card ts-untested">
+        <div class="ts-name">5&nbsp;&middot;&nbsp;Converting units</div>
+        <div class="ts-row"><span class="ts-label">Week 8</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/5</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="semester-box">
+    <div class="semester-title">Spring term</div>
+    <div class="topic-summary">
+      <a href="topic/6.html" class="ts-card ts-untested">
+        <div class="ts-name">6&nbsp;&middot;&nbsp;Ratio</div>
+        <div class="ts-row"><span class="ts-label">Weeks 1–2</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/10</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="topic/7.html" class="ts-card ts-untested">
+        <div class="ts-name">7&nbsp;&middot;&nbsp;Algebra</div>
+        <div class="ts-row"><span class="ts-label">Week 3</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/10</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="topic/8.html" class="ts-card ts-untested">
+        <div class="ts-name">8&nbsp;&middot;&nbsp;Decimals</div>
+        <div class="ts-row"><span class="ts-label">Week 4</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/9</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="topic/9.html" class="ts-card ts-untested">
+        <div class="ts-name">9&nbsp;&middot;&nbsp;Fractions, decimals and percentages</div>
+        <div class="ts-row"><span class="ts-label">Week 5</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/9</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="topic/10.html" class="ts-card ts-untested">
+        <div class="ts-name">10&nbsp;&middot;&nbsp;Area, perimeter and volume</div>
+        <div class="ts-row"><span class="ts-label">Week 6</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/8</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="topic/11.html" class="ts-card ts-untested">
+        <div class="ts-name">11&nbsp;&middot;&nbsp;Statistics</div>
+        <div class="ts-row"><span class="ts-label">Week 7</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/6</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="semester-box">
+    <div class="semester-title">Summer term</div>
+    <div class="topic-summary">
+      <a href="topic/12.html" class="ts-card ts-untested">
+        <div class="ts-name">12&nbsp;&middot;&nbsp;Shape</div>
+        <div class="ts-row"><span class="ts-label">Weeks 1–2</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/11</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="topic/13.html" class="ts-card ts-untested">
+        <div class="ts-name">13&nbsp;&middot;&nbsp;Position and direction</div>
+        <div class="ts-row"><span class="ts-label">Week 3</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/5</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+    </div>
+    <div class="term-note">Summer Block 3 &middot; Themed projects, consolidation and problem solving isn&rsquo;t tracked here &mdash; it&rsquo;s open-ended revision and application of everything covered across the year, not new small steps.</div>
+  </div>
+
+  <div class="overall-line">Overall across the whole Year 6 scheme: <b>1/112 (0.9%) learned</b> &mdash; only the trial has happened so far. Every &ldquo;Learned&rdquo;/&ldquo;Need to revise&rdquo; tag on this tracker comes only from real class feedback logs (see the session list above), not from an external syllabus checklist.</div>
+
+  <div class="band-legend">
+    <div><span class="band-dot dot-astar"></span>&ge;85% learned</div>
+    <div><span class="band-dot dot-b"></span>60&ndash;84% learned</div>
+    <div><span class="band-dot dot-below"></span>&lt;60% learned (started)</div>
+    <div><span class="band-dot dot-untested"></span>Not yet started</div>
+  </div>
+
+  <div class="legend-box">Add a new session: tell me the date, what was covered, and how she did, and I&rsquo;ll build the feedback page, tag the matching small step(s) on the relevant block page as Learned or Need to revise, and update this dashboard.</div>
+
+  <footer>Gina &middot; Year 6 Mathematics &middot; Brighton College Bangkok &middot; White Rose Maths scheme (Version 3, 2022) &middot; updated as classes happen</footer>
 
 </div>
 </body>
