@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tenten &mdash; September 2026 Fee Summary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
+    --accent: #0f6e56; --accent-light: #e1f5ee;
+    --tip: #185fa5; --tip-light: #e6f1fb;
+    --amber: #854f0b; --amber-light: #faeeda;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
+    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+  header { padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 24px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); font-size: 13px; margin-bottom: 22px; }
+  thead th { background: var(--ink); color: #fff; text-align: left; padding: 10px 12px; font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
+  tbody td { padding: 10px 12px; border-top: 1px solid var(--line); }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  tfoot td { padding: 12px; border-top: 2px solid var(--ink); font-weight: 700; }
+  .status-pill { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 20px; }
+  .status-charged { background: var(--accent-light); color: var(--accent); }
+  .status-nocharge { background: var(--amber-light); color: var(--amber); }
+  td a { color: var(--tip); text-decoration: none; font-weight: 600; }
+  td a:hover { text-decoration: underline; }
+  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="index.html">&larr; Back to monthly summaries</a>
+
+  <header>
+    <h1>September 2026 &mdash; fee summary</h1>
+    <div class="meta">Integrated Math II tutoring &middot; ฿800 / hour &middot; 1 session logged, 1 charged</div>
+  </header>
+
+  <table>
+    <thead>
+      <tr><th>Day</th><th>Date</th><th>Start</th><th>Finish</th><th>Subject</th><th>Duration</th><th>Rate</th><th>Status</th><th>Cost</th><th>Remark</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Mon</td>
+        <td>2026-09-07</td>
+        <td>17:00</td>
+        <td>18:00</td>
+        <td>Integrated Math II</td>
+        <td>1 hr</td>
+        <td>฿800</td>
+        <td><span class="status-pill status-charged">Charged</span></td>
+        <td>฿800</td>
+        <td><a href="../fb0907.html">Session notes</a></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr><td colspan="8">Total (1 charged session)</td><td colspan="2">฿800</td></tr>
+    </tfoot>
+  </table>
+
+  <footer>Tenten &middot; September 2026 &middot; fee summary</footer>
+
+</div>
+</body>
+</html>
