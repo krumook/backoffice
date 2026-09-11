@@ -23,7 +23,7 @@
   .total-box .sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
   .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
   .back-link:hover { background: var(--tip); color: #fff; }
-  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); font-size: 13px; margin-bottom: 24px; }
+  table { width: 100%; table-layout: fixed; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); font-size: 13px; margin-bottom: 24px; }
   thead th { background: var(--ink); color: #fff; text-align: left; padding: 11px 12px; font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
   tbody td { padding: 10px 12px; border-top: 1px solid var(--line); vertical-align: middle; }
   tbody tr:nth-child(even) { background: #fafaf8; }
@@ -60,21 +60,25 @@
       <div class="meta">คณิตศาสตร์ ม.3 tutoring &middot; ฿275 / hour &middot; 4 sessions logged, 2 charged, 2 half-charge</div>
     </div>
     <div class="total-box">
-      <div class="num">฿825.00</div>
-      <div class="sub">total due this month</div>
+      <div class="num">฿550.00</div>
+      <div class="sub">total due this month (after grace discount)</div>
     </div>
   </header>
 
   <table>
+    <colgroup>
+      <col style="width:5%"><col style="width:9%"><col style="width:6%"><col style="width:6%"><col style="width:12%"><col style="width:6%"><col style="width:6%"><col style="width:10%"><col style="width:8%"><col style="width:32%">
+    </colgroup>
     <thead>
       <tr><th>Day</th><th>Date</th><th>Start</th><th>Finish</th><th>Subject</th><th>Duration</th><th>Rate</th><th>Status</th><th>Cost</th><th>Remark</th></tr>
     </thead>
     <tbody>
-      <tr><td>Tue</td><td>2026-09-01</td><td>19:00</td><td>20:00</td><td>คณิตศาสตร์ ม.3</td><td>1 hr</td><td>฿275</td><td><span class="status-pill status-half">Half charge</span></td><td class="cost">฿137.50</td><td>Urgent leave &mdash; notified via Line at 18:24, only ~35 min before the 19:00 class; charged 50% (฿275 &times; 0.5 = ฿137.50) per urgent-leave policy</td></tr>
+      <tr><td>Tue</td><td>2026-09-01</td><td>19:00</td><td>20:00</td><td>คณิตศาสตร์ ม.3</td><td>1 hr</td><td>฿275</td><td><span class="status-pill status-half">Half charge</span></td><td class="cost">฿137.50</td><td>ลากะทันหัน &mdash; แจ้งทางไลน์เวลา 18:24 น. ก่อนเริ่มเรียน 19:00 น. เพียงประมาณ 35 นาที คิดค่าเรียน 50% (฿275 &times; 0.5 = ฿137.50) ตามนโยบายการลากะทันหัน</td></tr>
       <tr><td>Wed</td><td>2026-09-02</td><td>19:00</td><td>20:00</td><td>คณิตศาสตร์ ม.3</td><td>1 hr</td><td>฿275</td><td><span class="status-pill status-learned">Learned</span></td><td class="cost">฿275</td><td><a href="fb0902.html">Feedback &rarr;</a></td></tr>
       <tr><td>Tue</td><td>2026-09-08</td><td>19:00</td><td>20:00</td><td>คณิตศาสตร์ ม.3</td><td>1 hr</td><td>฿275</td><td><span class="status-pill status-learned">Learned</span></td><td class="cost">฿275</td><td><a href="fb0908.html">Feedback &rarr;</a></td></tr>
-      <tr><td>Wed</td><td>2026-09-09</td><td>19:00</td><td>20:00</td><td>คณิตศาสตร์ ม.3</td><td>1 hr</td><td>฿275</td><td><span class="status-pill status-half">Half charge</span></td><td class="cost">฿137.50</td><td>Urgent leave &mdash; notified via Line at 17:31, about 1.5 hr before the 19:00 class; charged 50% (฿275 &times; 0.5 = ฿137.50) per urgent-leave policy</td></tr>
-      <tr class="total"><td colspan="8">Total (2 charged sessions, 2 half-charge)</td><td class="cost">฿825.00</td><td></td></tr>
+      <tr><td>Wed</td><td>2026-09-09</td><td>19:00</td><td>20:00</td><td>คณิตศาสตร์ ม.3</td><td>1 hr</td><td>฿275</td><td><span class="status-pill status-half">Half charge</span></td><td class="cost">฿137.50</td><td>ลากะทันหัน &mdash; แจ้งทางไลน์เวลา 17:31 น. ก่อนเริ่มเรียน 19:00 น. ประมาณ 1.5 ชั่วโมง คิดค่าเรียน 50% (฿275 &times; 0.5 = ฿137.50) ตามนโยบายการลากะทันหัน</td></tr>
+      <tr><td colspan="8">🎁 ส่วนลดพิเศษ &mdash; นโยบายการลา</td><td class="cost" style="color:var(--accent);">&minus;฿275.00</td><td style="white-space:normal;">เนื่องจากเดือนนี้มีการลาแบบกระทันหันบ่อยครั้ง ในเดือนนี้ขอยกเว้นให้เป็นน้ำใจนะคะ แต่ในเดือนถัดไปจะมีการเรียกเก็บค่าใช้จ่ายจริงหากมีการลาในลักษณะนี้อีก</td></tr>
+      <tr class="total"><td colspan="8">Total (2 charged sessions, 2 half-charge, grace discount applied)</td><td class="cost">฿550.00</td><td></td></tr>
     </tbody>
   </table>
 
