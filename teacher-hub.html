@@ -82,6 +82,17 @@
   .tool-card { border: 1px dashed #b7bdf0; background: #f5f6fe; }
   .tool-card h2 { color: #3b3489; }
   .tool-card a.open { background: #5a4fc2; }
+  .section-heading {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 36px 0 4px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  section:first-of-type .section-heading { margin-top: 0; }
   footer {
     max-width: 1000px;
     margin: 0 auto;
@@ -94,6 +105,23 @@
     padding: 1px 5px;
     border-radius: 4px;
   }
+  .schedule-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: #fff8e6;
+    border: 1px solid #f0dca3;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .schedule-banner:hover { box-shadow: 0 3px 14px rgba(31,42,36,0.10); }
+  .schedule-banner .sb-title { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+  .schedule-banner .sb-sub { font-size: 13px; color: var(--muted); }
+  .schedule-banner .sb-go { background: #8a6a12; color: #fff; font-size: 13px; font-weight: 600; padding: 8px 14px; border-radius: 8px; white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -101,104 +129,137 @@
 <header>
   <h1>Teacher Hub</h1>
   <p>Your private overview of every student's tracker. Click a card to open their dashboard.</p>
+  <a class="schedule-banner" href="schedule.html">
+    <div>
+      <div class="sb-title">📅 Weekly Schedule</div>
+      <div class="sb-sub">Google-Calendar-style view of every class you teach, Mon&ndash;Sun</div>
+    </div>
+    <span class="sb-go">Open schedule &rarr;</span>
+  </a>
 </header>
 
 <main>
-  <div class="grid">
 
-    <!-- ===== ONE CARD PER STUDENT — copy this block to add another student, then make a matching subfolder ===== -->
-    <div class="card">
-      <h2>Mildy</h2>
-      <p class="info">🏫 School: Harrow International School Bangkok</p>
-      <p class="info">📖 Curriculum: IGCSE Maths (0580)</p>
-      <p class="info">🎓 Grade/Year: Year 10</p>
-      <a class="open" href="Mildy/home.html">Open dashboard</a>
+  <section>
+    <div class="section-heading">Kru Mook's Students</div>
+    <div class="grid">
+
+      <!-- ===== ONE CARD PER STUDENT — copy this block to add another student, then make a matching subfolder ===== -->
+      <div class="card">
+        <h2>Mildy</h2>
+        <p class="info">🏫 School: Harrow International School Bangkok</p>
+        <p class="info">📖 Curriculum: IGCSE Maths (0580)</p>
+        <p class="info">🎓 Grade/Year: Year 10</p>
+        <a class="open" href="Mildy/home.html">Open dashboard</a>
+      </div>
+
+      <div class="card">
+        <h2>Iris</h2>
+        <p class="info">🏫 School: โรงเรียนสาธิตมหาวิทยาลัยธรรมศาสตร์</p>
+        <p class="info">📖 Curriculum: คณิตศาสตร์ ม.3 (IPST)</p>
+        <p class="info">🎓 Grade/Year: Matthayom 3</p>
+        <a class="open" href="Iris/home.html">Open dashboard</a>
+      </div>
+
+      <div class="card">
+        <h2>Lima</h2>
+        <p class="info">🏫 School: not yet provided</p>
+        <p class="info">📖 Curriculum: EP (English Program), Thai national core curriculum</p>
+        <p class="info">🎓 Grade/Year: Grade 6 (US) / Year 7 (UK)</p>
+        <a class="open" href="Lima/home.html">Open dashboard</a>
+      </div>
+
+      <div class="card">
+        <h2>Imboon</h2>
+        <p class="info">🏫 School: Rugby International School</p>
+        <p class="info">📖 Curriculum: Pearson Edexcel IGCSE Maths A (4MA1)</p>
+        <p class="info">🎓 Grade/Year: Year 10 (Foundation Tier; Higher Tier from Year 11)</p>
+        <a class="open" href="Imboon/home.html">Open dashboard</a>
+      </div>
+
+      <div class="card">
+        <h2>Chilli</h2>
+        <p class="info">🏫 School: not yet provided</p>
+        <p class="info">📖 Curriculum: Australian Curriculum v9.0 Maths (AC9M10) &mdash; general, pending confirmed school/board</p>
+        <p class="info">🎓 Grade/Year: Year 10</p>
+        <a class="open" href="Chilli/home.html">Open dashboard</a>
+      </div>
+
+      <div class="card">
+        <h2>Tenten</h2>
+        <p class="info">🏫 School: KPIS</p>
+        <p class="info">📖 Curriculum: Integrated Math II (Reveal Math, McGraw Hill)</p>
+        <p class="info">🎓 Grade/Year: Grade 9</p>
+        <a class="open" href="Tenten/home.html">Open dashboard</a>
+      </div>
+
+      <div class="card">
+        <h2>Jeenna</h2>
+        <p class="info">🏫 School: Brighton College Bangkok</p>
+        <p class="info">📖 Curriculum: Mathematics &mdash; White Rose Maths (Year 6)</p>
+        <p class="info">🎓 Grade/Year: Year 6</p>
+        <a class="open" href="Gina/home.html">Open dashboard</a>
+      </div>
+
     </div>
+  </section>
 
-    <div class="card">
-      <h2>Iris</h2>
-      <p class="info">🏫 School: โรงเรียนสาธิตมหาวิทยาลัยธรรมศาสตร์</p>
-      <p class="info">📖 Curriculum: คณิตศาสตร์ ม.3 (IPST)</p>
-      <p class="info">🎓 Grade/Year: Matthayom 3</p>
-      <a class="open" href="Iris/home.html">Open dashboard</a>
+  <section>
+    <div class="section-heading">0580 Past Papers</div>
+    <div class="grid">
+
+      <div class="card tool-card">
+        <h2>📚 0580 Paper Breakdown</h2>
+        <p class="info">Personal work &mdash; not tied to a student</p>
+        <p class="info">IGCSE 0580 past paper questions tagged by syllabus topic, for lesson planning and building a question bank. Current 2025&ndash;2027 syllabus.</p>
+        <a class="open" href="0580-breakdown/index.html">Open dashboard</a>
+      </div>
+
+      <div class="card tool-card">
+        <h2>📚 0580 Paper Breakdown &mdash; Pre-2025</h2>
+        <p class="info">Personal work &mdash; not tied to a student</p>
+        <p class="info">Older IGCSE 0580 past papers (before the 2025&ndash;2027 syllabus), tagged the same way &mdash; kept as a fully separate running total.</p>
+        <a class="open" href="0580-breakdown-old/index.html">Open dashboard</a>
+      </div>
+
     </div>
+  </section>
 
-    <div class="card">
-      <h2>Lima</h2>
-      <p class="info">🏫 School: not yet provided</p>
-      <p class="info">📖 Curriculum: EP (English Program), Thai national core curriculum</p>
-      <p class="info">🎓 Grade/Year: Grade 6 (US) / Year 7 (UK)</p>
-      <a class="open" href="Lima/home.html">Open dashboard</a>
+  <section>
+    <div class="section-heading">Substitute</div>
+    <div class="grid">
+
+      <div class="card tool-card">
+        <h2>🧾 Substitute Teacher</h2>
+        <p class="info">Not tied to any one student</p>
+        <p class="info">What's collected from parents when someone else covers a class &mdash; one dashboard per paying parent, monthly log just like a regular student's fee page. Substitute pay and margin are tracked separately on the Chertam ledger.</p>
+        <a class="open" href="Substitute/hub.html">Open cost log</a>
+      </div>
+
+      <div class="card tool-card">
+        <h2>🤝 Chertam Ledger</h2>
+        <p class="info">Not tied to any one student</p>
+        <p class="info">Net balance with agent Chertam &mdash; fees received from Imboon, Chilli &amp; Jeenna minus substitute pay owed for Grace, Harrison &amp; Kaldan.</p>
+        <a class="open" href="Chertam/index.html">Open ledger</a>
+      </div>
+
     </div>
+  </section>
 
-    <div class="card">
-      <h2>Imboon</h2>
-      <p class="info">🏫 School: Rugby International School</p>
-      <p class="info">📖 Curriculum: Pearson Edexcel IGCSE Maths A (4MA1)</p>
-      <p class="info">🎓 Grade/Year: Year 10 (Foundation Tier; Higher Tier from Year 11)</p>
-      <a class="open" href="Imboon/home.html">Open dashboard</a>
+  <section>
+    <div class="section-heading">Other Tools</div>
+    <div class="grid">
+
+      <div class="card tool-card">
+        <h2>🎯 Trial Classes</h2>
+        <p class="info">Not tied to any one student</p>
+        <p class="info">Every 30-minute trial, whether they converted to 1:1, and why when they didn't &mdash; price, fit, schedule, or went elsewhere.</p>
+        <a class="open" href="Trials/index.html">Open tracker</a>
+      </div>
+
     </div>
+  </section>
 
-    <div class="card">
-      <h2>Chilli</h2>
-      <p class="info">🏫 School: not yet provided</p>
-      <p class="info">📖 Curriculum: Australian Curriculum v9.0 Maths (AC9M10) &mdash; general, pending confirmed school/board</p>
-      <p class="info">🎓 Grade/Year: Year 10</p>
-      <a class="open" href="Chilli/home.html">Open dashboard</a>
-    </div>
-
-    <div class="card">
-      <h2>Tenten</h2>
-      <p class="info">🏫 School: KPIS</p>
-      <p class="info">📖 Curriculum: Integrated Math II (Reveal Math, McGraw Hill)</p>
-      <p class="info">🎓 Grade/Year: Grade 9</p>
-      <a class="open" href="Tenten/home.html">Open dashboard</a>
-    </div>
-
-    <div class="card">
-      <h2>Jeenna</h2>
-      <p class="info">🏫 School: Brighton College Bangkok</p>
-      <p class="info">📖 Curriculum: Mathematics &mdash; White Rose Maths (Year 6)</p>
-      <p class="info">🎓 Grade/Year: Year 6</p>
-      <a class="open" href="Gina/home.html">Open dashboard</a>
-    </div>
-
-    <div class="card tool-card">
-      <h2>📚 0580 Paper Breakdown</h2>
-      <p class="info">Personal work &mdash; not tied to a student</p>
-      <p class="info">IGCSE 0580 past paper questions tagged by syllabus topic, for lesson planning and building a question bank. Current 2025&ndash;2027 syllabus.</p>
-      <a class="open" href="0580-breakdown/index.html">Open dashboard</a>
-    </div>
-
-    <div class="card tool-card">
-      <h2>📚 0580 Paper Breakdown &mdash; Pre-2025</h2>
-      <p class="info">Personal work &mdash; not tied to a student</p>
-      <p class="info">Older IGCSE 0580 past papers (before the 2025&ndash;2027 syllabus), tagged the same way &mdash; kept as a fully separate running total.</p>
-      <a class="open" href="0580-breakdown-old/index.html">Open dashboard</a>
-    </div>
-
-    <div class="card tool-card">
-      <h2>🎯 Trial Classes</h2>
-      <p class="info">Not tied to any one student</p>
-      <p class="info">Every 30-minute trial, whether they converted to 1:1, and why when they didn't &mdash; price, fit, schedule, or went elsewhere.</p>
-      <a class="open" href="Trials/index.html">Open tracker</a>
-    </div>
-
-    <div class="card tool-card">
-      <h2>🧾 Substitute Teacher</h2>
-      <p class="info">Not tied to any one student</p>
-      <p class="info">What's collected from parents when someone else covers a class &mdash; one dashboard per paying parent, monthly log just like a regular student's fee page. Substitute pay and margin are tracked separately on the Chertam ledger.</p>
-      <a class="open" href="Substitute/hub.html">Open cost log</a>
-    </div>
-
-    <div class="card tool-card">
-      <h2>🤝 Chertam Ledger</h2>
-      <p class="info">Not tied to any one student</p>
-      <p class="info">Net balance with agent Chertam &mdash; fees received from Imboon &amp; Chilli minus substitute pay owed for Grace, Harrison &amp; Kaldan.</p>
-      <a class="open" href="Chertam/index.html">Open ledger</a>
-    </div>
-
-  </div>
 </main>
 
 <footer>
