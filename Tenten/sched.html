@@ -19,7 +19,8 @@
   .back-link:hover { background: var(--tip); color: #fff; }
   .section-label { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.04em; }
   .schedule-list { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin-bottom: 28px; }
-  .schedule-row { display: flex; align-items: center; gap: 16px; padding: 16px 20px; }
+  .schedule-row { display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+  .schedule-row:last-child { border-bottom: none; }
   .day-pill { display: inline-block; min-width: 52px; text-align: center; font-size: 12.5px; font-weight: 700; color: var(--accent); background: var(--accent-light); padding: 5px 10px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.02em; }
   .schedule-time { font-size: 16px; font-weight: 600; color: var(--ink); flex: 1; }
   .schedule-note { font-size: 12.5px; color: var(--muted); }
@@ -34,7 +35,7 @@
   <a class="back-link" href="home.html">&larr; Back to home</a>
   <header>
     <h1>Tenten&rsquo;s class schedule</h1>
-    <div class="meta">Recurring weekly session &middot; confirmed 16 Aug 2026, starting 17 Aug 2026</div>
+    <div class="meta">Recurring weekly sessions &middot; confirmed 14 Sep 2026, now 2 classes/week</div>
   </header>
   <div class="section-label">Recurring weekly schedule</div>
   <div class="schedule-list">
@@ -43,10 +44,15 @@
       <span class="schedule-time">17:00 &ndash; 18:00</span>
       <span class="schedule-note">1 hour &middot; Integrated Math II</span>
     </div>
+    <div class="schedule-row">
+      <span class="day-pill">SAT</span>
+      <span class="schedule-time">9:00 &ndash; 10:00</span>
+      <span class="schedule-note">1 hour &middot; Integrated Math II</span>
+    </div>
   </div>
   <div class="note">
     <span class="emoji">&#127890;</span>
-    <div><b>Current pattern</b>Monday 17:00&ndash;18:00 is the standing weekly schedule, starting 17 Aug 2026. No end date has been given yet &mdash; let me know when this changes and I&rsquo;ll update this page.</div>
+    <div><b>Current pattern</b>Monday 17:00&ndash;18:00 has been the standing weekly slot since 17 Aug 2026; Saturday 9:00&ndash;10:00 was added as a second weekly class, confirmed 14 Sep 2026. No end date has been given yet &mdash; let me know when this changes and I&rsquo;ll update this page.</div>
   </div>
   <footer>Tenten &middot; class schedule &middot; update this page whenever a session is added, moved, or cancelled</footer>
 </div>
