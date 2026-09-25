@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — 0580/43 October/November 2024 Marking Breakdown</title>
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 28px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .score-box { text-align: right; }
+  .score-box .num { font-size: 40px; font-weight: 700; color: var(--accent); line-height: 1; }
+  .score-box .pct { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .summary-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .summary-card .value { font-size: 22px; font-weight: 600; margin-top: 4px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13.5px;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.q { font-weight: 600; width: 48px; text-align: center; color: var(--ink); }
+  td.topic { width: 200px; color: var(--ink); }
+  td.topic .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tip);
+    background: var(--tip-light);
+    padding: 1px 7px;
+    border-radius: 20px;
+    margin-bottom: 4px;
+  }
+  td.topic .topic-name { display: block; }
+  td.marks { width: 85px; text-align: center; white-space: nowrap; }
+  td.reason { color: var(--muted); }
+  .full { color: var(--accent); font-weight: 600; }
+  .partial { color: var(--loss); font-weight: 600; }
+  .dash { color: var(--muted); }
+  .tip-label { color: var(--tip); font-weight: 600; }
+
+  .reason .note-line { display: block; margin-top: 6px; color: var(--ink); font-size: 13px; line-height: 1.45; }
+  .reason .mini-eq {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin: 7px 0;
+    font-size: 12.5px;
+  }
+  .reason .mini-eq .eln { padding: 2px 0; }
+  .reason .note-line.correct-line, .reason .mini-eq .eln.correct-line { color: var(--accent); font-weight: 600; }
+
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-hw { background: var(--loss-light); color: var(--loss); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  tr.total td {
+    border-top: 2px solid var(--ink);
+    font-weight: 700;
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+  tr.total td.reason { color: var(--accent); font-weight: 600; }
+
+  .legend {
+    margin: 18px 0 40px;
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .legend span.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .dot.full-dot { background: var(--accent); }
+  .dot.partial-dot { background: var(--loss); }
+  .dot.tip-dot { background: var(--tip); }
+
+  h2.section-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    padding-top: 8px;
+    border-top: 2px solid var(--ink);
+  }
+
+  .ladder {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 8px 20px;
+    margin-bottom: 28px;
+  }
+  .ladder-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .ladder-row:last-child { border-bottom: none; }
+  .ladder-score {
+    font-size: 20px;
+    font-weight: 700;
+    min-width: 78px;
+    color: var(--ink);
+  }
+  .ladder-row.final .ladder-score { color: var(--accent); }
+  .ladder-desc { font-size: 13.5px; color: var(--muted); flex: 1; }
+  .ladder-desc b { color: var(--ink); font-weight: 600; }
+  .ladder-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .tag-slip { background: var(--amber-light); color: var(--amber); }
+  .tag-hand { background: var(--loss-light); color: var(--loss); }
+  .tag-miscon { background: var(--pink-light); color: var(--pink); }
+  .tag-blank { background: var(--purple-light); color: var(--purple); }
+
+  .weak-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .weak-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--tip);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .weak-card h3 { margin: 0 0 6px; font-size: 14.5px; font-weight: 600; }
+  .weak-card p { margin: 0; font-size: 13px; color: var(--muted); }
+  .weak-card.hand { border-left-color: var(--amber); }
+
+  footer {
+    margin-top: 28px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tip);
+    text-decoration: none;
+    background: var(--tip-light);
+    padding: 7px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .back-link:hover { background: var(--tip); color: #fff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../tracker-p4.html">&larr; Back to dashboard</a>
+  <a class="back-link" href="../../teacher-hub.html" style="margin-left:8px;">🏠 Teacher hub</a>
+
+  <header>
+    <div>
+      <h1>Mildy — marking breakdown</h1>
+      <div class="meta">Cambridge IGCSE Mathematics 0580/43 (Extended, calculator) &middot; October/November 2024 &middot; pre-2025 practice paper, self-marked and checked</div>
+    </div>
+    <div class="score-box">
+      <div class="num">104<span style="font-size:20px;color:var(--muted);">/130</span></div>
+      <div class="pct">80%</div>
+    </div>
+  </header>
+
+  <div class="summary-row">
+    <div class="summary-card">
+      <div class="label">Questions fully correct</div>
+      <div class="value">21 / 37</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Careless slips</div>
+      <div class="value">&minus;14</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Handwriting</div>
+      <div class="value">&minus;0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Misconceptions</div>
+      <div class="value">&minus;9</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Left blank</div>
+      <div class="value">&minus;3</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:48px;">Q</th>
+        <th style="width:175px;">Topic</th>
+        <th style="width:85px;">Marks</th>
+        <th>Marks deducted &amp; reason</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="q">1a</td><td class="topic"><span class="tag">E1.11</span><span class="topic-name">Ratio: mass of fruit</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">1b</td><td class="topic"><span class="tag">E1.11</span><span class="topic-name">Algebraic ratio</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">1c</td><td class="topic"><span class="tag">E1.13</span><span class="topic-name">Percentage profit</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">1d</td><td class="topic"><span class="tag">E1.13</span><span class="topic-name">Reverse percentage</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">2a(i)</td><td class="topic"><span class="tag">E3.1</span><span class="topic-name">Midpoint of a line</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">2a(ii)</td><td class="topic"><span class="tag">E7.2</span><span class="topic-name">Vector as a column vector</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">2a(iii)</td><td class="topic"><span class="tag">E7.2</span><span class="topic-name">Coordinates from a vector equation</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">2b(i)</td><td class="topic"><span class="tag">E7.1</span><span class="topic-name">Rotation 180&deg; about a point</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">A reflection was drawn instead of a rotation &mdash; the shape ended up in the right neighbourhood but by the wrong transformation entirely. Worth a quick refresher on what marks a rotation specifically: every point turns the same angle around the centre, it doesn't flip like a mirror image.</div></td></tr>
+      <tr><td class="q">2b(ii)</td><td class="topic"><span class="tag">E7.1</span><span class="topic-name">Reflection in y=x+2</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">2b(iii)</td><td class="topic"><span class="tag">E7.1</span><span class="topic-name">Describing a single enlargement</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">3a</td><td class="topic"><span class="tag">E1.13</span><span class="topic-name">Simple interest rate</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">3b</td><td class="topic"><span class="tag">E1.17</span><span class="topic-name">Compound interest: total interest</span></td><td class="marks partial">2/3</td><td class="reason"><span class="cat cat-slip">Careless reading</span><div class="note-line">The compound interest formula was used correctly to reach the new total, $508.183 &mdash; but the question asked for the <b>total interest earned</b>, not the new account total.</div><div class="mini-eq"><div class="eln correct-line">Total interest = 508.18 &minus; 400 = $108.18</div></div><div class="note-line">The right number was sitting right there in the working, just not the one written as the final answer &mdash; worth a habit of re-reading exactly what's being asked right before writing the final line.</div></td></tr>
+      <tr><td class="q">3c</td><td class="topic"><span class="tag">E1.17</span><span class="topic-name">Monthly compound interest rate</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">4a</td><td class="topic"><span class="tag">E1.6</span><span class="topic-name">Mass of a box (subtraction)</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">4b</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Volume of water between two cubes</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The water was poured only until it reaches the <b>top of the smaller cube</b> (4cm up), not to fill the whole large cube. The full 6&times;6&times;6 volume was used instead of just the first 4cm of height:</div><div class="mini-eq"><div class="eln correct-line">(6&times;6&times;4) &minus; (4&times;4&times;4) = 144 &minus; 64 = 80 cm&sup3;</div></div><div class="note-line">Always match the water height in the calculation to exactly what the question describes, not the full container.</div></td></tr>
+      <tr><td class="q">4c</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Mass of a triangular prism</span></td><td class="marks partial">2/4</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The density &divide; mass &divide; volume steps (M1(FT)) were sound, but the cross-section is an <b>equilateral</b> triangle, not a right-angled one &mdash; &frac12;&times;4&times;4 is the wrong area formula here.</div><div class="mini-eq"><div class="eln correct-line">Area = (&radic;3/4)&times;4&sup2; &asymp; 6.93 cm&sup2;, giving a correctly-scaled mass</div></div><div class="note-line">Worth reviewing the two area-of-triangle formulas side by side &mdash; &frac12;&times;base&times;height only works with a known right angle or perpendicular height; the &frac12;ab&thinsp;sinC (or equilateral shortcut) is needed otherwise.</div></td></tr>
+      <tr><td class="q">4d(i)</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Cone: showing total surface area</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">4d(ii)(a)</td><td class="topic"><span class="tag">E1.6</span><span class="topic-name">Cost to paint 1cm&sup2;, in cents</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-slip">Careless reading</span><div class="note-line">1131&times;1.71 was calculated (multiplying), but finding the cost of <b>one</b> cm&sup2; out of the total needs dividing the total cost by the total area, not multiplying:</div><div class="mini-eq"><div class="eln correct-line">(1.71&divide;1131)&times;100 &asymp; 0.151 cents</div></div></td></tr>
+      <tr><td class="q">4d(ii)(b)</td><td class="topic"><span class="tag">E1.6</span><span class="topic-name">Number of cones per tin of paint</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-slip">Careless reading</span><div class="note-line">The tin covers <b>2.5</b>m&sup2;, but only 1m&sup2; (10000cm&sup2;) was converted and used in the division.</div><div class="mini-eq"><div class="eln correct-line">2.5m&sup2; = 25000cm&sup2; &divide; 1131 &asymp; 22.1 &rarr; 22 cones</div></div><div class="note-line">The unit conversion method (m&sup2;&rarr;cm&sup2;) was correct &mdash; the number carried over from the question just needs double-checking against what's actually given.</div></td></tr>
+
+      <tr><td class="q">5a</td><td class="topic"><span class="tag">E1.12</span><span class="topic-name">Average speed in km/h</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">5b</td><td class="topic"><span class="tag">E1.12</span><span class="topic-name">Average speed for a two-stage run</span></td><td class="marks partial">2/3</td><td class="reason"><span class="cat cat-slip">Careless calculation</span><div class="note-line">Both stage distances and times were found correctly (7.125km, 1.08 hours), but the final division of total distance by total time was miscalculated as 8.265 instead of the correct value:</div><div class="mini-eq"><div class="eln correct-line">(7.125+8.1) &divide; (0.75+1.08) = 15.225 &divide; 1.83 &asymp; 8.32 km/h</div></div><div class="note-line">Method was fully correct throughout &mdash; just a slip in the final division.</div></td></tr>
+      <tr><td class="q">5c</td><td class="topic"><span class="tag">E2.1</span><span class="topic-name">Algebraic expression: train through a station</span></td><td class="marks partial">0/3</td><td class="reason"><span class="cat cat-blank">Left blank</span><div class="note-line">Left blank. Convert the speed to m/s, then time = distance &divide; speed, using the total distance (p+q) the train travels to fully clear the station:</div><div class="mini-eq"><div class="eln">Speed in m/s = v&times;1000/3600 = 5v/18</div><div class="eln correct-line">t = (p+q) &divide; (5v/18) = 18(p+q)/5v seconds</div></div></td></tr>
+
+      <tr><td class="q">6a</td><td class="topic"><span class="tag">E2.3</span><span class="topic-name">Simplify an algebraic fraction</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">6b</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Expand and simplify three brackets</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">6c</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Solve a quadratic (formula)</span></td><td class="marks partial">0/4</td><td class="reason"><span class="cat cat-slip">Careless calculation</span><div class="note-line">a, b and c were correctly identified as 2, 1, &minus;5 &mdash; but when substituting into the quadratic formula, a was mistakenly written as 1 in both the b&sup2;&minus;4ac term and the denominator, instead of 2:</div><div class="mini-eq"><div class="eln correct-line">x = (&minus;1 &plusmn; &radic;(1&sup2;&minus;4(2)(&minus;5))) &divide; (2&times;2) = (&minus;1&plusmn;&radic;41)/4</div></div><div class="note-line">The identification step was solid &mdash; the slip was purely in copying the values across into the formula.</div></td></tr>
+
+      <tr><td class="q">7a(i)</td><td class="topic"><span class="tag">E5.2</span><span class="topic-name">Area of a trapezium</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">7a(ii)(a)</td><td class="topic"><span class="tag">E2.1</span><span class="topic-name">Show that: quadratic from a trapezium's area</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">7a(ii)(b)</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Solve the quadratic <i>by factorisation</i></span></td><td class="marks partial">1/3</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The question specifically asked to solve <b>by factorisation</b>, but the quadratic formula was used instead. The final answer (y=14) was correct so the answer mark was still earned, but the method marks for factorising were lost.</div><div class="note-line">Worth practising spotting when a question names a required method &mdash; using a different (even successful) method usually still loses the marks tied to that specific technique.</div></td></tr>
+      <tr><td class="q">7b</td><td class="topic"><span class="tag">E5.3</span><span class="topic-name">Perimeter of a sector</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">7c</td><td class="topic"><span class="tag">E5.3</span><span class="topic-name">Area of a composite shape (sector + triangles)</span></td><td class="marks partial">2/4</td><td class="reason"><span class="cat cat-slip">Careless calculation</span><div class="note-line">The two right-angled triangles and the hypotenuse (5&radic;2) were found correctly, but the sector radius was <b>cubed</b> instead of squared when finding the sector's area:</div><div class="mini-eq"><div class="eln correct-line">Sector area = 90/360 &times; &pi; &times; (5&radic;2)&sup2; = 12.5&pi;</div></div><div class="note-line">giving a final area of 25+12.5&pi; cm&sup2;, not 25+(5&radic;2/4)&pi;.</div></td></tr>
+
+      <tr><td class="q">8a</td><td class="topic"><span class="tag">E9.2</span><span class="topic-name">Pie chart angle</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">8b</td><td class="topic"><span class="tag">E9.3</span><span class="topic-name">Estimated mean speed</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">8c</td><td class="topic"><span class="tag">E9.7</span><span class="topic-name">Completing a histogram</span></td><td class="marks partial">2/3</td><td class="reason"><span class="cat cat-slip">Careless reading</span><div class="note-line">The frequency density formula (FD = frequency &divide; class width) was correctly identified, but one of the bar heights was misread against the class width when drawing it in, giving one bar the wrong height on the grid.</div></td></tr>
+
+      <tr><td class="q">9a(i)</td><td class="topic"><span class="tag">E8.1</span><span class="topic-name">Probability a ball is white</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">9a(ii)</td><td class="topic"><span class="tag">E8.1</span><span class="topic-name">Expected frequency</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">9b(i)</td><td class="topic"><span class="tag">E8.3</span><span class="topic-name">Probability: same colour, with replacement</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">9b(ii)</td><td class="topic"><span class="tag">E8.3</span><span class="topic-name">Probability: not the same colour</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">9c</td><td class="topic"><span class="tag">E8.3</span><span class="topic-name">Probability without replacement (3 picks)</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">10a</td><td class="topic"><span class="tag">E2.12</span><span class="topic-name">Derivative of a quadratic</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">10b(i)</td><td class="topic"><span class="tag">E2.12</span><span class="topic-name">Equation of a tangent</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">10b(ii)</td><td class="topic"><span class="tag">E3.2</span><span class="topic-name">Perpendicular line through a point</span></td><td class="marks partial">2/3</td><td class="reason"><span class="cat cat-slip">Careless calculation</span><div class="note-line">The perpendicular gradient (&minus;&frac14;) and setup were correct, but &minus;&frac14;&times;2 was calculated as &minus;2 instead of &minus;&frac12;, throwing off the final intercept:</div><div class="mini-eq"><div class="eln correct-line">3 = &minus;&frac12; + c &rarr; c = 3.5, so y = &minus;&frac14;x + 3.5</div></div></td></tr>
+      <tr><td class="q">10c</td><td class="topic"><span class="tag">E2.12</span><span class="topic-name">Maximum point of the curve</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">11a</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: g(&minus;3)</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">11b</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions: f(x)g(x)+fg(x)+1</span></td><td class="marks partial">3/4</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">Every expansion step was correct, right through to &minus;4x&sup2;&minus;12x+13 (correctly boxed and confirmed along the way) &mdash; but the whole expression was then flipped to 4x&sup2;+12x&minus;13 in the final answer, for no mathematical reason.</div><div class="note-line correct-line">The boxed line, &minus;4x&sup2;&minus;12x+13, was already the final simplified answer &mdash; no sign flip needed.</div></td></tr>
+      <tr><td class="q">11c</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Inverse function g&supminus;&sup1;(x)</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">11d</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Composite function hh(1)</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-slip">Careless calculation</span><div class="note-line">The method (M1) was set up correctly, but the fraction arithmetic partway through went wrong, and the final answer was written as 1 instead of:</div><div class="mini-eq"><div class="eln correct-line">h(1) = &frac12; &rarr; h(&frac12;) = 1&divide;(3/2) = 2/3</div></div></td></tr>
+      <tr><td class="q">11e</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">1/f(x)&minus;h(x) as a single fraction</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">11f</td><td class="topic"><span class="tag">E2.4</span><span class="topic-name">Solving j(x)=1/32</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">11g</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Solving j&supminus;&sup1;(x)=0</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr><td class="q">12a</td><td class="topic"><span class="tag">E6.5</span><span class="topic-name">Cosine rule: show AC=17.37cm</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+      <tr><td class="q">12b</td><td class="topic"><span class="tag">E6.5</span><span class="topic-name">Sine rule: obtuse angle ACE</span></td><td class="marks full">4/4</td><td class="reason"><span class="tip-label">Note:</span> correct throughout, and the final answer (13&deg;) was right &mdash; but a couple of working-out lines (writing sin(&theta;)=17.37sin20&deg;/10.9 explicitly, and why 180&deg; gets subtracted to force the obtuse angle) were skipped over quickly rather than shown step by step. No marks were actually lost here since the answer and the shown steps support it, but it's worth slowing down on the intermediate reasoning lines &mdash; they're worth marks on their own and skipping them is risky if a later step goes wrong.</td></tr>
+      <tr><td class="q">12c</td><td class="topic"><span class="tag">E6.5</span><span class="topic-name">Perimeter of quadrilateral ABCD</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td></tr>
+
+      <tr class="total"><td colspan="2">Total</td><td class="marks">104/130</td><td class="reason">80%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="legend">
+    <div><span class="dot full-dot"></span>Full marks</div>
+    <div><span class="dot partial-dot"></span>Marks dropped</div>
+    <div><span class="dot tip-dot"></span>Technique tip (no marks lost)</div>
+  </div>
+
+  <div class="legend">
+    <span class="cat cat-slip">Careless slip</span>
+    <span class="cat cat-hw">Handwriting</span>
+    <span class="cat cat-miscon">Misconception</span>
+    <span class="cat cat-blank">Left blank</span>
+  </div>
+
+  <h2 class="section-title">What she could achieve</h2>
+  <div class="ladder">
+    <div class="ladder-row">
+      <div class="ladder-score">104/130</div>
+      <div class="ladder-desc">Actual mark obtained on this paper.</div>
+      <span></span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">118/130</div>
+      <div class="ladder-desc">Achievable by correcting the <b>14 marks lost to careless slips</b>: misreading "total interest" as the new balance (Q3b), the final division in a two-stage average speed (Q5b), multiplying instead of dividing for a unit cost (Q4d(ii)(a)), converting the wrong area for the paint-tin question (Q4d(ii)(b)), substituting a into the wrong places in the quadratic formula (Q6c), squaring 5&radic;2 as if cubing it (Q7c), one histogram bar height (Q8c), a &minus;&frac14;&times;2 slip in a perpendicular line (Q10b(ii)), and a fraction slip in hh(1) (Q11d) &mdash; every one of these had a fully correct method behind it.</div>
+      <span class="ladder-tag tag-slip">slips</span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">118/130</div>
+      <div class="ladder-desc">No handwriting-related losses on this paper.</div>
+      <span class="ladder-tag tag-hand">handwriting</span>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">127/130</div>
+      <div class="ladder-desc">Achievable by additionally resolving the <b>9 marks lost to misconceptions</b>: reflecting instead of rotating (Q2b(i)), filling the whole cube instead of just to the smaller cube's height (Q4b), using the wrong triangle-area formula for an equilateral triangle (Q4c), using the quadratic formula instead of the specifically-required factorisation (Q7a(ii)(b)), and an unnecessary sign flip on an already-correct final expression (Q11b).</div>
+      <span class="ladder-tag tag-miscon">misconceptions</span>
+    </div>
+    <div class="ladder-row final">
+      <div class="ladder-score">130/130</div>
+      <div class="ladder-desc">Achievable by additionally attempting and completing the <b>3 marks left blank</b> (Q5c, the algebraic train-and-station expression) &mdash; the only fully-blank question on this paper.</div>
+      <span class="ladder-tag tag-blank">blank</span>
+    </div>
+  </div>
+
+  <h2 class="section-title">Weak topics to target next session</h2>
+  <div class="weak-grid">
+    <div class="weak-card">
+      <h3>Reading exactly what's being asked, before writing the final answer</h3>
+      <p>Three separate losses this paper came from computing something real and correct, then writing down the wrong quantity as the final answer: total balance instead of total interest (Q3b), multiplying instead of dividing for a unit cost (Q4d(ii)(a)), and using 1m&sup2; instead of the given 2.5m&sup2; (Q4d(ii)(b)). The maths itself wasn't the problem in any of these &mdash; a habit of re-reading the question's exact final ask right before writing the answer line would catch all three.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Matching a formula to the actual shape described</h3>
+      <p>Two mensuration losses came from applying a formula that didn't match the situation: filling water to the full height of the large cube instead of just to the smaller cube's top (Q4b), and using the right-angled-triangle area formula (&frac12;&times;base&times;height) for an equilateral triangle cross-section (Q4c). Worth a couple of questions where she has to first identify which formula actually applies before calculating anything.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Following a named method when the question specifies one</h3>
+      <p>Question 7(a)(ii)(b) explicitly asked to solve "by factorisation," but the quadratic formula was used instead. The final answer was right, so only the method marks were lost &mdash; a useful reminder to scan for a named technique in the question before starting, since a different (even successful) method usually doesn't earn those marks.</p>
+    </div>
+    <div class="weak-card">
+      <h3>Careful substitution into memorised formulas</h3>
+      <p>Both Q6c (quadratic formula) and Q10b(ii) (perpendicular line through a point) had the right values identified correctly on paper, but a substitution or multiplication slip crept in when actually plugging them into the formula. Slowing down specifically at the substitution step &mdash; writing each value into its exact slot before simplifying &mdash; would catch this pattern.</p>
+    </div>
+  </div>
+
+  <footer>0580/43 &middot; Cambridge IGCSE Mathematics &middot; October/November 2024 (pre-2025 syllabus paper) &middot; self-checked against the paper's working, syllabus codes reference the current 2025&ndash;2027 subject content as a practical stand-in</footer>
+
+</div>
+</body>
+</html>
