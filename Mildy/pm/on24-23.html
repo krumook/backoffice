@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — 0580/23 October/November 2024 Marking Breakdown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 28px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .score-box { text-align: right; }
+  .score-box .num { font-size: 40px; font-weight: 700; color: var(--accent); line-height: 1; }
+  .score-box .pct { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .summary-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .summary-card .value { font-size: 22px; font-weight: 600; margin-top: 4px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13.5px;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.q { font-weight: 600; width: 48px; text-align: center; color: var(--ink); }
+  td.topic { width: 200px; color: var(--ink); }
+  td.topic .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tip);
+    background: var(--tip-light);
+    padding: 1px 7px;
+    border-radius: 20px;
+    margin-bottom: 4px;
+  }
+  td.topic .topic-name { display: block; }
+  td.marks { width: 85px; text-align: center; white-space: nowrap; }
+  td.reason { color: var(--muted); }
+  .full { color: var(--accent); font-weight: 600; }
+  .partial { color: var(--loss); font-weight: 600; }
+  .dash { color: var(--muted); }
+
+  .reason .note-line { display: block; margin-top: 6px; color: var(--ink); font-size: 13px; line-height: 1.45; }
+  .reason .mini-eq {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin: 7px 0;
+    font-size: 12.5px;
+  }
+  .reason .mini-eq .eln { padding: 2px 0; }
+  .reason .note-line.correct-line, .reason .mini-eq .eln.correct-line { color: var(--accent); font-weight: 600; }
+
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px; line-height: 1.05; font-size: 0.92em; position: relative; top: 0.1em; }
+  .frac .num, .frac .den { display: block; padding: 0 3px; }
+  .frac .num { border-bottom: 1.3px solid currentColor; padding-bottom: 1px; }
+  .frac .den { padding-top: 1px; }
+
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-hw { background: var(--loss-light); color: var(--loss); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  tr.total td { border-top: 2px solid var(--ink); font-weight: 700; background: var(--accent-light); color: var(--accent); }
+  tr.total td.reason { color: var(--accent); font-weight: 600; }
+
+  .legend { margin: 18px 0 40px; display: flex; gap: 20px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+  .legend span.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .dot.full-dot { background: var(--accent); }
+  .dot.partial-dot { background: var(--loss); }
+
+  h2.section-title { font-size: 17px; font-weight: 600; margin: 0 0 16px; padding-top: 8px; border-top: 2px solid var(--ink); }
+
+  .ladder { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 8px 20px; margin-bottom: 28px; }
+  .ladder-row { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .ladder-row:last-child { border-bottom: none; }
+  .ladder-score { font-size: 20px; font-weight: 700; min-width: 78px; color: var(--ink); }
+  .ladder-row.final .ladder-score { color: var(--accent); }
+  .ladder-desc { font-size: 13.5px; color: var(--muted); flex: 1; }
+  .ladder-desc b { color: var(--ink); font-weight: 600; }
+
+  .weak-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 12px; }
+  .weak-card { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--tip); border-radius: 8px; padding: 14px 16px; }
+  .weak-card h3 { margin: 0 0 6px; font-size: 14.5px; font-weight: 600; }
+  .weak-card p { margin: 0; font-size: 13px; color: var(--muted); }
+  .weak-card.blank { border-left-color: var(--purple); }
+  .weak-card.miscon { border-left-color: var(--pink); }
+  .weak-card.slip { border-left-color: var(--amber); }
+
+  .note-banner { background: var(--accent-light); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; font-size: 13.5px; color: var(--accent); margin-bottom: 28px; }
+
+  td.retake { width: 230px; color: var(--muted); }
+  .retake-done { color: var(--accent); font-weight: 700; }
+  .retake-partial { color: var(--amber); font-weight: 700; }
+  .retake-hw { color: var(--tip); font-weight: 700; }
+  .retake-dash { color: var(--muted); }
+
+  footer { margin-top: 28px; font-size: 12px; color: var(--muted); text-align: center; }
+
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; margin-right: 8px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../tracker-p2.html">&larr; Back to dashboard</a>
+  <a class="back-link" href="../../teacher-hub.html" style="margin-left:8px;">🏠 Teacher hub</a>
+
+  <header>
+    <div>
+      <h1>Mildy — marking breakdown</h1>
+      <div class="meta">Cambridge IGCSE Mathematics 0580/23 (Extended, Non-calculator) &middot; October/November 2024 &middot; self-marked by Mildy (green/pink pen), checked against the mark scheme</div>
+    </div>
+    <div class="score-box">
+      <div class="num">60<span style="font-size:20px;color:var(--muted);">/70</span></div>
+      <div class="pct">85.71%</div>
+    </div>
+  </header>
+
+  <div class="note-banner"><b>A strong, clean paper &mdash; 60/70, with 27 of 35 question-parts fully correct first time.</b> The algebra was essentially flawless (equations, sequences, rearranging, algebraic fractions, the vector proof) and the 3D trig/Pythagoras question (Q22) was perfect. Of the 10 marks lost, 5 were Q4 (scale drawing and bearing) left blank because no protractor or ruler was on hand during the session &mdash; not a knowledge gap. The box-and-whisker question (Q15) was also left blank. The remaining 3 marks were a genuine misconception on a circle-theorem reflex angle (Q14b) plus one on set notation (Q21a), and 2 careless slips (Q17b, Q19).</div>
+
+  <div class="summary-row">
+    <div class="summary-card">
+      <div class="label">Questions fully correct</div>
+      <div class="value">27 / 35</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Careless slips</div>
+      <div class="value">&minus;3</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Handwriting (no marks lost)</div>
+      <div class="value">0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Misconceptions</div>
+      <div class="value">&minus;2</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Left blank</div>
+      <div class="value">&minus;5</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:48px;">Q</th>
+        <th style="width:200px;">Topic</th>
+        <th style="width:85px;">Marks</th>
+        <th>Notes</th>
+        <th style="width:230px;">Retake</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="q">1a</td><td class="topic"><span class="tag">E1.1</span><span class="topic-name">Types of number</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">1b</td><td class="topic"><span class="tag">E1.1</span><span class="topic-name">Types of number</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">2</td><td class="topic"><span class="tag">E1.15</span><span class="topic-name">Time</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">3</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">4a</td><td class="topic"><span class="tag">E4.3</span><span class="topic-name">Scale drawings and bearings</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-blank">Left blank</span><div class="note-line">Written on the page: "Skip &ndash; no equipment." Geometrical instruments (ruler, protractor) were required to measure the scale drawing and weren't available during this session, so the whole question was skipped rather than attempted and missed.</div><div class="mini-eq"><div class="eln">Measure KL on the diagram, then scale up: 1cm represents 10km.</div></div></td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">4b</td><td class="topic"><span class="tag">E4.3</span><span class="topic-name">Scale drawings and bearings</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-blank">Left blank</span><div class="note-line">Same reason as 4(a) &mdash; no protractor on hand to measure the bearing of L from K.</div></td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">5a</td><td class="topic"><span class="tag">E9.3</span><span class="topic-name">Averages and measures of spread</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">5b</td><td class="topic"><span class="tag">E9.3</span><span class="topic-name">Averages and measures of spread</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">6</td><td class="topic"><span class="tag">E4.6</span><span class="topic-name">Angles</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">7</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">8</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">9</td><td class="topic"><span class="tag">E4.6</span><span class="topic-name">Angles</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">10</td><td class="topic"><span class="tag">E1.4</span><span class="topic-name">Fractions, decimals, percentages</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">11</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">12</td><td class="topic"><span class="tag">E2.1</span><span class="topic-name">Substitution &amp; rearranging formulae</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">13a</td><td class="topic"><span class="tag">E2.7</span><span class="topic-name">Sequences</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">13b</td><td class="topic"><span class="tag">E2.7</span><span class="topic-name">Sequences</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">14a(i)</td><td class="topic"><span class="tag">E4.7/E4.8</span><span class="topic-name">Circle theorems</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">14a(ii)</td><td class="topic"><span class="tag">E4.7/E4.8</span><span class="topic-name">Circle theorems</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">14b</td><td class="topic"><span class="tag">E4.7/E4.8</span><span class="topic-name">Circle theorems</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The angle marked w&deg; on the diagram is the non-reflex angle POR at the centre, not the reflex one &mdash; which direction a centre angle labelled in a diagram actually points has to be checked before doubling the circumference angle.</div><div class="mini-eq"><div class="eln">Angle at centre = 2 &times; angle at circumference = 2 &times; 115&deg; = 230&deg; (method mark earned)</div><div class="eln correct-line">That 230&deg; is the <i>reflex</i> angle POR &mdash; the diagram asks for the other one: w = 360&deg; &minus; 230&deg; = <b>130&deg;</b></div></div><div class="note-line">Written note: "note down in the diagram so you know is it the one they asked for" &mdash; she already knows the fix going forward.</div></td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">15a</td><td class="topic"><span class="tag">E9.3</span><span class="topic-name">Averages and measures of spread</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-blank">Left blank</span><div class="note-line">The median reads straight off the box-and-whisker plot as Q2.</div><div class="mini-eq"><div class="eln correct-line">Median = <b>28 cm</b></div></div></td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">15b</td><td class="topic"><span class="tag">E9.3</span><span class="topic-name">Averages and measures of spread</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-blank">Left blank</span><div class="note-line">Interquartile range = Q3 &minus; Q1.</div><div class="mini-eq"><div class="eln">Q3 &minus; Q1 = 53 &minus; 20</div><div class="eln correct-line">= <b>33 cm</b></div></div></td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">16</td><td class="topic"><span class="tag">E6.5</span><span class="topic-name">Non-right-angled triangles</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">17a</td><td class="topic"><span class="tag">E2.4</span><span class="topic-name">Indices II</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">17b</td><td class="topic"><span class="tag">E2.4</span><span class="topic-name">Indices II</span></td><td class="marks partial">1/2</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">The y<sup>50</sup> part of the answer (independent of the 125 part) was correct and earned its own mark.</div><div class="mini-eq"><div class="eln">(125y<sup>75</sup>)<sup>2/3</sup> = 125<sup>2/3</sup> &times; y<sup>(75&times;2/3)</sup> = 125<sup>2/3</sup> &times; y<sup>50</sup></div><div class="eln correct-line">125<sup>2/3</sup> = (&#179;&radic;125)&sup2; = 5&sup2; = <b>25</b>, so the answer is 25y<sup>50</sup></div></div><div class="note-line">Her working briefly landed on 25 (correctly, (&#179;&radic;125)&sup2;=5&sup2;=25) but then crossed it out as "WW" (wrong working) before settling the final answer box on 25y<sup>50</sup> &mdash; the right value was found and then second-guessed. Flagged as a slip rather than a gap since the correct computation genuinely appeared on the page.</div></td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">18</td><td class="topic"><span class="tag">E4.4</span><span class="topic-name">Similarity / congruence</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">19</td><td class="topic"><span class="tag">E2.8</span><span class="topic-name">Proportion</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">Method was right throughout (y=k/&radic;(x+2), substitute x=2, y=3 to find k) &mdash; the arithmetic slipped on the last step.</div><div class="mini-eq"><div class="eln">3 = k/&radic;4 = k/2</div><div class="eln correct-line">k = 3&times;2 = <b>6</b>, so y = 6/&radic;(x+2)</div></div><div class="note-line">She actually caught this herself mid-working &mdash; crossed out k=12 and wrote "careless," correcting it to k=6 in red pen &mdash; but the final answer box still shows y=12/&radic;(x+2), the uncorrected version, so the fix never made it to the answer line.</div></td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">20</td><td class="topic"><span class="tag">E6.4</span><span class="topic-name">Trigonometric functions</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">21a</td><td class="topic"><span class="tag">E1.2</span><span class="topic-name">Sets</span></td><td class="marks partial">0/1</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">The shaded region is everything in B or C, but not in A &mdash; written as (B&cup;C)&cap;A&prime;, not (B&cup;C&cup;A&prime;). Using &cup; (union) with the complement instead of &cap; (intersection) describes a much bigger region than the one actually shaded.</div><div class="mini-eq"><div class="eln correct-line">Correct: <b>(B&cup;C)&cap;A&prime;</b></div><div class="eln">Written: (B&cup;C&cup;A&prime;) &mdash; this would include almost the entire diagram, not just the shaded parts.</div></div></td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">21b</td><td class="topic"><span class="tag">E1.2</span><span class="topic-name">Sets</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">22</td><td class="topic"><span class="tag">E6.6</span><span class="topic-name">Pythagoras in 3D</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">23</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">24</td><td class="topic"><span class="tag">E1.10</span><span class="topic-name">Limits of accuracy</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">25</td><td class="topic"><span class="tag">E2.3</span><span class="topic-name">Algebraic fractions</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">26</td><td class="topic"><span class="tag">E7.4</span><span class="topic-name">Vector geometry (proofs)</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr class="total"><td colspan="2">Total</td><td class="marks">60/70</td><td class="reason">85.71%</td><td class="retake retake-dash"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="legend">
+    <div><span class="dot full-dot"></span>Full marks</div>
+    <div><span class="dot partial-dot"></span>Marks dropped</div>
+  </div>
+
+  <div class="legend">
+    <span class="cat cat-slip">Careless slip</span>
+    <span class="cat cat-hw">Handwriting</span>
+    <span class="cat cat-miscon">Misconception</span>
+    <span class="cat cat-blank">Left blank</span>
+  </div>
+
+  <h2 class="section-title">What she could achieve &mdash; fixing each category in turn</h2>
+  <div class="ladder">
+    <div class="ladder-row">
+      <div class="ladder-score">60/70</div>
+      <div class="ladder-desc">Actual score.</div>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">63/70</div>
+      <div class="ladder-desc">+ careless slips fixed: <b>Q17b</b> (correctly found 25 for the 125<sup>2/3</sup> part, then crossed it out as wrong before writing the final answer), <b>Q19</b> (caught her own k=12 error mid-working and corrected it to k=6, but the fix never reached the final answer line).</div>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">63/70</div>
+      <div class="ladder-desc">+ handwriting fixed: none this paper.</div>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">65/70</div>
+      <div class="ladder-desc">+ misconceptions resolved: <b>Q14b</b> (doubled the circumference angle correctly but didn't check whether the diagram's marked angle was the reflex one or not), <b>Q21a</b> (used union instead of intersection when combining the complement with the shaded region).</div>
+    </div>
+    <div class="ladder-row final">
+      <div class="ladder-score">70/70</div>
+      <div class="ladder-desc">+ blanks completed: <b>Q4a/b</b> (scale drawing and bearing, skipped &mdash; no ruler or protractor on hand, not a knowledge gap), <b>Q15a/b</b> (median and interquartile range straight off a box-and-whisker plot).</div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Weak topics to target next session</h2>
+  <div class="weak-grid">
+    <div class="weak-card blank">
+      <h3>Q4 &mdash; scale drawing and bearing (3 marks)</h3>
+      <p>Skipped entirely for lack of equipment (no ruler or protractor in the session), not because the method wasn't known &mdash; written clearly on the page as "Skip, no equipment." Worth a quick check with a real ruler/protractor next session to confirm the skill itself (measuring a scale drawing and reading a three-figure bearing) is solid, since this one wasn't actually tested.</p>
+    </div>
+    <div class="weak-card miscon">
+      <h3>Q14(b) &mdash; reflex vs. non-reflex angle at the centre (1 mark)</h3>
+      <p>The circle theorem itself (angle at centre = 2 &times; angle at circumference) was applied correctly and gave 230&deg; &mdash; but the angle marked w&deg; in the diagram was the non-reflex angle, not the 230&deg; reflex one, so the final step (360&minus;230=130) was missing. She's already flagged her own fix for this ("note down in the diagram") &mdash; worth confirming it sticks on the next circle-theorem question with a reflex/non-reflex angle in the same diagram.</p>
+    </div>
+    <div class="weak-card blank">
+      <h3>Q15 &mdash; box-and-whisker median &amp; IQR (2 marks)</h3>
+      <p>Both answers were left blank on the original attempt despite the method being simple reading-off from the diagram (median=Q2=28, IQR=Q3&minus;Q1=33) &mdash; worth checking whether this was a timing issue (near the end of a non-calculator paper) or genuine unfamiliarity with reading a box-and-whisker plot, since the two look very different as fixes.</p>
+    </div>
+    <div class="weak-card slip">
+      <h3>Q19 &mdash; inverse proportion, lost arithmetic fix (2 marks)</h3>
+      <p>The method was entirely correct and she caught her own error (k=12 corrected to k=6) while checking her working &mdash; but didn't go back and update the final answer line to match. Worth a standing habit: after catching and fixing a mistake mid-working, always re-copy the corrected final answer into the answer box, not just the working.</p>
+    </div>
+  </div>
+
+  <footer>0580/23 &middot; Cambridge IGCSE Mathematics &middot; October/November 2024 &middot; self-marked by Mildy, checked against the mark scheme</footer>
+
+</div>
+</body>
+</html>
