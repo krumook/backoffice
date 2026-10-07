@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy — 0580/23 May/June 2024 Marking Breakdown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24;
+    --muted: #5c6b63;
+    --line: #dfe6e1;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #0f6e56;
+    --accent-light: #e1f5ee;
+    --loss: #993c1d;
+    --loss-light: #faece7;
+    --tip: #185fa5;
+    --tip-light: #e6f1fb;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --pink: #72243e;
+    --pink-light: #fbeaf0;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 28px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .score-box { text-align: right; }
+  .score-box .num { font-size: 40px; font-weight: 700; color: var(--accent); line-height: 1; }
+  .score-box .pct { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .summary-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .summary-card .value { font-size: 22px; font-weight: 600; margin-top: 4px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 13.5px;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafaf8; }
+  td.q { font-weight: 600; width: 48px; text-align: center; color: var(--ink); }
+  td.topic { width: 200px; color: var(--ink); }
+  td.topic .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tip);
+    background: var(--tip-light);
+    padding: 1px 7px;
+    border-radius: 20px;
+    margin-bottom: 4px;
+  }
+  td.topic .topic-name { display: block; }
+  td.marks { width: 85px; text-align: center; white-space: nowrap; }
+  td.reason { color: var(--muted); }
+  .full { color: var(--accent); font-weight: 600; }
+  .partial { color: var(--loss); font-weight: 600; }
+  .dash { color: var(--muted); }
+
+  .reason .note-line { display: block; margin-top: 6px; color: var(--ink); font-size: 13px; line-height: 1.45; }
+  .reason .mini-eq {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin: 7px 0;
+    font-size: 12.5px;
+  }
+  .reason .mini-eq .eln { padding: 2px 0; }
+  .reason .note-line.correct-line, .reason .mini-eq .eln.correct-line { color: var(--accent); font-weight: 600; }
+
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px; line-height: 1.05; font-size: 0.92em; position: relative; top: 0.1em; }
+  .frac .num, .frac .den { display: block; padding: 0 3px; }
+  .frac .num { border-bottom: 1.3px solid currentColor; padding-bottom: 1px; }
+  .frac .den { padding-top: 1px; }
+
+  .cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  .cat-slip { background: var(--amber-light); color: var(--amber); }
+  .cat-hw { background: var(--loss-light); color: var(--loss); }
+  .cat-miscon { background: var(--pink-light); color: var(--pink); }
+  .cat-blank { background: var(--purple-light); color: var(--purple); }
+
+  tr.total td { border-top: 2px solid var(--ink); font-weight: 700; background: var(--accent-light); color: var(--accent); }
+  tr.total td.reason { color: var(--accent); font-weight: 600; }
+
+  .legend { margin: 18px 0 40px; display: flex; gap: 20px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+  .legend span.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .dot.full-dot { background: var(--accent); }
+  .dot.partial-dot { background: var(--loss); }
+
+  h2.section-title { font-size: 17px; font-weight: 600; margin: 0 0 16px; padding-top: 8px; border-top: 2px solid var(--ink); }
+
+  .ladder { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 8px 20px; margin-bottom: 28px; }
+  .ladder-row { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .ladder-row:last-child { border-bottom: none; }
+  .ladder-score { font-size: 20px; font-weight: 700; min-width: 78px; color: var(--ink); }
+  .ladder-row.final .ladder-score { color: var(--accent); }
+  .ladder-desc { font-size: 13.5px; color: var(--muted); flex: 1; }
+  .ladder-desc b { color: var(--ink); font-weight: 600; }
+
+  .weak-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 12px; }
+  .weak-card { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--tip); border-radius: 8px; padding: 14px 16px; }
+  .weak-card h3 { margin: 0 0 6px; font-size: 14.5px; font-weight: 600; }
+  .weak-card p { margin: 0; font-size: 13px; color: var(--muted); }
+  .weak-card.blank { border-left-color: var(--purple); }
+  .weak-card.miscon { border-left-color: var(--pink); }
+  .weak-card.slip { border-left-color: var(--amber); }
+
+  .note-banner { background: var(--accent-light); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; font-size: 13.5px; color: var(--accent); margin-bottom: 28px; }
+
+  td.retake { width: 230px; color: var(--muted); }
+  .retake-done { color: var(--accent); font-weight: 700; }
+  .retake-partial { color: var(--amber); font-weight: 700; }
+  .retake-hw { color: var(--tip); font-weight: 700; }
+  .retake-dash { color: var(--muted); }
+
+  footer { margin-top: 28px; font-size: 12px; color: var(--muted); text-align: center; }
+
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; margin-right: 8px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="../tracker-p2.html">&larr; Back to dashboard</a>
+  <a class="back-link" href="../../teacher-hub.html" style="margin-left:8px;">🏠 Teacher hub</a>
+
+  <header>
+    <div>
+      <h1>Mildy — marking breakdown</h1>
+      <div class="meta">Cambridge IGCSE Mathematics 0580/23 (Extended, Paper 2) &middot; May/June 2024 &middot; marked by Kru Mook (orange pen), totalled against the mark scheme</div>
+    </div>
+    <div class="score-box">
+      <div class="num">60<span style="font-size:20px;color:var(--muted);">/70</span></div>
+      <div class="pct">85.71%</div>
+    </div>
+  </header>
+
+  <div class="note-banner"><b>A good paper &mdash; 60/70, with 27 of 33 question-parts fully correct first time.</b> Ten marks were lost across six questions: a graph-reading slip on the cumulative frequency question (Q15b), standard-form multiplication (Q17a, powers not added), the transformations question (Q19, centre of rotation not given and the enlargement not drawn), and two algebraic-fraction questions (Q23, Q25).</div>
+
+  <div class="summary-row">
+    <div class="summary-card">
+      <div class="label">Questions fully correct</div>
+      <div class="value">27 / 33</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Careless slips</div>
+      <div class="value">&minus;5</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Handwriting</div>
+      <div class="value">0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Misconceptions</div>
+      <div class="value">&minus;3</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Left blank</div>
+      <div class="value">&minus;2</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:48px;">Q</th>
+        <th style="width:200px;">Topic</th>
+        <th style="width:85px;">Marks</th>
+        <th>Notes</th>
+        <th style="width:230px;">Retake</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="q">1</td><td class="topic"><span class="tag">E1.1</span><span class="topic-name">Types of number</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">2</td><td class="topic"><span class="tag">E1.6</span><span class="topic-name">The four operations</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">3</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">4</td><td class="topic"><span class="tag">E5.4</span><span class="topic-name">Surface area and volume</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">5</td><td class="topic"><span class="tag">E8.1</span><span class="topic-name">Introduction to probability</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">6</td><td class="topic"><span class="tag">E2.2</span><span class="topic-name">Algebraic manipulation</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">7</td><td class="topic"><span class="tag">E1.11</span><span class="topic-name">Ratio and proportion</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">8</td><td class="topic"><span class="tag">E1.4</span><span class="topic-name">Fractions, decimals, percentages</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">9</td><td class="topic"><span class="tag">E6.1/E6.2</span><span class="topic-name">Right-angled triangles</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">10</td><td class="topic"><span class="tag">E3.3</span><span class="topic-name">Gradient of linear graphs</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">11</td><td class="topic"><span class="tag">E2.5</span><span class="topic-name">Equations</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">12a</td><td class="topic"><span class="tag">E2.4</span><span class="topic-name">Indices II</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">12b</td><td class="topic"><span class="tag">E2.4</span><span class="topic-name">Indices II</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">13a</td><td class="topic"><span class="tag">E1.2</span><span class="topic-name">Sets</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">13b</td><td class="topic"><span class="tag">E1.2</span><span class="topic-name">Sets</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">14a</td><td class="topic"><span class="tag">E4.7/E4.8</span><span class="topic-name">Circle theorems</span></td><td class="marks full">1/1</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">14b</td><td class="topic"><span class="tag">E4.7/E4.8</span><span class="topic-name">Circle theorems</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">15a</td><td class="topic"><span class="tag">E9.6</span><span class="topic-name">Cumulative frequency diagrams</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">15b</td><td class="topic"><span class="tag">E9.6</span><span class="topic-name">Cumulative frequency diagrams</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">Number of students above 40 s: gave 4, read 196 from the graph instead of 194; answer 6</div><div class="mini-eq"><div class="eln correct-line">Correct: 200 &minus; 194 = <b>6</b></div></div></td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">16</td><td class="topic"><span class="tag">E2.1</span><span class="topic-name">Substitution &amp; rearranging formulae</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">17a</td><td class="topic"><span class="tag">E1.8</span><span class="topic-name">Standard form</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">Standard form multiplication: multiplied the numbers but did not add the powers (16.8x10<sup>101</sup>, should be 1.68x10<sup>203</sup>) and not in standard form</div><div class="mini-eq"><div class="eln correct-line">Correct: <b>1.68 &times; 10<sup>203</sup></b></div></div></td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">17b</td><td class="topic"><span class="tag">E1.8</span><span class="topic-name">Standard form</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">18</td><td class="topic"><span class="tag">E4.6</span><span class="topic-name">Angles</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">19a</td><td class="topic"><span class="tag">E7.1</span><span class="topic-name">Transformations</span></td><td class="marks partial">2/3</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">Rotation 90 clockwise correct, but centre (0,-2) was not given (added in blue; no orange mark)</div><div class="mini-eq"><div class="eln correct-line">Correct: rotation, 90&deg; clockwise, centre <b>(0, &minus;2)</b></div></div></td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">19b</td><td class="topic"><span class="tag">E7.1</span><span class="topic-name">Transformations</span></td><td class="marks partial">0/2</td><td class="reason"><span class="cat cat-blank">Left blank</span><div class="note-line">Enlargement scale factor -2 about (-1,1) not drawn on the grid</div><div class="mini-eq"><div class="eln correct-line">Correct: triangle at <b>(&minus;5, &minus;1), (&minus;5, &minus;7), (&minus;7, &minus;7)</b></div></div></td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">20a</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">20b</td><td class="topic"><span class="tag">E2.13</span><span class="topic-name">Functions</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">21</td><td class="topic"><span class="tag">E1.4</span><span class="topic-name">Fractions, decimals, percentages</span></td><td class="marks full">2/2</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">22</td><td class="topic"><span class="tag">E6.4</span><span class="topic-name">Trigonometric functions</span></td><td class="marks full">3/3</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">23</td><td class="topic"><span class="tag">E2.3</span><span class="topic-name">Algebraic fractions</span></td><td class="marks partial">1/3</td><td class="reason"><span class="cat cat-slip">Careless slip</span><div class="note-line">Subtracting algebraic fractions: common denominator found, but bracket/sign slip in numerator (2y &minus; 3y + 3 instead of 2y &minus; (3y+3)): answer (3-y)/(y(y+1)) instead of (-y-3)/(y(y+1))</div><div class="mini-eq"><div class="eln correct-line">Correct: <b>(&minus;y &minus; 3)/(y(y + 1))</b></div></div></td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">24</td><td class="topic"><span class="tag">E6.6</span><span class="topic-name">Pythagoras in 3D</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">25</td><td class="topic"><span class="tag">E2.3</span><span class="topic-name">Algebraic fractions</span></td><td class="marks partial">3/4</td><td class="reason"><span class="cat cat-miscon">Misconception</span><div class="note-line">Algebraic fraction: factorised numerator and denominator correctly but did not spot (t-1) = -(1-t) to cancel, so answer not simplified</div><div class="mini-eq"><div class="eln correct-line">Correct: <b>(1 &minus; p)/(1 + t)</b></div></div></td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr><td class="q">26</td><td class="topic"><span class="tag">E7.4</span><span class="topic-name">Vector geometry (proofs)</span></td><td class="marks full">4/4</td><td class="reason dash">&mdash;</td><td class="retake retake-dash">&mdash;</td></tr>
+      <tr class="total"><td colspan="2">Total</td><td class="marks">60/70</td><td class="reason">85.71%</td><td class="retake retake-dash"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="legend">
+    <div><span class="dot full-dot"></span>Full marks</div>
+    <div><span class="dot partial-dot"></span>Marks dropped</div>
+  </div>
+
+  <div class="legend">
+    <span class="cat cat-slip">Careless slip</span>
+    <span class="cat cat-hw">Handwriting</span>
+    <span class="cat cat-miscon">Misconception</span>
+    <span class="cat cat-blank">Left blank</span>
+  </div>
+
+  <h2 class="section-title">What she could achieve &mdash; fixing each category in turn</h2>
+  <div class="ladder">
+    <div class="ladder-row">
+      <div class="ladder-score">60/70</div>
+      <div class="ladder-desc">Actual score.</div>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">65/70</div>
+      <div class="ladder-desc">+ careless slips fixed: <b>Q15b</b>, <b>Q19a</b>, <b>Q23</b>.</div>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">65/70</div>
+      <div class="ladder-desc">+ handwriting fixed: none this paper.</div>
+    </div>
+    <div class="ladder-row">
+      <div class="ladder-score">68/70</div>
+      <div class="ladder-desc">+ misconceptions resolved: <b>Q17a</b>, <b>Q25</b>.</div>
+    </div>
+    <div class="ladder-row final">
+      <div class="ladder-score">70/70</div>
+      <div class="ladder-desc">+ blanks completed: <b>Q19b</b>.</div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Weak topics to target next session</h2>
+  <div class="weak-grid">
+    <div class="weak-card slip">
+      <h3>Q15b &mdash; Cumulative frequency diagrams (2 marks lost)</h3>
+      <p>Number of students above 40 s: gave 4, read 196 from the graph instead of 194; answer 6. Correct: 200 &minus; 194 = <b>6</b>.</p>
+    </div>
+    <div class="weak-card miscon">
+      <h3>Q17a &mdash; Standard form (2 marks lost)</h3>
+      <p>Standard form multiplication: multiplied the numbers but did not add the powers (16.8x10<sup>101</sup>, should be 1.68x10<sup>203</sup>) and not in standard form. Correct: <b>1.68 &times; 10<sup>203</sup></b>.</p>
+    </div>
+    <div class="weak-card slip">
+      <h3>Q19a &mdash; Transformations (1 mark lost)</h3>
+      <p>Rotation 90 clockwise correct, but centre (0,-2) was not given (added in blue; no orange mark). Correct: rotation, 90&deg; clockwise, centre <b>(0, &minus;2)</b>.</p>
+    </div>
+    <div class="weak-card blank">
+      <h3>Q19b &mdash; Transformations (2 marks lost)</h3>
+      <p>Enlargement scale factor -2 about (-1,1) not drawn on the grid. Correct: triangle at <b>(&minus;5, &minus;1), (&minus;5, &minus;7), (&minus;7, &minus;7)</b>.</p>
+    </div>
+    <div class="weak-card slip">
+      <h3>Q23 &mdash; Algebraic fractions (2 marks lost)</h3>
+      <p>Subtracting algebraic fractions: common denominator found, but bracket/sign slip in numerator (2y &minus; 3y + 3 instead of 2y &minus; (3y+3)): answer (3-y)/(y(y+1)) instead of (-y-3)/(y(y+1)). Correct: <b>(&minus;y &minus; 3)/(y(y + 1))</b>.</p>
+    </div>
+    <div class="weak-card miscon">
+      <h3>Q25 &mdash; Algebraic fractions (1 mark lost)</h3>
+      <p>Algebraic fraction: factorised numerator and denominator correctly but did not spot (t-1) = -(1-t) to cancel, so answer not simplified. Correct: <b>(1 &minus; p)/(1 + t)</b>.</p>
+    </div>
+  </div>
+
+  <footer>0580/23 &middot; Cambridge IGCSE Mathematics &middot; May/June 2024 &middot; marked by Kru Mook, totalled against the mark scheme</footer>
+
+</div>
+</body>
+</html>
