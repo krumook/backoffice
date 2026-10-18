@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ninnie &mdash; Progress Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
+    --accent: #0f6e56; --accent-light: #e1f5ee;
+    --loss: #993c1d; --loss-light: #faece7;
+    --tip: #185fa5; --tip-light: #e6f1fb;
+    --amber: #854f0b; --amber-light: #faeeda;
+    --grade-astar: #1BA755; --grade-a: #1B88A7; --grade-b: #DD800E; --grade-below: #A71B46;
+    --grade-astar-light: #E2F8EB; --grade-a-light: #E2F3F8; --grade-b-light: #F8EEE2; --grade-below-light: #F8E2E9;
+    --weight: #1f2a24;
+    --untested: #8b978f; --untested-light: #eef1ef;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
+    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header { padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 20px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .back-link:hover { background: var(--tip); color: #fff; }
+  .legend-box { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; margin-bottom: 22px; font-size: 13px; color: var(--muted); }
+  .legend-box b { color: var(--ink); }
+  .legend-box .paper-list { margin-top: 6px; }
+  .legend-box .paper-list a { display: inline-block; padding: 2px 10px; border-radius: 20px; margin: 2px 6px 2px 0; font-size: 12.5px; font-weight: 600; text-decoration: none; }
+  .legend-box .paper-list a.sess { background: var(--tip-light); color: var(--tip); }
+  .legend-box .paper-list a.sess:hover { background: var(--tip); color: #fff; }
+  .section-label { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .topic-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
+  .ts-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: block; text-decoration: none; color: inherit; cursor: pointer; transition: box-shadow 0.15s ease, transform 0.15s ease; }
+  .ts-card:hover { box-shadow: 0 3px 14px rgba(31,42,36,0.14); transform: translateY(-2px); }
+  .ts-card .ts-name { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 9px; text-transform: uppercase; }
+  .ts-row { display: flex; align-items: baseline; justify-content: space-between; }
+  .ts-row .ts-label { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+  .ts-card .ts-pct { font-size: 20px; font-weight: 700; }
+  .ts-card .ts-frac { font-size: 12px; color: var(--muted); margin-left: 6px; }
+  .ts-bar { height: 5px; border-radius: 3px; background: #fff; margin-top: 4px; margin-bottom: 0; overflow: hidden; }
+  .ts-bar-fill { height: 100%; border-radius: 3px; }
+  .ts-astar { background: var(--grade-astar-light); } .ts-astar .ts-pct { color: var(--grade-astar); } .ts-astar .ts-bar-fill { background: var(--grade-astar); }
+  .ts-a { background: var(--grade-a-light); } .ts-a .ts-pct { color: var(--grade-a); } .ts-a .ts-bar-fill { background: var(--grade-a); }
+  .ts-b { background: var(--grade-b-light); } .ts-b .ts-pct { color: var(--grade-b); } .ts-b .ts-bar-fill { background: var(--grade-b); }
+  .ts-below { background: var(--grade-below-light); } .ts-below .ts-pct { color: var(--grade-below); } .ts-below .ts-bar-fill { background: var(--grade-below); }
+  .overall-line { font-size: 12.5px; color: var(--muted); margin: 4px 0 0; }
+  .overall-line b { color: var(--ink); }
+  .band-legend { display: flex; justify-content: center; gap: 18px; font-size: 12px; color: var(--muted); flex-wrap: wrap; align-items: center; margin: 0 0 30px; }
+  .band-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+  .dot-astar { background: var(--grade-astar); } .dot-a { background: var(--grade-a); } .dot-b { background: var(--grade-b); } .dot-below { background: var(--grade-below); }
+  .ts-school { background: #f1f1ee; } .ts-school .ts-pct { color: var(--untested); font-size: 14px; } .ts-school .ts-bar-fill { background: var(--untested); }
+  .unit-label { font-size: 13px; font-weight: 700; color: var(--ink); margin: 22px 0 8px; text-transform: uppercase; letter-spacing: 0.04em; }
+  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="home.html">&larr; Back to home</a>
+  <a class="back-link" href="../teacher-hub.html" style="margin-left:8px;">🏠 Teacher hub</a>
+
+  <header>
+    <h1>Ninnie &mdash; Syllabus Coverage Tracker</h1>
+    <div class="meta">Cambridge IGCSE Mathematics coursebook (chapter list from the book her mother sent) &middot; &ldquo;Learned&rdquo; % reflects real class feedback tags, not a graded exam score &mdash; no tests marked yet</div>
+  </header>
+
+  <div class="legend-box">
+    <div class="section-label" style="margin-bottom: 6px;">Class sessions &middot; 2 logged since Oct 2026</div>
+    <div class="paper-list"><a class="sess" href="../Trials/ninnie-1011.html">Sun 11 Oct (free trial)</a><a class="sess" href="fb1018.html">Sun 18 Oct</a></div>
+  </div>
+
+  <div class="section-label">Coverage by chapter &middot; click a card for full detail</div>
+  <div class="legend-box" style="margin-top:-8px;">Ninnie first came to Kru Mook for chapter 6, so chapters 1&ndash;5 are assumed to be done at her school and are not scored. Each chapter from 6 onwards shows the share of its lessons tagged Learned (1) or Need to revise (0.5) out of every lesson in that chapter &mdash; covered or not &mdash; so an untouched lesson pulls the bar down rather than being left out of the count.</div>
+
+  <div class="unit-label">Unit 1</div>
+  <div class="topic-summary">
+      <a href="t1.html" class="ts-card ts-school">
+        <div class="ts-name">1&nbsp;&middot;&nbsp;Review of number concepts</div>
+        <div class="ts-row"><span class="ts-label">At school</span><span><span class="ts-pct">Assumed done</span><span class="ts-frac">7 lessons</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
+      </a>
+      <a href="t2.html" class="ts-card ts-school">
+        <div class="ts-name">2&nbsp;&middot;&nbsp;Making sense of algebra</div>
+        <div class="ts-row"><span class="ts-label">At school</span><span><span class="ts-pct">Assumed done</span><span class="ts-frac">5 lessons</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
+      </a>
+      <a href="t3.html" class="ts-card ts-school">
+        <div class="ts-name">3&nbsp;&middot;&nbsp;Lines, angles and shapes</div>
+        <div class="ts-row"><span class="ts-label">At school</span><span><span class="ts-pct">Assumed done</span><span class="ts-frac">6 lessons</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
+      </a>
+      <a href="t4.html" class="ts-card ts-school">
+        <div class="ts-name">4&nbsp;&middot;&nbsp;Collecting, organising and displaying data</div>
+        <div class="ts-row"><span class="ts-label">At school</span><span><span class="ts-pct">Assumed done</span><span class="ts-frac">3 lessons</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
+      </a>
+  </div>
+  <div class="unit-label">Unit 2</div>
+  <div class="topic-summary">
+      <a href="t5.html" class="ts-card ts-school">
+        <div class="ts-name">5&nbsp;&middot;&nbsp;Fractions, percentages and standard form</div>
+        <div class="ts-row"><span class="ts-label">At school</span><span><span class="ts-pct">Assumed done</span><span class="ts-frac">4 lessons</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
+      </a>
+      <a href="t6.html" class="ts-card ts-below">
+        <div class="ts-name">6&nbsp;&middot;&nbsp;Equations, factors and formulae</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">33.3%</span><span class="ts-frac">1/3</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:33.3%;"></div></div>
+      </a>
+      <a href="t7.html" class="ts-card ts-below">
+        <div class="ts-name">7&nbsp;&middot;&nbsp;Perimeter, area and volume</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="t8.html" class="ts-card ts-below">
+        <div class="ts-name">8&nbsp;&middot;&nbsp;Introduction to probability</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+  </div>
+  <div class="unit-label">Unit 3</div>
+  <div class="topic-summary">
+      <a href="t9.html" class="ts-card ts-below">
+        <div class="ts-name">9&nbsp;&middot;&nbsp;Sequences, surds and sets</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/4</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="t10.html" class="ts-card ts-below">
+        <div class="ts-name">10&nbsp;&middot;&nbsp;Straight lines and quadratic equations</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/2</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="t11.html" class="ts-card ts-below">
+        <div class="ts-name">11&nbsp;&middot;&nbsp;Pythagoras' theorem and similar shapes</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/4</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="t12.html" class="ts-card ts-below">
+        <div class="ts-name">12&nbsp;&middot;&nbsp;Averages and measures of spread</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/5</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+  </div>
+  <div class="unit-label">Unit 4</div>
+  <div class="topic-summary">
+      <a href="t13.html" class="ts-card ts-below">
+        <div class="ts-name">13&nbsp;&middot;&nbsp;Understanding measurement</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/5</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="t14.html" class="ts-card ts-below">
+        <div class="ts-name">14&nbsp;&middot;&nbsp;Further solving of equations and inequalities</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/7</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="t15.html" class="ts-card ts-below">
+        <div class="ts-name">15&nbsp;&middot;&nbsp;Scale drawings, bearings and trigonometry</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/9</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="t16.html" class="ts-card ts-below">
+        <div class="ts-name">16&nbsp;&middot;&nbsp;Scatter diagrams and correlation</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/1</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+  </div>
+  <div class="unit-label">Unit 5</div>
+  <div class="topic-summary">
+      <a href="t17.html" class="ts-card ts-below">
+        <div class="ts-name">17&nbsp;&middot;&nbsp;Managing money</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="t18.html" class="ts-card ts-below">
+        <div class="ts-name">18&nbsp;&middot;&nbsp;Curved graphs</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/7</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="t19.html" class="ts-card ts-below">
+        <div class="ts-name">19&nbsp;&middot;&nbsp;Symmetry</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/4</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="t20.html" class="ts-card ts-below">
+        <div class="ts-name">20&nbsp;&middot;&nbsp;Histograms and cumulative frequency diagrams</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/2</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+  </div>
+  <div class="unit-label">Unit 6</div>
+  <div class="topic-summary">
+      <a href="t21.html" class="ts-card ts-below">
+        <div class="ts-name">21&nbsp;&middot;&nbsp;Ratio, rate and proportion</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/6</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="t22.html" class="ts-card ts-below">
+        <div class="ts-name">22&nbsp;&middot;&nbsp;More equations, formulae and functions</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="t23.html" class="ts-card ts-below">
+        <div class="ts-name">23&nbsp;&middot;&nbsp;Transformations and vectors</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+      <a href="t24.html" class="ts-card ts-below">
+        <div class="ts-name">24&nbsp;&middot;&nbsp;Probability using tree diagrams and Venn diagrams</div>
+        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/4</span></span></div>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
+      </a>
+  </div>
+
+  <div class="overall-line" style="margin-top:14px;">Overall across chapters 6&ndash;24: <b>1/78 (1.28%) learned</b> of the lessons in the book from chapter 6 onwards &mdash; every &ldquo;Learned&rdquo;/&ldquo;Need to revise&rdquo; tag on this tracker comes only from real class feedback logs (see the session list above), not from an external checklist.</div>
+
+  <div class="band-legend" style="margin-top:16px;">
+    <div><span class="band-dot dot-astar"></span>&ge;85% learned</div>
+    <div><span class="band-dot dot-b"></span>60&ndash;84% learned</div>
+    <div><span class="band-dot dot-below"></span>&lt;60% learned</div>
+  </div>
+
+  <div class="legend-box">Her exam board and exam date are not known yet (she has not sat an exam). If the school or her mother tells you the board, tell me and I can match the chapters to its syllabus.</div>
+
+  <footer>Ninnie &middot; Cambridge IGCSE Mathematics coursebook &middot; updated as classes happen</footer>
+
+</div>
+</body>
+</html>
