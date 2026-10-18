@@ -34,6 +34,14 @@
   .status-pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
   .status-charged { background: var(--accent-light); color: var(--accent); }
   .status-nocharge { background: var(--amber-light); color: var(--amber); }
+  .status-half { background: var(--tip-light); color: var(--tip); }
+  .reg-box { background: var(--amber-light); border: 1px solid #eddcb8; border-radius: 10px; padding: 16px 20px; margin-bottom: 28px; }
+  .reg-title { font-size: 14px; font-weight: 700; color: var(--amber); margin-bottom: 12px; }
+  .reg-section { margin-bottom: 10px; }
+  .reg-section:last-child { margin-bottom: 0; }
+  .reg-heading { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .reg-section ul { margin: 0; padding-left: 20px; }
+  .reg-section li { font-size: 13px; color: var(--ink); margin-bottom: 3px; }
   tr.total td { border-top: 2px solid var(--ink); font-weight: 700; background: var(--accent-light); color: var(--accent); }
   footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
 </style>
@@ -47,10 +55,10 @@
   <header>
     <div>
       <h1>October 2026 &mdash; fee summary</h1>
-      <div class="meta">Mathematics tutoring &middot; ฿400 / hour &middot; 3 sessions logged, 1 charged, 2 no-charge</div>
+      <div class="meta">Mathematics tutoring &middot; ฿400 / hour &middot; 6 sessions logged, 2 charged, 1 half-charge, 3 no-charge</div>
     </div>
     <div class="total-box">
-      <div class="num">&#3647;400</div>
+      <div class="num">&#3647;1,000</div>
       <div class="sub">total due this month</div>
     </div>
   </header>
@@ -61,9 +69,30 @@
       <tr><td>Sun</td><td>2026-10-04</td><td>13:00</td><td>14:00</td><td>Mathematics</td><td>1 hr</td><td>&#3647;400</td><td><span class="status-pill status-nocharge">No charge</span></td><td class="cost">&#3647;0</td><td>Leave &mdash; notified via Line on Sat 3 Oct at 19:49 (the day before); parent asked to study on Monday instead</td></tr>
       <tr><td>Mon</td><td>2026-10-05</td><td>19:00</td><td>20:00</td><td>Mathematics</td><td>1 hr</td><td>&#3647;400</td><td><span class="status-pill status-nocharge">No charge</span></td><td class="cost">&#3647;0</td><td>Leave &mdash; mother visiting from abroad, student has a show rehearsal; notified via Line on Mon 5 Oct at 17:09 (about 2 hours before class), after the Sun 4 Oct leave</td></tr>
       <tr><td>Sun</td><td>2026-10-11</td><td>13:00</td><td>14:00</td><td>Mathematics</td><td>1 hr</td><td>&#3647;400</td><td><span class="status-pill status-charged">Charged</span></td><td class="cost">&#3647;400</td><td>Long division (exact and with remainders), division word problems &middot; <a href="../fb1011.html">Session notes</a></td></tr>
-      <tr class="total"><td colspan="8">Total (1 charged session, 2 no-charge)</td><td class="cost">&#3647;400</td><td></td></tr>
+      <tr><td>Mon</td><td>2026-10-12</td><td>19:30</td><td>20:30</td><td>Mathematics</td><td>1 hr</td><td>&#3647;400</td><td><span class="status-pill status-charged">Charged</span></td><td class="cost">&#3647;400</td><td>Rescheduled from 19:00&ndash;20:00. Multi-step division word problems (choosing the right operation), order of operations (BIDMAS); writing-numbers homework pages 13&ndash;15 still to be sent &middot; <a href="../fb1012.html">Session notes</a></td></tr>
+      <tr><td>Sun</td><td>2026-10-18</td><td>13:00</td><td>14:00</td><td>Mathematics</td><td>1 hr</td><td>&#3647;400</td><td><span class="status-pill status-half">Half charge</span></td><td class="cost">&#3647;200</td><td>Urgent leave &mdash; parent notified via Line after class time had started (13:22, class at 13:00); 50% charged per urgent-leave policy</td></tr>
+      <tr><td>Mon</td><td>2026-10-19</td><td>19:00</td><td>20:00</td><td>Mathematics</td><td>1 hr</td><td>&#3647;400</td><td><span class="status-pill status-nocharge">No charge</span></td><td class="cost">&#3647;0</td><td>Leave &mdash; parent notified via Line on Sun 18 Oct at 13:22 (about 30 hours before class), so no charge</td></tr>
+      <tr class="total"><td colspan="8">Total (2 charged sessions, 1 half-charge, 3 no-charge)</td><td class="cost">&#3647;1,000</td><td></td></tr>
     </tbody>
   </table>
+
+  <div class="reg-box">
+    <div class="reg-title">📖 Regulations</div>
+    <div class="reg-section">
+      <div class="reg-heading">🌟 การแจ้งลา</div>
+      <ul>
+        <li>รบกวนน้องและผู้ปกครองให้แจ้งลาล่วงหน้าอย่างน้อย 1 วัน</li>
+        <li>อย่างช้าที่สุด 3 ชั่วโมงก่อนถึงเวลาเรียน กรณีมีธุระด่วนกระทันหัน หรือ ป่วย หรือ กลับบ้านไม่ทันค่ะ</li>
+      </ul>
+    </div>
+    <div class="reg-section">
+      <div class="reg-heading">🌟 กรณีน้องลากระทันหัน หรือ ไม่แจ้งลาจนล่วงเลยมาถึงเวลาเรียนแล้ว</div>
+      <ul>
+        <li>จะขอรบกวนเรียกเก็บค่าเรียน 50% ของค่าเรียนรายชั่วโมงค่ะ เช่น ค่าเรียน 400/hr จะเก็บค่าเสียเวลาให้คุณครู 200/class</li>
+        <li>เนื่องจากคุณครูได้เสียโอกาสในการรับงานอื่นๆในช่วงดังกล่าวค่ะ</li>
+      </ul>
+    </div>
+  </div>
 
   <footer>Jeenna &middot; monthly fee summary &middot; ฿400 / hour &middot; a new page is made for each month</footer>
 
