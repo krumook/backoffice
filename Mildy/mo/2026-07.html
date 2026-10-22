@@ -1,105 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Mildy &mdash; July 2026 Fee Summary</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
-    --accent: #0f6e56; --accent-light: #e1f5ee;
-    --tip: #185fa5; --tip-light: #e6f1fb;
-    --amber: #854f0b; --amber-light: #faeeda;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    padding: 40px 48px 64px;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-  }
-  .wrap { max-width: 1180px; margin: 0 auto; }
-  header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 24px; }
-  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
-  header .meta { color: var(--muted); font-size: 14px; }
-  .total-box { text-align: right; }
-  .total-box .num { font-size: 32px; font-weight: 700; color: var(--amber); line-height: 1; }
-  .total-box .sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
-
-  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
-  .back-link:hover { background: var(--tip); color: #fff; }
-
-  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); font-size: 13px; margin-bottom: 24px; }
-  thead th { background: var(--ink); color: #fff; text-align: left; padding: 11px 12px; font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
-  tbody td { padding: 10px 12px; border-top: 1px solid var(--line); vertical-align: middle; }
-  tbody tr:nth-child(even) { background: #fafaf8; }
-  td.cost { text-align: right; font-weight: 700; }
-  tbody td:nth-child(1), tbody td:nth-child(2), tbody td:nth-child(3), tbody td:nth-child(4), tbody td:nth-child(6), tbody td:nth-child(7) { white-space: nowrap; }
-
-  .status-pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
-  .status-learned { background: var(--accent-light); color: var(--accent); }
-  .status-nocharge { background: var(--amber-light); color: var(--amber); }
-
-  tr.total td { border-top: 2px solid var(--ink); font-weight: 700; background: var(--accent-light); color: var(--accent); }
-
-
-  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
-</style>
-</head>
-<body>
-<div class="wrap">
-
-  <a class="back-link" href="index.html">&larr; Back to all months</a>
-  <a class="back-link" href="../../teacher-hub.html" style="margin-left:8px;">🏠 Teacher hub</a>
-
-  <header>
-    <div>
-      <h1>July 2026 &mdash; fee summary</h1>
-      <div class="meta">Mathematics &amp; Biology tutoring &middot; rate varies by subject &middot; 11 sessions logged, 9 charged, 2 no-charge</div>
-    </div>
-    <div class="total-box">
-      <div class="num">฿9,275</div>
-      <div class="sub">total due this month</div>
-    </div>
-  </header>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Day</th>
-        <th>Date</th>
-        <th>Start</th>
-        <th>Finish</th>
-        <th>Subject</th>
-        <th>Duration</th>
-        <th>Rate</th>
-        <th>Status</th>
-        <th>Cost</th>
-        <th>Remark</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>Thu</td><td>2026-07-02</td><td>17:30</td><td>19:00</td><td>Mathematics</td><td>1.5 hr</td><td>฿700</td><td><span class="status-pill status-learned">Learned</span></td><td class="cost">฿1,050</td><td>&mdash;</td></tr>
-      <tr><td>Sun</td><td>2026-07-05</td><td>19:00</td><td>20:00</td><td>Mathematics</td><td>1 hr</td><td>฿700</td><td><span class="status-pill status-learned">Learned</span></td><td class="cost">฿700</td><td>&mdash;</td></tr>
-      <tr><td>Wed</td><td>2026-07-08</td><td>17:30</td><td>19:00</td><td>Mathematics</td><td>1.5 hr</td><td>฿700</td><td><span class="status-pill status-learned">Learned</span></td><td class="cost">฿1,050</td><td>&mdash;</td></tr>
-      <tr><td>Sun</td><td>2026-07-12</td><td>19:00</td><td>20:30</td><td>Mathematics</td><td>1.5 hr</td><td>฿700</td><td><span class="status-pill status-learned">Learned</span></td><td class="cost">฿1,050</td><td>&mdash;</td></tr>
-      <tr><td>Thu</td><td>2026-07-16</td><td>16:00</td><td>17:30</td><td>Mathematics</td><td>1.5 hr</td><td>฿700</td><td><span class="status-pill status-learned">Learned</span></td><td class="cost">฿1,050</td><td>&mdash;</td></tr>
-      <tr><td>Sun</td><td>2026-07-19</td><td>19:00</td><td>20:30</td><td>Mathematics</td><td>1.5 hr</td><td>฿700</td><td><span class="status-pill status-nocharge">No charge</span></td><td class="cost">฿0</td><td>&#3621;&#3634;&#3605;&#3636;&#3604;&#3608;&#3640;&#3619;&#3632; (on leave &mdash; personal errand)</td></tr>
-      <tr><td>Mon</td><td>2026-07-20</td><td>16:15</td><td>18:00</td><td>Biology</td><td>1.75 hr</td><td>฿700</td><td><span class="status-pill status-learned">Learned</span></td><td class="cost">฿1,225</td><td>Gas exchange &amp; respiration (Kru Prim) &mdash; see <a href="../other-subjects/kru-prim/2026-07.html">Kru Prim's ledger</a></td></tr>
-      <tr><td>Thu</td><td>2026-07-23</td><td>16:00</td><td>17:30</td><td>Mathematics</td><td>1.5 hr</td><td>฿700</td><td><span class="status-pill status-learned">Learned</span></td><td class="cost">฿1,050</td><td>&mdash;</td></tr>
-      <tr><td>Sun</td><td>2026-07-26</td><td>19:00</td><td>20:30</td><td>Mathematics</td><td>1.5 hr</td><td>฿700</td><td><span class="status-pill status-nocharge">No charge</span></td><td class="cost">฿0</td><td>&#3621;&#3634;&#3605;&#3636;&#3604;&#3608;&#3640;&#3619;&#3632; (on leave &mdash; personal errand)</td></tr>
-      <tr><td>Wed</td><td>2026-07-29</td><td>17:00</td><td>18:30</td><td>Mathematics</td><td>1.5 hr</td><td>฿700</td><td><span class="status-pill status-learned">Learned</span></td><td class="cost">฿1,050</td><td>&mdash;</td></tr>
-      <tr><td>Thu</td><td>2026-07-30</td><td>16:00</td><td>17:30</td><td>Mathematics</td><td>1.5 hr</td><td>฿700</td><td><span class="status-pill status-learned">Learned</span></td><td class="cost">฿1,050</td><td>&mdash;</td></tr>
-      <tr class="total"><td colspan="8">Total (9 charged sessions, 2 no-charge)</td><td class="cost">฿9,275</td><td></td></tr>
-    </tbody>
-  </table>
-
-  <footer>Mildy &middot; monthly fee summary &middot; ฿700 / hour &middot; a new page like this is made for each month</footer>
-
-</div>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Locked</title>
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fbfaf7;font-family:'Space Grotesk',-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#1f2a24}
+form{background:#fff;border:1px solid #dfe6e1;border-radius:14px;padding:32px 34px;width:min(360px,90vw);text-align:center;box-shadow:0 6px 22px rgba(31,42,36,.10)}
+h1{font-size:20px;margin:0 0 6px}p{margin:0 0 18px;color:#5c6b63;font-size:14px}
+input{width:100%;font:inherit;font-size:16px;padding:11px 14px;border:1px solid #dfe6e1;border-radius:10px;margin-bottom:12px}
+button{width:100%;font:inherit;font-weight:700;font-size:15px;padding:11px;border:0;border-radius:10px;background:#0f6e56;color:#fff;cursor:pointer}
+#m{margin-top:12px;font-size:13px;color:#993c1d;min-height:18px}</style></head>
+<body><form id="f" autocomplete="off"><h1>&#128274; School back office</h1><p>Enter the password to open this page.</p>
+<input type="password" id="p" placeholder="Password" autofocus><button type="submit">Unlock</button><div id="m"></div></form>
+<script>
+const D={"s":"bPVNZHgZ6TzAHvhfOXepZg==","i":"TxTFdFWYgzM6tQYW","n":600000,"c":"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"};
+const b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function go(pw){
+  if(!window.crypto||!crypto.subtle) throw new Error('nocrypto');
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b(D.s),iterations:D.n,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b(D.i)},key,b(D.c));
+  try{sessionStorage.setItem('bo_pw',pw)}catch(e){}
+  document.open();document.write(new TextDecoder().decode(pt));document.close();
+}
+const m=document.getElementById('m');
+document.getElementById('f').addEventListener('submit',async e=>{e.preventDefault();m.textContent='Checking\u2026';
+  try{await go(document.getElementById('p').value)}catch(x){m.textContent=x.message==='nocrypto'?'This browser needs a secure (https) connection to unlock.':'Wrong password.'}});
+let saved=null;try{saved=sessionStorage.getItem('bo_pw')}catch(e){}
+if(saved){go(saved).catch(()=>{try{sessionStorage.removeItem('bo_pw')}catch(e){}})}
+</script></body></html>

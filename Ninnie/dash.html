@@ -1,233 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Ninnie &mdash; Progress Tracker</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
-    --accent: #0f6e56; --accent-light: #e1f5ee;
-    --loss: #993c1d; --loss-light: #faece7;
-    --tip: #185fa5; --tip-light: #e6f1fb;
-    --amber: #854f0b; --amber-light: #faeeda;
-    --grade-astar: #1BA755; --grade-a: #1B88A7; --grade-b: #DD800E; --grade-below: #A71B46;
-    --grade-astar-light: #E2F8EB; --grade-a-light: #E2F3F8; --grade-b-light: #F8EEE2; --grade-below-light: #F8E2E9;
-    --weight: #1f2a24;
-    --untested: #8b978f; --untested-light: #eef1ef;
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
-    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
-  .wrap { max-width: 1180px; margin: 0 auto; }
-  header { padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 20px; }
-  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
-  header .meta { color: var(--muted); font-size: 14px; }
-  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
-  .back-link:hover { background: var(--tip); color: #fff; }
-  .legend-box { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; margin-bottom: 22px; font-size: 13px; color: var(--muted); }
-  .legend-box b { color: var(--ink); }
-  .legend-box .paper-list { margin-top: 6px; }
-  .legend-box .paper-list a { display: inline-block; padding: 2px 10px; border-radius: 20px; margin: 2px 6px 2px 0; font-size: 12.5px; font-weight: 600; text-decoration: none; }
-  .legend-box .paper-list a.sess { background: var(--tip-light); color: var(--tip); }
-  .legend-box .paper-list a.sess:hover { background: var(--tip); color: #fff; }
-  .section-label { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.04em; }
-  .topic-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
-  .ts-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: block; text-decoration: none; color: inherit; cursor: pointer; transition: box-shadow 0.15s ease, transform 0.15s ease; }
-  .ts-card:hover { box-shadow: 0 3px 14px rgba(31,42,36,0.14); transform: translateY(-2px); }
-  .ts-card .ts-name { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 9px; text-transform: uppercase; }
-  .ts-row { display: flex; align-items: baseline; justify-content: space-between; }
-  .ts-row .ts-label { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
-  .ts-card .ts-pct { font-size: 20px; font-weight: 700; }
-  .ts-card .ts-frac { font-size: 12px; color: var(--muted); margin-left: 6px; }
-  .ts-bar { height: 5px; border-radius: 3px; background: #fff; margin-top: 4px; margin-bottom: 0; overflow: hidden; }
-  .ts-bar-fill { height: 100%; border-radius: 3px; }
-  .ts-astar { background: var(--grade-astar-light); } .ts-astar .ts-pct { color: var(--grade-astar); } .ts-astar .ts-bar-fill { background: var(--grade-astar); }
-  .ts-a { background: var(--grade-a-light); } .ts-a .ts-pct { color: var(--grade-a); } .ts-a .ts-bar-fill { background: var(--grade-a); }
-  .ts-b { background: var(--grade-b-light); } .ts-b .ts-pct { color: var(--grade-b); } .ts-b .ts-bar-fill { background: var(--grade-b); }
-  .ts-below { background: var(--grade-below-light); } .ts-below .ts-pct { color: var(--grade-below); } .ts-below .ts-bar-fill { background: var(--grade-below); }
-  .overall-line { font-size: 12.5px; color: var(--muted); margin: 4px 0 0; }
-  .overall-line b { color: var(--ink); }
-  .band-legend { display: flex; justify-content: center; gap: 18px; font-size: 12px; color: var(--muted); flex-wrap: wrap; align-items: center; margin: 0 0 30px; }
-  .band-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
-  .dot-astar { background: var(--grade-astar); } .dot-a { background: var(--grade-a); } .dot-b { background: var(--grade-b); } .dot-below { background: var(--grade-below); }
-  .ts-school { background: #f1f1ee; } .ts-school .ts-pct { color: var(--untested); font-size: 14px; } .ts-school .ts-bar-fill { background: var(--untested); }
-  .unit-label { font-size: 13px; font-weight: 700; color: var(--ink); margin: 22px 0 8px; text-transform: uppercase; letter-spacing: 0.04em; }
-  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
-</style>
-</head>
-<body>
-<div class="wrap">
-
-  <a class="back-link" href="home.html">&larr; Back to home</a>
-  <a class="back-link" href="../teacher-hub.html" style="margin-left:8px;">🏠 Teacher hub</a>
-
-  <header>
-    <h1>Ninnie &mdash; Syllabus Coverage Tracker</h1>
-    <div class="meta">Cambridge IGCSE Mathematics coursebook (chapter list from the book her mother sent) &middot; &ldquo;Learned&rdquo; % reflects real class feedback tags, not a graded exam score &mdash; no tests marked yet</div>
-  </header>
-
-  <div class="legend-box">
-    <div class="section-label" style="margin-bottom: 6px;">Class sessions &middot; 2 logged since Oct 2026</div>
-    <div class="paper-list"><a class="sess" href="../Trials/ninnie-1011.html">Sun 11 Oct (free trial)</a><a class="sess" href="fb1018.html">Sun 18 Oct</a></div>
-  </div>
-
-  <div class="section-label">Coverage by chapter &middot; click a card for full detail</div>
-  <div class="legend-box" style="margin-top:-8px;">Ninnie first came to Kru Mook for chapter 6, so chapters 1&ndash;5 are assumed to be done at her school and are not scored. Each chapter from 6 onwards shows the share of its lessons tagged Learned (1) or Need to revise (0.5) out of every lesson in that chapter &mdash; covered or not &mdash; so an untouched lesson pulls the bar down rather than being left out of the count.</div>
-
-  <div class="unit-label">Unit 1</div>
-  <div class="topic-summary">
-      <a href="t1.html" class="ts-card ts-school">
-        <div class="ts-name">1&nbsp;&middot;&nbsp;Review of number concepts</div>
-        <div class="ts-row"><span class="ts-label">At school</span><span><span class="ts-pct">Assumed done</span><span class="ts-frac">7 lessons</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
-      </a>
-      <a href="t2.html" class="ts-card ts-school">
-        <div class="ts-name">2&nbsp;&middot;&nbsp;Making sense of algebra</div>
-        <div class="ts-row"><span class="ts-label">At school</span><span><span class="ts-pct">Assumed done</span><span class="ts-frac">5 lessons</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
-      </a>
-      <a href="t3.html" class="ts-card ts-school">
-        <div class="ts-name">3&nbsp;&middot;&nbsp;Lines, angles and shapes</div>
-        <div class="ts-row"><span class="ts-label">At school</span><span><span class="ts-pct">Assumed done</span><span class="ts-frac">6 lessons</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
-      </a>
-      <a href="t4.html" class="ts-card ts-school">
-        <div class="ts-name">4&nbsp;&middot;&nbsp;Collecting, organising and displaying data</div>
-        <div class="ts-row"><span class="ts-label">At school</span><span><span class="ts-pct">Assumed done</span><span class="ts-frac">3 lessons</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
-      </a>
-  </div>
-  <div class="unit-label">Unit 2</div>
-  <div class="topic-summary">
-      <a href="t5.html" class="ts-card ts-school">
-        <div class="ts-name">5&nbsp;&middot;&nbsp;Fractions, percentages and standard form</div>
-        <div class="ts-row"><span class="ts-label">At school</span><span><span class="ts-pct">Assumed done</span><span class="ts-frac">4 lessons</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0%;"></div></div>
-      </a>
-      <a href="t6.html" class="ts-card ts-below">
-        <div class="ts-name">6&nbsp;&middot;&nbsp;Equations, factors and formulae</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">33.3%</span><span class="ts-frac">1/3</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:33.3%;"></div></div>
-      </a>
-      <a href="t7.html" class="ts-card ts-below">
-        <div class="ts-name">7&nbsp;&middot;&nbsp;Perimeter, area and volume</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-      <a href="t8.html" class="ts-card ts-below">
-        <div class="ts-name">8&nbsp;&middot;&nbsp;Introduction to probability</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-  </div>
-  <div class="unit-label">Unit 3</div>
-  <div class="topic-summary">
-      <a href="t9.html" class="ts-card ts-below">
-        <div class="ts-name">9&nbsp;&middot;&nbsp;Sequences, surds and sets</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/4</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-      <a href="t10.html" class="ts-card ts-below">
-        <div class="ts-name">10&nbsp;&middot;&nbsp;Straight lines and quadratic equations</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/2</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-      <a href="t11.html" class="ts-card ts-below">
-        <div class="ts-name">11&nbsp;&middot;&nbsp;Pythagoras' theorem and similar shapes</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/4</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-      <a href="t12.html" class="ts-card ts-below">
-        <div class="ts-name">12&nbsp;&middot;&nbsp;Averages and measures of spread</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/5</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-  </div>
-  <div class="unit-label">Unit 4</div>
-  <div class="topic-summary">
-      <a href="t13.html" class="ts-card ts-below">
-        <div class="ts-name">13&nbsp;&middot;&nbsp;Understanding measurement</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/5</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-      <a href="t14.html" class="ts-card ts-below">
-        <div class="ts-name">14&nbsp;&middot;&nbsp;Further solving of equations and inequalities</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/7</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-      <a href="t15.html" class="ts-card ts-below">
-        <div class="ts-name">15&nbsp;&middot;&nbsp;Scale drawings, bearings and trigonometry</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/9</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-      <a href="t16.html" class="ts-card ts-below">
-        <div class="ts-name">16&nbsp;&middot;&nbsp;Scatter diagrams and correlation</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/1</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-  </div>
-  <div class="unit-label">Unit 5</div>
-  <div class="topic-summary">
-      <a href="t17.html" class="ts-card ts-below">
-        <div class="ts-name">17&nbsp;&middot;&nbsp;Managing money</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-      <a href="t18.html" class="ts-card ts-below">
-        <div class="ts-name">18&nbsp;&middot;&nbsp;Curved graphs</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/7</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-      <a href="t19.html" class="ts-card ts-below">
-        <div class="ts-name">19&nbsp;&middot;&nbsp;Symmetry</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/4</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-      <a href="t20.html" class="ts-card ts-below">
-        <div class="ts-name">20&nbsp;&middot;&nbsp;Histograms and cumulative frequency diagrams</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/2</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-  </div>
-  <div class="unit-label">Unit 6</div>
-  <div class="topic-summary">
-      <a href="t21.html" class="ts-card ts-below">
-        <div class="ts-name">21&nbsp;&middot;&nbsp;Ratio, rate and proportion</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/6</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-      <a href="t22.html" class="ts-card ts-below">
-        <div class="ts-name">22&nbsp;&middot;&nbsp;More equations, formulae and functions</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-      <a href="t23.html" class="ts-card ts-below">
-        <div class="ts-name">23&nbsp;&middot;&nbsp;Transformations and vectors</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/3</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-      <a href="t24.html" class="ts-card ts-below">
-        <div class="ts-name">24&nbsp;&middot;&nbsp;Probability using tree diagrams and Venn diagrams</div>
-        <div class="ts-row"><span class="ts-label">Learned</span><span><span class="ts-pct">0.0%</span><span class="ts-frac">0/4</span></span></div>
-        <div class="ts-bar"><div class="ts-bar-fill" style="width:0.0%;"></div></div>
-      </a>
-  </div>
-
-  <div class="overall-line" style="margin-top:14px;">Overall across chapters 6&ndash;24: <b>1/78 (1.28%) learned</b> of the lessons in the book from chapter 6 onwards &mdash; every &ldquo;Learned&rdquo;/&ldquo;Need to revise&rdquo; tag on this tracker comes only from real class feedback logs (see the session list above), not from an external checklist.</div>
-
-  <div class="band-legend" style="margin-top:16px;">
-    <div><span class="band-dot dot-astar"></span>&ge;85% learned</div>
-    <div><span class="band-dot dot-b"></span>60&ndash;84% learned</div>
-    <div><span class="band-dot dot-below"></span>&lt;60% learned</div>
-  </div>
-
-  <div class="legend-box">Her exam board and exam date are not known yet (she has not sat an exam). If the school or her mother tells you the board, tell me and I can match the chapters to its syllabus.</div>
-
-  <footer>Ninnie &middot; Cambridge IGCSE Mathematics coursebook &middot; updated as classes happen</footer>
-
-</div>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Locked</title>
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fbfaf7;font-family:'Space Grotesk',-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#1f2a24}
+form{background:#fff;border:1px solid #dfe6e1;border-radius:14px;padding:32px 34px;width:min(360px,90vw);text-align:center;box-shadow:0 6px 22px rgba(31,42,36,.10)}
+h1{font-size:20px;margin:0 0 6px}p{margin:0 0 18px;color:#5c6b63;font-size:14px}
+input{width:100%;font:inherit;font-size:16px;padding:11px 14px;border:1px solid #dfe6e1;border-radius:10px;margin-bottom:12px}
+button{width:100%;font:inherit;font-weight:700;font-size:15px;padding:11px;border:0;border-radius:10px;background:#0f6e56;color:#fff;cursor:pointer}
+#m{margin-top:12px;font-size:13px;color:#993c1d;min-height:18px}</style></head>
+<body><form id="f" autocomplete="off"><h1>&#128274; School back office</h1><p>Enter the password to open this page.</p>
+<input type="password" id="p" placeholder="Password" autofocus><button type="submit">Unlock</button><div id="m"></div></form>
+<script>
+const D={"s":"rONhRd8pWKC1Nm6hJ5EmkA==","i":"d7nPR8PhwzzVAHLq","n":600000,"c":"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"};
+const b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function go(pw){
+  if(!window.crypto||!crypto.subtle) throw new Error('nocrypto');
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b(D.s),iterations:D.n,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b(D.i)},key,b(D.c));
+  try{sessionStorage.setItem('bo_pw',pw)}catch(e){}
+  document.open();document.write(new TextDecoder().decode(pt));document.close();
+}
+const m=document.getElementById('m');
+document.getElementById('f').addEventListener('submit',async e=>{e.preventDefault();m.textContent='Checking\u2026';
+  try{await go(document.getElementById('p').value)}catch(x){m.textContent=x.message==='nocrypto'?'This browser needs a secure (https) connection to unlock.':'Wrong password.'}});
+let saved=null;try{saved=sessionStorage.getItem('bo_pw')}catch(e){}
+if(saved){go(saved).catch(()=>{try{sessionStorage.removeItem('bo_pw')}catch(e){}})}
+</script></body></html>

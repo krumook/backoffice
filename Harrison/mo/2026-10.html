@@ -1,73 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Harrison &mdash; October 2026 Fee Summary</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
-    --accent: #0f6e56; --accent-light: #e1f5ee;
-    --tip: #185fa5; --tip-light: #e6f1fb;
-    --amber: #854f0b; --amber-light: #faeeda;
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; padding: 40px 48px 64px; background: var(--bg); color: var(--ink);
-    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
-  .wrap { max-width: 1180px; margin: 0 auto; }
-  header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 24px; }
-  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
-  header .meta { color: var(--muted); font-size: 14px; }
-  .total-box { text-align: right; }
-  .total-box .num { font-size: 32px; font-weight: 700; color: var(--amber); line-height: 1; }
-  .total-box .sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
-  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
-  .back-link:hover { background: var(--tip); color: #fff; }
-  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); font-size: 13px; margin-bottom: 24px; }
-  thead th { background: var(--ink); color: #fff; text-align: left; padding: 11px 12px; font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
-  tbody td { padding: 10px 12px; border-top: 1px solid var(--line); vertical-align: middle; }
-  tbody tr:nth-child(even) { background: #fafaf8; }
-  td.cost { text-align: right; font-weight: 700; }
-  tbody td:nth-child(1), tbody td:nth-child(2), tbody td:nth-child(3), tbody td:nth-child(4), tbody td:nth-child(6), tbody td:nth-child(7) { white-space: nowrap; }
-  .status-pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
-  .status-charged { background: var(--accent-light); color: var(--accent); }
-  .status-half { background: var(--tip-light); color: var(--tip); }
-  .status-nocharge { background: var(--amber-light); color: var(--amber); }
-  tr.total td { border-top: 2px solid var(--ink); font-weight: 700; background: var(--accent-light); color: var(--accent); }
-  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
-</style>
-</head>
-<body>
-<div class="wrap">
-
-  <a class="back-link" href="index.html">&larr; Back to all months</a>
-  <a class="back-link" href="../../teacher-hub.html" style="margin-left:8px;">🏠 Teacher hub</a>
-
-  <header>
-    <div>
-      <h1>October 2026 &mdash; fee summary</h1>
-      <div class="meta">Thai tutoring &middot; &#3647;320 / hour &middot; 3 sessions logged, 1 half charge, 2 no-charge</div>
-    </div>
-    <div class="total-box">
-      <div class="num">&#3647;80</div>
-      <div class="sub">total due this month</div>
-    </div>
-  </header>
-
-  <table>
-    <thead><tr><th>Day</th><th>Date</th><th>Start</th><th>Finish</th><th>Subject</th><th>Duration</th><th>Rate</th><th>Status</th><th>Cost</th><th>Remark</th></tr></thead>
-    <tbody>
-      <tr><td>Sun</td><td>2026-10-04</td><td>23:00</td><td>23:30</td><td>Thai</td><td>0.5 hr</td><td>&#3647;320</td><td><span class="status-pill status-half">Half charge</span></td><td class="cost">&#3647;80</td><td>No-show &mdash; student did not join, teacher waited; parent (via Line, 4 Oct 23:27) agreed to half charge per policy</td></tr>
-      <tr><td>Sun</td><td>2026-10-11</td><td>23:00</td><td>23:30</td><td>Thai</td><td>0.5 hr</td><td>&#3647;320</td><td><span class="status-pill status-nocharge">No charge</span></td><td class="cost">&#3647;0</td><td>Cancelled by parent (Line, 11 Oct 05:15, about 18 hours&rsquo; notice); teacher informed</td></tr>
-      <tr><td>Sun</td><td>2026-10-18</td><td>23:00</td><td>23:30</td><td>Thai</td><td>0.5 hr</td><td>&#3647;320</td><td><span class="status-pill status-nocharge">No charge</span></td><td class="cost">&#3647;0</td><td>Cancelled by parent &mdash; the family can no longer do Sunday mornings (US time); new recurring day/time to be arranged with Kru Asia</td></tr>
-      <tr class="total"><td colspan="8">Total (1 half-charge session, 2 no-charge)</td><td class="cost">&#3647;80</td><td></td></tr>
-    </tbody>
-  </table>
-
-  <footer>Harrison &middot; monthly fee summary &middot; &#3647;320 / hour &middot; a new page is made for each month</footer>
-
-</div>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Locked</title>
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fbfaf7;font-family:'Space Grotesk',-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#1f2a24}
+form{background:#fff;border:1px solid #dfe6e1;border-radius:14px;padding:32px 34px;width:min(360px,90vw);text-align:center;box-shadow:0 6px 22px rgba(31,42,36,.10)}
+h1{font-size:20px;margin:0 0 6px}p{margin:0 0 18px;color:#5c6b63;font-size:14px}
+input{width:100%;font:inherit;font-size:16px;padding:11px 14px;border:1px solid #dfe6e1;border-radius:10px;margin-bottom:12px}
+button{width:100%;font:inherit;font-weight:700;font-size:15px;padding:11px;border:0;border-radius:10px;background:#0f6e56;color:#fff;cursor:pointer}
+#m{margin-top:12px;font-size:13px;color:#993c1d;min-height:18px}</style></head>
+<body><form id="f" autocomplete="off"><h1>&#128274; School back office</h1><p>Enter the password to open this page.</p>
+<input type="password" id="p" placeholder="Password" autofocus><button type="submit">Unlock</button><div id="m"></div></form>
+<script>
+const D={"s":"8gucjMDlmKDiYBwUHceiXw==","i":"B0ILf3IuGW5ncnMu","n":600000,"c":"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"};
+const b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function go(pw){
+  if(!window.crypto||!crypto.subtle) throw new Error('nocrypto');
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b(D.s),iterations:D.n,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b(D.i)},key,b(D.c));
+  try{sessionStorage.setItem('bo_pw',pw)}catch(e){}
+  document.open();document.write(new TextDecoder().decode(pt));document.close();
+}
+const m=document.getElementById('m');
+document.getElementById('f').addEventListener('submit',async e=>{e.preventDefault();m.textContent='Checking\u2026';
+  try{await go(document.getElementById('p').value)}catch(x){m.textContent=x.message==='nocrypto'?'This browser needs a secure (https) connection to unlock.':'Wrong password.'}});
+let saved=null;try{saved=sessionStorage.getItem('bo_pw')}catch(e){}
+if(saved){go(saved).catch(()=>{try{sessionStorage.removeItem('bo_pw')}catch(e){}})}
+</script></body></html>

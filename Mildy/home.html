@@ -1,130 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Mildy — Home</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
-    --accent: #0f6e56; --accent-light: #e1f5ee;
-    --tip: #185fa5; --tip-light: #e6f1fb;
-    --amber: #854f0b; --amber-light: #faeeda;
-    --grade-a: #1B88A7; --grade-a-light: #E2F3F8;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    padding: 56px 24px 64px;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-  }
-  .wrap { max-width: 900px; margin: 0 auto; }
-  header { text-align: center; margin-bottom: 44px; }
-  .eyebrow { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
-  header h1 { margin: 0 0 10px; font-size: 32px; font-weight: 700; }
-  header .meta { color: var(--muted); font-size: 14.5px; }
-
-  .hub-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-  .hub-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 26px 22px;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    transition: box-shadow 0.15s ease, transform 0.15s ease;
-    border-top: 4px solid var(--hub-color, var(--accent));
-  }
-  .hub-card:hover { box-shadow: 0 6px 22px rgba(31,42,36,0.14); transform: translateY(-3px); }
-  .hub-icon { font-size: 26px; line-height: 1; }
-  .hub-card h2 { margin: 0; font-size: 16.5px; font-weight: 700; }
-  .hub-card p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
-  .hub-goto { margin-top: auto; padding-top: 10px; font-size: 12.5px; font-weight: 600; color: var(--hub-color, var(--accent)); }
-
-  .hub-card.schedule { --hub-color: var(--tip); }
-  .hub-card.fees { --hub-color: var(--amber); }
-  .hub-card.progress { --hub-color: var(--grade-a); }
-  .hub-card.other { --hub-color: #3c3489; }
-
-  footer { margin-top: 46px; font-size: 12px; color: var(--muted); text-align: center; }
-
-  @media (max-width: 720px) {
-    .hub-grid { grid-template-columns: 1fr; }
-  }
-  .hub-grid.two { grid-template-columns: repeat(2, 1fr); }
-  .group-label { font-size: 13px; font-weight: 700; color: #5c6b63; text-transform: uppercase; letter-spacing: 0.06em; margin: 30px 0 12px; }
-  .group-label.first { margin-top: 0; }
-  @media (max-width: 720px) { .hub-grid.two { grid-template-columns: 1fr; } }
-</style>
-</head>
-<body>
-<div class="wrap">
-
-  <a href="../teacher-hub.html" style="display:inline-block;font-size:13px;font-weight:600;color:var(--tip);text-decoration:none;background:var(--tip-light);padding:7px 14px;border-radius:20px;margin-bottom:18px;">&larr; Back to Teacher Hub</a>
-
-  <header>
-    <div class="eyebrow">Mildy &middot; Tutoring hub</div>
-    <h1>What would you like to check?</h1>
-    <div class="meta">Everything in one place &mdash; schedule, fees, Further Maths and IGCSE Maths progress.</div>
-  </header>
-
-  <div class="group-label first">Classes &amp; fees</div>
-  <div class="hub-grid two">
-    <a class="hub-card schedule" href="schedule.html">
-      <div class="hub-icon">🗓️</div>
-      <h2>View class schedule</h2>
-      <p>The recurring weekly class times, and how long the current schedule runs before it changes.</p>
-      <div class="hub-goto">Open schedule &rarr;</div>
-    </a>
-    <a class="hub-card fees" href="mo/index.html">
-      <div class="hub-icon">🧾</div>
-      <h2>This month's schedule conclusion</h2>
-      <p>Every session held this month with dates and fees, and the running total for collecting payment.</p>
-      <div class="hub-goto">Open this month &rarr;</div>
-    </a>
-  </div>
-
-  <div class="group-label">Progress</div>
-  <div class="hub-grid two">
-    <a class="hub-card progress" href="fm.html" style="--hub-color: var(--accent);">
-      <div class="hub-icon">🎓</div>
-      <h2>Further Maths progress</h2>
-      <p>AQA Level 2 Further Maths: all 12 units from Surds to Factor Theorem with objectives and a status for each.</p>
-      <div class="hub-goto">Open Further Maths &rarr;</div>
-    </a>
-    <a class="hub-card progress" href="tracker.html">
-      <div class="hub-icon">📐</div>
-      <h2>IGCSE Maths 0580 (finished)</h2>
-      <p>Syllabus coverage, topic scores, and marking breakdowns from every past paper marked.</p>
-      <div class="hub-goto">Open progress tracker &rarr;</div>
-    </a>
-  </div>
-
-  <div class="group-label">More</div>
-  <div class="hub-grid two">
-    <a class="hub-card other" href="other-subjects/index.html">
-      <div class="hub-icon">🤝</div>
-      <h2>Business, Econ &amp; Biology</h2>
-      <p>What's paid to Kru Jan and Kru Prim and the margin kept &mdash; not through Chertam, not shown to the parent.</p>
-      <div class="hub-goto">Open ledger &rarr;</div>
-    </a>
-  </div>
-
-  <footer>Mildy &middot; Year 10 &middot; Harrow International School Bangkok &middot; updated as classes happen</footer>
-
-</div>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Locked</title>
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fbfaf7;font-family:'Space Grotesk',-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#1f2a24}
+form{background:#fff;border:1px solid #dfe6e1;border-radius:14px;padding:32px 34px;width:min(360px,90vw);text-align:center;box-shadow:0 6px 22px rgba(31,42,36,.10)}
+h1{font-size:20px;margin:0 0 6px}p{margin:0 0 18px;color:#5c6b63;font-size:14px}
+input{width:100%;font:inherit;font-size:16px;padding:11px 14px;border:1px solid #dfe6e1;border-radius:10px;margin-bottom:12px}
+button{width:100%;font:inherit;font-weight:700;font-size:15px;padding:11px;border:0;border-radius:10px;background:#0f6e56;color:#fff;cursor:pointer}
+#m{margin-top:12px;font-size:13px;color:#993c1d;min-height:18px}</style></head>
+<body><form id="f" autocomplete="off"><h1>&#128274; School back office</h1><p>Enter the password to open this page.</p>
+<input type="password" id="p" placeholder="Password" autofocus><button type="submit">Unlock</button><div id="m"></div></form>
+<script>
+const D={"s":"O9W8g0T5WAMEjRad0AwRRQ==","i":"nT4+XlW6hbN7NdS8","n":600000,"c":"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"};
+const b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function go(pw){
+  if(!window.crypto||!crypto.subtle) throw new Error('nocrypto');
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b(D.s),iterations:D.n,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b(D.i)},key,b(D.c));
+  try{sessionStorage.setItem('bo_pw',pw)}catch(e){}
+  document.open();document.write(new TextDecoder().decode(pt));document.close();
+}
+const m=document.getElementById('m');
+document.getElementById('f').addEventListener('submit',async e=>{e.preventDefault();m.textContent='Checking\u2026';
+  try{await go(document.getElementById('p').value)}catch(x){m.textContent=x.message==='nocrypto'?'This browser needs a secure (https) connection to unlock.':'Wrong password.'}});
+let saved=null;try{saved=sessionStorage.getItem('bo_pw')}catch(e){}
+if(saved){go(saved).catch(()=>{try{sessionStorage.removeItem('bo_pw')}catch(e){}})}
+</script></body></html>

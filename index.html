@@ -1,12 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=teacher-hub.html">
-<title>Teacher Hub</title>
-<script>window.location.replace("teacher-hub.html");</script>
-</head>
-<body>
-<p>Redirecting… <a href="teacher-hub.html">Go to Teacher Hub</a></p>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Locked</title>
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fbfaf7;font-family:'Space Grotesk',-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#1f2a24}
+form{background:#fff;border:1px solid #dfe6e1;border-radius:14px;padding:32px 34px;width:min(360px,90vw);text-align:center;box-shadow:0 6px 22px rgba(31,42,36,.10)}
+h1{font-size:20px;margin:0 0 6px}p{margin:0 0 18px;color:#5c6b63;font-size:14px}
+input{width:100%;font:inherit;font-size:16px;padding:11px 14px;border:1px solid #dfe6e1;border-radius:10px;margin-bottom:12px}
+button{width:100%;font:inherit;font-weight:700;font-size:15px;padding:11px;border:0;border-radius:10px;background:#0f6e56;color:#fff;cursor:pointer}
+#m{margin-top:12px;font-size:13px;color:#993c1d;min-height:18px}</style></head>
+<body><form id="f" autocomplete="off"><h1>&#128274; School back office</h1><p>Enter the password to open this page.</p>
+<input type="password" id="p" placeholder="Password" autofocus><button type="submit">Unlock</button><div id="m"></div></form>
+<script>
+const D={"s":"R469tNCUmqbB3wtGmJuj9Q==","i":"KdajkOV2Un36TOJf","n":600000,"c":"e8NK1PAbT2ZQLvTS+DgdVU18DUYpvIkTNkdch5Xb8OZtKFCZx+2hSyMArZdtNTZXbJxDImiRLVnnwDqrVxH/CuW1ZzvOK/zQN77aercoN7yHnYSss0kpbMH52CdWEXRIaZ5xZJblZSFYXNHoFFgsBHbZOfwfKAHmC26noSgGQtUl6eg9K3QTyHMtj5r6cbvJ9wBe6ka2eUvy+Q0Zd6u08gyXuR0JWP0RaKXif5BVc/ou2e2qK8yLt3r2imzBhUDaEZ8XUvzjnN2PK6d1clL6lPxoARfiwD2N3Mmy5If+vqBgphCbJZXUmJ50SyPEQY1A8b8eQKJsSfQwBCf1Cu5h1ROy7o17KnlqpcVyuhva07hfWLLGAA7yg67sU1PS0nobceaAZPHFc9O42WMQHaUnP7MufsRqsUZkAYgQGahcOJgcphtowLVYEHFI3IjOI3umz6UKg37DAgI="};
+const b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function go(pw){
+  if(!window.crypto||!crypto.subtle) throw new Error('nocrypto');
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b(D.s),iterations:D.n,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b(D.i)},key,b(D.c));
+  try{sessionStorage.setItem('bo_pw',pw)}catch(e){}
+  document.open();document.write(new TextDecoder().decode(pt));document.close();
+}
+const m=document.getElementById('m');
+document.getElementById('f').addEventListener('submit',async e=>{e.preventDefault();m.textContent='Checking\u2026';
+  try{await go(document.getElementById('p').value)}catch(x){m.textContent=x.message==='nocrypto'?'This browser needs a secure (https) connection to unlock.':'Wrong password.'}});
+let saved=null;try{saved=sessionStorage.getItem('bo_pw')}catch(e){}
+if(saved){go(saved).catch(()=>{try{sessionStorage.removeItem('bo_pw')}catch(e){}})}
+</script></body></html>

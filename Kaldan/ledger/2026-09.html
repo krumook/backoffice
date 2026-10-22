@@ -1,96 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Substitute Ledger &mdash; September 2026 (Kaldan)</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
-    --accent: #0f6e56; --accent-light: #e1f5ee;
-    --tip: #185fa5; --tip-light: #e6f1fb;
-    --amber: #854f0b; --amber-light: #faeeda;
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
-    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
-  .wrap { max-width: 1000px; margin: 0 auto; }
-  header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 24px; }
-  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
-  header .meta { color: var(--muted); font-size: 14px; }
-  .summary-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
-  .summary-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
-  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
-  .summary-card .value { font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--ink); }
-  .summary-card.collected .value { color: var(--amber); }
-  .summary-card.paid .value { color: var(--tip); }
-  .summary-card.kept .value { color: var(--accent); }
-  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
-  .back-link:hover { background: var(--tip); color: #fff; }
-  table { width: 100%; table-layout: fixed; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); font-size: 13px; margin-bottom: 24px; }
-  thead th { background: var(--ink); color: #fff; text-align: left; padding: 11px 12px; font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
-  tbody td { padding: 10px 12px; border-top: 1px solid var(--line); vertical-align: middle; }
-  tbody tr:nth-child(even) { background: #fafaf8; }
-  td.money { text-align: right; font-weight: 700; }
-  td.collected { color: var(--amber); }
-  td.paid { color: var(--tip); }
-  td.kept { color: var(--accent); }
-  .sub-pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
-  .sub-farah { background: var(--tip-light); color: var(--tip); }
-  .sub-q { background: var(--amber-light); color: var(--amber); }
-  tr.total td { border-top: 2px solid var(--ink); font-weight: 700; background: var(--accent-light); color: var(--accent); }
-  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
-</style>
-</head>
-<body>
-<div class="wrap">
-
-  <a class="back-link" href="index.html">&larr; Back to Kaldan's ledger</a>
-  <a class="back-link" href="../../teacher-hub.html" style="margin-left:8px;">🏠 Teacher hub</a>
-
-  <header>
-    <div>
-      <h1>September 2026 &mdash; substitute ledger (Kaldan)</h1>
-      <div class="meta">Mathematics &middot; &#3647;350/hr collected from parent, &#3647;250/hr paid to whichever substitute covered the class</div>
-    </div>
-  </header>
-
-  <div class="summary-row">
-    <div class="summary-card collected">
-      <div class="label">Collected this month</div>
-      <div class="value">&#3647;1,750</div>
-    </div>
-    <div class="summary-card paid">
-      <div class="label">Paid to substitutes this month</div>
-      <div class="value">&#3647;1,250</div>
-    </div>
-    <div class="summary-card kept">
-      <div class="label">Kept (margin) this month</div>
-      <div class="value">&#3647;500</div>
-    </div>
-  </div>
-
-  <table>
-    <colgroup>
-      <col style="width:6%"><col style="width:10%"><col style="width:7%"><col style="width:7%"><col style="width:10%"><col style="width:8%"><col style="width:9%"><col style="width:11%"><col style="width:11%"><col style="width:9%"><col style="width:12%">
-    </colgroup>
-    <thead>
-      <tr><th>Day</th><th>Date</th><th>Start</th><th>Finish</th><th>Subject</th><th>Duration</th><th>Substitute</th><th>Collected</th><th>Paid</th><th>Kept</th><th>Remark</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Wed</td><td>2026-09-02</td><td>06:00</td><td>07:00</td><td>Mathematics</td><td>1 hr</td><td><span class="sub-pill sub-farah">Farah</span></td><td class="money collected">&#3647;350</td><td class="money paid">&#3647;250</td><td class="money kept">&#3647;100</td><td></td></tr>
-      <tr><td>Wed</td><td>2026-09-09</td><td>06:00</td><td>07:00</td><td>Mathematics</td><td>1 hr</td><td><span class="sub-pill sub-farah">Farah</span></td><td class="money collected">&#3647;350</td><td class="money paid">&#3647;250</td><td class="money kept">&#3647;100</td><td></td></tr>
-      <tr><td>Wed</td><td>2026-09-16</td><td>06:00</td><td>07:00</td><td>Mathematics</td><td>1 hr</td><td><span class="sub-pill sub-farah">Farah</span></td><td class="money collected">&#3647;350</td><td class="money paid">&#3647;250</td><td class="money kept">&#3647;100</td><td></td></tr>
-      <tr><td>Wed</td><td>2026-09-23</td><td>06:00</td><td>07:00</td><td>Mathematics</td><td>1 hr</td><td><span class="sub-pill sub-farah">Farah</span></td><td class="money collected">&#3647;350</td><td class="money paid">&#3647;250</td><td class="money kept">&#3647;100</td><td></td></tr>
-      <tr><td>Wed</td><td>2026-09-30</td><td>06:00</td><td>07:00</td><td>Mathematics</td><td>1 hr</td><td><span class="sub-pill sub-farah">Farah</span></td><td class="money collected">&#3647;350</td><td class="money paid">&#3647;250</td><td class="money kept">&#3647;100</td><td></td></tr>
-      <tr class="total"><td colspan="7">Total (5 sessions &mdash; Farah 5)</td><td class="money collected">&#3647;1,750</td><td class="money paid">&#3647;1,250</td><td class="money kept">&#3647;500</td><td></td></tr>
-    </tbody>
-  </table>
-
-  <footer>Kaldan's Math ledger &middot; not shown to the parent &middot; migrated from the old Substitute/Chertam pages &middot; a new page like this is made for each month</footer>
-
-</div>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Locked</title>
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fbfaf7;font-family:'Space Grotesk',-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#1f2a24}
+form{background:#fff;border:1px solid #dfe6e1;border-radius:14px;padding:32px 34px;width:min(360px,90vw);text-align:center;box-shadow:0 6px 22px rgba(31,42,36,.10)}
+h1{font-size:20px;margin:0 0 6px}p{margin:0 0 18px;color:#5c6b63;font-size:14px}
+input{width:100%;font:inherit;font-size:16px;padding:11px 14px;border:1px solid #dfe6e1;border-radius:10px;margin-bottom:12px}
+button{width:100%;font:inherit;font-weight:700;font-size:15px;padding:11px;border:0;border-radius:10px;background:#0f6e56;color:#fff;cursor:pointer}
+#m{margin-top:12px;font-size:13px;color:#993c1d;min-height:18px}</style></head>
+<body><form id="f" autocomplete="off"><h1>&#128274; School back office</h1><p>Enter the password to open this page.</p>
+<input type="password" id="p" placeholder="Password" autofocus><button type="submit">Unlock</button><div id="m"></div></form>
+<script>
+const D={"s":"cMBcuqlclUdwfC4wLh3fSg==","i":"UfdOrp1bsygZ/ZmJ","n":600000,"c":"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"};
+const b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function go(pw){
+  if(!window.crypto||!crypto.subtle) throw new Error('nocrypto');
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b(D.s),iterations:D.n,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b(D.i)},key,b(D.c));
+  try{sessionStorage.setItem('bo_pw',pw)}catch(e){}
+  document.open();document.write(new TextDecoder().decode(pt));document.close();
+}
+const m=document.getElementById('m');
+document.getElementById('f').addEventListener('submit',async e=>{e.preventDefault();m.textContent='Checking\u2026';
+  try{await go(document.getElementById('p').value)}catch(x){m.textContent=x.message==='nocrypto'?'This browser needs a secure (https) connection to unlock.':'Wrong password.'}});
+let saved=null;try{saved=sessionStorage.getItem('bo_pw')}catch(e){}
+if(saved){go(saved).catch(()=>{try{sessionStorage.removeItem('bo_pw')}catch(e){}})}
+</script></body></html>

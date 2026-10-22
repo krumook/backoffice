@@ -1,103 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Tenten &mdash; Feedback 14 Sep 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
-    --accent: #0f6e56; --accent-light: #e1f5ee;
-    --tip: #185fa5; --tip-light: #e6f1fb;
-    --amber: #854f0b; --amber-light: #faeeda;
-    --loss: #993c1d; --loss-light: #faece7;
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
-    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.55; }
-  .wrap { max-width: 760px; margin: 0 auto; }
-  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
-  .back-link:hover { background: var(--tip); color: #fff; }
-  header { padding-bottom: 18px; border-bottom: 2px solid var(--ink); margin-bottom: 22px; }
-  header h1 { margin: 0 0 6px; font-size: 21px; font-weight: 700; }
-  header .meta { color: var(--muted); font-size: 13.5px; }
-  .sess-nav { display:flex; justify-content:space-between; align-items:center; margin: 22px 0 4px; font-size: 13px; }
-  .sess-nav a { color: var(--tip); text-decoration:none; font-weight:600; }
-  .sess-nav a:hover { text-decoration:underline; }
-  .sess-nav .spacer { color: var(--muted); }
-  .fb-section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
-  .fb-title { font-size: 14px; font-weight: 700; color: var(--ink); margin: 0 0 10px; }
-  .fb-sub { font-size: 13.5px; font-weight: 700; color: var(--accent); margin: 14px 0 6px; }
-  .fb-sub:first-of-type { margin-top: 0; }
-  .fb-section p { margin: 0 0 8px; font-size: 13.5px; color: var(--ink); }
-  .fb-section ul { margin: 0 0 4px; padding-left: 20px; }
-  .fb-section li { font-size: 13.5px; color: var(--ink); margin-bottom: 5px; }
-  .fb-section.homework .fb-title { color: var(--accent); }
-  .fb-section.next .fb-title { color: var(--tip); }
-  .fb-section.today-hw { background: var(--amber-light); border-color: #eddcb8; }
-  .fb-section.today-hw .fb-title { color: var(--amber); }
-  .fb-section.next { background: var(--tip-light); border-color: #cfe1f4; }
-  .status-note { font-size: 12px; color: var(--muted); font-style: italic; }
-  footer { margin-top: 28px; font-size: 12px; color: var(--muted); text-align: center; }
-</style>
-</head>
-<body>
-<div class="wrap">
-
-  <a class="back-link" href="dash.html">&larr; Back to progress tracker</a>
-  <a class="back-link" href="../teacher-hub.html" style="margin-left:8px;">🏠 Teacher hub</a>
-
-  <header>
-    <h1>Tenten &mdash; Class Feedback</h1>
-    <div class="meta">Monday 14 Sep 2026 &middot; 17:00&ndash;18:00</div>
-  </header>
-
-  <div class="fb-section homework">
-    <div class="fb-title">📬 Homework Result</div>
-    <p>No homework was assigned from the previous session.</p>
-  </div>
-
-  <div class="fb-section">
-    <div class="fb-title">📚 In-Class Today</div>
-
-    <div class="fb-sub">📝 Indirect Proof (Proof by Contradiction)</div>
-    <ul>
-      <li>Introduced the structure of indirect proof: assume the opposite of what needs to be proven, find a contradiction, then conclude the original statement is true</li>
-      <li>Worked through examples: proving complementary angles cannot include an angle over 90°, and that a triangle can have at most one right angle</li>
-      <li>Practiced applying indirect proof to: a scalene triangle cannot have two congruent angles, and if one angle is a right angle, another angle cannot be obtuse</li>
-    </ul>
-
-    <div class="fb-sub">🎯 Focus &amp; Understanding</div>
-    <ul>
-      <li>On time and fully focused throughout the session</li>
-      <li>Partially understood the proof structure itself; however, several foundational triangle classification facts (names and properties, typically covered in Grade 6&ndash;7) were missing gaps that surfaced during the lesson &mdash; these will be sent to him as review material</li>
-      <li>Progress was steady (same as last session)</li>
-      <li>Neutral attitude &mdash; showed some lack of confidence in attempting problems independently and relied on guided steps, which is understandable given reasoning/proof is a known area of difficulty for him</li>
-    </ul>
-  </div>
-
-  <div class="fb-section today-hw">
-    <div class="fb-title">🏠 Today's Homework</div>
-    <p>Question 3 from the class file: Write an indirect proof that if &#9651;ABC is equilateral, then the measure of one of the angles cannot be 72&deg;.</p>
-  </div>
-
-  <div class="fb-section next">
-    <div class="fb-title">🗓️ Plan for Next Session</div>
-    <ul>
-      <li>Inequalities in triangles</li>
-    </ul>
-  </div>
-
-  <div class="sess-nav">
-    <a href="fb0912.html">&larr; Previous session</a>
-    <a href="dash.html">Progress tracker</a>
-    <a href="fb0919.html">Next session &rarr;</a>
-  </div>
-
-  <footer>Tenten &middot; Integrated Math II (Reveal Math) &middot; class feedback log</footer>
-
-</div>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Locked</title>
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fbfaf7;font-family:'Space Grotesk',-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#1f2a24}
+form{background:#fff;border:1px solid #dfe6e1;border-radius:14px;padding:32px 34px;width:min(360px,90vw);text-align:center;box-shadow:0 6px 22px rgba(31,42,36,.10)}
+h1{font-size:20px;margin:0 0 6px}p{margin:0 0 18px;color:#5c6b63;font-size:14px}
+input{width:100%;font:inherit;font-size:16px;padding:11px 14px;border:1px solid #dfe6e1;border-radius:10px;margin-bottom:12px}
+button{width:100%;font:inherit;font-weight:700;font-size:15px;padding:11px;border:0;border-radius:10px;background:#0f6e56;color:#fff;cursor:pointer}
+#m{margin-top:12px;font-size:13px;color:#993c1d;min-height:18px}</style></head>
+<body><form id="f" autocomplete="off"><h1>&#128274; School back office</h1><p>Enter the password to open this page.</p>
+<input type="password" id="p" placeholder="Password" autofocus><button type="submit">Unlock</button><div id="m"></div></form>
+<script>
+const D={"s":"5PE7Or/l4C1zl1oow2W7dg==","i":"IVhMRO3SilAf69eF","n":600000,"c":"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"};
+const b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function go(pw){
+  if(!window.crypto||!crypto.subtle) throw new Error('nocrypto');
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b(D.s),iterations:D.n,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b(D.i)},key,b(D.c));
+  try{sessionStorage.setItem('bo_pw',pw)}catch(e){}
+  document.open();document.write(new TextDecoder().decode(pt));document.close();
+}
+const m=document.getElementById('m');
+document.getElementById('f').addEventListener('submit',async e=>{e.preventDefault();m.textContent='Checking\u2026';
+  try{await go(document.getElementById('p').value)}catch(x){m.textContent=x.message==='nocrypto'?'This browser needs a secure (https) connection to unlock.':'Wrong password.'}});
+let saved=null;try{saved=sessionStorage.getItem('bo_pw')}catch(e){}
+if(saved){go(saved).catch(()=>{try{sessionStorage.removeItem('bo_pw')}catch(e){}})}
+</script></body></html>

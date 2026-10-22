@@ -1,110 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Imboon &mdash; Feedback 7 Sep 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
-    --accent: #0f6e56; --accent-light: #e1f5ee;
-    --tip: #185fa5; --tip-light: #e6f1fb;
-    --amber: #854f0b; --amber-light: #faeeda;
-    --loss: #993c1d; --loss-light: #faece7;
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
-    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.55; }
-  .wrap { max-width: 760px; margin: 0 auto; }
-  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
-  .back-link:hover { background: var(--tip); color: #fff; }
-  header { padding-bottom: 18px; border-bottom: 2px solid var(--ink); margin-bottom: 22px; }
-  header h1 { margin: 0 0 6px; font-size: 21px; font-weight: 700; }
-  header .meta { color: var(--muted); font-size: 13.5px; }
-  .sess-nav { display:flex; justify-content:space-between; align-items:center; margin: 22px 0 4px; font-size: 13px; }
-  .sess-nav a { color: var(--tip); text-decoration:none; font-weight:600; }
-  .sess-nav a:hover { text-decoration:underline; }
-  .sess-nav .spacer { color: var(--muted); }
-  .fb-section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
-  .fb-title { font-size: 14px; font-weight: 700; color: var(--ink); margin: 0 0 10px; }
-  .fb-sub { font-size: 13.5px; font-weight: 700; color: var(--accent); margin: 14px 0 6px; }
-  .fb-sub:first-of-type { margin-top: 0; }
-  .fb-section p { margin: 0 0 8px; font-size: 13.5px; color: var(--ink); }
-  .fb-section ul { margin: 0 0 4px; padding-left: 20px; }
-  .fb-section li { font-size: 13.5px; color: var(--ink); margin-bottom: 5px; }
-  .fb-section.homework .fb-title { color: var(--accent); }
-  .fb-section.next .fb-title { color: var(--tip); }
-  .fb-section.today-hw { background: var(--amber-light); border-color: #eddcb8; }
-  .fb-section.today-hw .fb-title { color: var(--amber); }
-  .fb-section.next { background: var(--tip-light); border-color: #cfe1f4; }
-  .status-note { font-size: 12px; color: var(--muted); font-style: italic; }
-  .cat { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 20px; margin-right: 6px; white-space: nowrap; }
-  .cat-correct { background: var(--accent-light); color: var(--accent); }
-  .cat-slip { background: var(--amber-light); color: var(--amber); }
-  footer { margin-top: 28px; font-size: 12px; color: var(--muted); text-align: center; }
-</style>
-</head>
-<body>
-<div class="wrap">
-
-  <a class="back-link" href="dash.html">&larr; Back to progress tracker</a>
-  <a class="back-link" href="../teacher-hub.html" style="margin-left:8px;">🏠 Teacher hub</a>
-
-  <header>
-    <h1>Imboon &mdash; Class Feedback</h1>
-    <div class="meta">Monday 7 Sep 2026 &middot; 20:00&ndash;21:00</div>
-  </header>
-
-  <div class="fb-section homework">
-    <div class="fb-title">📬 Homework Result</div>
-    <p>Imboon submitted her homework from the 31/8 worksheet, and while a few answers came out wrong, we went through them together in class &mdash; they were careless slips rather than misunderstanding, since her working out and method were solid throughout.</p>
-  </div>
-
-  <div class="fb-section">
-    <div class="fb-title">📚 In-Class Today &mdash; Factoring ax&sup2; + bx + c (a &ne; 1)</div>
-
-    <div class="fb-sub">➕ c Positive</div>
-    <ul>
-      <li>Reviewed the "factor out the HCF first" case, and practiced factoring where c is positive &mdash; finding factor pairs of a and c with matching signs to build the right binomials</li>
-    </ul>
-
-    <div class="fb-sub">➖ c Negative</div>
-    <ul>
-      <li>Covered cases where c is negative, working through the sign logic for the factor pairs to land on the correct middle term</li>
-    </ul>
-
-    <div class="fb-sub">🎯 Focus &amp; Understanding</div>
-    <ul>
-      <li>Fully focused and in great spirits, right on time today</li>
-      <li>Solid understanding of the process overall, though she worked through it a little more slowly than usual</li>
-      <li>Progress was about the same as last session &mdash; a good, steady pace</li>
-    </ul>
-  </div>
-
-  <div class="fb-section today-hw">
-    <div class="fb-title">🏠 Today's Homework</div>
-    <p>Worksheet dated 7/9/2026: factoring 8 quadratics where a &ne; 1, mixing positive and negative middle/constant terms (e.g. 2x&sup2; + 14x + 20, 3x&sup2; + 16x + 5, 4x&sup2; &minus; 8x + 3).</p>
-    <p><b>Explanation:</b> This set reinforces today's method &mdash; pulling out common factors first where possible, then finding the right factor pairs of a and c whose combination gives the correct middle term. It's good repetition to help her build speed and reduce the small careless errors we saw this week.</p>
-  </div>
-
-  <div class="fb-section next">
-    <div class="fb-title">🗓️ Plan for Next Session</div>
-    <ul>
-      <li>Continue with factoring quadratics where c is negative</li>
-      <li>Move on to solving quadratic equations by factoring</li>
-    </ul>
-  </div>
-
-  <div class="sess-nav">
-    <a href="fb0831.html">&larr; Previous session</a>
-    <a href="dash.html">Progress tracker</a>
-<a href="fb0914.html">Next session &rarr;</a>
-  </div>
-
-  <footer>Imboon &middot; Year 10 (Rugby International School) &middot; Pearson Edexcel International GCSE Mathematics A (4MA1) &middot; class feedback log</footer>
-
-</div>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Locked</title>
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fbfaf7;font-family:'Space Grotesk',-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#1f2a24}
+form{background:#fff;border:1px solid #dfe6e1;border-radius:14px;padding:32px 34px;width:min(360px,90vw);text-align:center;box-shadow:0 6px 22px rgba(31,42,36,.10)}
+h1{font-size:20px;margin:0 0 6px}p{margin:0 0 18px;color:#5c6b63;font-size:14px}
+input{width:100%;font:inherit;font-size:16px;padding:11px 14px;border:1px solid #dfe6e1;border-radius:10px;margin-bottom:12px}
+button{width:100%;font:inherit;font-weight:700;font-size:15px;padding:11px;border:0;border-radius:10px;background:#0f6e56;color:#fff;cursor:pointer}
+#m{margin-top:12px;font-size:13px;color:#993c1d;min-height:18px}</style></head>
+<body><form id="f" autocomplete="off"><h1>&#128274; School back office</h1><p>Enter the password to open this page.</p>
+<input type="password" id="p" placeholder="Password" autofocus><button type="submit">Unlock</button><div id="m"></div></form>
+<script>
+const D={"s":"3HTDEexDWKo7jKWfgm71og==","i":"xsjk7rtFBf2AIdmc","n":600000,"c":"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"};
+const b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function go(pw){
+  if(!window.crypto||!crypto.subtle) throw new Error('nocrypto');
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b(D.s),iterations:D.n,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b(D.i)},key,b(D.c));
+  try{sessionStorage.setItem('bo_pw',pw)}catch(e){}
+  document.open();document.write(new TextDecoder().decode(pt));document.close();
+}
+const m=document.getElementById('m');
+document.getElementById('f').addEventListener('submit',async e=>{e.preventDefault();m.textContent='Checking\u2026';
+  try{await go(document.getElementById('p').value)}catch(x){m.textContent=x.message==='nocrypto'?'This browser needs a secure (https) connection to unlock.':'Wrong password.'}});
+let saved=null;try{saved=sessionStorage.getItem('bo_pw')}catch(e){}
+if(saved){go(saved).catch(()=>{try{sessionStorage.removeItem('bo_pw')}catch(e){}})}
+</script></body></html>

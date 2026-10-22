@@ -1,106 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Asia &mdash; Harrison Ledger</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
-    --accent: #0f6e56; --accent-light: #e1f5ee;
-    --tip: #185fa5; --tip-light: #e6f1fb;
-    --amber: #854f0b; --amber-light: #faeeda;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    padding: 40px 24px 64px;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-  }
-  .wrap { max-width: 900px; margin: 0 auto; }
-  header { padding-bottom: 20px; border-bottom: 2px solid var(--ink); margin-bottom: 24px; }
-  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 600; }
-  header .meta { color: var(--muted); font-size: 14px; }
-
-  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
-  .back-link:hover { background: var(--tip); color: #fff; }
-
-  .summary-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
-  .summary-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
-  .summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
-  .summary-card .value { font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--ink); }
-  .summary-card.collected .value { color: var(--amber); }
-  .summary-card.paid .value { color: var(--tip); }
-  .summary-card.kept .value { color: var(--accent); }
-
-  .section-label { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.04em; }
-
-  .schedule-list { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-  .schedule-row { padding: 14px 18px; border-top: 1px solid var(--line); }
-  .schedule-row:first-child { border-top: none; }
-
-  .note { background: var(--accent-light); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; font-size: 13.5px; color: var(--accent); margin-bottom: 28px; }
-  .note b { display: block; margin-bottom: 4px; color: var(--ink); }
-  .note ul { margin: 8px 0 0; padding-left: 20px; }
-  .note li { margin-bottom: 4px; }
-
-  footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
-</style>
-</head>
-<body>
-<div class="wrap">
-
-  <a class="back-link" href="../home.html">&larr; Back to Harrison's home</a>
-  <a class="back-link" href="../../teacher-hub.html" style="margin-left:8px;">🏠 Teacher hub</a>
-
-  <header>
-    <h1>Asia &mdash; Thai (Harrison)</h1>
-    <div class="meta">&#3647;320/hr collected from parent, &#3647;250/hr paid to Asia &middot; a substitute Chertam arranges</div>
-  </header>
-
-  <div class="summary-row">
-    <div class="summary-card collected">
-      <div class="label">Collected (all-time)</div>
-      <div class="value">&#3647;1,520</div>
-    </div>
-    <div class="summary-card paid">
-      <div class="label">Paid to Asia (all-time)</div>
-      <div class="value">&#3647;1,187.50</div>
-    </div>
-    <div class="summary-card kept">
-      <div class="label">Kept (margin, all-time)</div>
-      <div class="value">&#3647;332.50</div>
-    </div>
-  </div>
-
-  <div class="section-label">Monthly ledger</div>
-  <div class="schedule-list" style="margin-bottom: 28px;">
-    <a class="schedule-row" href="2026-10.html" style="text-decoration:none; color:inherit; display:flex; justify-content: space-between; align-items:center;">
-      <span style="font-weight:600;">October 2026</span>
-      <span class="schedule-note">1 half-charge session, 2 cancelled &middot; &#3647;80 collected &middot; &#3647;17.50 kept</span>
-    </a>
-    <a class="schedule-row" href="2026-09.html" style="text-decoration:none; color:inherit; display:flex; justify-content: space-between; align-items:center;">
-      <span style="font-weight:600;">September 2026</span>
-      <span class="schedule-note">4 sessions &middot; &#3647;640 collected &middot; &#3647;140 kept</span>
-    </a>
-    <a class="schedule-row" href="2026-08.html" style="text-decoration:none; color:inherit; display:flex; justify-content: space-between; align-items:center;">
-      <span style="font-weight:600;">August 2026</span>
-      <span class="schedule-note">5 sessions &middot; &#3647;800 collected &middot; &#3647;175 kept</span>
-    </a>
-  </div>
-
-  <div class="note">
-    <b>How to add a session</b>
-    Once a session actually happens, tell me the date, start/finish time, and whether it was charged or no-charge. I'll add it to that month's table and update the totals above, plus reflect the collected amount on Harrison's own monthly fee page.
-  </div>
-
-  <footer>Asia &middot; Harrison's Thai ledger &middot; not shown to the parent &middot; migrated from the old Substitute/Chertam pages on 26 Sep 2026 &middot; a new page like this is made for each month</footer>
-
-</div>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Locked</title>
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fbfaf7;font-family:'Space Grotesk',-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#1f2a24}
+form{background:#fff;border:1px solid #dfe6e1;border-radius:14px;padding:32px 34px;width:min(360px,90vw);text-align:center;box-shadow:0 6px 22px rgba(31,42,36,.10)}
+h1{font-size:20px;margin:0 0 6px}p{margin:0 0 18px;color:#5c6b63;font-size:14px}
+input{width:100%;font:inherit;font-size:16px;padding:11px 14px;border:1px solid #dfe6e1;border-radius:10px;margin-bottom:12px}
+button{width:100%;font:inherit;font-weight:700;font-size:15px;padding:11px;border:0;border-radius:10px;background:#0f6e56;color:#fff;cursor:pointer}
+#m{margin-top:12px;font-size:13px;color:#993c1d;min-height:18px}</style></head>
+<body><form id="f" autocomplete="off"><h1>&#128274; School back office</h1><p>Enter the password to open this page.</p>
+<input type="password" id="p" placeholder="Password" autofocus><button type="submit">Unlock</button><div id="m"></div></form>
+<script>
+const D={"s":"fxvGetrDYKkeMvsvyqaSSA==","i":"RbHkG1qZ8ku+OmUZ","n":600000,"c":"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"};
+const b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function go(pw){
+  if(!window.crypto||!crypto.subtle) throw new Error('nocrypto');
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b(D.s),iterations:D.n,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b(D.i)},key,b(D.c));
+  try{sessionStorage.setItem('bo_pw',pw)}catch(e){}
+  document.open();document.write(new TextDecoder().decode(pt));document.close();
+}
+const m=document.getElementById('m');
+document.getElementById('f').addEventListener('submit',async e=>{e.preventDefault();m.textContent='Checking\u2026';
+  try{await go(document.getElementById('p').value)}catch(x){m.textContent=x.message==='nocrypto'?'This browser needs a secure (https) connection to unlock.':'Wrong password.'}});
+let saved=null;try{saved=sessionStorage.getItem('bo_pw')}catch(e){}
+if(saved){go(saved).catch(()=>{try{sessionStorage.removeItem('bo_pw')}catch(e){}})}
+</script></body></html>

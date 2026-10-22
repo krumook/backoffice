@@ -1,107 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Chilli &mdash; Feedback 9 Sep 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
-    --accent: #0f6e56; --accent-light: #e1f5ee;
-    --tip: #185fa5; --tip-light: #e6f1fb;
-    --amber: #854f0b; --amber-light: #faeeda;
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; padding: 40px 24px 64px; background: var(--bg); color: var(--ink);
-    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.55; }
-  .wrap { max-width: 760px; margin: 0 auto; }
-  .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--tip); text-decoration: none; background: var(--tip-light); padding: 7px 14px; border-radius: 20px; margin-bottom: 18px; }
-  .back-link:hover { background: var(--tip); color: #fff; }
-  header { padding-bottom: 18px; border-bottom: 2px solid var(--ink); margin-bottom: 22px; }
-  header h1 { margin: 0 0 6px; font-size: 21px; font-weight: 700; }
-  header .meta { color: var(--muted); font-size: 13.5px; }
-  .status-pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; margin-left: 8px; vertical-align: middle; background: var(--tip-light); color: var(--tip); }
-  .sess-nav { display:flex; justify-content:space-between; align-items:center; margin: 22px 0 4px; font-size: 13px; }
-  .sess-nav a { color: var(--tip); text-decoration:none; font-weight:600; }
-  .sess-nav a:hover { text-decoration:underline; }
-  .sess-nav .spacer { color: var(--muted); }
-  .fb-section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
-  .fb-title { font-size: 14px; font-weight: 700; color: var(--ink); margin: 0 0 10px; }
-  .fb-sub { font-size: 13.5px; font-weight: 700; color: var(--accent); margin: 14px 0 6px; }
-  .fb-sub:first-of-type { margin-top: 0; }
-  .fb-section p { margin: 0 0 8px; font-size: 13.5px; color: var(--ink); }
-  .fb-section ul { margin: 0 0 4px; padding-left: 20px; }
-  .fb-section li { font-size: 13.5px; color: var(--ink); margin-bottom: 5px; }
-  .fb-section.homework .fb-title { color: var(--accent); }
-  .fb-section.next .fb-title { color: var(--tip); }
-  .fb-section.today-hw { background: var(--amber-light); border-color: #eddcb8; }
-  .fb-section.today-hw .fb-title { color: var(--amber); }
-  .fb-section.next { background: var(--tip-light); border-color: #cfe1f4; }
-  footer { margin-top: 28px; font-size: 12px; color: var(--muted); text-align: center; }
-</style>
-</head>
-<body>
-<div class="wrap">
-
-  <a class="back-link" href="dash.html">&larr; Back to progress tracker</a>
-  <a class="back-link" href="../teacher-hub.html" style="margin-left:8px;">🏠 Teacher hub</a>
-
-  <header>
-    <h1>Chilli &mdash; Class Feedback <span class="status-pill">Additional class</span></h1>
-    <div class="meta">Wednesday 9 Sep 2026 &middot; 14:00&ndash;15:00 &middot; extra session outside the regular weekly slot, for exam prep</div>
-  </header>
-
-  <div class="fb-section homework">
-    <div class="fb-title">📬 Homework Result</div>
-    <p>No homework was assigned from the previous session, so there was nothing due today.</p>
-  </div>
-
-  <div class="fb-section">
-    <div class="fb-title">📚 In-Class Today</div>
-
-    <div class="fb-sub">📊 Logarithms &mdash; Convert, Evaluate &amp; Solve</div>
-    <ul>
-      <li>Practiced converting between index and logarithmic form, and evaluating logs by hand (e.g. log&#8323;243, log&#8325;(1/25))</li>
-      <li>Worked through solving for unknowns in logarithmic equations and interpreting logarithmic graphs</li>
-    </ul>
-
-    <div class="fb-sub">📐 Laws of Logarithms &amp; Solving Exponential Equations</div>
-    <ul>
-      <li>Applied the log laws (product, quotient, power) to simplify expressions and evaluate given log x and log y values</li>
-      <li>Practiced solving exponential equations that don't share a common base by taking logs of both sides</li>
-      <li>Extended into more complex log-law problems from an additional worksheet &mdash; combining laws, substitution-style questions, and expressing logs in terms of given variables (p, q, x, y, z)</li>
-    </ul>
-
-    <div class="fb-sub">🎯 Focus &amp; Understanding</div>
-    <ul>
-      <li>Fully focused and on time today, in a good mood throughout</li>
-      <li>Handled the material well overall &mdash; the parts that gave her trouble were the same algebra-heavy substitution steps we've flagged before</li>
-      <li>Her simplifying has gotten better since last session, but substitution and the more complex multi-step problems still need more practice</li>
-    </ul>
-  </div>
-
-  <div class="fb-section today-hw">
-    <div class="fb-title">🏠 Today's Homework</div>
-    <p>None assigned this session.</p>
-  </div>
-
-  <div class="fb-section next">
-    <div class="fb-title">🗓️ Plan for Next Session</div>
-    <ul>
-      <li>Continue with more complex log-law and simplification problems to help build her confidence further</li>
-    </ul>
-  </div>
-
-  <div class="sess-nav">
-    <a href="fb0908.html">&larr; Previous session</a>
-    <a href="dash.html">Progress tracker</a>
-<a href="fb0915.html">Next session &rarr;</a>
-  </div>
-
-  <footer>Chilli &middot; Year 10 &middot; class feedback log</footer>
-
-</div>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Locked</title>
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fbfaf7;font-family:'Space Grotesk',-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#1f2a24}
+form{background:#fff;border:1px solid #dfe6e1;border-radius:14px;padding:32px 34px;width:min(360px,90vw);text-align:center;box-shadow:0 6px 22px rgba(31,42,36,.10)}
+h1{font-size:20px;margin:0 0 6px}p{margin:0 0 18px;color:#5c6b63;font-size:14px}
+input{width:100%;font:inherit;font-size:16px;padding:11px 14px;border:1px solid #dfe6e1;border-radius:10px;margin-bottom:12px}
+button{width:100%;font:inherit;font-weight:700;font-size:15px;padding:11px;border:0;border-radius:10px;background:#0f6e56;color:#fff;cursor:pointer}
+#m{margin-top:12px;font-size:13px;color:#993c1d;min-height:18px}</style></head>
+<body><form id="f" autocomplete="off"><h1>&#128274; School back office</h1><p>Enter the password to open this page.</p>
+<input type="password" id="p" placeholder="Password" autofocus><button type="submit">Unlock</button><div id="m"></div></form>
+<script>
+const D={"s":"3walXwEC77hPhBa8nBkAbw==","i":"OX09gEay51cicEyj","n":600000,"c":"2kiHvM7mCVoXdDkK23WyPfW2pvwNFHks+nsACvFCkwkRJfqfC5pYXf+p0+i6nBFc9ZapleAuSIM0gcSw8d4f/GKa9INw1v4ijqNRELjSYShXdxSH5VycDBTNKbFcEnD7lAoH8gcYuxA4w5zKgPFqSZlkWbFVisvqrzBCmKk+6ctnvwc7dX5RFhTknAS7dDJ1n0fbGSTjTIHsrc/YhUSPqIWkdAorDAWIXhz0qZztkNN8WAYwjr0hHh78vhz4LLQNbi8EQCCCZDcvjqit9OEDCilseGJkRjv263Z8c7wEkJlIAsR5EaJ/3eTYp3JYpZUuciRy0EhuPvG6Dy1TAAB1v1haYFuRT4RoblVTwz1Hkzs+lUWw1QGlZXVLyLvMP8sflKe3V5Zndmt0NwiQNQr6elDh8V54cD8wIUdO0dRS9MLbnktWFx8Opj4i7Rk3e29rx5MzEQB5Wmz0g4DRoyE0IbBPF2gDAgSMmXl6LTs4RhkzzZBuWEi3cMWv2x6GU9zSVSidG3RS2l3ylmuQ8EokIsazB3ne8INqBRp1Z51JCc/n2KCP6f5AwZnvwgKI23Uz4GSuikFTKg/Z6fPS7l3Goebu/cAgTuL3FspTdKz2kLF9wxr/fe99zkufPQIgL/oaIg80kAwa/mIJiIUsKTmM+fMO/w0NZfyWWHUgtyT0TC/ERat+d2parnISo5Aah4haZl/X8OpTZnxKY8XLXUG1EyB+790uR3PmL1lbAdyDXkyMKtWvEckuXiwmrbkiFRWqgtt7vUUcEemRiQT2a43sUIDV9F6Qs6uLBaZ/z/kAHZGkBlwwJCwJoZLV4w5H5nTTEPdNgRF/I/5Vnyp+Y0A3PXdWmEQ7AWLC2JRm5gd10irFgT89rnmQTdbjEafxozwRszKad1dvJ4ol4BkJsFCMnmQ/7SpHM9aGbdSu4jKyiCY4MEMbLkrjfCAQR4hbrmkDbGELoYLs7VPT0jwqzApiiVfisKJLNu0LQnL9cMVRzEEoZMNRQCyJ2sO8X5XxYsSCVp00kgU5LDayBPgX5KZQ0e+aeU1o4V8qnb0ZqFxu6zCQSQUFplK0FgW/tkyXpQfccEZkBHjv9lBNKKf1dvRj7qA6xMFAQ6Q9YI3AZI7If0jYVuYg85NxmV3JsADjdMNWprcTNMDlfhjyfBfG2xU4MyCkN8OuQ8W8ChDO/+7kMPuvgKJ3oDydFBP3ipgJID7r10R9F+WolB2Nbh4ByC9SbocLsnR66Q6hUvhQ3oFz+VgL4PI9qhCDSwFJLZSCA8q00vvc4Bpdk0gvMsBdUNQxfptndJiUMQs+LUA8tGcFG3Od1f4PyUtEEBS3gwZFXuyDrzumLUkMEG3ckQWWMNmeBy4CIBcIflwnBO1XpTPZq2q8fSRx60wbVQVj1OkAUJRZjbVxURBHHdscpcf0USXdl9Hfurpqfpr8b4VXCSQDAs+GrOgoQ2ndqsFFQB9sAO6shQZHrL2+c0LkNoCgx+UWKuyE/sYhChI6+vhKYTUtqJzP0JJfUK3ceflSUsibLbleBGbTqjSpju28cft+9fuU3ZhUMFtGoFR5AE9fWRRrb1kWNBC0VlzxtAiUNj3NG+jyKl29IrAs6GQoUDX6n+j/K+0N7Z1rQ6Yu1ZXhCYLQj23AAdruE1/GrbGW/Bio5JHnDLZFaYkReyPiQpRtXwqcAzg+FxVtPZuujt3D9wh2Ysa2KjxIHol8k/nlrbzjeLIdDvHwbRGGgC0obKs4Qs0158GR9Xre4Z/Jzk0XsvHP2r5P3XMCN9j3CxQ3sbOq3OHcdfnmxmqt/XY9ZAYPvzo24hrkR0SxqFJ+p2ooNbpnMbQPyYv91no8rGD650VLyeoG18wtbfCRZOwNzYLNidIxBy6leQFFWGN3kfJS9KbaiVXO7aPouR6APDchbQkbzuRSRptenxNpWhvhDKYFRzzT+gwc5MLRFxCYD8WROxre4pRveIzrSQ8ROnDJTL5IcQ+EdvHqLAtgmDODdIgrDRV46w8QBY/0nzZeqF8sjVDkzLLgzv/xSfG/5PGSmtG8V167k7UWO0j9WUAUpyysBCU3yUytKbw6j++OkYddopMptRNDfSf0CVyk1cQHdX8duYhQls3Vh0za04HVpi8Fo6I1d4l9MxQOhI8t7oikBtE6hGSF4y5a2JooqufEwLCCI7PoaXBdQB5t9ksxRkEog5b37R54HPUWZh4wmMO1PCrOCjpJKwFWUZ+2ia/t5KfhEtFtC0ggL9TImMD/WWOnR1l/E/cpK0xaZlYzhzfZuz+aSiVZusBQ5wwxymWT0w6kQz/zHvODUcHqa/GF9yFjj9u3QmrJ0XVLFrLr9yyR5WYT43f4Zvhc+gV7H3bVhNpjZ1RXeiNcfJquIxpUSouOlrOOr6HfkEv4DvDq1H/iZnVpf4MiyStjYrMIrdQ4b1lIWeP0Obfg35HNjgJ6gPNQVZN5nRpVzRgCVOK/rqLiHRKcE6G/LihvBXldRlIymun4AziAHWxiYrnYqJKna2F+b/44Q7pDkwLRQIWPz+BRx3qcZI5l0OXP+by8NwEPmka74ENjb2KrBLhlmjoHEvtRbUGR7xz4K6eb1Pvp2h4CrM2G63YcQM1dBHkP2Fng1mTKJC38FpWild+rIclnrgUDN9atxBAZ7yjbc/egeZjWSoBxTExk0/Zft2SLQDIEVjIWaOD4xHDjLhFDV1kdjyuBqCqd0Dntusg9j9ZW/piO2XqZNLjQxeMzbC0fd8OgxEqpuZK+em2zbmwaXJDWb5CyReEjPY37huOfCxIADQtQecjfc7+gVtDPF9h3VsZM9FlLP7tWe96WwHhzUznhvBa3Q0XfL4tDUCMkH4HK51yVihBkFJhF4Tksf2EympBmN+XPvQdHeGG+ZcbbkHCG+vrPNsA1J96WSRLCcenyWP5it9WY4S69lGF4Kdjaf22fBJIrOwPt4Sg8uGuZa1bsKsYZPmn9hQN/5878w1E8ORDplQ7SsUqvNKVd/5LD4ZKoUDFtuZRQ+50IKiUpxU26UUnbHb8zo1hS9HyMA8L/YmITXCN66xBut2O8DSNFVvy+3h9v495IAJ4BMBntprXiZ/zdrpaVEGKbZQz7H0zeW2mnUGCelV6h7wns0jKfawU6Z+8xaFUj1pezoA8kUJ8amiKfR1UKigW4UjsXlSJFDKb9h8U2izUFPcBBDndFs30aWwjtoRehAeFSZyJ9hparSAc6Mdrg/7kog5x9W6lZWEsGrd/Ehx2QS2W7hDuOiVqjtefcBycdinnaLYlgdHkdKKj92421xT8skxpvafsmDldf5OoB7XaOjq+MrzenErc6B5Zaz/L1/WBgFkiVGogQDeRPpUt7bCM91Ugs5inPBd/lCHQIF37YetSr+NwzbIgX2fmKmEaSmViYlBcMgbx9xm2YIFZYPUa/dy0Y/49p2bGZObEdxBI1gNMrkGvOIeVrBAXo84po6SX62K1HdiU7RVxFm0A1c0Vzpuja7Xe7i58UOrUsSOqK6l+ZzMclsCHWlJTGQVOC1mGNPewwrHiMp5A5WCAguJO29KjKfGN26l/cTFlXHZksGeimOI5Q2CXc/zivs6B/ee1jCts11kbL1ubpJbnkJyD9BHzflM9F3V/lvsBePivEH1bVTcj6qdJc2Ib1FbEzO7pHUVt3r1NOxuOwVHVI239jCIlSxkOTeKcb2CmKC5EXcvli9Oxh/YfJQ9Uj+4GV7nssIo6MpvfFugIYIksSUzsflOO/D+R46sScQiohKbWT86gp+P2b9YWxiABsg/vkRCAr7xkPA1GMi/ybWQivI6B+0QuNrNKpbOCX371Ec4y3CwuI7FfIhthL14OrBRSC4ZtlBDNIktZ3EkDpz3AjXN7kgX1k2e9DUTG2Eagv3sAxakMZ+Iw5eY9RxJ3nERVSQxu7MA+WIUO6PDhajwPbpn4qrejHIpuM1lgyo45V/wDhy5VFlzOvf1BZe7EAx5NziqTNejDacQ0pr5QsU5a+cnOFY/WWg/NHaCq557kQ9eK2A9FMkyFLARVQjaEYtlOMbvbugTn8YXWBkOMhZnyleEF0ilP8qSdQiXahAJ5x03D65AGSxiP7uW0c+TnhrKrxS0EGn7zV6qMGG+RHvNA2mRjdhT/OT2T4e/sZSw27CsfSz4h6h1Runw7miZ4QRnvI/uTySqOrnBWkBX9X/UhwdER6pWCJMSDernXQADpIkN3vLVYGdQ5/aT1bu8f7NKX4Zysz16f0SE9FFQYMMOoAWM85zXgdbz+MkXIrSvMOhPiwCUBKVBOqr2FIYI0D119hn3+zdO/YY1tdrqqNW3gfL4+iqAarpakHZs+E0eC05dSslr1XzWJYbEc4XQKI/Iz30y23VLHZVzbyQwxIXKoBkYe+5lbZzIShjDgI4mQ4h8UGiAgaeg8Ph/5n+R8lWQq0gQ1m7+iP/ccioLkoiaPifydB52SQyeN8u6qhJz467oqTVoNSKQEXgaDTILfSZWt3Uy2BdkO7BhK+aF125RIl90mWNhRn4VH/Rk7CGo7YelEO0S1ZKaE58CzoJ9CJEtlqGI/70fIbuGVnym8iVtJdHgeddTF0y1n/J4yZpbR9DakBvb4CjhvGyBVfzxavHr1QQk4rpyuhYuS8YSx0GHYyN1YQnmIvYKEDa0E+SccNbbRuvmYoubAJj/9gyNxTlrpNHsLSfoaXQwBD1I8HXPWwFWdcFdrC8uUutvsJ3vfFnMX15LLzNQCUxAk64qEUu6wNuaB7w3yVKxjuKrWAmr5Y3Wh8/q+DLHGFPHl0CxHy2o+YHQINJeLxxeSc/fAs4ZIDvrUD+Dwtnp+B1aKmWIkCPOGuHs8bK3QZBRrY07uRUzHto8ngsLOuGT8PvEXfsmm1Ds/5omQIGCJ63KptFvXiTrgRaiNsW0AfUFrdBliGZE62iWHuodHdlgncyKqwr/yIHRevKrb2eWbfVbmTau0AtJtTWniBJnjMQMKIEPewbcFHM6xscJFbgCIGyYNJub/q+zdO44/JZbEP+WjBfreF/hMrUY+rBB/8DGryO6JOm+YRDmWgGZujfO70xsAM1qm4BSoupZRA8qxDK1n3er8FlCNQtsIFrEOtKBr+oRR9GHrFIZwUiAul06L2x+7fyc83Mjz6ADt7+n7hbI9xoZE8g0+Acs3sJ0SX8gURqqUrmEPN6KFhA0ZVaLpXBs2pzMYw9TIHlp20NeOWDsJZvY+EKJozCrrPC+FK9UDS7LUer1SipHEk2Vyrk01LKW4ccGrTzCOucDgGsblyxX5sIM/NdBFSZvyTkSsVFcjAI1j46JBGi8WgQ+zLTHuNn8lsdrWcD/EAX6BCpHnNFiNIB87HQKwezudKDm3+xu6S4d4hO46gm16p4+bFdM9yNQfJf47WIVRUy+XkwudsZgCkPkOLwg85qj4s7uaVi6KpJElYjUPXaNwN0y5ynQDwnKjZ3icaFt/jNs6IGwh2xcqix1HdkaRfZQJ6Iwz3RgPwh+8nYwpAjTopi0It3lZA9ka++mjNbZNGXTrUhGaQIM1ynWlXazSMqDGi5u5uD00wXmxFNh3yIvhg4gfoDguoJuaaX4cgPhWhqyb7UJBxhQeDYghCw4wRaFwVDm2klRwbAi2Uf+8UB9LCDNG5OM3S1ph3rOiya8tXVLcW7UdeFcROHQD+H2Y1T9/snQZ1IaDlUsb6jrMNt/7FPiRMYRwDv0rIu60enY9vXktMCcN1FbqvbQNj5crPeZr5R8iPEgX+FpdFF7B+tRtRlXkbmX9PXzgJJKXJj1tnVqXbZLMjc5TagIUmsMy4W4rKGCmMW5p0hL4VhuWrpEsyAgoQuEOUmVeBH95ZRT/VyoeoD5B3H2EcGh38HKopOT3YlkmqMwumaihwLoWf58SHfj8WCWkJJcnJrM7qcNragHNPM5JMptaAX/MUYV3fokjyBmglwU6vp9T9Go1bVWgod0rmP29ilpo0P6IsiMcq66qtJTLFb2CR2x/qrFbWYWq+mO3J+mXxfgHG0JgQQVwQRnw+Dg7LZx+QS7EhJZKOVmR1O/L9HQXeWfcgQECtCS9RlKkwmCPr7a2UJ0l3Cg/bjFozZnkHO/TCHweQiP2FjM5jadqPhPkD2GInVhV6CUb4b4+tnhM//exgeCq1xFgediM/EWRvHWT7ytKBTQG8acvZywWOXl5vE8o55D057u+PSprJ+78mrlpv9FLyhlml3CM70s00ReqjMWaLc2+IOMtHTrbgVUQpVue7jByC1glop4fqD06CecbWZ64VJJnPK5fIkAD8VwDj+NtQgfLXChXxt/hutfUxw81eZo9aWpeZMgbmgsU+isiDw+EYO1DB/eUln9Fz0kpFMXH6hOeaiF5JkrmKZYj4s6x7HstK7zQdX2EBzG60UmrzuTRP+eVAmZCKpoBdTVENh8BwIpMjm6s2eFQg2a6R7LGiY7KSR9ZVlCAZ63opJvICUPC8jZvcxLZYBGJ3ry0yvlC88sxtNNJ3L4h5KmUX/AoeUbsXhuA+m514B7zFI0SCQnVYj+jbr88/dHUGVMex2YcuqNo4m4TfiLMAkMIGQL8BPksyfilbl99+UwKqhKod4QFtvkC/dHdxKOVusP1eDtyIZ8BHodNnR23X5qmLSQvg1hprYwf1CVDArQvSfRmHTy3lClrFGcp/enu3yYrdTd5wi9z/uQWF8TeLVnpOuyOYiOCK+OwxVJ2Uc3SSwlbJzORdHWFi3qg7+taFE8obtMYnXHIf/a4LFl7kfLty/bUuyXt0/aqwwRmOoOjAC18ZgXs2RUd1WNfgksCdtLTo7whawMy9Nr7En4HInvcqaChMiHL+Qsauou82GOd1WHMGim9ZfU8oUcYhHKYbmqh5VAfkSSQw4vQ4k6brzWomAWrA65h89YXE6YPGzqThPt07nQtm2U6tFj7mZOtHmxMOd2L0guFkuF6LOWS2m0YF1alPl+731z3YowwieVqqgRYzuRK6y/k4vyRWeHTJzPHjqrjsbanhmP8mOdf8eEiA5334K11xzxPmIkcH4riqMzYBN2dn3LbHhoIMpJSit9r6tMn9pTtwxIjEZxewdNPhtyPnYA/K1beAbKztj7tvanCs8c8OThA0tEd2F8Rn7x+4FbvI3qPzq865ZIaPY7IgMI/bpEbuu9v0gw0zFI6y2RSdqVp1yMJhh0pejtmOQHK93H4MGkHIItO8Mg104nGsaF0CaQ+cNYGNi4HdTr8u4ozuf5jU1o39cHI5CZbUWXX6R6UL7eSla5OHJ2jbKuk2fyqrLU6YkQzqtu2DdcumlCSEB39afNKHvNkhfqHF+ezr83vyUzLNxoQWAD9FQ9nCC9W0n0YrcLKSCyfoFv3qCFyTbVmkpe7qDeG0lGE7MkS0VJdEYuEg21fDzq/rc79MwRH3w7qpyzcrG7WOziYfeyt2IIqyHt8S4Sj9bsITlYJGszjU0T1D8R0XlSvlXYl/cay4x5fqVG1k1AUQjQUjtvcOAo5+yvTAWyj28NS6pY/om7IoyrLKLH6Kjgjcd9Yg+/u6S6jy9o70k4351PJaZjBskkGvpPLHNGpqJoLPJOD7Tv8A37lE16Z8ZvxFCVgFD87wXYJVobjUGXoWiA=="};
+const b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function go(pw){
+  if(!window.crypto||!crypto.subtle) throw new Error('nocrypto');
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b(D.s),iterations:D.n,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b(D.i)},key,b(D.c));
+  try{sessionStorage.setItem('bo_pw',pw)}catch(e){}
+  document.open();document.write(new TextDecoder().decode(pt));document.close();
+}
+const m=document.getElementById('m');
+document.getElementById('f').addEventListener('submit',async e=>{e.preventDefault();m.textContent='Checking\u2026';
+  try{await go(document.getElementById('p').value)}catch(x){m.textContent=x.message==='nocrypto'?'This browser needs a secure (https) connection to unlock.':'Wrong password.'}});
+let saved=null;try{saved=sessionStorage.getItem('bo_pw')}catch(e){}
+if(saved){go(saved).catch(()=>{try{sessionStorage.removeItem('bo_pw')}catch(e){}})}
+</script></body></html>

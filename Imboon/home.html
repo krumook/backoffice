@@ -1,128 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Imboon &mdash; Home</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #1f2a24; --muted: #5c6b63; --line: #dfe6e1; --bg: #fbfaf7; --card: #ffffff;
-    --accent: #0f6e56; --accent-light: #e1f5ee;
-    --tip: #185fa5; --tip-light: #e6f1fb;
-    --amber: #854f0b; --amber-light: #faeeda;
-    --grade-a: #1B88A7; --grade-a-light: #E2F3F8;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    padding: 56px 24px 64px;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Space Grotesk', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-  }
-  .wrap { max-width: 900px; margin: 0 auto; }
-  header { text-align: center; margin-bottom: 44px; }
-  .eyebrow { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
-  header h1 { margin: 0 0 10px; font-size: 32px; font-weight: 700; }
-  header .meta { color: var(--muted); font-size: 14.5px; }
-
-  .hub-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-  .hub-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 26px 22px;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    transition: box-shadow 0.15s ease, transform 0.15s ease;
-    border-top: 4px solid var(--hub-color, var(--accent));
-  }
-  .hub-card:hover { box-shadow: 0 6px 22px rgba(31,42,36,0.14); transform: translateY(-3px); }
-  .hub-icon { font-size: 26px; line-height: 1; }
-  .hub-card h2 { margin: 0; font-size: 16.5px; font-weight: 700; }
-  .hub-card p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
-  .hub-goto { margin-top: auto; padding-top: 10px; font-size: 12.5px; font-weight: 600; color: var(--hub-color, var(--accent)); }
-
-  .hub-grid.two { grid-template-columns: repeat(2, 1fr); }
-  .group-label { font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 30px 0 12px; }
-  .group-label:first-of-type { margin-top: 0; }
-  .hub-card.schedule { --hub-color: var(--tip); }
-  .hub-card.fees { --hub-color: var(--amber); }
-  .hub-card.progress { --hub-color: var(--grade-a); }
-
-  footer { margin-top: 46px; font-size: 12px; color: var(--muted); text-align: center; }
-
-  @media (max-width: 720px) {
-    .hub-grid, .hub-grid.two { grid-template-columns: 1fr; }
-  }
-</style>
-</head>
-<body>
-<div class="wrap">
-
-  <a href="../teacher-hub.html" style="display:inline-block;font-size:13px;font-weight:600;color:var(--tip);text-decoration:none;background:var(--tip-light);padding:7px 14px;border-radius:20px;margin-bottom:18px;">&larr; Back to Teacher Hub</a>
-
-  <header>
-    <div class="eyebrow">Imboon &middot; Tutoring hub</div>
-    <h1>What would you like to check?</h1>
-    <div class="meta">Everything in one place &mdash; schedule, fees, Year 10 school maths, and 4MA1 progress.</div>
-  </header>
-
-  <div class="group-label">Classes &amp; fees</div>
-  <div class="hub-grid two">
-    <a class="hub-card schedule" href="schedule.html">
-      <div class="hub-icon">🗓️</div>
-      <h2>Class schedule</h2>
-      <p>The recurring weekly class time and the school topics planned for each term.</p>
-      <div class="hub-goto">Open schedule &rarr;</div>
-    </a>
-    <a class="hub-card fees" href="mo/index.html">
-      <div class="hub-icon">🧾</div>
-      <h2>This month&rsquo;s schedule conclusion</h2>
-      <p>Every session held this month with dates and fees, and the running total for collecting payment.</p>
-      <div class="hub-goto">Open this month &rarr;</div>
-    </a>
-  </div>
-
-  <div class="group-label">Year 10 school maths</div>
-  <div class="hub-grid two">
-    <a class="hub-card progress" href="y10.html" style="--hub-color: var(--accent);">
-      <div class="hub-icon">🏫</div>
-      <h2>Year 10 school topics</h2>
-      <p>All 18 units with learning objectives and DrFrost codes, and a status for each objective.</p>
-      <div class="hub-goto">Open Year 10 page &rarr;</div>
-    </a>
-    <a class="hub-card progress" href="y10-checks.html" style="--hub-color: var(--tip);">
-      <div class="hub-icon">✅</div>
-      <h2>End-of-class checks</h2>
-      <p>Key learning and check questions with answers for every subtopic in all 18 units.</p>
-      <div class="hub-goto">Open checks &rarr;</div>
-    </a>
-  </div>
-
-  <div class="group-label">IGCSE 4MA1</div>
-  <div class="hub-grid two">
-    <a class="hub-card progress" href="dash.html">
-      <div class="hub-icon">📐</div>
-      <h2>4MA1 progress</h2>
-      <p>Syllabus coverage, topic scores, and marking breakdowns from every past paper marked so far.</p>
-      <div class="hub-goto">Open progress tracker &rarr;</div>
-    </a>
-  </div>
-
-  <footer>Imboon &middot; Year 10 &middot; Rugby International School &middot; updated as classes happen</footer>
-
-</div>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Locked</title>
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fbfaf7;font-family:'Space Grotesk',-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#1f2a24}
+form{background:#fff;border:1px solid #dfe6e1;border-radius:14px;padding:32px 34px;width:min(360px,90vw);text-align:center;box-shadow:0 6px 22px rgba(31,42,36,.10)}
+h1{font-size:20px;margin:0 0 6px}p{margin:0 0 18px;color:#5c6b63;font-size:14px}
+input{width:100%;font:inherit;font-size:16px;padding:11px 14px;border:1px solid #dfe6e1;border-radius:10px;margin-bottom:12px}
+button{width:100%;font:inherit;font-weight:700;font-size:15px;padding:11px;border:0;border-radius:10px;background:#0f6e56;color:#fff;cursor:pointer}
+#m{margin-top:12px;font-size:13px;color:#993c1d;min-height:18px}</style></head>
+<body><form id="f" autocomplete="off"><h1>&#128274; School back office</h1><p>Enter the password to open this page.</p>
+<input type="password" id="p" placeholder="Password" autofocus><button type="submit">Unlock</button><div id="m"></div></form>
+<script>
+const D={"s":"rPCd7x5zXRtPSlF86k+bxQ==","i":"D4T06Zbw3ZN6KQMx","n":600000,"c":"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"};
+const b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function go(pw){
+  if(!window.crypto||!crypto.subtle) throw new Error('nocrypto');
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b(D.s),iterations:D.n,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b(D.i)},key,b(D.c));
+  try{sessionStorage.setItem('bo_pw',pw)}catch(e){}
+  document.open();document.write(new TextDecoder().decode(pt));document.close();
+}
+const m=document.getElementById('m');
+document.getElementById('f').addEventListener('submit',async e=>{e.preventDefault();m.textContent='Checking\u2026';
+  try{await go(document.getElementById('p').value)}catch(x){m.textContent=x.message==='nocrypto'?'This browser needs a secure (https) connection to unlock.':'Wrong password.'}});
+let saved=null;try{saved=sessionStorage.getItem('bo_pw')}catch(e){}
+if(saved){go(saved).catch(()=>{try{sessionStorage.removeItem('bo_pw')}catch(e){}})}
+</script></body></html>

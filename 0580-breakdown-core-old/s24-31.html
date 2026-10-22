@@ -1,193 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>0580/31 &mdash; May/June 2024 (Core)</title>
-<style>
-  :root {
-    --bg: #f6f7fb;
-    --card-bg: #ffffff;
-    --border: #e2e5ec;
-    --text: #1f2430;
-    --muted: #6b7280;
-    --accent: #5a4fc2;
-    --num: #2f7d5c; --num-bg: #e7f5ee;
-    --alg: #b8590a; --alg-bg: #fdf0e2;
-    --cog: #1c6fb0; --cog-bg: #e6f2fb;
-    --geo: #a8317a; --geo-bg: #fbe8f3;
-    --men: #6d5bd0; --men-bg: #eeecfb;
-    --trig: #c0392b; --trig-bg: #fbeae8;
-    --vec: #0e8a8a; --vec-bg: #e3f6f6;
-    --prob: #8a7315; --prob-bg: #f7f2df;
-    --stat: #5c6b1f; --stat-bg: #eef2df;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-  }
-  header {
-    padding: 32px 24px 16px;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  header .back {
-    font-size: 13px;
-    color: var(--muted);
-    text-decoration: none;
-  }
-  header .back:hover { text-decoration: underline; }
-  header h1 {
-    margin: 10px 0 4px;
-    font-size: 24px;
-  }
-  header p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 14px;
-  }
-  main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 8px 24px 48px;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    font-size: 13.5px;
-    margin-top: 16px;
-  }
-  th, td {
-    text-align: left;
-    padding: 10px 12px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: top;
-  }
-  th {
-    background: #f0f1f7;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: var(--muted);
-  }
-  tr:last-child td { border-bottom: none; }
-  td.q { font-weight: 700; width: 42px; }
-  td.marks { width: 60px; color: var(--muted); }
-  .tag {
-    display: inline-block;
-    padding: 2px 9px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-  .tag-num { color: var(--num); background: var(--num-bg); }
-  .tag-alg { color: var(--alg); background: var(--alg-bg); }
-  .tag-cog { color: var(--cog); background: var(--cog-bg); }
-  .tag-geo { color: var(--geo); background: var(--geo-bg); }
-  .tag-men { color: var(--men); background: var(--men-bg); }
-  .tag-trig { color: var(--trig); background: var(--trig-bg); }
-  .tag-vec { color: var(--vec); background: var(--vec-bg); }
-  .tag-prob { color: var(--prob); background: var(--prob-bg); }
-  .tag-stat { color: var(--stat); background: var(--stat-bg); }
-  .note {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 3px;
-  }
-  .summary {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px 18px;
-    margin-top: 20px;
-    font-size: 13.5px;
-  }
-  .summary h3 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
-  .summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px 16px; }
-  footer {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 24px 40px;
-    font-size: 12px;
-    color: var(--muted);
-  }
-</style>
-</head>
-<body>
-
-<header>
-  <a class="back" href="index.html">&larr; 0580 Paper Breakdown &mdash; Core Papers (Pre-2025)</a> <a class="back" href="../teacher-hub.html" style="margin-left:10px;">🏠 Teacher Hub</a>
-  <h1>0580/31 &mdash; May/June 2024</h1>
-  <p>Paper 3, Calculator (Core) &middot; 104 marks &middot; 8 questions</p>
-</header>
-
-<main>
-  <table>
-    <thead>
-      <tr><th>Q</th><th>Marks</th><th>Topic</th><th>What it tests</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="q">1</td><td class="marks">15</td><td><span class="tag tag-num">Number</span></td>
-        <td>(a)(i) Total cost of four cinema tickets [1]<div class="note">(a)(ii) Cost per person with a ten-for-nine offer [2] (b)(i) Number of rows from seats per row [1] (b)(ii) Number of unoccupied seats from a percentage [2] (c) Cost of two items from a ratio of prices and the change &mdash; <span class="tag tag-alg" style="margin-top:2px;">Algebra &amp; graphs</span> [3] (d)(i) Converting minutes to hours and minutes [1] (d)(ii) Finishing time of a film [1] (e) Weekly pay with a percentage increase after 18 00 [4]</div></td>
-      </tr>
-      <tr>
-        <td class="q">2</td><td class="marks">15</td><td><span class="tag tag-stat">Statistics</span></td>
-        <td>(a)(i) Fraction from a pie chart [2]<div class="note">(a)(ii) Percentage from a pie chart [1] (a)(iii) Ratio of four categories from sector angles &mdash; <span class="tag tag-num" style="margin-top:2px;">Number</span> [2] (a)(iv) Probability from a pie chart &mdash; <span class="tag tag-prob" style="margin-top:2px;">Probability</span> [2] (a)(v) Showing the total number of people [1] (a)(vi)a Completing a table of sector angles and frequencies [2] (a)(vi)b Completing a bar chart [3] (b) Difference in price between two currencies &mdash; <span class="tag tag-num" style="margin-top:2px;">Number</span> [2]</div></td>
-      </tr>
-      <tr>
-        <td class="q">3</td><td class="marks">15</td><td><span class="tag tag-num">Number</span></td>
-        <td>(a)(i) Completing a train timetable [2]<div class="note">(a)(ii) Showing a time on a clock diagram [1] (b) Number of buses in a day [3] (c) Bus pass cost after two percentage increases [3] (d)(i) Total number of workers from a Venn diagram [1] (d)(ii) Finding n(B &cup; T) [1] (d)(iii) Explaining a region of a Venn diagram [1] (d)(iv) Probability from a Venn diagram &mdash; <span class="tag tag-prob" style="margin-top:2px;">Probability</span> [1] (e) Number of single rooms from a ratio and a difference [2]</div></td>
-      </tr>
-      <tr>
-        <td class="q">4</td><td class="marks">11</td><td><span class="tag tag-stat">Statistics</span></td>
-        <td>(a)(i) Range from a stem-and-leaf diagram [1]<div class="note">(a)(ii) Mode [1] (a)(iii) Median [1] (a)(iv) Percentage of values between two ages [2] (b) Range, mode and median a year later [2] (c) Updating a stem-and-leaf diagram [2] (d) Finding a number from prime, square and multiple conditions &mdash; <span class="tag tag-num" style="margin-top:2px;">Number</span> [2]</div></td>
-      </tr>
-      <tr>
-        <td class="q">5</td><td class="marks">13</td><td><span class="tag tag-geo">Geometry</span></td>
-        <td>(a)(i) Naming the type of an angle [1]<div class="note">(a)(ii) Finding an angle with a geometrical reason [2] (a)(iii) Finding a second angle with a reason [2] (b) Interior angle of a regular 7-sided polygon [3] (c) Finding three values from the equal sides of a regular pentagon &mdash; <span class="tag tag-alg" style="margin-top:2px;">Algebra &amp; graphs</span> [5]</div></td>
-      </tr>
-      <tr>
-        <td class="q">6</td><td class="marks">11</td><td><span class="tag tag-vec">Transformations &amp; vectors</span></td>
-        <td>(a) Reflecting a point in y = 0 [1]<div class="note">(b) Finding an angle using trigonometry &mdash; <span class="tag tag-trig" style="margin-top:2px;">Trigonometry</span> [2] (c)(i) Describing a transformation fully [3] (c)(ii) Describing a second transformation fully [2] (d)(i) Scale factor of an enlargement [1] (d)(ii) Vertices of an enlarged triangle [2]</div></td>
-      </tr>
-      <tr>
-        <td class="q">7</td><td class="marks">14</td><td><span class="tag tag-geo">Geometry</span></td>
-        <td>(a) Marking a position from a bearing, speed and time on a scale drawing [3]<div class="note">(b)(i) Back bearing [2] (b)(ii) Bounds of a distance given to the nearest kilometre &mdash; <span class="tag tag-num" style="margin-top:2px;">Number</span> [2] (c) Scale of a model as 1 : n &mdash; <span class="tag tag-num" style="margin-top:2px;">Number</span> [2] (d) Missing length in mathematically similar rectangles [2] (e) Curved surface area of a cylinder, with units &mdash; <span class="tag tag-men" style="margin-top:2px;">Mensuration</span> [3]</div></td>
-      </tr>
-      <tr>
-        <td class="q">8</td><td class="marks">10</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
-        <td>(a) Completing a table of values for a quadratic [3]<div class="note">(b) Drawing the quadratic graph [4] (c) Coordinates of the lowest point [1] (d) Solving an equation from the graph [2]</div></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="summary">
-    <h3>Marks by topic</h3>
-    <div class="summary-grid">
-      <div><span class="tag tag-num">Number</span> 36</div>
-      <div><span class="tag tag-alg">Algebra &amp; graphs</span> 18</div>
-      <div><span class="tag tag-stat">Statistics</span> 18</div>
-      <div><span class="tag tag-geo">Geometry</span> 15</div>
-      <div><span class="tag tag-vec">Transformations &amp; vectors</span> 9</div>
-      <div><span class="tag tag-prob">Probability</span> 3</div>
-      <div><span class="tag tag-men">Mensuration</span> 3</div>
-      <div><span class="tag tag-trig">Trigonometry</span> 2</div>
-    </div>
-  </div>
-</main>
-
-<footer>
-  Core papers &mdash; 0580 Paper 3. Personal reference &mdash; not linked to any student tracker. Topic codes are approximate Core stand-ins from the current 2025&ndash;2027 syllabus (see dashboard note).
-</footer>
-
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Locked</title>
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fbfaf7;font-family:'Space Grotesk',-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#1f2a24}
+form{background:#fff;border:1px solid #dfe6e1;border-radius:14px;padding:32px 34px;width:min(360px,90vw);text-align:center;box-shadow:0 6px 22px rgba(31,42,36,.10)}
+h1{font-size:20px;margin:0 0 6px}p{margin:0 0 18px;color:#5c6b63;font-size:14px}
+input{width:100%;font:inherit;font-size:16px;padding:11px 14px;border:1px solid #dfe6e1;border-radius:10px;margin-bottom:12px}
+button{width:100%;font:inherit;font-weight:700;font-size:15px;padding:11px;border:0;border-radius:10px;background:#0f6e56;color:#fff;cursor:pointer}
+#m{margin-top:12px;font-size:13px;color:#993c1d;min-height:18px}</style></head>
+<body><form id="f" autocomplete="off"><h1>&#128274; School back office</h1><p>Enter the password to open this page.</p>
+<input type="password" id="p" placeholder="Password" autofocus><button type="submit">Unlock</button><div id="m"></div></form>
+<script>
+const D={"s":"9S55hoxydeCHzXAw2/h2bQ==","i":"2ERsvYXoo8COMk6Q","n":600000,"c":"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"};
+const b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function go(pw){
+  if(!window.crypto||!crypto.subtle) throw new Error('nocrypto');
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b(D.s),iterations:D.n,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b(D.i)},key,b(D.c));
+  try{sessionStorage.setItem('bo_pw',pw)}catch(e){}
+  document.open();document.write(new TextDecoder().decode(pt));document.close();
+}
+const m=document.getElementById('m');
+document.getElementById('f').addEventListener('submit',async e=>{e.preventDefault();m.textContent='Checking\u2026';
+  try{await go(document.getElementById('p').value)}catch(x){m.textContent=x.message==='nocrypto'?'This browser needs a secure (https) connection to unlock.':'Wrong password.'}});
+let saved=null;try{saved=sessionStorage.getItem('bo_pw')}catch(e){}
+if(saved){go(saved).catch(()=>{try{sessionStorage.removeItem('bo_pw')}catch(e){}})}
+</script></body></html>
