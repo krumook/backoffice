@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0580/32 &mdash; May/June 2022 (Core)</title>
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --card-bg: #ffffff;
+    --border: #e2e5ec;
+    --text: #1f2430;
+    --muted: #6b7280;
+    --accent: #5a4fc2;
+    --num: #2f7d5c; --num-bg: #e7f5ee;
+    --alg: #b8590a; --alg-bg: #fdf0e2;
+    --cog: #1c6fb0; --cog-bg: #e6f2fb;
+    --geo: #a8317a; --geo-bg: #fbe8f3;
+    --men: #6d5bd0; --men-bg: #eeecfb;
+    --trig: #c0392b; --trig-bg: #fbeae8;
+    --vec: #0e8a8a; --vec-bg: #e3f6f6;
+    --prob: #8a7315; --prob-bg: #f7f2df;
+    --stat: #5c6b1f; --stat-bg: #eef2df;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    padding: 32px 24px 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  header .back {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  header .back:hover { text-decoration: underline; }
+  header h1 {
+    margin: 10px 0 4px;
+    font-size: 24px;
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 8px 24px 48px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 13.5px;
+    margin-top: 16px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: #f0f1f7;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+  }
+  tr:last-child td { border-bottom: none; }
+  td.q { font-weight: 700; width: 42px; }
+  td.marks { width: 60px; color: var(--muted); }
+  .tag {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .tag-num { color: var(--num); background: var(--num-bg); }
+  .tag-alg { color: var(--alg); background: var(--alg-bg); }
+  .tag-cog { color: var(--cog); background: var(--cog-bg); }
+  .tag-geo { color: var(--geo); background: var(--geo-bg); }
+  .tag-men { color: var(--men); background: var(--men-bg); }
+  .tag-trig { color: var(--trig); background: var(--trig-bg); }
+  .tag-vec { color: var(--vec); background: var(--vec-bg); }
+  .tag-prob { color: var(--prob); background: var(--prob-bg); }
+  .tag-stat { color: var(--stat); background: var(--stat-bg); }
+  .note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .summary {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-top: 20px;
+    font-size: 13.5px;
+  }
+  .summary h3 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px 16px; }
+  footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="index.html">&larr; 0580 Paper Breakdown &mdash; Core Papers (Pre-2025)</a> <a class="back" href="../teacher-hub.html" style="margin-left:10px;">🏠 Teacher Hub</a>
+  <h1>0580/32 &mdash; May/June 2022</h1>
+  <p>Paper 3, Calculator (Core) &middot; 104 marks &middot; 9 questions</p>
+</header>
+
+<main>
+  <table>
+    <thead>
+      <tr><th>Q</th><th>Marks</th><th>Topic</th><th>What it tests</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="q">1</td><td class="marks">17</td><td><span class="tag tag-num">Number</span></td>
+        <td>(a)(i) Reading a total from a tally &mdash; <span class="tag tag-stat" style="margin-top:2px;">Statistics</span> [1]<div class="note">(a)(ii) Fraction in simplest form [1] (a)(iii) Missing quantity from a ratio [2] (b)(i) Range &mdash; <span class="tag tag-stat" style="margin-top:2px;">Statistics</span> [1] (b)(ii) Median &mdash; <span class="tag tag-stat" style="margin-top:2px;">Statistics</span> [2] (b)(iii) Mean &mdash; <span class="tag tag-stat" style="margin-top:2px;">Statistics</span> [2] (c)(i) Percentage profit [2] (c)(ii) Volume of a sphere, with units &mdash; <span class="tag tag-men" style="margin-top:2px;">Mensuration</span> [3] (d) Best value from three bottle sizes [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">2</td><td class="marks">15</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
+        <td>(a)(i) Completing a table of values for a reciprocal graph [3]<div class="note">(a)(ii) Drawing the reciprocal graph [4] (a)(iii) Order of rotational symmetry of the graph [1] (a)(iv) Equations of the lines of symmetry [2] (a)(v) Drawing the line y = 2.5 [1] (a)(vi) Solving an equation from the graph [1] (b) Drawing a perpendicular line &mdash; <span class="tag tag-cog" style="margin-top:2px;">Coordinate geometry</span> [1] (c) Equation of a parallel line through a point &mdash; <span class="tag tag-cog" style="margin-top:2px;">Coordinate geometry</span> [2]</div></td>
+      </tr>
+      <tr>
+        <td class="q">3</td><td class="marks">11</td><td><span class="tag tag-geo">Geometry</span></td>
+        <td>(a)(i) Naming a type of angle [1]<div class="note">(a)(ii) Measuring an angle [1] (b)(i) Sketching a quadrilateral from its properties [1] (b)(ii) Naming the quadrilateral [1] (b)(iii) Finding the other angles of a rhombus [2] (c)(i) Geometrical reason for the angle sum of a triangle [1] (c)(ii) Forming an equation from angles on a straight line &mdash; <span class="tag tag-alg" style="margin-top:2px;">Algebra &amp; graphs</span> [1] (c)(iii) Solving simultaneous equations &mdash; <span class="tag tag-alg" style="margin-top:2px;">Algebra &amp; graphs</span> [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">4</td><td class="marks">9</td><td><span class="tag tag-men">Mensuration</span></td>
+        <td>(a)(i) Area of a face of a cuboid [2]<div class="note">(a)(ii) Dimensions of a cuboid from its volume [2] (b) Volume of a cylinder in terms of &pi; [2] (c) Shaded area of a parallelogram and a circle [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">5</td><td class="marks">8</td><td><span class="tag tag-stat">Statistics</span></td>
+        <td>(a) Completing a scatter diagram [2]<div class="note">(b) Type of correlation [1] (c) Identifying the highest price per kilometre [1] (d) Drawing a line of best fit [1] (e) Estimating a price using a scale drawing and a line of best fit &mdash; <span class="tag tag-num" style="margin-top:2px;">Number</span> [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">6</td><td class="marks">12</td><td><span class="tag tag-num">Number</span></td>
+        <td>(a)(i) Reading a distance from a travel graph [1]<div class="note">(a)(ii) Explaining a stage of a travel graph [1] (a)(iii) Fastest part of a journey [2] (a)(iv) Average speed for a whole journey [3] (b) Total value of a set of coins [2] (c) Converting dollars to euros [1] (d) Total simple interest over 4 years [2]</div></td>
+      </tr>
+      <tr>
+        <td class="q">7</td><td class="marks">11</td><td><span class="tag tag-num">Number</span></td>
+        <td>(a) Shading equivalent fractions [2]<div class="note">(b)(i) Drawing the next shapes in a pattern &mdash; <span class="tag tag-alg" style="margin-top:2px;">Algebra &amp; graphs</span> [1] (b)(ii) Describing the position numbers of a shape &mdash; <span class="tag tag-alg" style="margin-top:2px;">Algebra &amp; graphs</span> [1] (b)(iii) Explaining which shape is in a given position &mdash; <span class="tag tag-alg" style="margin-top:2px;">Algebra &amp; graphs</span> [2] (c)(i)a Completing a Venn diagram [1] (c)(i)b Finding n(B &cup; C) [1] (c)(ii) Labelling and completing a Venn diagram [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">8</td><td class="marks">14</td><td><span class="tag tag-geo">Geometry</span></td>
+        <td>(a)(i) Showing the exterior angle of a regular octagon [1]<div class="note">(a)(ii) Interior angle of a regular octagon [1] (b)(i) Bearing of one vertex from another [1] (b)(ii) Matching bearings [1] (b)(iii)a Naming a type of triangle [1] (b)(iii)b Finding an angle in an isosceles triangle [2] (b)(iii)c Bearing from another vertex [2] (c) Time for a race from speed and distance &mdash; <span class="tag tag-num" style="margin-top:2px;">Number</span> [3] (d) Deciding whether a scale is suitable &mdash; <span class="tag tag-num" style="margin-top:2px;">Number</span> [2]</div></td>
+      </tr>
+      <tr>
+        <td class="q">9</td><td class="marks">7</td><td><span class="tag tag-vec">Transformations &amp; vectors</span></td>
+        <td>(a)(i) Describing a transformation fully [2]<div class="note">(a)(ii) Describing a second transformation fully [3] (b) Rotating a shape 90&deg; clockwise [2]</div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="summary">
+    <h3>Marks by topic</h3>
+    <div class="summary-grid">
+      <div><span class="tag tag-num">Number</span> 35</div>
+      <div><span class="tag tag-alg">Algebra &amp; graphs</span> 20</div>
+      <div><span class="tag tag-geo">Geometry</span> 16</div>
+      <div><span class="tag tag-men">Mensuration</span> 12</div>
+      <div><span class="tag tag-stat">Statistics</span> 11</div>
+      <div><span class="tag tag-vec">Transformations &amp; vectors</span> 7</div>
+      <div><span class="tag tag-cog">Coordinate geometry</span> 3</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Core papers &mdash; 0580 Paper 3. Personal reference &mdash; not linked to any student tracker. Topic codes are approximate Core stand-ins from the current 2025&ndash;2027 syllabus (see dashboard note).
+</footer>
+
+</body>
+</html>

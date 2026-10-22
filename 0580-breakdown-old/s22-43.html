@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0580/43 &mdash; May/June 2022</title>
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --card-bg: #ffffff;
+    --border: #e2e5ec;
+    --text: #1f2430;
+    --muted: #6b7280;
+    --accent: #5a4fc2;
+    --num: #2f7d5c; --num-bg: #e7f5ee;
+    --alg: #b8590a; --alg-bg: #fdf0e2;
+    --cog: #1c6fb0; --cog-bg: #e6f2fb;
+    --geo: #a8317a; --geo-bg: #fbe8f3;
+    --men: #6d5bd0; --men-bg: #eeecfb;
+    --trig: #c0392b; --trig-bg: #fbeae8;
+    --vec: #0e8a8a; --vec-bg: #e3f6f6;
+    --prob: #8a7315; --prob-bg: #f7f2df;
+    --stat: #5c6b1f; --stat-bg: #eef2df;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    padding: 32px 24px 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  header .back {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  header .back:hover { text-decoration: underline; }
+  header h1 {
+    margin: 10px 0 4px;
+    font-size: 24px;
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 8px 24px 48px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 13.5px;
+    margin-top: 16px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: #f0f1f7;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+  }
+  tr:last-child td { border-bottom: none; }
+  td.q { font-weight: 700; width: 42px; }
+  td.marks { width: 60px; color: var(--muted); }
+  .tag {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .tag-num { color: var(--num); background: var(--num-bg); }
+  .tag-alg { color: var(--alg); background: var(--alg-bg); }
+  .tag-cog { color: var(--cog); background: var(--cog-bg); }
+  .tag-geo { color: var(--geo); background: var(--geo-bg); }
+  .tag-men { color: var(--men); background: var(--men-bg); }
+  .tag-trig { color: var(--trig); background: var(--trig-bg); }
+  .tag-vec { color: var(--vec); background: var(--vec-bg); }
+  .tag-prob { color: var(--prob); background: var(--prob-bg); }
+  .tag-stat { color: var(--stat); background: var(--stat-bg); }
+  .note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .summary {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-top: 20px;
+    font-size: 13.5px;
+  }
+  .summary h3 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px 16px; }
+  footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="index.html">&larr; 0580 Paper Breakdown &mdash; Pre-2025 Papers</a> <a class="back" href="../teacher-hub.html" style="margin-left:10px;">🏠 Teacher Hub</a>
+  <h1>0580/43 &mdash; May/June 2022</h1>
+  <p>Paper 4, Calculator (Extended) &middot; 130 marks &middot; 10 questions</p>
+</header>
+
+<main>
+  <table>
+    <thead>
+      <tr><th>Q</th><th>Marks</th><th>Topic</th><th>What it tests</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="q">1</td><td class="marks">9</td><td><span class="tag tag-num">Number</span></td>
+        <td>(a) Arrival time from a bus timetable [1]<div class="note">(b) Total journey time using a timetable [2] (c) Average speed in kilometres per hour [2] (d) Total ticket cost from a ratio and a fraction [4]</div></td>
+      </tr>
+      <tr>
+        <td class="q">2</td><td class="marks">9</td><td><span class="tag tag-vec">Transformations &amp; vectors</span></td>
+        <td>(a)(i) Reflecting a triangle in y = x [2]<div class="note">(a)(ii) Translating a triangle by a vector [2] (a)(iii) Describing a transformation fully [3] (b) Area of an enlarged shape [2]</div></td>
+      </tr>
+      <tr>
+        <td class="q">3</td><td class="marks">13</td><td><span class="tag tag-num">Number</span></td>
+        <td>(a)(i)a One number as a percentage of another [1]<div class="note">(a)(i)b Simplifying a three-part ratio [2] (a)(ii) Percentage increase in a population [2] (a)(iii) Original amount before a percentage increase [3] (b) Exponential growth formula and a later population [5]</div></td>
+      </tr>
+      <tr>
+        <td class="q">4</td><td class="marks">11</td><td><span class="tag tag-men">Mensuration</span></td>
+        <td>(a) Showing the interior angle of a regular 12-sided polygon &mdash; <span class="tag tag-geo" style="margin-top:2px;">Geometry</span> [1]<div class="note">(b)(i) Showing the radius of a circle round a polygon &mdash; <span class="tag tag-trig" style="margin-top:2px;">Trigonometry</span> [3] (b)(ii)a Circumference of a circle [2] (b)(ii)b Perimeter of a minor segment [2] (c) Volume of a prism with a regular 12-sided cross-section [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">5</td><td class="marks">19</td><td><span class="tag tag-stat">Statistics</span></td>
+        <td>(a)(i) Class interval containing the median [1]<div class="note">(a)(ii) Estimating the mean from a grouped frequency table [4] (b)(i) Probability from a grouped frequency table &mdash; <span class="tag tag-prob" style="margin-top:2px;">Probability</span> [2] (b)(ii) Probability of two people chosen without replacement &mdash; <span class="tag tag-prob" style="margin-top:2px;">Probability</span> [3] (c)(i) Completing a cumulative frequency table [1] (c)(ii) Drawing a cumulative frequency diagram [3] (c)(iii) 80th percentile [2] (c)(iv) Percentage above a value from a cumulative frequency diagram [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">6</td><td class="marks">14</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
+        <td>(a) Simplifying by collecting like terms [2]<div class="note">(b) Expanding and simplifying [2] (c) Combining algebraic fractions into one [3] (d) Solving an equation with a fraction [3] (e) Making x the subject where it appears twice [4]</div></td>
+      </tr>
+      <tr>
+        <td class="q">7</td><td class="marks">14</td><td><span class="tag tag-trig">Trigonometry</span></td>
+        <td>(a) Length in a triangle using the cosine rule [3]<div class="note">(b) Angle in a triangle using the sine rule [3] (c) Shortest distance from a point to a side [3] (d) Two possible angles from the area of a triangle [5]</div></td>
+      </tr>
+      <tr>
+        <td class="q">8</td><td class="marks">18</td><td><span class="tag tag-cog">Coordinate geometry</span></td>
+        <td>(a)(i) Midpoint of a line segment [2]<div class="note">(a)(ii) Column vector between two points &mdash; <span class="tag tag-vec" style="margin-top:2px;">Transformations &amp; vectors</span> [2] (a)(iii) Magnitude of a vector &mdash; <span class="tag tag-vec" style="margin-top:2px;">Transformations &amp; vectors</span> [2] (a)(iv) Equation of a line through two points [3] (a)(v) Equation of a perpendicular line through a point [3] (b) Intersection of a line and a quadratic curve &mdash; <span class="tag tag-alg" style="margin-top:2px;">Algebra &amp; graphs</span> [6]</div></td>
+      </tr>
+      <tr>
+        <td class="q">9</td><td class="marks">16</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
+        <td>(a) Sketching a cubic graph with its intercepts [4]<div class="note">(b)(i) Showing an expansion of three brackets [2] (b)(ii) Turning points by differentiation [7] (b)(iii) Values of k for exactly one solution [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">10</td><td class="marks">7</td><td><span class="tag tag-trig">Trigonometry</span></td>
+        <td>(a) Length in a cuboid using a given diagonal [4]<div class="note">(b) Angle between a line and the base of a cuboid [3]</div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="summary">
+    <h3>Marks by topic</h3>
+    <div class="summary-grid">
+      <div><span class="tag tag-alg">Algebra &amp; graphs</span> 36</div>
+      <div><span class="tag tag-trig">Trigonometry</span> 24</div>
+      <div><span class="tag tag-num">Number</span> 22</div>
+      <div><span class="tag tag-stat">Statistics</span> 14</div>
+      <div><span class="tag tag-vec">Transformations &amp; vectors</span> 13</div>
+      <div><span class="tag tag-cog">Coordinate geometry</span> 8</div>
+      <div><span class="tag tag-men">Mensuration</span> 7</div>
+      <div><span class="tag tag-prob">Probability</span> 5</div>
+      <div><span class="tag tag-geo">Geometry</span> 1</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Pre-2025 papers &mdash; 0580 Paper 4. Personal reference &mdash; not linked to any student tracker. Topic codes are approximate stand-ins from the current 2025&ndash;2027 syllabus (see dashboard note).
+</footer>
+
+</body>
+</html>

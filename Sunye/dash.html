@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sunye &mdash; Progress tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#1f2a24; --muted:#5c6b63; --line:#dfe6e1; --bg:#fbfaf7; --card:#fff; --accent:#0f6e56; --accent-light:#e1f5ee; --tip:#185fa5; --tip-light:#e6f1fb; --amber:#854f0b; --amber-light:#faeeda; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:40px 24px 64px; background:var(--bg); color:var(--ink); font-family:'Space Grotesk',-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; line-height:1.5; }
+  .wrap { max-width:1240px; margin:0 auto; }
+  .back-link { display:inline-block; font-size:13px; font-weight:600; color:var(--tip); text-decoration:none; background:var(--tip-light); padding:7px 14px; border-radius:20px; margin-bottom:18px; }
+  .back-link:hover { background:var(--tip); color:#fff; }
+  header { padding-bottom:20px; border-bottom:2px solid var(--ink); margin-bottom:24px; }
+  header h1 { margin:0 0 6px; font-size:30px; font-weight:700; }
+  header .meta { color:var(--muted); font-size:15.5px; }
+  .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:24px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px; }
+  .card .k { font-size:12px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+  .card .v { font-size:24px; font-weight:700; margin-top:4px; }
+  .card .s { font-size:14px; color:var(--muted); }
+  .section-label { font-size:14px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin:28px 0 12px; }
+  .note { background:var(--amber-light); border:1px solid var(--line); border-radius:10px; padding:16px 22px; font-size:15px; color:var(--amber); margin-bottom:18px; }
+  .note b { color:var(--ink); }
+  table { width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; font-size:16px; }
+  th,td { text-align:left; padding:13px 18px; border-top:1px solid var(--line); vertical-align:top; }
+  th { background:var(--accent-light); color:var(--accent); font-size:13px; text-transform:uppercase; letter-spacing:.04em; border-top:none; }
+  td:first-child { white-space:nowrap; font-weight:700; width:190px; }
+  td:nth-child(2) { width:36%; }
+  td:nth-child(4),td:nth-child(5) { white-space:nowrap; }
+  tr.brk td { background:#f4f5f2; color:var(--muted); font-size:14px; text-align:center; }
+  tr.rev td { background:var(--tip-light); }
+  .fit { font-size:13px; font-weight:700; padding:3px 11px; border-radius:10px; }
+  .fit.c { background:#e3f1e6; color:#1f6b35; } .fit.p { background:var(--amber-light); color:var(--amber); } .fit.x { background:#f6e1e1; color:#8a2b2b; }
+  .status { white-space:nowrap; font-size:13px; color:var(--muted); background:#f1f1ee; padding:2px 9px; border-radius:10px; }
+  .links a { display:block; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 20px; margin-bottom:8px; color:var(--ink); text-decoration:none; font-size:16px; }
+  .links a:hover { box-shadow:0 3px 12px rgba(31,42,36,.12); }
+  .sessbox { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:22px; }
+  .sess { display:flex; flex-direction:column; gap:2px; background:var(--tip-light); border:1px solid var(--line); border-radius:12px; padding:14px 20px; text-decoration:none; color:var(--tip); font-size:16px; }
+  .sess span { color:var(--ink); font-size:15px; }
+  .sess:hover { background:var(--tip); color:#fff; } .sess:hover span { color:#fff; }
+  @media (max-width:700px) { .sessbox { grid-template-columns:1fr; } }
+  footer { margin-top:30px; font-size:12px; color:var(--muted); text-align:center; }
+  @media (max-width:700px) { .cards { grid-template-columns:1fr; } table { font-size:14px; } th,td { padding:9px 10px; } td:nth-child(2) { width:auto; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="home.html">&larr; Back to Sunye&rsquo;s home</a>
+  <a class="back-link" href="sched.html" style="margin-left:8px;">Class schedule</a>
+  <header>
+    <h1>Sunye &mdash; progress tracker</h1>
+    <div class="meta">Harrow International School Bangkok &middot; Cambridge IGCSE Mathematics 0580 &middot; Core tier &middot; Paper 1 and Paper 3 in May 2027</div>
+  </header>
+
+  <div class="cards">
+    <div class="card"><div class="k">Exams</div><div class="v">May 2027</div><div class="s">Paper 1 (non-calculator) and Paper 3 (calculator), Core</div></div>
+    <div class="card"><div class="k">School study leave</div><div class="v">from 26 Apr 2027</div><div class="s">IGCSE examinations week of 3 May 2027</div></div>
+    <div class="card"><div class="k">Papers marked so far</div><div class="v">0</div><div class="s">Tracker fills in as soon as one is marked</div></div>
+  </div>
+
+  <div class="section-label">Class sessions &middot; 2 logged since Oct 2026</div>
+  <div class="sessbox">
+    <a class="sess" href="fb1012.html"><b>Mon 12 Oct</b><span>Differentiation and percentages</span></a>
+    <a class="sess" href="fb1014.html"><b>Wed 14 Oct</b><span>Fractions, decimals &amp; percentages; long division</span></a>
+  </div>
+
+  <div class="note"><b>Read this first.</b> The school&rsquo;s SOW is for the whole Year 11 class, which also covers Extended content. The &ldquo;Core fit&rdquo; column is my reading of the 0580 syllabus (Core / Part Core / Extended only), so it is a guide to what to prioritise for her Core papers, not an official mapping. The weeks were typed from a screenshot of the spreadsheet; please check them against the original. Exact exam dates are not on the SOW.</div>
+
+  <div class="section-label">School scheme of work &middot; Year 11 &middot; dates (Mon&ndash;Fri)</div>
+  <table>
+    <thead><tr><th>Dates</th><th>Key content</th><th>Syllabus area</th><th>Core fit</th><th>Sunye</th></tr></thead>
+    <tbody>
+<tr><td>17 &ndash; 21 Aug</td><td>Expanding triple brackets</td><td>Algebra</td><td><span class="fit x">Extended</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr><td>24 &ndash; 28 Aug</td><td>Similarity &ndash; 3D</td><td>Geometry</td><td><span class="fit p">Part Core</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr><td>31 Aug &ndash; 4 Sep</td><td>Differentiation and estimating gradients</td><td>Algebra and graphs</td><td><span class="fit x">Extended</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr><td>7 &ndash; 11 Sep</td><td>(none listed)</td><td></td><td></td><td></td></tr>
+<tr><td>14 &ndash; 18 Sep</td><td>Quadratics recap</td><td>Algebra</td><td><span class="fit p">Part Core</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr><td>21 &ndash; 25 Sep</td><td>Completing the square</td><td>Algebra</td><td><span class="fit x">Extended</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr><td>28 Sep &ndash; 2 Oct</td><td>Probability</td><td>Probability</td><td><span class="fit c">Core</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr><td>5 &ndash; 9 Oct</td><td>(none listed)</td><td></td><td></td><td></td></tr>
+<tr class="brk"><td>12 &ndash; 16 Oct</td><td colspan="4">Half term break</td></tr>
+<tr><td>19 &ndash; 23 Oct</td><td>Inequalities</td><td>Algebra</td><td><span class="fit p">Part Core</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr><td>26 &ndash; 30 Oct</td><td>Proportion</td><td>Number / algebra</td><td><span class="fit p">Part Core</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr><td>2 &ndash; 6 Nov</td><td>Vectors</td><td>Transformations and vectors</td><td><span class="fit p">Part Core</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr><td>9 &ndash; 13 Nov</td><td>Trigonometry (including exact values)</td><td>Trigonometry</td><td><span class="fit p">Part Core</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr class="rev"><td>16 &ndash; 20 Nov</td><td><b>Revision</b></td><td colspan="3"></td></tr>
+<tr class="rev"><td>23 &ndash; 27 Nov</td><td><b>Practice exam week</b></td><td colspan="3"></td></tr>
+<tr><td>30 Nov &ndash; 4 Dec</td><td>Sketching graphs</td><td>Algebra and graphs</td><td><span class="fit p">Part Core</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr class="rev"><td>7 &ndash; 11 Dec</td><td><b>Practice exam review</b></td><td colspan="3"></td></tr>
+<tr class="brk"><td>14 Dec &ndash; 3 Jan</td><td colspan="4">Christmas break (to 3 Jan)</td></tr>
+<tr><td>4 &ndash; 8 Jan</td><td>Handling data</td><td>Statistics</td><td><span class="fit c">Core</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr><td>11 &ndash; 15 Jan</td><td>Histograms</td><td>Statistics</td><td><span class="fit x">Extended</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr><td>18 &ndash; 22 Jan</td><td>Trig graphs and solving</td><td>Trigonometry</td><td><span class="fit x">Extended</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr><td>25 &ndash; 29 Jan</td><td>Recurring decimals to fractions</td><td>Number</td><td><span class="fit x">Extended</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr><td>1 &ndash; 5 Feb</td><td>Surds (rationalising)</td><td>Number</td><td><span class="fit x">Extended</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr><td>8 &ndash; 12 Feb</td><td>Sequences (harder)</td><td>Algebra</td><td><span class="fit p">Part Core</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr class="brk"><td>15 &ndash; 19 Feb</td><td colspan="4">Chinese New Year break</td></tr>
+<tr><td>22 &ndash; 26 Feb</td><td>Constructions</td><td>Geometry</td><td><span class="fit c">Core</span></td><td><span class="status">Not yet rated</span></td></tr>
+<tr class="rev"><td>1 &ndash; 5 Mar</td><td><b>Revision</b></td><td colspan="3"></td></tr>
+<tr><td>8 &ndash; 12 Mar</td><td>TBD</td><td></td><td></td><td></td></tr>
+<tr><td>15 &ndash; 19 Mar</td><td>TBD</td><td></td><td></td><td></td></tr>
+<tr><td>22 &ndash; 26 Mar</td><td>(none listed)</td><td></td><td></td><td></td></tr>
+<tr><td>29 Mar &ndash; 2 Apr</td><td>(none listed)</td><td></td><td></td><td></td></tr>
+<tr class="brk"><td>5 &ndash; 16 Apr</td><td colspan="4">Songkran break (school closed 8&ndash;19 Apr)</td></tr>
+<tr class="rev"><td>19 &ndash; 23 Apr</td><td><b>Revision</b></td><td colspan="3"></td></tr>
+<tr class="rev"><td>26 &ndash; 30 Apr</td><td><b>Study leave</b></td><td colspan="3"></td></tr>
+<tr class="rev"><td>3 &ndash; 7 May</td><td><b>IGCSE examinations (Paper 1 and Paper 3 for Sunye)</b></td><td colspan="3"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-label">Question banks for her papers</div>
+  <div class="links">
+    <a href="../0580-breakdown-core-old/index.html">Core Paper 1 and Paper 3 question bank by topic, 2022&ndash;2024 &rarr;</a>
+    <a href="../0580-breakdown-core/index.html">Core Paper 1 and Paper 3 question bank by topic, 2025 onwards &rarr;</a>
+  </div>
+
+  <footer>Sunye &middot; Core tracker &middot; topic scores are added once her first paper is marked</footer>
+</div>
+</body>
+</html>

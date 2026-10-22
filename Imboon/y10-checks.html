@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Imboon &mdash; Year 10 end-of-class checks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#1f2a24; --muted:#5c6b63; --line:#dfe6e1; --bg:#fbfaf7; --card:#fff; --accent:#0f6e56; --accent-light:#e1f5ee; --tip:#185fa5; --tip-light:#e6f1fb;
+    --all:#e3f1e6; --all-ink:#2f6b3a; --most:#fdf1d3; --most-ink:#8a6414; --some:#f8dcdc; --some-ink:#9a3b3b; --grey:#eef0ee; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:40px 24px 64px; background:var(--bg); color:var(--ink); font-family:'Space Grotesk',-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; line-height:1.5; }
+  .wrap { max-width:960px; margin:0 auto; }
+  .back-link { display:inline-block; font-size:13px; font-weight:600; color:var(--tip); text-decoration:none; background:var(--tip-light); padding:7px 14px; border-radius:20px; margin-bottom:18px; }
+  .back-link:hover { background:var(--tip); color:#fff; }
+  header { padding-bottom:18px; border-bottom:2px solid var(--ink); margin-bottom:22px; }
+  header h1 { margin:0 0 6px; font-size:24px; font-weight:700; }
+  header .meta { color:var(--muted); font-size:14px; }
+  .section-label { font-size:13px; font-weight:600; color:var(--muted); margin:26px 0 12px; text-transform:uppercase; letter-spacing:.04em; }
+  .overview { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+  .ov { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 14px 12px; text-decoration:none; color:inherit; border-top:4px solid var(--accent); }
+  .ov:hover { box-shadow:0 4px 16px rgba(31,42,36,.12); }
+  .ov .u { font-size:11.5px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:.04em; }
+  .ov .t { font-size:14.5px; font-weight:700; margin:2px 0 4px; line-height:1.3; }
+  .ov .l { font-size:12px; color:var(--muted); }
+  .note { background:var(--accent-light); border:1px solid var(--line); border-radius:10px; padding:14px 18px; font-size:13.5px; margin:18px 0; }
+  .note b { color:var(--ink); }
+  .legend { font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  .unit { background:var(--card); border:1px solid var(--line); border-radius:14px; margin-bottom:26px; overflow:hidden; }
+  .unit-head { padding:16px 22px; border-bottom:1px solid var(--line); background:var(--accent-light); display:flex; gap:12px; align-items:baseline; flex-wrap:wrap; }
+  .unit-head h2 { margin:0; font-size:19px; font-weight:700; }
+  .unit-head .pill { font-size:12px; font-weight:700; color:var(--accent); background:#fff; border:1px solid var(--line); padding:3px 10px; border-radius:14px; }
+  .unit-body { padding:6px 22px 18px; }
+  .kv { font-size:13px; color:var(--muted); margin:10px 0 0; }
+  .kv b { color:var(--ink); }
+  table { width:100%; border-collapse:collapse; margin-top:14px; font-size:13.5px; }
+  th { text-align:left; font-size:11.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); padding:6px 10px; border-bottom:1px solid var(--line); }
+  td { padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  td.lvl { width:70px; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.03em; border-radius:6px; text-align:center; }
+  .lv-all td.lvl { background:var(--all); color:var(--all-ink); }
+  .lv-most td.lvl { background:var(--most); color:var(--most-ink); }
+  .lv-some td.lvl { background:var(--some); color:var(--some-ink); }
+  td.code { width:210px; font-size:12px; color:var(--muted); }
+  td.tier { width:44px; text-align:center; font-weight:700; font-size:12px; color:var(--muted); }
+  td.st { width:120px; }
+  .status { display:inline-block; font-size:11.5px; font-weight:600; background:var(--grey); color:var(--muted); padding:3px 10px; border-radius:12px; white-space:nowrap; }
+  .cols { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:16px; }
+  .box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; font-size:13px; }
+  .box h3 { margin:0 0 6px; font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .box ul { margin:0; padding-left:18px; } .box li { margin-bottom:3px; }
+  footer { margin-top:30px; font-size:12px; color:var(--muted); text-align:center; }
+  @media (max-width:780px){ .overview{grid-template-columns:1fr 1fr;} .cols{grid-template-columns:1fr;} td.code{width:auto;} }
+
+  .tools{display:flex;gap:10px;margin:0 0 20px;flex-wrap:wrap}
+  .tools button{font:inherit;font-size:13px;font-weight:600;border:1px solid var(--line);background:#fff;color:var(--tip);padding:8px 14px;border-radius:20px;cursor:pointer}
+  .tools button:hover{background:var(--tip);color:#fff}
+  .sub{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0}
+  .sub h3{margin:0 0 6px;font-size:15px}
+  .sub h3 .n{display:inline-block;min-width:24px;font-size:12px;color:var(--accent);background:var(--accent-light);border-radius:6px;padding:2px 7px;margin-right:8px;text-align:center}
+  .key{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+  .q{margin:8px 0;font-size:14.5px}
+  .q b{color:var(--ink)}
+  .q.stretch b{color:var(--tip)}
+  details{margin:4px 0 6px 0}
+  details summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--accent)}
+  details .a{font-size:14px;background:var(--accent-light);border-radius:8px;padding:8px 12px;margin-top:6px}
+  .unit-body{padding-top:6px}
+  @media print{.tools{display:none} details .a{display:block} details[open] summary{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="y10.html">&larr; Year 10 topics</a>
+  <a class="back-link" href="home.html" style="margin-left:8px;">Home</a>
+  <a class="back-link" href="../teacher-hub.html" style="margin-left:8px;">&#127968; Teacher hub</a>
+  <header>
+    <h1>Imboon &mdash; end-of-class checks</h1>
+    <div class="meta">18 units &middot; 137 subtopics &middot; each with key learning, one check question and one stretch question</div>
+  </header>
+  <div class="note"><b>How to use.</b> At the end of the class, ask the <b>Check</b> question for each subtopic you covered. If she gets it right without help, try the <b>Stretch</b>. Answers are hidden until you click. Rate her on <a href="y10.html" style="color:var(--tip);font-weight:600;">the Year 10 page</a> afterwards.</div>
+  <div class="tools"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">Show all answers</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">Hide all answers</button></div>
+  <div class="overview"><a class="ov" href="#u1"><div class="u">Unit 1</div><div class="t">Algebraic Manipulation</div><div class="l">6 subtopics</div></a><a class="ov" href="#u2"><div class="u">Unit 2</div><div class="t">Solving Quadratics</div><div class="l">7 subtopics</div></a><a class="ov" href="#u3"><div class="u">Unit 3</div><div class="t">Percentages</div><div class="l">7 subtopics</div></a><a class="ov" href="#u4"><div class="u">Unit 4</div><div class="t">Volume and Surface Area</div><div class="l">8 subtopics</div></a><a class="ov" href="#u5"><div class="u">Unit 5</div><div class="t">Compound Measures</div><div class="l">9 subtopics</div></a><a class="ov" href="#u6"><div class="u">Unit 6</div><div class="t">Probability</div><div class="l">9 subtopics</div></a><a class="ov" href="#u7"><div class="u">Unit 7</div><div class="t">Graphs</div><div class="l">8 subtopics</div></a><a class="ov" href="#u8"><div class="u">Unit 8</div><div class="t">Sine and Cosine Rule</div><div class="l">9 subtopics</div></a><a class="ov" href="#u9"><div class="u">Unit 9</div><div class="t">Bounds</div><div class="l">7 subtopics</div></a><a class="ov" href="#u10"><div class="u">Unit 10</div><div class="t">Inequalities</div><div class="l">7 subtopics</div></a><a class="ov" href="#u11"><div class="u">Unit 11</div><div class="t">Geometrical Reasoning</div><div class="l">4 subtopics</div></a><a class="ov" href="#u12"><div class="u">Unit 12</div><div class="t">Surds</div><div class="l">7 subtopics</div></a><a class="ov" href="#u13"><div class="u">Unit 13</div><div class="t">Algebraic Proportion</div><div class="l">7 subtopics</div></a><a class="ov" href="#u14"><div class="u">Unit 14</div><div class="t">Circle Theorems</div><div class="l">9 subtopics</div></a><a class="ov" href="#u15"><div class="u">Unit 15</div><div class="t">Set Notation</div><div class="l">7 subtopics</div></a><a class="ov" href="#u16"><div class="u">Unit 16</div><div class="t">Algebraic Fractions</div><div class="l">8 subtopics</div></a><a class="ov" href="#u17"><div class="u">Unit 17</div><div class="t">Cumulative Frequency</div><div class="l">6 subtopics</div></a><a class="ov" href="#u18"><div class="u">Unit 18</div><div class="t">Transformations of Shapes</div><div class="l">12 subtopics</div></a></div>
+  <section class="unit" id="u1"><div class="unit-head"><span class="un">Unit 1</span><span class="ut">Algebraic Manipulation</span><span class="ul">6 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">1.1</span>Expanding double brackets</h3>
+<p class="key"><b>Key learning:</b> Multiply every term in the first bracket by every term in the second, then collect like terms. Watch the signs.</p>
+<div class="q"><b>Check:</b> Expand and simplify (x + 3)(x &minus; 6).</div>
+<details><summary>Show answer</summary><div class="a">x&sup2; &minus; 3x &minus; 18</div></details>
+<div class="q stretch"><b>Stretch:</b> Expand and simplify (2x &minus; 5)(3x + 4).</div>
+<details><summary>Show answer</summary><div class="a">6x&sup2; &minus; 7x &minus; 20</div></details>
+</div>
+<div class="sub"><h3><span class="n">1.2</span>Factorising x&sup2; + bx + c</h3>
+<p class="key"><b>Key learning:</b> Find two numbers that multiply to give c and add to give b, then write them in two brackets.</p>
+<div class="q"><b>Check:</b> Factorise x&sup2; &minus; 6x &minus; 16.</div>
+<details><summary>Show answer</summary><div class="a">(x &minus; 8)(x + 2)</div></details>
+<div class="q stretch"><b>Stretch:</b> Factorise x&sup2; + 11x + 28.</div>
+<details><summary>Show answer</summary><div class="a">(x + 4)(x + 7)</div></details>
+</div>
+<div class="sub"><h3><span class="n">1.3</span>Expanding triple brackets</h3>
+<p class="key"><b>Key learning:</b> Expand two brackets first, then multiply the result by the third bracket, taking care to multiply every term.</p>
+<div class="q"><b>Check:</b> Expand and simplify (x + 2)(x &minus; 3)(x + 5).</div>
+<details><summary>Show answer</summary><div class="a">x&sup3; + 4x&sup2; &minus; 11x &minus; 30</div></details>
+<div class="q stretch"><b>Stretch:</b> Expand and simplify (x &minus; 1)(x + 2)(x + 4).</div>
+<details><summary>Show answer</summary><div class="a">x&sup3; + 5x&sup2; + 2x &minus; 8</div></details>
+</div>
+<div class="sub"><h3><span class="n">1.4</span>Difference of two squares</h3>
+<p class="key"><b>Key learning:</b> a&sup2; &minus; b&sup2; = (a &minus; b)(a + b). Spot it when there are two perfect squares separated by a minus sign.</p>
+<div class="q"><b>Check:</b> Factorise x&sup2; &minus; 49.</div>
+<details><summary>Show answer</summary><div class="a">(x &minus; 7)(x + 7)</div></details>
+<div class="q stretch"><b>Stretch:</b> Factorise 9x&sup2; &minus; 25y&sup2;.</div>
+<details><summary>Show answer</summary><div class="a">(3x &minus; 5y)(3x + 5y)</div></details>
+</div>
+<div class="sub"><h3><span class="n">1.5</span>Factorising ax&sup2; + bx + c (a &gt; 1)</h3>
+<p class="key"><b>Key learning:</b> Multiply a &times; c, find two numbers with that product that add to b, split the middle term, then factorise in pairs.</p>
+<div class="q"><b>Check:</b> Factorise 2x&sup2; &minus; x &minus; 21.</div>
+<details><summary>Show answer</summary><div class="a">(2x &minus; 7)(x + 3)</div></details>
+<div class="q stretch"><b>Stretch:</b> Factorise 6x&sup2; + 13x &minus; 5.</div>
+<details><summary>Show answer</summary><div class="a">(3x &minus; 1)(2x + 5)</div></details>
+</div>
+<div class="sub"><h3><span class="n">1.6</span>Quadratic expressions in area problems</h3>
+<p class="key"><b>Key learning:</b> Write each side as an expression, multiply for area, set up the equation, then expand, rearrange and solve. Reject any negative length.</p>
+<div class="q"><b>Check:</b> A rectangle has sides (x + 3) cm and (x &minus; 1) cm. Its area is 21 cm&sup2;. Find x.</div>
+<details><summary>Show answer</summary><div class="a">(x + 3)(x &minus; 1) = 21 &rarr; x&sup2; + 2x &minus; 24 = 0 &rarr; (x + 6)(x &minus; 4) = 0. x = 4 (x = &minus;6 is impossible). Sides 7 cm and 3 cm.</div></details>
+<div class="q stretch"><b>Stretch:</b> A square of side (x + 2) cm has the same area as a rectangle (x + 8) cm by (x &minus; 1) cm. Find x.</div>
+<details><summary>Show answer</summary><div class="a">x&sup2; + 4x + 4 = x&sup2; + 7x &minus; 8 &rarr; 12 = 3x &rarr; x = 4. (Both areas = 36 cm&sup2;.)</div></details>
+</div>
+</div></section><section class="unit" id="u2"><div class="unit-head"><span class="un">Unit 2</span><span class="ut">Solving Quadratics</span><span class="ul">7 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">2.1</span>Solving by factorising (a = 1)</h3>
+<p class="key"><b>Key learning:</b> Rearrange to equal 0, factorise, then set each bracket equal to 0.</p>
+<div class="q"><b>Check:</b> Solve x&sup2; + x &minus; 30 = 0.</div>
+<details><summary>Show answer</summary><div class="a">(x + 6)(x &minus; 5) = 0, so x = &minus;6 or x = 5</div></details>
+<div class="q stretch"><b>Stretch:</b> Solve x&sup2; &minus; 3x = 28.</div>
+<details><summary>Show answer</summary><div class="a">x&sup2; &minus; 3x &minus; 28 = 0 &rarr; (x &minus; 7)(x + 4) = 0, so x = 7 or x = &minus;4</div></details>
+</div>
+<div class="sub"><h3><span class="n">2.2</span>The quadratic formula</h3>
+<p class="key"><b>Key learning:</b> x = (&minus;b &plusmn; &radic;(b&sup2; &minus; 4ac)) / 2a. Substitute carefully, using brackets for negative values. Give decimals to 3 s.f. unless told otherwise.</p>
+<div class="q"><b>Check:</b> Solve x&sup2; + 3x &minus; 5 = 0, giving answers to 3 s.f.</div>
+<details><summary>Show answer</summary><div class="a">x = (&minus;3 &plusmn; &radic;29)/2, so x = 1.19 or x = &minus;4.19</div></details>
+<div class="q stretch"><b>Stretch:</b> Solve 3x&sup2; &minus; 4x &minus; 2 = 0, giving answers to 3 s.f.</div>
+<details><summary>Show answer</summary><div class="a">x = (4 &plusmn; &radic;40)/6, so x = 1.72 or x = &minus;0.387</div></details>
+</div>
+<div class="sub"><h3><span class="n">2.3</span>Factorising when a &gt; 1</h3>
+<p class="key"><b>Key learning:</b> Use the &ldquo;a &times; c&rdquo; method or trial and error. Put equations in the form ax&sup2; + bx + c = 0 first.</p>
+<div class="q"><b>Check:</b> Solve 2x&sup2; &minus; 3x + 1 = 0.</div>
+<details><summary>Show answer</summary><div class="a">(2x &minus; 1)(x &minus; 1) = 0, so x = &frac12; or x = 1</div></details>
+<div class="q stretch"><b>Stretch:</b> Solve x(3x &minus; 2) = 5.</div>
+<details><summary>Show answer</summary><div class="a">3x&sup2; &minus; 2x &minus; 5 = 0 &rarr; (3x &minus; 5)(x + 1) = 0, so x = 5/3 or x = &minus;1</div></details>
+</div>
+<div class="sub"><h3><span class="n">2.4</span>Non-linear simultaneous equations</h3>
+<p class="key"><b>Key learning:</b> Substitute the linear equation into the non-linear one, solve the quadratic, then find each y value. There are usually two pairs of answers.</p>
+<div class="q"><b>Check:</b> Solve y = x &minus; 4 and x&sup2; + y&sup2; = 40.</div>
+<details><summary>Show answer</summary><div class="a">x&sup2; + (x &minus; 4)&sup2; = 40 &rarr; x&sup2; &minus; 4x &minus; 12 = 0 &rarr; (x &minus; 6)(x + 2) = 0. (x, y) = (6, 2) and (&minus;2, &minus;6).</div></details>
+<div class="q stretch"><b>Stretch:</b> Solve y = 11x &minus; 2 and y = 5x&sup2;.</div>
+<details><summary>Show answer</summary><div class="a">5x&sup2; &minus; 11x + 2 = 0 &rarr; (5x &minus; 1)(x &minus; 2) = 0. (x, y) = (0.2, 0.2) and (2, 20).</div></details>
+</div>
+<div class="sub"><h3><span class="n">2.5</span>Completing the square (a = 1)</h3>
+<p class="key"><b>Key learning:</b> x&sup2; + bx + c = (x + b/2)&sup2; + c &minus; (b/2)&sup2;. Then rearrange to solve, remembering &plusmn;.</p>
+<div class="q"><b>Check:</b> Write x&sup2; + 8x + 2 in the form (x + p)&sup2; + q, then solve x&sup2; + 8x + 2 = 0 (2 d.p.).</div>
+<details><summary>Show answer</summary><div class="a">(x + 4)&sup2; &minus; 14. x = &minus;4 &plusmn; &radic;14, so x = &minus;0.26 or x = &minus;7.74</div></details>
+<div class="q stretch"><b>Stretch:</b> Solve x&sup2; &minus; 5x + 1 = 0 by completing the square (2 d.p.).</div>
+<details><summary>Show answer</summary><div class="a">(x &minus; 2.5)&sup2; &minus; 5.25 = 0, so x = 2.5 &plusmn; &radic;5.25 = 4.79 or 0.21</div></details>
+</div>
+<div class="sub"><h3><span class="n">2.6</span>Forming and solving from context</h3>
+<p class="key"><b>Key learning:</b> Define the unknown, write an expression for each quantity, form the equation, solve, then check the answer makes sense in the question.</p>
+<div class="q"><b>Check:</b> A rectangle is 3 cm longer than it is wide. Its area is 54 cm&sup2;. Find its width.</div>
+<details><summary>Show answer</summary><div class="a">x(x + 3) = 54 &rarr; x&sup2; + 3x &minus; 54 = 0 &rarr; (x + 9)(x &minus; 6) = 0. Width = 6 cm (length 9 cm).</div></details>
+<div class="q stretch"><b>Stretch:</b> Solve 3/(x + 5) + 6/(2x + 1) = 1.</div>
+<details><summary>Show answer</summary><div class="a">3(2x + 1) + 6(x + 5) = (x + 5)(2x + 1) &rarr; 2x&sup2; &minus; x &minus; 28 = 0 &rarr; (2x + 7)(x &minus; 4) = 0. x = 4 or x = &minus;3.5</div></details>
+</div>
+<div class="sub"><h3><span class="n">2.7</span>Completing the square when a &gt; 1</h3>
+<p class="key"><b>Key learning:</b> Factor out a from the x&sup2; and x terms first, complete the square inside the bracket, then multiply out the constant.</p>
+<div class="q"><b>Check:</b> Write 2x&sup2; &minus; 12x + 7 in the form a(x + p)&sup2; + q.</div>
+<details><summary>Show answer</summary><div class="a">2(x &minus; 3)&sup2; &minus; 11</div></details>
+<div class="q stretch"><b>Stretch:</b> Use your answer to solve 2x&sup2; &minus; 12x + 7 = 0 (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">(x &minus; 3)&sup2; = 5.5, so x = 3 &plusmn; &radic;5.5 = 5.35 or 0.655</div></details>
+</div>
+</div></section><section class="unit" id="u3"><div class="unit-head"><span class="un">Unit 3</span><span class="ut">Percentages</span><span class="ul">7 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">3.1</span>Percentage of an amount</h3>
+<p class="key"><b>Key learning:</b> Convert the percentage to a decimal multiplier (35% = 0.35) and multiply.</p>
+<div class="q"><b>Check:</b> Find 35% of $240.</div>
+<details><summary>Show answer</summary><div class="a">0.35 &times; 240 = $84</div></details>
+<div class="q stretch"><b>Stretch:</b> Find 12.5% of 360.</div>
+<details><summary>Show answer</summary><div class="a">0.125 &times; 360 = 45</div></details>
+</div>
+<div class="sub"><h3><span class="n">3.2</span>Increase and decrease with multipliers</h3>
+<p class="key"><b>Key learning:</b> Increase by r%: multiply by 1 + r/100. Decrease by r%: multiply by 1 &minus; r/100.</p>
+<div class="q"><b>Check:</b> Increase 120 by 12%.</div>
+<details><summary>Show answer</summary><div class="a">120 &times; 1.12 = 134.4</div></details>
+<div class="q stretch"><b>Stretch:</b> Decrease &pound;250 by 18%.</div>
+<details><summary>Show answer</summary><div class="a">250 &times; 0.82 = &pound;205</div></details>
+</div>
+<div class="sub"><h3><span class="n">3.3</span>Compound interest and depreciation</h3>
+<p class="key"><b>Key learning:</b> Multiplier raised to the power of the number of years: amount &times; (multiplier)<sup>n</sup>.</p>
+<div class="q"><b>Check:</b> $5000 is invested at 3% compound interest per year. Find the value after 4 years.</div>
+<details><summary>Show answer</summary><div class="a">5000 &times; 1.03<sup>4</sup> = $5627.54</div></details>
+<div class="q stretch"><b>Stretch:</b> A car worth &pound;12 000 depreciates by 15% each year. Find its value after 3 years.</div>
+<details><summary>Show answer</summary><div class="a">12 000 &times; 0.85<sup>3</sup> = &pound;7369.50</div></details>
+</div>
+<div class="sub"><h3><span class="n">3.4</span>Percentage change problems</h3>
+<p class="key"><b>Key learning:</b> Percentage change = (change &divide; original) &times; 100. Always divide by the original value.</p>
+<div class="q"><b>Check:</b> A price rises from $80 to $92. Find the percentage increase.</div>
+<details><summary>Show answer</summary><div class="a">12/80 &times; 100 = 15%</div></details>
+<div class="q stretch"><b>Stretch:</b> A laptop is reduced from $650 to $533. Find the percentage reduction.</div>
+<details><summary>Show answer</summary><div class="a">117/650 &times; 100 = 18%</div></details>
+</div>
+<div class="sub"><h3><span class="n">3.5</span>Reverse percentages</h3>
+<p class="key"><b>Key learning:</b> The new value is a percentage of the original, so divide by the multiplier to get back to the original.</p>
+<div class="q"><b>Check:</b> After a 20% increase a price is $96. Find the original price.</div>
+<details><summary>Show answer</summary><div class="a">96 &divide; 1.20 = $80</div></details>
+<div class="q stretch"><b>Stretch:</b> A coat is sold for &pound;357 after a 15% discount. Find the original price.</div>
+<details><summary>Show answer</summary><div class="a">357 &divide; 0.85 = &pound;420</div></details>
+</div>
+<div class="sub"><h3><span class="n">3.6</span>Repeated percentage change</h3>
+<p class="key"><b>Key learning:</b> Multiply the multipliers together. A rise of 20% then a fall of 20% is not back to the start.</p>
+<div class="q"><b>Check:</b> A population of 25 000 grows by 8% per year. Find the population after 3 years (nearest whole number).</div>
+<details><summary>Show answer</summary><div class="a">25 000 &times; 1.08<sup>3</sup> = 31 493</div></details>
+<div class="q stretch"><b>Stretch:</b> A price increases by 20%, then decreases by 20%. What is the overall percentage change?</div>
+<details><summary>Show answer</summary><div class="a">1.2 &times; 0.8 = 0.96, so a 4% decrease</div></details>
+</div>
+<div class="sub"><h3><span class="n">3.7</span>Compound interest problems</h3>
+<p class="key"><b>Key learning:</b> Use trial of whole years, or work out the rate from the final multiplier, by taking roots.</p>
+<div class="q"><b>Check:</b> How many whole years until $2000 invested at 4% compound interest exceeds $2500?</div>
+<details><summary>Show answer</summary><div class="a">1.04<sup>n</sup> &gt; 1.25. 1.04<sup>5</sup> = 1.217, 1.04<sup>6</sup> = 1.265, so 6 years.</div></details>
+<div class="q stretch"><b>Stretch:</b> $8000 grows to $9261 in 3 years of compound interest. Find the annual rate.</div>
+<details><summary>Show answer</summary><div class="a">9261/8000 = 1.157625 = 1.05&lt;sup&gt;3&lt;/sup&gt;, so 5%</div></details>
+</div>
+</div></section><section class="unit" id="u4"><div class="unit-head"><span class="un">Unit 4</span><span class="ut">Volume and Surface Area</span><span class="ul">8 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">4.1</span>Properties of 3D shapes</h3>
+<p class="key"><b>Key learning:</b> Faces are flat surfaces, edges are where faces meet, vertices are corners. Euler: V + F &minus; E = 2.</p>
+<div class="q"><b>Check:</b> State the number of faces, edges and vertices of a triangular prism.</div>
+<details><summary>Show answer</summary><div class="a">5 faces, 9 edges, 6 vertices</div></details>
+<div class="q stretch"><b>Stretch:</b> State the number of faces, edges and vertices of a square-based pyramid.</div>
+<details><summary>Show answer</summary><div class="a">5 faces, 8 edges, 5 vertices</div></details>
+</div>
+<div class="sub"><h3><span class="n">4.2</span>Volume of prisms and cuboids</h3>
+<p class="key"><b>Key learning:</b> Volume of a prism = area of cross-section &times; length.</p>
+<div class="q"><b>Check:</b> Find the volume of a cuboid 8 cm by 5 cm by 3 cm.</div>
+<details><summary>Show answer</summary><div class="a">8 &times; 5 &times; 3 = 120 cm&sup3;</div></details>
+<div class="q stretch"><b>Stretch:</b> A prism has a triangular cross-section with base 6 cm and height 4 cm. It is 10 cm long. Find its volume.</div>
+<details><summary>Show answer</summary><div class="a">&frac12; &times; 6 &times; 4 = 12 cm&sup2;; 12 &times; 10 = 120 cm&sup3;</div></details>
+</div>
+<div class="sub"><h3><span class="n">4.3</span>Surface area of cuboids and prisms</h3>
+<p class="key"><b>Key learning:</b> Add the areas of all the faces. Count every face: a cuboid has 6.</p>
+<div class="q"><b>Check:</b> Find the surface area of a cuboid 8 cm by 5 cm by 3 cm.</div>
+<details><summary>Show answer</summary><div class="a">2(8&times;5 + 8&times;3 + 5&times;3) = 2(40 + 24 + 15) = 158 cm&sup2;</div></details>
+<div class="q stretch"><b>Stretch:</b> A prism has a right-angled triangle cross-section with sides 3 cm, 4 cm, 5 cm and is 10 cm long. Find its surface area.</div>
+<details><summary>Show answer</summary><div class="a">Two triangles 2 &times; 6 = 12; rectangles 30 + 40 + 50 = 120; total 132 cm&sup2;</div></details>
+</div>
+<div class="sub"><h3><span class="n">4.4</span>Cylinders</h3>
+<p class="key"><b>Key learning:</b> V = &pi;r&sup2;h. Curved surface area = 2&pi;rh. Total surface area = 2&pi;r&sup2; + 2&pi;rh.</p>
+<div class="q"><b>Check:</b> A cylinder has radius 4 cm and height 10 cm. Find its volume and total surface area (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">V = &pi; &times; 16 &times; 10 = 503 cm&sup3;. SA = 32&pi; + 80&pi; = 112&pi; = 352 cm&sup2;</div></details>
+<div class="q stretch"><b>Stretch:</b> A cylinder has volume 500 cm&sup3; and radius 5 cm. Find its height (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">h = 500 &divide; (25&pi;) = 6.37 cm</div></details>
+</div>
+<div class="sub"><h3><span class="n">4.5</span>Converting metric units</h3>
+<p class="key"><b>Key learning:</b> Length &times;10 per step for cm&rarr;mm, but area uses the factor squared and volume uses it cubed. 1 litre = 1000 cm&sup3;.</p>
+<div class="q"><b>Check:</b> Convert 2.5 m&sup3; to cm&sup3; and 4500 cm&sup2; to m&sup2;.</div>
+<details><summary>Show answer</summary><div class="a">2.5 &times; 1 000 000 = 2 500 000 cm&sup3;. 4500 &divide; 10 000 = 0.45 m&sup2;</div></details>
+<div class="q stretch"><b>Stretch:</b> A tank measures 40 cm by 25 cm by 30 cm. How many litres does it hold?</div>
+<details><summary>Show answer</summary><div class="a">30 000 cm&sup3; = 30 litres</div></details>
+</div>
+<div class="sub"><h3><span class="n">4.6</span>Cones and spheres (formulae given)</h3>
+<p class="key"><b>Key learning:</b> Cone: V = &#8531;&pi;r&sup2;h, curved SA = &pi;rl. Sphere: V = &#8564;&pi;r&sup3;, SA = 4&pi;r&sup2;. Use Pythagoras to find l.</p>
+<div class="q"><b>Check:</b> A cone has radius 6 cm and height 8 cm. Find its volume and curved surface area (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">V = &#8531;&pi;(36)(8) = 302 cm&sup3;. l = &radic;(36 + 64) = 10, curved SA = &pi;(6)(10) = 189 cm&sup2;</div></details>
+<div class="q stretch"><b>Stretch:</b> Find the total surface area of a solid hemisphere of radius 5 cm (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">Curved 2&pi;r&sup2; = 50&pi; plus flat &pi;r&sup2; = 25&pi;; total 75&pi; = 236 cm&sup2;</div></details>
+</div>
+<div class="sub"><h3><span class="n">4.7</span>Similar shapes (areas and volumes)</h3>
+<p class="key"><b>Key learning:</b> If lengths are in ratio 1 : k, areas are 1 : k&sup2; and volumes are 1 : k&sup3;.</p>
+<div class="q"><b>Check:</b> Two similar solids have lengths in the ratio 2 : 3. The smaller has volume 40 cm&sup3;. Find the volume of the larger.</div>
+<details><summary>Show answer</summary><div class="a">Volume ratio 8 : 27. 40 &times; 27/8 = 135 cm&sup3;</div></details>
+<div class="q stretch"><b>Stretch:</b> Two similar bottles have surface areas 50 cm&sup2; and 200 cm&sup2;. The larger holds 240 cm&sup3;. Find the volume of the smaller.</div>
+<details><summary>Show answer</summary><div class="a">Area ratio 1 : 4, so length ratio 1 : 2 and volume ratio 1 : 8. 240 &divide; 8 = 30 cm&sup3;</div></details>
+</div>
+<div class="sub"><h3><span class="n">4.8</span>Compound solids</h3>
+<p class="key"><b>Key learning:</b> Split into simple solids, find each volume or area, then add. Do not count the joined faces in surface area.</p>
+<div class="q"><b>Check:</b> A solid is a hemisphere of radius 6 cm on top of a cylinder of radius 6 cm and height 10 cm. Find its volume (4 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">Hemisphere &#8532;&pi;(216) = 144&pi;; cylinder &pi;(36)(10) = 360&pi;; total 504&pi; = 1583 cm&sup3;</div></details>
+<div class="q stretch"><b>Stretch:</b> Find the volume of a square-based pyramid with base side 6 cm and height 4 cm.</div>
+<details><summary>Show answer</summary><div class="a">&#8531; &times; 36 &times; 4 = 48 cm&sup3;</div></details>
+</div>
+</div></section><section class="unit" id="u5"><div class="unit-head"><span class="un">Unit 5</span><span class="ut">Compound Measures</span><span class="ul">9 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">5.1</span>Speed, distance and time</h3>
+<p class="key"><b>Key learning:</b> speed = distance &divide; time. Use the triangle D / (S &times; T). Change minutes to hours before using km/h.</p>
+<div class="q"><b>Check:</b> A car travels 150 km in 2.5 hours. Find its average speed.</div>
+<details><summary>Show answer</summary><div class="a">150 &divide; 2.5 = 60 km/h</div></details>
+<div class="q stretch"><b>Stretch:</b> A train travels at 72 km/h for 45 minutes. Find the distance.</div>
+<details><summary>Show answer</summary><div class="a">72 &times; 0.75 = 54 km</div></details>
+</div>
+<div class="sub"><h3><span class="n">5.2</span>Density</h3>
+<p class="key"><b>Key learning:</b> density = mass &divide; volume.</p>
+<div class="q"><b>Check:</b> A metal block has mass 450 g and volume 50 cm&sup3;. Find its density.</div>
+<details><summary>Show answer</summary><div class="a">450 &divide; 50 = 9 g/cm&sup3;</div></details>
+<div class="q stretch"><b>Stretch:</b> Aluminium has density 2.7 g/cm&sup3;. Find the volume of 2.7 kg of aluminium.</div>
+<details><summary>Show answer</summary><div class="a">2700 &divide; 2.7 = 1000 cm&sup3;</div></details>
+</div>
+<div class="sub"><h3><span class="n">5.3</span>Pressure</h3>
+<p class="key"><b>Key learning:</b> pressure = force &divide; area (formula given in the exam).</p>
+<div class="q"><b>Check:</b> A force of 600 N acts on an area of 0.3 m&sup2;. Find the pressure.</div>
+<details><summary>Show answer</summary><div class="a">600 &divide; 0.3 = 2000 N/m&sup2;</div></details>
+<div class="q stretch"><b>Stretch:</b> A pressure of 50 N/m&sup2; is caused by a force of 1200 N. Find the area.</div>
+<details><summary>Show answer</summary><div class="a">1200 &divide; 50 = 24 m&sup2;</div></details>
+</div>
+<div class="sub"><h3><span class="n">5.4</span>Speed with unit conversions</h3>
+<p class="key"><b>Key learning:</b> To change km/h to m/s, multiply by 1000 and divide by 3600 (divide by 3.6).</p>
+<div class="q"><b>Check:</b> Change 72 km/h into m/s.</div>
+<details><summary>Show answer</summary><div class="a">72 &divide; 3.6 = 20 m/s</div></details>
+<div class="q stretch"><b>Stretch:</b> A runner covers 400 m in 50 s. Find the speed in km/h.</div>
+<details><summary>Show answer</summary><div class="a">8 m/s &times; 3.6 = 28.8 km/h</div></details>
+</div>
+<div class="sub"><h3><span class="n">5.5</span>Density with unit conversions</h3>
+<p class="key"><b>Key learning:</b> Convert to the same units before dividing. 1 g/cm&sup3; = 1000 kg/m&sup3;.</p>
+<div class="q"><b>Check:</b> 0.5 m&sup3; of wood has mass 350 kg. Find its density in kg/m&sup3; and in g/cm&sup3;.</div>
+<details><summary>Show answer</summary><div class="a">700 kg/m&sup3; = 0.7 g/cm&sup3;</div></details>
+<div class="q stretch"><b>Stretch:</b> A block 20 cm by 10 cm by 5 cm has mass 2.5 kg. Find the density in g/cm&sup3;.</div>
+<details><summary>Show answer</summary><div class="a">Volume 1000 cm&sup3;; 2500 &divide; 1000 = 2.5 g/cm&sup3;</div></details>
+</div>
+<div class="sub"><h3><span class="n">5.6</span>Pressure involving surface area</h3>
+<p class="key"><b>Key learning:</b> Work out the area of the face in contact with the surface first, in the right units.</p>
+<div class="q"><b>Check:</b> A 90 N crate rests on a face 0.5 m by 0.3 m. Find the pressure.</div>
+<details><summary>Show answer</summary><div class="a">Area 0.15 m&sup2;; 90 &divide; 0.15 = 600 N/m&sup2;</div></details>
+<div class="q stretch"><b>Stretch:</b> A cylinder of weight 400 N stands on a circular base of radius 0.1 m. Find the pressure (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">Area &pi;(0.1)&sup2; = 0.0314 m&sup2;; 400 &divide; 0.0314 = 12 700 N/m&sup2;</div></details>
+</div>
+<div class="sub"><h3><span class="n">5.7</span>Multiple journeys and average speed</h3>
+<p class="key"><b>Key learning:</b> Average speed = total distance &divide; total time. Never average the speeds.</p>
+<div class="q"><b>Check:</b> Anna drives 80 km at 40 km/h then 120 km at 60 km/h. Find her average speed.</div>
+<details><summary>Show answer</summary><div class="a">Times 2 h and 2 h; 200 &divide; 4 = 50 km/h</div></details>
+<div class="q stretch"><b>Stretch:</b> A cyclist rides out at 30 km/h and returns the same route at 60 km/h. Find the average speed.</div>
+<details><summary>Show answer</summary><div class="a">Let the distance be d: total 2d &divide; (d/30 + d/60) = 40 km/h (not 45)</div></details>
+</div>
+<div class="sub"><h3><span class="n">5.8</span>More than one density</h3>
+<p class="key"><b>Key learning:</b> Find each volume separately, add them, and divide the total mass by the total volume.</p>
+<div class="q"><b>Check:</b> An alloy has 300 g of metal A (density 6 g/cm&sup3;) and 200 g of metal B (density 4 g/cm&sup3;). Find the density of the alloy.</div>
+<details><summary>Show answer</summary><div class="a">Volumes 50 + 50 = 100 cm&sup3;; mass 500 g; density 5 g/cm&sup3;</div></details>
+<div class="q stretch"><b>Stretch:</b> What is the density of an alloy of equal masses 100 g of A (density 5) and 100 g of B (density 20)?</div>
+<details><summary>Show answer</summary><div class="a">Volumes 20 + 5 = 25 cm&sup3;; 200 &divide; 25 = 8 g/cm&sup3;</div></details>
+</div>
+<div class="sub"><h3><span class="n">5.9</span>Reading speed&ndash;time and distance&ndash;time graphs</h3>
+<p class="key"><b>Key learning:</b> On a distance&ndash;time graph, gradient = speed and a flat line = stopped. On a speed&ndash;time graph, gradient = acceleration and area = distance.</p>
+<div class="q"><b>Check:</b> A cyclist rides 12 km in 40 min, rests 20 min, then rides back in 60 min. Find the speed of the first part and the return, in km/h.</div>
+<details><summary>Show answer</summary><div class="a">First part 12 &divide; (2/3) = 18 km/h. Return 12 &divide; 1 = 12 km/h.</div></details>
+<div class="q stretch"><b>Stretch:</b> Find the cyclist&rsquo;s average speed for the whole journey.</div>
+<details><summary>Show answer</summary><div class="a">24 km in 2 hours = 12 km/h</div></details>
+</div>
+</div></section><section class="unit" id="u6"><div class="unit-head"><span class="un">Unit 6</span><span class="ut">Probability</span><span class="ul">9 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">6.1</span>Sample space diagrams</h3>
+<p class="key"><b>Key learning:</b> List every outcome in a table or grid, then count favourable outcomes ÷ total outcomes.</p>
+<div class="q"><b>Check:</b> Two fair dice are thrown and the scores are added. Find P(total = 7).</div>
+<details><summary>Show answer</summary><div class="a">6 outcomes out of 36 = 1/6</div></details>
+<div class="q stretch"><b>Stretch:</b> Find P(total greater than 9).</div>
+<details><summary>Show answer</summary><div class="a">(4,6),(5,5),(6,4),(5,6),(6,5),(6,6) = 6/36 = 1/6</div></details>
+</div>
+<div class="sub"><h3><span class="n">6.2</span>Probability of an event not happening</h3>
+<p class="key"><b>Key learning:</b> P(not A) = 1 − P(A). All probabilities add up to 1.</p>
+<div class="q"><b>Check:</b> The probability it rains tomorrow is 0.35. Find the probability it does not rain.</div>
+<details><summary>Show answer</summary><div class="a">1 − 0.35 = 0.65</div></details>
+<div class="q stretch"><b>Stretch:</b> P(red) = x, P(blue) = 2x and P(green) = 0.1. Find x.</div>
+<details><summary>Show answer</summary><div class="a">3x + 0.1 = 1, so x = 0.3</div></details>
+</div>
+<div class="sub"><h3><span class="n">6.3</span>Missing probabilities (mutually exclusive)</h3>
+<p class="key"><b>Key learning:</b> The probabilities of all possible outcomes add to 1, so subtract the known ones from 1.</p>
+<div class="q"><b>Check:</b> A spinner lands on 1, 2, 3 or 4 with probabilities 0.2, x, 0.3, 0.15. Find x.</div>
+<details><summary>Show answer</summary><div class="a">1 − (0.2 + 0.3 + 0.15) = 0.35</div></details>
+<div class="q stretch"><b>Stretch:</b> P(A) = 2y, P(B) = y + 0.1, P(C) = 0.2 and no other outcomes. Find y.</div>
+<details><summary>Show answer</summary><div class="a">3y + 0.3 = 1, so y = 7/30</div></details>
+</div>
+<div class="sub"><h3><span class="n">6.4</span>Expected frequency</h3>
+<p class="key"><b>Key learning:</b> Expected frequency = probability × number of trials.</p>
+<div class="q"><b>Check:</b> A fair dice is rolled 300 times. How many sixes are expected?</div>
+<details><summary>Show answer</summary><div class="a">1/6 × 300 = 50</div></details>
+<div class="q stretch"><b>Stretch:</b> A game is won with probability 0.18. Roughly how many wins in 250 plays?</div>
+<details><summary>Show answer</summary><div class="a">0.18 × 250 = 45</div></details>
+</div>
+<div class="sub"><h3><span class="n">6.5</span>Addition rule</h3>
+<p class="key"><b>Key learning:</b> For mutually exclusive events, P(A or B) = P(A) + P(B).</p>
+<div class="q"><b>Check:</b> P(A) = 0.3 and P(B) = 0.45 are mutually exclusive. Find P(A or B).</div>
+<details><summary>Show answer</summary><div class="a">0.3 + 0.45 = 0.75</div></details>
+<div class="q stretch"><b>Stretch:</b> A bag has 5 red, 3 blue and 2 green counters. Find P(red or green).</div>
+<details><summary>Show answer</summary><div class="a">5/10 + 2/10 = 7/10</div></details>
+</div>
+<div class="sub"><h3><span class="n">6.6</span>Frequency from a theoretical probability</h3>
+<p class="key"><b>Key learning:</b> Multiply the probability by the total number of trials. Rearrange to find the total if the frequency is given.</p>
+<div class="q"><b>Check:</b> P(blue) = 3/8. A counter is picked 240 times (replaced each time). How many blues are expected?</div>
+<details><summary>Show answer</summary><div class="a">3/8 × 240 = 90</div></details>
+<div class="q stretch"><b>Stretch:</b> P(blue) = 0.15 and 24 blue counters were counted. How many counters were there in total?</div>
+<details><summary>Show answer</summary><div class="a">24 ÷ 0.15 = 160</div></details>
+</div>
+<div class="sub"><h3><span class="n">6.7</span>Tree diagrams (independent events)</h3>
+<p class="key"><b>Key learning:</b> Multiply along the branches for “and”, add the end results for “or”. Branches on each set add to 1.</p>
+<div class="q"><b>Check:</b> P(rain) = 0.3 on each of two days. Find P(rain on both days) and P(rain on exactly one day).</div>
+<details><summary>Show answer</summary><div class="a">Both: 0.3 × 0.3 = 0.09. Exactly one: 2 × 0.3 × 0.7 = 0.42</div></details>
+<div class="q stretch"><b>Stretch:</b> Find P(rain on at least one day).</div>
+<details><summary>Show answer</summary><div class="a">1 − 0.7 × 0.7 = 0.51 (or 0.09 + 0.42)</div></details>
+</div>
+<div class="sub"><h3><span class="n">6.8</span>Tree diagrams (dependent events)</h3>
+<p class="key"><b>Key learning:</b> Without replacement the second branches change, because one item has gone. Update numerator and denominator.</p>
+<div class="q"><b>Check:</b> A bag has 4 red and 6 blue counters. Two are taken without replacement. Find P(both red) and P(different colours).</div>
+<details><summary>Show answer</summary><div class="a">Both red: 4/10 × 3/9 = 2/15. Different: 2 × (4/10 × 6/9) = 8/15</div></details>
+<div class="q stretch"><b>Stretch:</b> Three counters are taken without replacement. Find P(all blue).</div>
+<details><summary>Show answer</summary><div class="a">6/10 × 5/9 × 4/8 = 1/6</div></details>
+</div>
+<div class="sub"><h3><span class="n">6.9</span>Probability with algebra</h3>
+<p class="key"><b>Key learning:</b> Write each probability as an expression, multiply for “and”, form an equation, then solve (often a quadratic).</p>
+<div class="q"><b>Check:</b> A bag has 3 red and n blue counters. Two are taken without replacement and P(both red) = 1/15. Find n.</div>
+<details><summary>Show answer</summary><div class="a">3/(n+3) × 2/(n+2) = 1/15, so (n+3)(n+2) = 90, n² + 5n − 84 = 0, (n + 12)(n − 7) = 0. n = 7</div></details>
+<div class="q stretch"><b>Stretch:</b> Using your value of n, find P(both blue).</div>
+<details><summary>Show answer</summary><div class="a">7/10 × 6/9 = 7/15</div></details>
+</div>
+</div></section><section class="unit" id="u7"><div class="unit-head"><span class="un">Unit 7</span><span class="ut">Graphs</span><span class="ul">8 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">7.1</span>Pie charts</h3>
+<p class="key"><b>Key learning:</b> Angle = (frequency ÷ total) × 360°. To read one, find 1° or 1 unit of frequency first.</p>
+<div class="q"><b>Check:</b> 12 of 48 students walk to school. What angle is the pie-chart sector?</div>
+<details><summary>Show answer</summary><div class="a">12/48 × 360 = 90°</div></details>
+<div class="q stretch"><b>Stretch:</b> A sector of 72° represents 18 people. How many people in total?</div>
+<details><summary>Show answer</summary><div class="a">72° is 1/5 of the circle, so 18 × 5 = 90</div></details>
+</div>
+<div class="sub"><h3><span class="n">7.2</span>Tables of values: linear and quadratic</h3>
+<p class="key"><b>Key learning:</b> Substitute each x into the equation carefully. Plot the points and join quadratics with a smooth curve, not ruled lines.</p>
+<div class="q"><b>Check:</b> Complete y = x² − 2x − 3 for x = −1, 0, 1, 2, 3.</div>
+<details><summary>Show answer</summary><div class="a">y = 0, −3, −4, −3, 0</div></details>
+<div class="q stretch"><b>Stretch:</b> Write down the turning point and the roots of y = x² − 2x − 3.</div>
+<details><summary>Show answer</summary><div class="a">Turning point (1, −4). Roots x = −1 and x = 3</div></details>
+</div>
+<div class="sub"><h3><span class="n">7.3</span>Cubic, reciprocal and exponential tables</h3>
+<p class="key"><b>Key learning:</b> Cubic: S-shape. Reciprocal: two separate branches and never touches the axes. Exponential: always positive, rapid growth.</p>
+<div class="q"><b>Check:</b> Complete y = x³ − 3x for x = −2, −1, 0, 1, 2.</div>
+<details><summary>Show answer</summary><div class="a">y = −2, 2, 0, −2, 2</div></details>
+<div class="q stretch"><b>Stretch:</b> Complete y = 6/x for x = 1, 2, 3, −2 and y = 2ˣ for x = −1, 0, 3.</div>
+<details><summary>Show answer</summary><div class="a">6, 3, 2, −3. And 0.5, 1, 8</div></details>
+</div>
+<div class="sub"><h3><span class="n">7.4</span>Recognising graph types from equations</h3>
+<p class="key"><b>Key learning:</b> y = mx + c is a line, x² gives a parabola (U or ∩), x³ an S-shape, 1/x two curved branches, aˣ a curve rising from the x-axis.</p>
+<div class="q"><b>Check:</b> Name the graph shape: (a) y = 2x + 1 (b) y = x² − 4 (c) y = x³ (d) y = 3/x (e) y = 2ˣ.</div>
+<details><summary>Show answer</summary><div class="a">(a) straight line (b) U-shaped parabola (c) cubic S-curve (d) reciprocal, two branches (e) exponential curve</div></details>
+<div class="q stretch"><b>Stretch:</b> Describe y = −x³ + 2 and y = −x² + 5.</div>
+<details><summary>Show answer</summary><div class="a">−x³ + 2: S-curve going from top-left to bottom-right. −x² + 5: upside-down parabola with maximum (0, 5)</div></details>
+</div>
+<div class="sub"><h3><span class="n">7.5</span>Trigonometric graphs</h3>
+<p class="key"><b>Key learning:</b> y = sin x and y = cos x repeat every 360° and lie between −1 and 1. y = tan x repeats every 180° and has asymptotes at 90°, 270°.</p>
+<div class="q"><b>Check:</b> State the maximum value, minimum value and period of y = sin x. What is cos 0°?</div>
+<details><summary>Show answer</summary><div class="a">Max 1, min −1, period 360°. cos 0° = 1</div></details>
+<div class="q stretch"><b>Stretch:</b> Solve sin x = 0.5 for 0° ≤ x ≤ 360°.</div>
+<details><summary>Show answer</summary><div class="a">x = 30° and 150°</div></details>
+</div>
+<div class="sub"><h3><span class="n">7.6</span>Non-linear simultaneous equations graphically</h3>
+<p class="key"><b>Key learning:</b> The solutions are the x and y values where the two graphs cross.</p>
+<div class="q"><b>Check:</b> The graphs y = x² and y = x + 2 cross. Find the points of intersection.</div>
+<details><summary>Show answer</summary><div class="a">x² = x + 2, so x² − x − 2 = 0, x = −1 or 2. Points (−1, 1) and (2, 4)</div></details>
+<div class="q stretch"><b>Stretch:</b> Find the intersections of the circle x² + y² = 25 and the line y = x + 1.</div>
+<details><summary>Show answer</summary><div class="a">2x² + 2x − 24 = 0, x = 3 or −4. Points (3, 4) and (−4, −3)</div></details>
+</div>
+<div class="sub"><h3><span class="n">7.7</span>Approximate solutions using a horizontal line</h3>
+<p class="key"><b>Key learning:</b> To solve f(x) = k using a drawn graph of y = f(x), draw the horizontal line y = k and read the x values where it crosses.</p>
+<div class="q"><b>Check:</b> Using the graph of y = x² − 2x − 3, which line do you draw to solve x² − 2x − 3 = 2? Give both solutions to 2 d.p.</div>
+<details><summary>Show answer</summary><div class="a">Draw y = 2. x² − 2x − 5 = 0 gives x = 1 ± √6 = 3.45 or −1.45</div></details>
+<div class="q stretch"><b>Stretch:</b> Which line do you draw to solve x² − 3x − 4 = 0 using the same graph?</div>
+<details><summary>Show answer</summary><div class="a">x² − 2x − 3 = x + 1, so draw y = x + 1. Solutions x = −1 and 4</div></details>
+</div>
+<div class="sub"><h3><span class="n">7.8</span>Turning points by completing the square</h3>
+<p class="key"><b>Key learning:</b> For y = (x + p)² + q the minimum point is (−p, q). For y = q − (x + p)² it is a maximum.</p>
+<div class="q"><b>Check:</b> Write y = x² − 6x + 5 in the form (x + p)² + q and state the minimum point.</div>
+<details><summary>Show answer</summary><div class="a">(x − 3)² − 4. Minimum (3, −4)</div></details>
+<div class="q stretch"><b>Stretch:</b> Find the maximum point of y = −x² + 4x + 1.</div>
+<details><summary>Show answer</summary><div class="a">−(x − 2)² + 5. Maximum (2, 5)</div></details>
+</div>
+</div></section><section class="unit" id="u8"><div class="unit-head"><span class="un">Unit 8</span><span class="ut">Sine and Cosine Rule</span><span class="ul">9 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">8.1</span>Sine rule: finding a side</h3>
+<p class="key"><b>Key learning:</b> a/sin A = b/sin B. Use it when you have a matching side-angle pair and one more angle.</p>
+<div class="q"><b>Check:</b> In triangle ABC, A = 40°, B = 65° and a = 8 cm. Find b (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">b = 8 sin 65° ÷ sin 40° = 11.3 cm</div></details>
+<div class="q stretch"><b>Stretch:</b> In triangle ABC, A = 35°, C = 80° and c = 12 cm. Find a (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">a = 12 sin 35° ÷ sin 80° = 6.99 cm</div></details>
+</div>
+<div class="sub"><h3><span class="n">8.2</span>Cosine rule: finding a side</h3>
+<p class="key"><b>Key learning:</b> a² = b² + c² − 2bc cos A. Use it when you know two sides and the angle between them.</p>
+<div class="q"><b>Check:</b> b = 7 cm, c = 9 cm, A = 52°. Find a (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">a² = 49 + 81 − 126 cos 52° = 52.43, so a = 7.24 cm</div></details>
+<div class="q stretch"><b>Stretch:</b> Two sides are 5.4 cm and 8.2 cm with an angle of 110° between them. Find the third side (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">a² = 29.16 + 67.24 − 88.56 cos 110° = 126.69, so a = 11.3 cm</div></details>
+</div>
+<div class="sub"><h3><span class="n">8.3</span>Sine rule: finding an acute angle</h3>
+<p class="key"><b>Key learning:</b> sin A / a = sin B / b. Use inverse sin on your calculator.</p>
+<div class="q"><b>Check:</b> a = 9 cm, b = 7 cm, A = 70°. Find acute angle B (1 d.p.).</div>
+<details><summary>Show answer</summary><div class="a">sin B = 7 sin 70° ÷ 9 = 0.7309, B = 46.9°</div></details>
+<div class="q stretch"><b>Stretch:</b> a = 15 cm, b = 11 cm, A = 62°. Find B (1 d.p.).</div>
+<details><summary>Show answer</summary><div class="a">sin B = 11 sin 62° ÷ 15 = 0.6475, B = 40.3°</div></details>
+</div>
+<div class="sub"><h3><span class="n">8.4</span>Area of a triangle</h3>
+<p class="key"><b>Key learning:</b> Area = ½ab sin C, where C is the angle between sides a and b.</p>
+<div class="q"><b>Check:</b> a = 8 cm, b = 11 cm, C = 38°. Find the area (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">½ × 8 × 11 × sin 38° = 27.1 cm²</div></details>
+<div class="q stretch"><b>Stretch:</b> A triangle has area 40 cm² and two sides 10 cm and 9 cm. Find the acute angle between them (1 d.p.).</div>
+<details><summary>Show answer</summary><div class="a">sin C = 80 ÷ 90 = 0.8889, C = 62.7°</div></details>
+</div>
+<div class="sub"><h3><span class="n">8.5</span>Cosine rule: finding an angle</h3>
+<p class="key"><b>Key learning:</b> cos A = (b² + c² − a²) ÷ 2bc. A negative cosine means an obtuse angle.</p>
+<div class="q"><b>Check:</b> Triangle with sides 6 cm, 8 cm and 11 cm. Find the largest angle (1 d.p.).</div>
+<details><summary>Show answer</summary><div class="a">cos C = (36 + 64 − 121) ÷ 96 = −0.21875, C = 102.6°</div></details>
+<div class="q stretch"><b>Stretch:</b> Triangle with sides 7, 9, 10 cm. Find the angle opposite the 7 cm side (1 d.p.).</div>
+<details><summary>Show answer</summary><div class="a">cos A = (81 + 100 − 49) ÷ 180 = 0.7333, A = 42.8°</div></details>
+</div>
+<div class="sub"><h3><span class="n">8.6</span>Combining sine and cosine rule</h3>
+<p class="key"><b>Key learning:</b> Choose the rule by what you are given. Often cosine rule first to find a side, then sine rule for an angle.</p>
+<div class="q"><b>Check:</b> A triangle has sides 8 cm and 10 cm with an included angle of 60°. Find the third side, then the smallest angle (1 d.p.).</div>
+<details><summary>Show answer</summary><div class="a">Third side √84 = 9.17 cm. sin x ÷ 8 = sin 60° ÷ 9.165, x = 49.1°</div></details>
+<div class="q stretch"><b>Stretch:</b> Find the remaining angle.</div>
+<details><summary>Show answer</summary><div class="a">180 − 60 − 49.1 = 70.9°</div></details>
+</div>
+<div class="sub"><h3><span class="n">8.7</span>Bearings problems</h3>
+<p class="key"><b>Key learning:</b> Draw a clear diagram, mark the angle between the two bearings at the common point, then choose a rule.</p>
+<div class="q"><b>Check:</b> From port P, ship A is 12 km on a bearing 040° and ship B is 15 km on a bearing 110°. Find AB (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">Angle APB = 70°. AB² = 144 + 225 − 360 cos 70° = 245.9, AB = 15.7 km</div></details>
+<div class="q stretch"><b>Stretch:</b> Find the area of triangle APB (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">½ × 12 × 15 × sin 70° = 84.6 km²</div></details>
+</div>
+<div class="sub"><h3><span class="n">8.8</span>Obtuse angles with the sine rule</h3>
+<p class="key"><b>Key learning:</b> sin θ = sin (180° − θ), so the calculator gives only the acute angle. Check whether the diagram needs the obtuse one.</p>
+<div class="q"><b>Check:</b> In triangle ABC, A = 48°, BC = 10 cm and AB = 12.5 cm. Find the obtuse angle C (1 d.p.).</div>
+<details><summary>Show answer</summary><div class="a">sin C = 12.5 sin 48° ÷ 10 = 0.9289, so 68.3° or 111.7°. Obtuse C = 111.7°</div></details>
+<div class="q stretch"><b>Stretch:</b> State the possible values of angle C in this situation.</div>
+<details><summary>Show answer</summary><div class="a">68.3° or 111.7°</div></details>
+</div>
+<div class="sub"><h3><span class="n">8.9</span>Segments, algebra and combined shapes</h3>
+<p class="key"><b>Key learning:</b> Segment area = sector area − triangle area. For algebra, form an equation in x and solve.</p>
+<div class="q"><b>Check:</b> A circle has radius 6 cm. A chord subtends 80° at the centre. Find the area of the segment (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">Sector (80/360) × π × 36 = 25.13; triangle ½ × 36 × sin 80° = 17.73; segment = 7.40 cm²</div></details>
+<div class="q stretch"><b>Stretch:</b> A triangle has sides x and 2x with an included angle of 30°. Its area is 8 cm². Find x.</div>
+<details><summary>Show answer</summary><div class="a">½ × x × 2x × sin 30° = x²/2 = 8, so x = 4</div></details>
+</div>
+</div></section><section class="unit" id="u9"><div class="unit-head"><span class="un">Unit 9</span><span class="ut">Bounds</span><span class="ul">7 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">9.1</span>Identifying upper and lower bounds</h3>
+<p class="key"><b>Key learning:</b> Half a unit of the degree of accuracy either side. The upper bound is not included in the inequality (lower ≤ x &lt; upper).</p>
+<div class="q"><b>Check:</b> A length is 6.4 cm to the nearest 0.1 cm. Write the error interval.</div>
+<details><summary>Show answer</summary><div class="a">6.35 ≤ x &lt; 6.45</div></details>
+<div class="q stretch"><b>Stretch:</b> A mass is 380 g to the nearest 10 g. Another number is 0.07 to 1 s.f. Write both error intervals.</div>
+<details><summary>Show answer</summary><div class="a">375 ≤ m &lt; 385. And 0.065 ≤ x &lt; 0.075</div></details>
+</div>
+<div class="sub"><h3><span class="n">9.2</span>Bounds with addition</h3>
+<p class="key"><b>Key learning:</b> Upper bound of a + b = UB(a) + UB(b). Lower bound is LB + LB.</p>
+<div class="q"><b>Check:</b> a = 12.5 and b = 8.3, both to 1 d.p. Find the bounds of a + b.</div>
+<details><summary>Show answer</summary><div class="a">UB 12.55 + 8.35 = 20.9. LB 12.45 + 8.25 = 20.7</div></details>
+<div class="q stretch"><b>Stretch:</b> Two planks are 2.4 m and 1.8 m to 1 d.p. Find the upper bound of their total length.</div>
+<details><summary>Show answer</summary><div class="a">2.45 + 1.85 = 4.3 m</div></details>
+</div>
+<div class="sub"><h3><span class="n">9.3</span>Bounds with multiplication</h3>
+<p class="key"><b>Key learning:</b> Upper bound of a × b = UB × UB. Lower bound is LB × LB (for positive numbers).</p>
+<div class="q"><b>Check:</b> A rectangle is 14 cm by 9 cm, each to the nearest cm. Find the bounds of its area.</div>
+<details><summary>Show answer</summary><div class="a">UB 14.5 × 9.5 = 137.75 cm². LB 13.5 × 8.5 = 114.75 cm²</div></details>
+<div class="q stretch"><b>Stretch:</b> A square has side 7.0 cm to 1 d.p. Find the bounds of the area.</div>
+<details><summary>Show answer</summary><div class="a">LB 6.95² = 48.3025. UB 7.05² = 49.7025</div></details>
+</div>
+<div class="sub"><h3><span class="n">9.4</span>Bounds with subtraction</h3>
+<p class="key"><b>Key learning:</b> For a − b: the upper bound is UB(a) − LB(b). The lower bound is LB(a) − UB(b).</p>
+<div class="q"><b>Check:</b> a = 15.6 and b = 7.2, both to 1 d.p. Find the bounds of a − b.</div>
+<details><summary>Show answer</summary><div class="a">UB 15.65 − 7.15 = 8.5. LB 15.55 − 7.25 = 8.3</div></details>
+<div class="q stretch"><b>Stretch:</b> p = 20 and q = 12 to the nearest whole number. Find the lower bound of p − q.</div>
+<details><summary>Show answer</summary><div class="a">19.5 − 12.5 = 7</div></details>
+</div>
+<div class="sub"><h3><span class="n">9.5</span>Bounds with division</h3>
+<p class="key"><b>Key learning:</b> For a ÷ b: upper bound is UB(a) ÷ LB(b). Lower bound is LB(a) ÷ UB(b).</p>
+<div class="q"><b>Check:</b> Distance 200 m (nearest 10 m) and time 24 s (nearest second). Find the bounds of speed (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">UB 205 ÷ 23.5 = 8.72 m/s. LB 195 ÷ 24.5 = 7.96 m/s</div></details>
+<div class="q stretch"><b>Stretch:</b> Density = mass ÷ volume with mass 50 g (nearest g) and volume 20 cm³ (nearest cm³). Find the upper bound (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">50.5 ÷ 19.5 = 2.59 g/cm³</div></details>
+</div>
+<div class="sub"><h3><span class="n">9.6</span>Bounds with several operations</h3>
+<p class="key"><b>Key learning:</b> Work out which bound of each value gives the biggest or smallest result: for a denominator you want the opposite bound.</p>
+<div class="q"><b>Check:</b> a = 5.2, b = 3.1, c = 2.4, each to 1 d.p. Find the bounds of (a + b) ÷ c (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">UB (5.25 + 3.15) ÷ 2.35 = 3.57. LB (5.15 + 3.05) ÷ 2.45 = 3.35</div></details>
+<div class="q stretch"><b>Stretch:</b> Find the upper bound of (a − b) ÷ c (3 s.f.).</div>
+<details><summary>Show answer</summary><div class="a">(5.25 − 3.05) ÷ 2.35 = 0.936</div></details>
+</div>
+<div class="sub"><h3><span class="n">9.7</span>Choosing a suitable degree of accuracy</h3>
+<p class="key"><b>Key learning:</b> Round both bounds to the same number of significant figures. The greatest accuracy at which they agree is the answer.</p>
+<div class="q"><b>Check:</b> A calculation has UB = 2.3478 and LB = 2.3112. To what accuracy can the answer be given?</div>
+<details><summary>Show answer</summary><div class="a">Both round to 2.3 (2 s.f.). To 3 s.f. they differ (2.35, 2.31). So 2.3</div></details>
+<div class="q stretch"><b>Stretch:</b> UB = 0.8647 and LB = 0.8512. Give the answer to a suitable accuracy.</div>
+<details><summary>Show answer</summary><div class="a">To 2 s.f. both are 0.86 and 0.85, so they differ. To 1 s.f. both are 0.9. So 0.9</div></details>
+</div>
+</div></section><section class="unit" id="u10"><div class="unit-head"><span class="un">Unit 10</span><span class="ut">Inequalities</span><span class="ul">7 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">10.1</span>Listing integer values</h3>
+<p class="key"><b>Key learning:</b> Check each end: &lt; and &gt; exclude the number, ≤ and ≥ include it.</p>
+<div class="q"><b>Check:</b> List the integers n with −2 ≤ n &lt; 3.</div>
+<details><summary>Show answer</summary><div class="a">−2, −1, 0, 1, 2</div></details>
+<div class="q stretch"><b>Stretch:</b> List the integers n with −5 &lt; n ≤ −1.</div>
+<details><summary>Show answer</summary><div class="a">−4, −3, −2, −1</div></details>
+</div>
+<div class="sub"><h3><span class="n">10.2</span>Number lines</h3>
+<p class="key"><b>Key learning:</b> An open circle means not included (&lt; or &gt;). A filled circle means included (≤ or ≥).</p>
+<div class="q"><b>Check:</b> A number line has an open circle at −1 and a filled circle at 4 with the line between. Write the inequality.</div>
+<details><summary>Show answer</summary><div class="a">−1 &lt; x ≤ 4</div></details>
+<div class="q stretch"><b>Stretch:</b> Represent x ≤ −2 or x &gt; 3 on a number line.</div>
+<details><summary>Show answer</summary><div class="a">Filled circle at −2 with an arrow left. Open circle at 3 with an arrow right</div></details>
+</div>
+<div class="sub"><h3><span class="n">10.3</span>Solving linear inequalities</h3>
+<p class="key"><b>Key learning:</b> Solve like an equation, but reverse the inequality sign when multiplying or dividing by a negative.</p>
+<div class="q"><b>Check:</b> Solve 3x − 5 &gt; 10.</div>
+<details><summary>Show answer</summary><div class="a">x &gt; 5</div></details>
+<div class="q stretch"><b>Stretch:</b> Solve −2x + 3 ≥ 11.</div>
+<details><summary>Show answer</summary><div class="a">−2x ≥ 8, so x ≤ −4</div></details>
+</div>
+<div class="sub"><h3><span class="n">10.4</span>Inequalities on a graph</h3>
+<p class="key"><b>Key learning:</b> y &gt; … or y &lt; … use a dashed line. y ≥ … or y ≤ … use a solid line. Test a point to decide which side to shade.</p>
+<div class="q"><b>Check:</b> Describe the boundary line and shading for y ≤ 3 − x.</div>
+<details><summary>Show answer</summary><div class="a">Solid line through (0, 3) and (3, 0), shade the region below it</div></details>
+<div class="q stretch"><b>Stretch:</b> Describe the line type for y &gt; x + 1.</div>
+<details><summary>Show answer</summary><div class="a">Dashed line, shade above</div></details>
+</div>
+<div class="sub"><h3><span class="n">10.5</span>Two-ended inequalities</h3>
+<p class="key"><b>Key learning:</b> Do the same operation to all three parts.</p>
+<div class="q"><b>Check:</b> Solve −7 &lt; 3x + 2 ≤ 11.</div>
+<details><summary>Show answer</summary><div class="a">−9 &lt; 3x ≤ 9, so −3 &lt; x ≤ 3</div></details>
+<div class="q stretch"><b>Stretch:</b> Solve 4 ≤ 5 − x &lt; 9.</div>
+<details><summary>Show answer</summary><div class="a">−1 ≤ … : 5 − x ≥ 4 gives x ≤ 1; 5 − x &lt; 9 gives x &gt; −4. So −4 &lt; x ≤ 1</div></details>
+</div>
+<div class="sub"><h3><span class="n">10.6</span>Regions from inequalities</h3>
+<p class="key"><b>Key learning:</b> Draw each boundary, shade the unwanted side (or the wanted side) consistently, and read off the region.</p>
+<div class="q"><b>Check:</b> Region R satisfies x ≥ 1, y ≥ 2 and x + y ≤ 6. How many points with integer coordinates lie in R (including boundaries)?</div>
+<details><summary>Show answer</summary><div class="a">x = 1: y = 2 to 5 (4); x = 2: 3; x = 3: 2; x = 4: 1. Total 10</div></details>
+<div class="q stretch"><b>Stretch:</b> Find the area of region R.</div>
+<details><summary>Show answer</summary><div class="a">Triangle with vertices (1,2), (1,5), (4,2): ½ × 3 × 3 = 4.5 units²</div></details>
+</div>
+<div class="sub"><h3><span class="n">10.7</span>Quadratic inequalities</h3>
+<p class="key"><b>Key learning:</b> Factorise, find the roots, sketch the parabola and read off where it is above or below zero.</p>
+<div class="q"><b>Check:</b> Solve x² − x − 12 &lt; 0.</div>
+<details><summary>Show answer</summary><div class="a">(x − 4)(x + 3) &lt; 0, so −3 &lt; x &lt; 4</div></details>
+<div class="q stretch"><b>Stretch:</b> Solve x² + 2x − 8 ≥ 0.</div>
+<details><summary>Show answer</summary><div class="a">(x + 4)(x − 2) ≥ 0, so x ≤ −4 or x ≥ 2</div></details>
+</div>
+</div></section><section class="unit" id="u11"><div class="unit-head"><span class="un">Unit 11</span><span class="ut">Geometrical Reasoning</span><span class="ul">4 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">11.1</span>Angles in parallel lines (recap)</h3>
+<p class="key"><b>Key learning:</b> Alternate (Z) angles are equal, corresponding (F) angles are equal, co-interior (C) angles add to 180°.</p>
+<div class="q"><b>Check:</b> Two parallel lines are crossed by a transversal. One angle is 68°. Give the alternate, corresponding and co-interior angles.</div>
+<details><summary>Show answer</summary><div class="a">Alternate 68°, corresponding 68°, co-interior 112°</div></details>
+<div class="q stretch"><b>Stretch:</b> A straight line crossing parallel lines makes a co-interior angle of 125°. Find the other co-interior angle.</div>
+<details><summary>Show answer</summary><div class="a">55°</div></details>
+</div>
+<div class="sub"><h3><span class="n">11.2</span>Angles in polygons (recap)</h3>
+<p class="key"><b>Key learning:</b> Sum of interior angles = (n − 2) × 180°. Exterior angles of any polygon add to 360°.</p>
+<div class="q"><b>Check:</b> Find the interior and exterior angle of a regular octagon.</div>
+<details><summary>Show answer</summary><div class="a">Interior (6 × 180) ÷ 8 = 135°; exterior 360 ÷ 8 = 45°</div></details>
+<div class="q stretch"><b>Stretch:</b> A regular polygon has exterior angle 30°. How many sides?</div>
+<details><summary>Show answer</summary><div class="a">360 ÷ 30 = 12 sides</div></details>
+</div>
+<div class="sub"><h3><span class="n">11.3</span>Angle problems with reasons</h3>
+<p class="key"><b>Key learning:</b> Write each step and its reason: e.g. “base angles of an isosceles triangle are equal”, “angles in a triangle sum to 180°”.</p>
+<div class="q"><b>Check:</b> Triangle ABC has AB = AC and angle A = 40°. Find angle B and give reasons.</div>
+<details><summary>Show answer</summary><div class="a">AB = AC so base angles are equal. (180 − 40) ÷ 2 = 70° (angles in a triangle sum to 180°)</div></details>
+<div class="q stretch"><b>Stretch:</b> ABCDE is a regular pentagon. Find angle BAC with reasons.</div>
+<details><summary>Show answer</summary><div class="a">Interior angle 108°. Triangle ABC is isosceles (AB = BC), so BAC = (180 − 108) ÷ 2 = 36°</div></details>
+</div>
+<div class="sub"><h3><span class="n">11.4</span>Angle problems with algebra</h3>
+<p class="key"><b>Key learning:</b> Form an equation from the angle fact, solve for x, then substitute back to find the angles asked for.</p>
+<div class="q"><b>Check:</b> Alternate angles are (3x + 10)° and (5x − 30)°. Find x and the angles.</div>
+<details><summary>Show answer</summary><div class="a">3x + 10 = 5x − 30, x = 20. Angles 70° (alternate angles are equal)</div></details>
+<div class="q stretch"><b>Stretch:</b> Co-interior angles are (2x + 15)° and (3x + 5)°. Find x and both angles.</div>
+<details><summary>Show answer</summary><div class="a">5x + 20 = 180, x = 32. Angles 79° and 101°</div></details>
+</div>
+</div></section><section class="unit" id="u12"><div class="unit-head"><span class="un">Unit 12</span><span class="ut">Surds</span><span class="ul">7 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">12.1</span>Simplifying surds</h3>
+<p class="key"><b>Key learning:</b> Write the number as a product containing the largest square number, then take its square root out.</p>
+<div class="q"><b>Check:</b> Simplify √72 and √48.</div>
+<details><summary>Show answer</summary><div class="a">6√2 and 4√3</div></details>
+<div class="q stretch"><b>Stretch:</b> Simplify 3√12.</div>
+<details><summary>Show answer</summary><div class="a">3 × 2√3 = 6√3</div></details>
+</div>
+<div class="sub"><h3><span class="n">12.2</span>Adding and subtracting surds</h3>
+<p class="key"><b>Key learning:</b> Simplify each surd first. Only like surds can be combined.</p>
+<div class="q"><b>Check:</b> Simplify 3√5 + √20.</div>
+<details><summary>Show answer</summary><div class="a">3√5 + 2√5 = 5√5</div></details>
+<div class="q stretch"><b>Stretch:</b> Simplify √75 − √12 + √27.</div>
+<details><summary>Show answer</summary><div class="a">5√3 − 2√3 + 3√3 = 6√3</div></details>
+</div>
+<div class="sub"><h3><span class="n">12.3</span>Multiplying and dividing surds</h3>
+<p class="key"><b>Key learning:</b> √a × √b = √(ab) and √a ÷ √b = √(a/b). Multiply numbers outside the root together.</p>
+<div class="q"><b>Check:</b> Simplify √6 × √10 and 12√10 ÷ 3√2.</div>
+<details><summary>Show answer</summary><div class="a">√60 = 2√15; and 4√5</div></details>
+<div class="q stretch"><b>Stretch:</b> Simplify (2√3)³.</div>
+<details><summary>Show answer</summary><div class="a">8 × 3√3 = 24√3</div></details>
+</div>
+<div class="sub"><h3><span class="n">12.4</span>Expanding brackets with surds</h3>
+<p class="key"><b>Key learning:</b> Expand as normal. Remember √a × √a = a.</p>
+<div class="q"><b>Check:</b> Expand and simplify (3 + √2)(4 − √2).</div>
+<details><summary>Show answer</summary><div class="a">12 − 3√2 + 4√2 − 2 = 10 + √2</div></details>
+<div class="q stretch"><b>Stretch:</b> Expand (2 + √5)² and (√7 − 2)(√7 + 2).</div>
+<details><summary>Show answer</summary><div class="a">9 + 4√5. And 7 − 4 = 3</div></details>
+</div>
+<div class="sub"><h3><span class="n">12.5</span>Rationalising a single-surd denominator</h3>
+<p class="key"><b>Key learning:</b> Multiply top and bottom by the surd in the denominator.</p>
+<div class="q"><b>Check:</b> Rationalise 6/√3 and 10/√5.</div>
+<details><summary>Show answer</summary><div class="a">2√3 and 2√5</div></details>
+<div class="q stretch"><b>Stretch:</b> Rationalise and simplify (4 + √2)/√2.</div>
+<details><summary>Show answer</summary><div class="a">(4√2 + 2)/2 = 2√2 + 1</div></details>
+</div>
+<div class="sub"><h3><span class="n">12.6</span>Rationalising a two-term denominator</h3>
+<p class="key"><b>Key learning:</b> Multiply top and bottom by the conjugate (change the sign between the terms). The denominator becomes a² − b.</p>
+<div class="q"><b>Check:</b> Rationalise 1/(3 + √2).</div>
+<details><summary>Show answer</summary><div class="a">(3 − √2)/(9 − 2) = (3 − √2)/7</div></details>
+<div class="q stretch"><b>Stretch:</b> Rationalise 6/(√5 − 1).</div>
+<details><summary>Show answer</summary><div class="a">6(√5 + 1)/4 = 3(√5 + 1)/2</div></details>
+</div>
+<div class="sub"><h3><span class="n">12.7</span>Problems involving surds</h3>
+<p class="key"><b>Key learning:</b> Use exact values throughout. Area and Pythagoras often produce surds.</p>
+<div class="q"><b>Check:</b> A rectangle has sides (3 + √2) cm and (3 − √2) cm. Find its area.</div>
+<details><summary>Show answer</summary><div class="a">9 − 2 = 7 cm²</div></details>
+<div class="q stretch"><b>Stretch:</b> Right-angled triangle with legs 2√6 cm and 3√2 cm. Find the exact hypotenuse and area.</div>
+<details><summary>Show answer</summary><div class="a">Hyp² = 24 + 18 = 42, so √42 cm. Area ½ × 2√6 × 3√2 = 3√12 = 6√3 cm²</div></details>
+</div>
+</div></section><section class="unit" id="u13"><div class="unit-head"><span class="un">Unit 13</span><span class="ut">Algebraic Proportion</span><span class="ul">7 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">13.1</span>Numerical proportion (recap)</h3>
+<p class="key"><b>Key learning:</b> Find the value of one unit, then scale up. Direct: both increase together. Inverse: one increases as the other decreases.</p>
+<div class="q"><b>Check:</b> 5 pens cost £6. Find the cost of 8 pens.</div>
+<details><summary>Show answer</summary><div class="a">£1.20 each, so 8 × 1.20 = £9.60</div></details>
+<div class="q stretch"><b>Stretch:</b> 6 workers take 10 days. How long for 4 workers?</div>
+<details><summary>Show answer</summary><div class="a">60 worker-days ÷ 4 = 15 days</div></details>
+</div>
+<div class="sub"><h3><span class="n">13.2</span>Direct proportion formula</h3>
+<p class="key"><b>Key learning:</b> y ∝ x means y = kx. Use known values to find k.</p>
+<div class="q"><b>Check:</b> y is directly proportional to x. y = 12 when x = 3. Find the formula and y when x = 7.</div>
+<details><summary>Show answer</summary><div class="a">k = 4, y = 4x, y = 28</div></details>
+<div class="q stretch"><b>Stretch:</b> y is directly proportional to x, y = 10 when x = 4. Find x when y = 25.</div>
+<details><summary>Show answer</summary><div class="a">k = 2.5, x = 10</div></details>
+</div>
+<div class="sub"><h3><span class="n">13.3</span>Inverse proportion formula</h3>
+<p class="key"><b>Key learning:</b> y ∝ 1/x means y = k/x.</p>
+<div class="q"><b>Check:</b> y is inversely proportional to x. y = 6 when x = 4. Find the formula and y when x = 3.</div>
+<details><summary>Show answer</summary><div class="a">k = 24, y = 24/x, y = 8</div></details>
+<div class="q stretch"><b>Stretch:</b> y is inversely proportional to x, y = 5 when x = 8. Find x when y = 20.</div>
+<details><summary>Show answer</summary><div class="a">k = 40, x = 2</div></details>
+</div>
+<div class="sub"><h3><span class="n">13.4</span>Proportion with powers and roots</h3>
+<p class="key"><b>Key learning:</b> y ∝ x² gives y = kx². y ∝ √x gives y = k√x. y ∝ 1/x² gives y = k/x².</p>
+<div class="q"><b>Check:</b> y ∝ x². y = 50 when x = 5. Find y when x = 7.</div>
+<details><summary>Show answer</summary><div class="a">k = 2, y = 2x², y = 98</div></details>
+<div class="q stretch"><b>Stretch:</b> y ∝ √x. y = 12 when x = 16. Find x when y = 21.</div>
+<details><summary>Show answer</summary><div class="a">y = 3√x, √x = 7, x = 49</div></details>
+</div>
+<div class="sub"><h3><span class="n">13.5</span>Determine then use the formula</h3>
+<p class="key"><b>Key learning:</b> Always find the formula first, then substitute. Give the formula as part of your answer.</p>
+<div class="q"><b>Check:</b> F is inversely proportional to d². F = 90 when d = 2. Find d when F = 10.</div>
+<details><summary>Show answer</summary><div class="a">F = 360/d², d² = 36, d = 6</div></details>
+<div class="q stretch"><b>Stretch:</b> The time T for a pendulum is proportional to √L. T = 2 when L = 1. Find T when L = 2.25.</div>
+<details><summary>Show answer</summary><div class="a">T = 2√L, T = 2 × 1.5 = 3</div></details>
+</div>
+<div class="sub"><h3><span class="n">13.6</span>Linking two proportional relationships</h3>
+<p class="key"><b>Key learning:</b> Combine into one formula with a single constant, e.g. y = kx²/z.</p>
+<div class="q"><b>Check:</b> y is proportional to x² and inversely proportional to z. y = 12 when x = 2 and z = 3. Find y when x = 4 and z = 6.</div>
+<details><summary>Show answer</summary><div class="a">y = kx²/z, 12 = 4k/3, k = 9. y = 9 × 16 ÷ 6 = 24</div></details>
+<div class="q stretch"><b>Stretch:</b> Find z when x = 3 and y = 9.</div>
+<details><summary>Show answer</summary><div class="a">9 = 9 × 9 ÷ z, so z = 9</div></details>
+</div>
+<div class="sub"><h3><span class="n">13.7</span>Algebraic inputs</h3>
+<p class="key"><b>Key learning:</b> Treat the whole expression (e.g. x − 1) as the variable.</p>
+<div class="q"><b>Check:</b> y is directly proportional to the square of (x − 1). y = 36 when x = 4. Find y when x = 6.</div>
+<details><summary>Show answer</summary><div class="a">y = k(x − 1)², k = 4, y = 4 × 25 = 100</div></details>
+<div class="q stretch"><b>Stretch:</b> Find x when y = 16 (x &gt; 1).</div>
+<details><summary>Show answer</summary><div class="a">(x − 1)² = 4, x = 3</div></details>
+</div>
+</div></section><section class="unit" id="u14"><div class="unit-head"><span class="un">Unit 14</span><span class="ut">Circle Theorems</span><span class="ul">9 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">14.1</span>Parts of a circle</h3>
+<p class="key"><b>Key learning:</b> Tangent touches at one point; chord joins two points; diameter is a chord through the centre; arc, sector, segment.</p>
+<div class="q"><b>Check:</b> Name the line that touches a circle at exactly one point, and the line that joins two points on the circumference through the centre.</div>
+<details><summary>Show answer</summary><div class="a">Tangent; diameter</div></details>
+<div class="q stretch"><b>Stretch:</b> What is the region cut off by a chord called?</div>
+<details><summary>Show answer</summary><div class="a">Segment</div></details>
+</div>
+<div class="sub"><h3><span class="n">14.2</span>Chord and perpendicular bisector</h3>
+<p class="key"><b>Key learning:</b> A line from the centre perpendicular to a chord bisects it. Use Pythagoras.</p>
+<div class="q"><b>Check:</b> A chord is 16 cm long in a circle of radius 10 cm. Find the distance from the centre to the chord.</div>
+<details><summary>Show answer</summary><div class="a">Half chord 8; √(10² − 8²) = 6 cm</div></details>
+<div class="q stretch"><b>Stretch:</b> The centre is 5 cm from a chord in a circle of radius 13 cm. Find the chord length.</div>
+<details><summary>Show answer</summary><div class="a">Half chord √(169 − 25) = 12, so 24 cm</div></details>
+</div>
+<div class="sub"><h3><span class="n">14.3</span>Tangent properties</h3>
+<p class="key"><b>Key learning:</b> Two tangents from a point are equal. A tangent is perpendicular to the radius at the point of contact.</p>
+<div class="q"><b>Check:</b> O is the centre, T is on the circle and PT is a tangent. OT = 5 cm and OP = 13 cm. Find PT.</div>
+<details><summary>Show answer</summary><div class="a">Angle OTP = 90°. PT = √(169 − 25) = √144 = 12 cm</div></details>
+<div class="q stretch"><b>Stretch:</b> Tangents PA and PB meet at P. PA = 9 cm and angle APB = 50°. Find PB and angle PAB.</div>
+<details><summary>Show answer</summary><div class="a">PB = 9 cm. Triangle is isosceles, angle PAB = (180 − 50) ÷ 2 = 65°</div></details>
+</div>
+<div class="sub"><h3><span class="n">14.4</span>Angle at the centre</h3>
+<p class="key"><b>Key learning:</b> The angle at the centre is twice the angle at the circumference on the same arc.</p>
+<div class="q"><b>Check:</b> The angle at the centre is 124°. Find the angle at the circumference on the same arc.</div>
+<details><summary>Show answer</summary><div class="a">62°</div></details>
+<div class="q stretch"><b>Stretch:</b> An angle at the circumference is 37°. Find the angle at the centre.</div>
+<details><summary>Show answer</summary><div class="a">74°</div></details>
+</div>
+<div class="sub"><h3><span class="n">14.5</span>Same segment and semicircle</h3>
+<p class="key"><b>Key learning:</b> Angles in the same segment are equal. The angle in a semicircle is 90°.</p>
+<div class="q"><b>Check:</b> Two angles in the same segment: one is 38°. Find the other.</div>
+<details><summary>Show answer</summary><div class="a">38°</div></details>
+<div class="q stretch"><b>Stretch:</b> AB is a diameter and C is on the circle. Angle CAB = 35°. Find angle ABC.</div>
+<details><summary>Show answer</summary><div class="a">Angle ACB = 90°, so ABC = 180 − 90 − 35 = 55°</div></details>
+</div>
+<div class="sub"><h3><span class="n">14.6</span>Cyclic quadrilaterals</h3>
+<p class="key"><b>Key learning:</b> Opposite angles of a cyclic quadrilateral add to 180°.</p>
+<div class="q"><b>Check:</b> In cyclic quadrilateral ABCD, angle A = 105° and angle B = 88°. Find C and D.</div>
+<details><summary>Show answer</summary><div class="a">C = 180 − 105 = 75°; D = 180 − 88 = 92°</div></details>
+<div class="q stretch"><b>Stretch:</b> Angle B = 2x + 10 and D = 3x − 20. Find x and both angles.</div>
+<details><summary>Show answer</summary><div class="a">5x − 10 = 180, x = 38. B = 86°, D = 94°</div></details>
+</div>
+<div class="sub"><h3><span class="n">14.7</span>Alternate segment theorem</h3>
+<p class="key"><b>Key learning:</b> The angle between a tangent and a chord equals the angle in the alternate segment.</p>
+<div class="q"><b>Check:</b> The angle between a tangent and a chord is 52°. Find the angle in the alternate segment.</div>
+<details><summary>Show answer</summary><div class="a">52°</div></details>
+<div class="q stretch"><b>Stretch:</b> The tangent–chord angle is 64° and the triangle in the alternate segment is isosceles with the 64° angle at a base. Find the third angle.</div>
+<details><summary>Show answer</summary><div class="a">180 − 64 − 64 = 52°</div></details>
+</div>
+<div class="sub"><h3><span class="n">14.8</span>Intersecting chord and secant theorems</h3>
+<p class="key"><b>Key learning:</b> Chords: AX × XB = CX × XD. Secants from a point P: PA × PB = PC × PD.</p>
+<div class="q"><b>Check:</b> Chords AB and CD cross at X. AX = 4, XB = 9, CX = 3. Find XD.</div>
+<details><summary>Show answer</summary><div class="a">4 × 9 = 3 × XD, so XD = 12</div></details>
+<div class="q stretch"><b>Stretch:</b> Two secants from P: PA = 4 and PB = 12 (B further away), PC = 3. Find PD.</div>
+<details><summary>Show answer</summary><div class="a">4 × 12 = 3 × PD, so PD = 16</div></details>
+</div>
+<div class="sub"><h3><span class="n">14.9</span>Combining theorems and algebra</h3>
+<p class="key"><b>Key learning:</b> Name every theorem you use in your reasons. Form an equation when angles are algebraic.</p>
+<div class="q"><b>Check:</b> The angle at the centre is 4x° and the angle at the circumference on the same arc is (x + 30)°. Find x.</div>
+<details><summary>Show answer</summary><div class="a">4x = 2(x + 30), x = 30. Angles 120° and 60°</div></details>
+<div class="q stretch"><b>Stretch:</b> Give the reason for each step.</div>
+<details><summary>Show answer</summary><div class="a">Angle at the centre is twice the angle at the circumference</div></details>
+</div>
+</div></section><section class="unit" id="u15"><div class="unit-head"><span class="un">Unit 15</span><span class="ut">Set Notation</span><span class="ul">7 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">15.1</span>Definition of a set</h3>
+<p class="key"><b>Key learning:</b> A set is a collection of items listed inside { }. n(A) counts the elements.</p>
+<div class="q"><b>Check:</b> ξ = {1, 2, …, 12}. A = {even numbers}. List A and state n(A).</div>
+<details><summary>Show answer</summary><div class="a">A = {2, 4, 6, 8, 10, 12}, n(A) = 6</div></details>
+<div class="q stretch"><b>Stretch:</b> B = {multiples of 3}. List B and find n(B).</div>
+<details><summary>Show answer</summary><div class="a">B = {3, 6, 9, 12}, n(B) = 4</div></details>
+</div>
+<div class="sub"><h3><span class="n">15.2</span>Universal set and empty set</h3>
+<p class="key"><b>Key learning:</b> ξ is the universal set (everything in the question). ∅ or { } is the empty set.</p>
+<div class="q"><b>Check:</b> A = {1, 3} and B = {2, 4}. What is A ∩ B?</div>
+<details><summary>Show answer</summary><div class="a">∅ (the empty set)</div></details>
+<div class="q stretch"><b>Stretch:</b> Write the empty set in two ways.</div>
+<details><summary>Show answer</summary><div class="a">∅ and { }</div></details>
+</div>
+<div class="sub"><h3><span class="n">15.3</span>Union, intersection and complement</h3>
+<p class="key"><b>Key learning:</b> A ∪ B: in A or B or both. A ∩ B: in both. A′: in ξ but not in A.</p>
+<div class="q"><b>Check:</b> ξ = {1, …, 10}, A = {1, 2, 3, 4, 5}, B = {4, 5, 6, 7}. Find A ∪ B, A ∩ B and A′.</div>
+<details><summary>Show answer</summary><div class="a">A ∪ B = {1, 2, 3, 4, 5, 6, 7}; A ∩ B = {4, 5}; A′ = {6, 7, 8, 9, 10}</div></details>
+<div class="q stretch"><b>Stretch:</b> Find B′.</div>
+<details><summary>Show answer</summary><div class="a">{1, 2, 3, 8, 9, 10}</div></details>
+</div>
+<div class="sub"><h3><span class="n">15.4</span>Venn diagrams</h3>
+<p class="key"><b>Key learning:</b> Fill the overlap first, then the rest of each circle, then outside both. The total must match.</p>
+<div class="q"><b>Check:</b> 30 students: 18 play football (F), 14 play tennis (T), 6 play both. Complete the Venn diagram.</div>
+<details><summary>Show answer</summary><div class="a">Only F: 12, both: 6, only T: 8, neither: 30 − 26 = 4</div></details>
+<div class="q stretch"><b>Stretch:</b> Find the number who play exactly one sport.</div>
+<details><summary>Show answer</summary><div class="a">12 + 8 = 20</div></details>
+</div>
+<div class="sub"><h3><span class="n">15.5</span>Number of elements</h3>
+<p class="key"><b>Key learning:</b> n(A ∪ B) = n(A) + n(B) − n(A ∩ B).</p>
+<div class="q"><b>Check:</b> Using the Venn diagram above, find n(F ∪ T) and n(F ∩ T).</div>
+<details><summary>Show answer</summary><div class="a">n(F ∪ T) = 26; n(F ∩ T) = 6</div></details>
+<div class="q stretch"><b>Stretch:</b> Find n(F′).</div>
+<details><summary>Show answer</summary><div class="a">30 − 18 = 12</div></details>
+</div>
+<div class="sub"><h3><span class="n">15.6</span>Combining notation</h3>
+<p class="key"><b>Key learning:</b> Work step by step: find the inside bracket first, or complement first.</p>
+<div class="q"><b>Check:</b> With A and B as above, find (A ∪ B)′ and A′ ∩ B.</div>
+<details><summary>Show answer</summary><div class="a">(A ∪ B)′ = {8, 9, 10}; A′ ∩ B = {6, 7}</div></details>
+<div class="q stretch"><b>Stretch:</b> Find A ∩ B′.</div>
+<details><summary>Show answer</summary><div class="a">{1, 2, 3}</div></details>
+</div>
+<div class="sub"><h3><span class="n">15.7</span>Subsets</h3>
+<p class="key"><b>Key learning:</b> A ⊂ B means every element of A is also in B. A set with n elements has 2ⁿ subsets.</p>
+<div class="q"><b>Check:</b> List all subsets of {a, b}.</div>
+<details><summary>Show answer</summary><div class="a">∅, {a}, {b}, {a, b} — 4 subsets</div></details>
+<div class="q stretch"><b>Stretch:</b> How many subsets does a set of 4 elements have?</div>
+<details><summary>Show answer</summary><div class="a">2⁴ = 16</div></details>
+</div>
+</div></section><section class="unit" id="u16"><div class="unit-head"><span class="un">Unit 16</span><span class="ut">Algebraic Fractions</span><span class="ul">8 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">16.1</span>Simplifying with linear expressions</h3>
+<p class="key"><b>Key learning:</b> Factorise top and bottom, then cancel common factors (never cancel terms).</p>
+<div class="q"><b>Check:</b> Simplify (4x + 8)/(6x + 12).</div>
+<details><summary>Show answer</summary><div class="a">4(x + 2)/6(x + 2) = 2/3</div></details>
+<div class="q stretch"><b>Stretch:</b> Simplify (9x − 3)/(6x − 2).</div>
+<details><summary>Show answer</summary><div class="a">3(3x − 1)/2(3x − 1) = 3/2</div></details>
+</div>
+<div class="sub"><h3><span class="n">16.2</span>Multiplying and dividing (single terms)</h3>
+<p class="key"><b>Key learning:</b> Multiply tops and bottoms. To divide, flip the second fraction and multiply.</p>
+<div class="q"><b>Check:</b> Simplify (3x/5) × (10/x²) and (4a/b) ÷ (2a/b²).</div>
+<details><summary>Show answer</summary><div class="a">6/x; and 2b</div></details>
+<div class="q stretch"><b>Stretch:</b> Simplify (2x²/y) ÷ (4x/y³).</div>
+<details><summary>Show answer</summary><div class="a">x y²/2</div></details>
+</div>
+<div class="sub"><h3><span class="n">16.3</span>Adding and subtracting (integer denominators)</h3>
+<p class="key"><b>Key learning:</b> Use a common denominator, then combine the numerators carefully with brackets for subtraction.</p>
+<div class="q"><b>Check:</b> Write x/3 + (x + 1)/4 as a single fraction.</div>
+<details><summary>Show answer</summary><div class="a">(4x + 3x + 3)/12 = (7x + 3)/12</div></details>
+<div class="q stretch"><b>Stretch:</b> Write (2x − 1)/5 − (x + 2)/3 as a single fraction.</div>
+<details><summary>Show answer</summary><div class="a">(6x − 3 − 5x − 10)/15 = (x − 13)/15</div></details>
+</div>
+<div class="sub"><h3><span class="n">16.4</span>Simplifying with monic quadratics</h3>
+<p class="key"><b>Key learning:</b> Factorise quadratics fully before cancelling.</p>
+<div class="q"><b>Check:</b> Simplify (x² + 5x + 6)/(x² − 9).</div>
+<details><summary>Show answer</summary><div class="a">(x + 2)(x + 3)/(x − 3)(x + 3) = (x + 2)/(x − 3)</div></details>
+<div class="q stretch"><b>Stretch:</b> Simplify (x² − 4x − 5)/(x² − 25).</div>
+<details><summary>Show answer</summary><div class="a">(x − 5)(x + 1)/(x − 5)(x + 5) = (x + 1)/(x + 5)</div></details>
+</div>
+<div class="sub"><h3><span class="n">16.5</span>Multiplying and dividing with brackets</h3>
+<p class="key"><b>Key learning:</b> Cancel across the whole expression after factorising.</p>
+<div class="q"><b>Check:</b> Simplify (x + 2)/(x − 1) ÷ (x + 2)/(x + 4).</div>
+<details><summary>Show answer</summary><div class="a">(x + 4)/(x − 1)</div></details>
+<div class="q stretch"><b>Stretch:</b> Simplify (x² − 4)/(x + 3) ÷ (x − 2)/(x² − 9).</div>
+<details><summary>Show answer</summary><div class="a">(x + 2)(x − 3)</div></details>
+</div>
+<div class="sub"><h3><span class="n">16.6</span>Adding and subtracting (linear denominators)</h3>
+<p class="key"><b>Key learning:</b> Common denominator is the product of the two denominators.</p>
+<div class="q"><b>Check:</b> Write 2/(x + 1) + 3/(x − 2) as a single fraction.</div>
+<details><summary>Show answer</summary><div class="a">(2(x − 2) + 3(x + 1))/((x + 1)(x − 2)) = (5x − 1)/((x + 1)(x − 2))</div></details>
+<div class="q stretch"><b>Stretch:</b> Write 4/(x − 3) − 1/(x + 1) as a single fraction.</div>
+<details><summary>Show answer</summary><div class="a">(4(x + 1) − (x − 3))/((x − 3)(x + 1)) = (3x + 7)/((x − 3)(x + 1))</div></details>
+</div>
+<div class="sub"><h3><span class="n">16.7</span>Simplifying with non-monic quadratics</h3>
+<p class="key"><b>Key learning:</b> Factorise using the a × c method, then cancel.</p>
+<div class="q"><b>Check:</b> Simplify (2x² + 7x + 3)/(2x² − x − 1).</div>
+<details><summary>Show answer</summary><div class="a">(2x + 1)(x + 3)/(2x + 1)(x − 1) = (x + 3)/(x − 1)</div></details>
+<div class="q stretch"><b>Stretch:</b> Simplify (3x² + 5x − 2)/(3x² − 7x + 2).</div>
+<details><summary>Show answer</summary><div class="a">(3x − 1)(x + 2)/(3x − 1)(x − 2) = (x + 2)/(x − 2)</div></details>
+</div>
+<div class="sub"><h3><span class="n">16.8</span>Adding and subtracting (quadratic denominators)</h3>
+<p class="key"><b>Key learning:</b> Factorise denominators first, find the lowest common denominator, then combine.</p>
+<div class="q"><b>Check:</b> Write 3/(x² − 4) + 1/(x + 2) as a single fraction.</div>
+<details><summary>Show answer</summary><div class="a">(3 + (x − 2))/((x − 2)(x + 2)) = (x + 1)/(x² − 4)</div></details>
+<div class="q stretch"><b>Stretch:</b> Write 5/(x² + x − 6) − 2/(x − 2) as a single fraction.</div>
+<details><summary>Show answer</summary><div class="a">x² + x − 6 = (x + 3)(x − 2). (5 − 2(x + 3))/((x + 3)(x − 2)) = (−2x − 1)/((x + 3)(x − 2))</div></details>
+</div>
+</div></section><section class="unit" id="u17"><div class="unit-head"><span class="un">Unit 17</span><span class="ut">Cumulative Frequency</span><span class="ul">6 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">17.1</span>Cumulative frequency tables</h3>
+<p class="key"><b>Key learning:</b> Add the frequencies as you go down: each value is the running total up to the end of that class.</p>
+<div class="q"><b>Check:</b> Heights h (cm): 0&lt;h≤10: 4; 10&lt;h≤20: 11; 20&lt;h≤30: 17; 30&lt;h≤40: 12; 40&lt;h≤50: 6. Complete the cumulative frequency column.</div>
+<details><summary>Show answer</summary><div class="a">4, 15, 32, 44, 50</div></details>
+<div class="q stretch"><b>Stretch:</b> How many are 30 cm or shorter?</div>
+<details><summary>Show answer</summary><div class="a">32</div></details>
+</div>
+<div class="sub"><h3><span class="n">17.2</span>Drawing the diagram</h3>
+<p class="key"><b>Key learning:</b> Plot (upper class boundary, cumulative frequency) points and join with a smooth curve. Start at (lowest boundary, 0).</p>
+<div class="q"><b>Check:</b> Which points do you plot for the table above?</div>
+<details><summary>Show answer</summary><div class="a">(0,0), (10,4), (20,15), (30,32), (40,44), (50,50)</div></details>
+<div class="q stretch"><b>Stretch:</b> Why is the horizontal axis labelled with upper class boundaries?</div>
+<details><summary>Show answer</summary><div class="a">Because cumulative frequency counts everything up to the end of each class</div></details>
+</div>
+<div class="sub"><h3><span class="n">17.3</span>Median and quartiles</h3>
+<p class="key"><b>Key learning:</b> Median at n/2, lower quartile at n/4, upper quartile at 3n/4. Read across to the curve then down.</p>
+<div class="q"><b>Check:</b> For n = 50, state the three positions to read from the curve.</div>
+<details><summary>Show answer</summary><div class="a">Median at 25, LQ at 12.5, UQ at 37.5</div></details>
+<div class="q stretch"><b>Stretch:</b> By linear interpolation estimate the median.</div>
+<details><summary>Show answer</summary><div class="a">Between 20 and 30: 20 + (25 − 15)/17 × 10 ≈ 25.9 cm (a hand-drawn curve may give 25–27)</div></details>
+</div>
+<div class="sub"><h3><span class="n">17.4</span>Interquartile range</h3>
+<p class="key"><b>Key learning:</b> IQR = upper quartile − lower quartile. It measures the spread of the middle 50%.</p>
+<div class="q"><b>Check:</b> LQ ≈ 17.7 and UQ ≈ 34.6. Find the interquartile range.</div>
+<details><summary>Show answer</summary><div class="a">34.6 − 17.7 = 16.9</div></details>
+<div class="q stretch"><b>Stretch:</b> Class B has median 28 and IQR 9. Compare with the table above.</div>
+<details><summary>Show answer</summary><div class="a">B scores higher on average (28 vs ≈ 25.9) and is more consistent (IQR 9 vs ≈ 16.9)</div></details>
+</div>
+<div class="sub"><h3><span class="n">17.5</span>Estimating values from the curve</h3>
+<p class="key"><b>Key learning:</b> To find how many are below a value, read up from the value to the curve then across. To find a percentage, divide by the total.</p>
+<div class="q"><b>Check:</b> Estimate how many heights are 35 cm or less (use interpolation).</div>
+<details><summary>Show answer</summary><div class="a">Between 32 (at 30) and 44 (at 40): 32 + 0.5 × 12 = 38 people</div></details>
+<div class="q stretch"><b>Stretch:</b> Estimate the number taller than 35 cm.</div>
+<details><summary>Show answer</summary><div class="a">50 − 38 = 12</div></details>
+</div>
+<div class="sub"><h3><span class="n">17.6</span>Cumulative frequency problems</h3>
+<p class="key"><b>Key learning:</b> Set up the question on the curve first. For percentiles, find the percentage of n then read across.</p>
+<div class="q"><b>Check:</b> Find the height that 90% of the group are below (use n = 50).</div>
+<details><summary>Show answer</summary><div class="a">90% of 50 = 45, in class 40–50 at about 40 + (45 − 44)/6 × 10 ≈ 41.7 cm</div></details>
+<div class="q stretch"><b>Stretch:</b> What percentage of the group is taller than the median height?</div>
+<details><summary>Show answer</summary><div class="a">50% (the median splits the data in half)</div></details>
+</div>
+</div></section><section class="unit" id="u18"><div class="unit-head"><span class="un">Unit 18</span><span class="ut">Transformations of Shapes</span><span class="ul">12 subtopics</span></div><div class="unit-body"><div class="sub"><h3><span class="n">18.1</span>Symmetry</h3>
+<p class="key"><b>Key learning:</b> Lines of symmetry split a shape into two mirror images. The order of rotational symmetry is how many times it fits in one full turn.</p>
+<div class="q"><b>Check:</b> State the number of lines of symmetry and the order of rotational symmetry of a rectangle (not a square) and an equilateral triangle.</div>
+<details><summary>Show answer</summary><div class="a">Rectangle 2 lines, order 2. Equilateral triangle 3 lines, order 3</div></details>
+<div class="q stretch"><b>Stretch:</b> Regular hexagon?</div>
+<details><summary>Show answer</summary><div class="a">6 lines, order 6</div></details>
+</div>
+<div class="sub"><h3><span class="n">18.2</span>Reflecting in horizontal and vertical lines</h3>
+<p class="key"><b>Key learning:</b> Each point moves to the same distance on the other side of the mirror line. Count the distance.</p>
+<div class="q"><b>Check:</b> Triangle A(1,1), B(3,1), C(1,4) is reflected in x = 4. Write the new coordinates.</div>
+<details><summary>Show answer</summary><div class="a">A′(7,1), B′(5,1), C′(7,4)</div></details>
+<div class="q stretch"><b>Stretch:</b> Reflect the same triangle in y = −1.</div>
+<details><summary>Show answer</summary><div class="a">A′(1,−3), B′(3,−3), C′(1,−6)</div></details>
+</div>
+<div class="sub"><h3><span class="n">18.3</span>Rotating about a point</h3>
+<p class="key"><b>Key learning:</b> Rotate by the angle and direction about the centre. 90° clockwise about the origin: (x, y) → (y, −x).</p>
+<div class="q"><b>Check:</b> Rotate (3, 1) by 90° clockwise about the origin.</div>
+<details><summary>Show answer</summary><div class="a">(1, −3)</div></details>
+<div class="q stretch"><b>Stretch:</b> Rotate (2, 4) by 180° about (1, 1).</div>
+<details><summary>Show answer</summary><div class="a">(0, −2)</div></details>
+</div>
+<div class="sub"><h3><span class="n">18.4</span>Translating by a vector</h3>
+<p class="key"><b>Key learning:</b> Add the column vector (x-move on top, y-move below). Negative moves left or down.</p>
+<div class="q"><b>Check:</b> Translate (4, 5) by the vector (−3, 2).</div>
+<details><summary>Show answer</summary><div class="a">(1, 7)</div></details>
+<div class="q stretch"><b>Stretch:</b> What vector moves (1, 1) to (6, −2)?</div>
+<details><summary>Show answer</summary><div class="a">(5, −3)</div></details>
+</div>
+<div class="sub"><h3><span class="n">18.5</span>Enlargement (no centre)</h3>
+<p class="key"><b>Key learning:</b> Multiply each length by the scale factor. Area is multiplied by the scale factor squared.</p>
+<div class="q"><b>Check:</b> A 2 cm by 4 cm rectangle is enlarged by scale factor 3. Give the new dimensions and area.</div>
+<details><summary>Show answer</summary><div class="a">6 cm by 12 cm, area 72 cm²</div></details>
+<div class="q stretch"><b>Stretch:</b> By what factor does the area increase?</div>
+<details><summary>Show answer</summary><div class="a">9</div></details>
+</div>
+<div class="sub"><h3><span class="n">18.6</span>Reflecting in diagonal lines</h3>
+<p class="key"><b>Key learning:</b> In y = x the coordinates swap: (x, y) → (y, x). In y = −x: (x, y) → (−y, −x).</p>
+<div class="q"><b>Check:</b> Reflect (2, 5) in y = x and (4, 1) in y = −x.</div>
+<details><summary>Show answer</summary><div class="a">(5, 2) and (−1, −4)</div></details>
+<div class="q stretch"><b>Stretch:</b> Reflect (−3, 2) in y = x.</div>
+<details><summary>Show answer</summary><div class="a">(2, −3)</div></details>
+</div>
+<div class="sub"><h3><span class="n">18.7</span>Describing a reflection</h3>
+<p class="key"><b>Key learning:</b> State “reflection” and the equation of the mirror line. Find it by looking at the midpoint of a point and its image.</p>
+<div class="q"><b>Check:</b> A(1, 1) maps to A′(1, 5). Describe the transformation.</div>
+<details><summary>Show answer</summary><div class="a">Reflection in the line y = 3</div></details>
+<div class="q stretch"><b>Stretch:</b> B(2, 1) maps to B′(−1, −2). Describe the transformation.</div>
+<details><summary>Show answer</summary><div class="a">Reflection in the line y = −x</div></details>
+</div>
+<div class="sub"><h3><span class="n">18.8</span>Describing a rotation</h3>
+<p class="key"><b>Key learning:</b> State the angle, direction and centre of rotation.</p>
+<div class="q"><b>Check:</b> A point (2, 1) maps to (−1, 2). Describe the rotation about the origin.</div>
+<details><summary>Show answer</summary><div class="a">90° anticlockwise about (0, 0)</div></details>
+<div class="q stretch"><b>Stretch:</b> (4, 2) maps to (0, −2). Describe the rotation about the centre (2, 0).</div>
+<details><summary>Show answer</summary><div class="a">180° about (2, 0)</div></details>
+</div>
+<div class="sub"><h3><span class="n">18.9</span>Describing a translation</h3>
+<p class="key"><b>Key learning:</b> State “translation by the vector” with the column vector.</p>
+<div class="q"><b>Check:</b> A(3, 2) maps to A′(−1, 6). Describe the transformation.</div>
+<details><summary>Show answer</summary><div class="a">Translation by the vector (−4, 4)</div></details>
+<div class="q stretch"><b>Stretch:</b> Write the vector for the reverse translation.</div>
+<details><summary>Show answer</summary><div class="a">(4, −4)</div></details>
+</div>
+<div class="sub"><h3><span class="n">18.10</span>Enlargement with centre (integer scale factor)</h3>
+<p class="key"><b>Key learning:</b> New position = centre + scale factor × (original − centre).</p>
+<div class="q"><b>Check:</b> Enlarge the point (3, 2) by scale factor 3, centre (1, 1).</div>
+<details><summary>Show answer</summary><div class="a">(1 + 3×2, 1 + 3×1) = (7, 4)</div></details>
+<div class="q stretch"><b>Stretch:</b> Enlarge (−1, 3) by scale factor 2, centre the origin.</div>
+<details><summary>Show answer</summary><div class="a">(−2, 6)</div></details>
+</div>
+<div class="sub"><h3><span class="n">18.11</span>Enlargement with a fractional scale factor</h3>
+<p class="key"><b>Key learning:</b> A scale factor between 0 and 1 makes the shape smaller.</p>
+<div class="q"><b>Check:</b> Enlarge (6, 4) by scale factor 1/2, centre (2, 2).</div>
+<details><summary>Show answer</summary><div class="a">(2 + ½×4, 2 + ½×2) = (4, 3)</div></details>
+<div class="q stretch"><b>Stretch:</b> Enlarge (6, −9) by scale factor 1/3, centre the origin.</div>
+<details><summary>Show answer</summary><div class="a">(2, −3)</div></details>
+</div>
+<div class="sub"><h3><span class="n">18.12</span>Describing an enlargement</h3>
+<p class="key"><b>Key learning:</b> State the scale factor and the centre. Scale factor = image length ÷ object length. Centre is the intersection of lines through matching points.</p>
+<div class="q"><b>Check:</b> P(3, 2) → P′(7, 4) and Q(4, 2) → Q′(10, 4). Describe the enlargement.</div>
+<details><summary>Show answer</summary><div class="a">PQ = 1, P′Q′ = 3, so scale factor 3. Centre (1, 1)</div></details>
+<div class="q stretch"><b>Stretch:</b> Check using point Q.</div>
+<details><summary>Show answer</summary><div class="a">(1 + 3×3, 1 + 3×1) = (10, 4) ✓</div></details>
+</div>
+</div></section>
+  <footer>Imboon &middot; Year 10 &middot; end-of-class checks &middot; based on the school SOW objectives</footer>
+</div>
+</body>
+</html>

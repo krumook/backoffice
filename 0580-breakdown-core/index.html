@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0580 Paper Breakdown &mdash; Core Papers</title>
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --card-bg: #ffffff;
+    --border: #e2e5ec;
+    --text: #1f2430;
+    --muted: #6b7280;
+    --accent: #5a4fc2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    padding: 32px 24px 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  header .back {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  header .back:hover { text-decoration: underline; }
+  header h1 {
+    margin: 10px 0 4px;
+    font-size: 26px;
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    max-width: 640px;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 8px 24px 48px;
+  }
+  .intake {
+    background: #f5f6fe;
+    border: 1px dashed #b7bdf0;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 20px 0 28px;
+    font-size: 14px;
+  }
+  .intake strong { color: var(--accent); }
+  .intake ul { margin: 8px 0 0; padding-left: 20px; }
+  .intake li { margin-bottom: 4px; }
+  .note-box {
+    background: #fdf0e2;
+    border: 1px solid #f3d9b0;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 0 0 28px;
+    font-size: 13px;
+    color: #854f0b;
+  }
+  .papers-log {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .papers-log h3 {
+    margin: 0 0 6px;
+    font-size: 13px;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .papers-log ul { margin: 0; padding-left: 18px; }
+  .papers-log li { margin-bottom: 4px; }
+  .papers-log a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .papers-log a:hover { text-decoration: underline; }
+  .paper-section-title {
+    font-size: 18px;
+    margin: 8px 0 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+  }
+  .paper-section-placeholder {
+    background: var(--card-bg);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 20px 0 8px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .topic-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .topic-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 10px rgba(90, 79, 194, 0.12);
+  }
+  .topic-card .click-hint {
+    font-size: 11.5px;
+    color: var(--accent);
+    margin-top: 8px;
+    font-weight: 600;
+  }
+  .topic-card h2 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .topic-card h2 .weight-pct {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .topic-card .count {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .weight-bar {
+    margin-top: 8px;
+    height: 6px;
+    border-radius: 4px;
+    background: #eceefa;
+    overflow: hidden;
+  }
+  .weight-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 4px;
+  }
+  footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="../teacher-hub.html">&larr; Teacher Hub</a>
+  <h1>📚 0580 Paper Breakdown &mdash; Core Papers</h1>
+  <p>Personal question bank for IGCSE 0580 (Cambridge) <b>Core</b> past papers &mdash; Paper 1 (non-calculator) and Paper 3 (calculator), for students sitting the Core tier. Kept as a completely separate dashboard from the Extended breakdowns (<a href="../0580-breakdown/index.html">current syllabus</a> and <a href="../0580-breakdown-old/index.html">pre-2025</a>) &mdash; no shared papers, counts, or totals.</p>
+</header>
+
+<main>
+  <div class="note-box">
+    <b>A note on topic codes:</b> questions here use the same 9 main topics as the Extended dashboards, with Core sub-codes (C1.1, C2.5, etc.) numbered to match the current 2025&ndash;2027 syllabus. Core and Extended share most topic numbering, so these are practical labels for organising questions rather than an exact copy of the syllabus wording. Marks shown for a topic are the marks for just the matching part of a question, so a multi-part question can appear under more than one topic.
+  </div>
+
+  <h2 class="paper-section-title">Paper 1 &mdash; Non-calculator (Core)</h2>
+  <div class="intake">
+    <strong>11 papers tagged.</strong> 1 from Feb/March 2025, 3 from May/June 2025, 3 from Oct/Nov 2025, 1 from Feb/March 2026, 3 from May/June 2026 &mdash; 880 marks worth of questions sorted by topic below (each Core Paper 1 is worth 80 marks). Send another Core Paper 1 any time and I will tag it and fold it into these totals.
+    <ul>
+      <li>Works from PDFs, images, or pasted question text</li>
+      <li>Each tagged question gets logged under its topic card below, with its approximate Core syllabus code</li>
+      <li>Years are added one at a time &mdash; no need to re-send old ones</li>
+    </ul>
+  </div>
+
+  <div class="papers-log">
+    <h3>Papers tagged &mdash; 11</h3>
+    <ul>
+      <li style="list-style:none;margin-left:-20px;margin-top:8px;"><b>2025</b></li>
+      <li><a href="m25-12.html">0580/12 &mdash; Feb/March 2025</a> (Non-calculator, Core) &mdash; 26 questions tagged</li>
+      <li><a href="s25-11.html">0580/11 &mdash; May/June 2025</a> (Non-calculator, Core) &mdash; 26 questions tagged</li>
+      <li><a href="s25-12.html">0580/12 &mdash; May/June 2025</a> (Non-calculator, Core) &mdash; 25 questions tagged</li>
+      <li><a href="s25-13.html">0580/13 &mdash; May/June 2025</a> (Non-calculator, Core) &mdash; 25 questions tagged</li>
+      <li><a href="w25-11.html">0580/11 &mdash; Oct/Nov 2025</a> (Non-calculator, Core) &mdash; 29 questions tagged</li>
+      <li><a href="w25-12.html">0580/12 &mdash; Oct/Nov 2025</a> (Non-calculator, Core) &mdash; 27 questions tagged</li>
+      <li><a href="w25-13.html">0580/13 &mdash; Oct/Nov 2025</a> (Non-calculator, Core) &mdash; 27 questions tagged</li>
+      <li style="list-style:none;margin-left:-20px;margin-top:8px;"><b>2026</b></li>
+      <li><a href="m26-12.html">0580/12 &mdash; Feb/March 2026</a> (Non-calculator, Core) &mdash; 27 questions tagged</li>
+      <li><a href="s26-11.html">0580/11 &mdash; May/June 2026</a> (Non-calculator, Core) &mdash; 23 questions tagged</li>
+      <li><a href="s26-12.html">0580/12 &mdash; May/June 2026</a> (Non-calculator, Core) &mdash; 29 questions tagged</li>
+      <li><a href="s26-13.html">0580/13 &mdash; May/June 2026</a> (Non-calculator, Core) &mdash; 23 questions tagged</li>
+    </ul>
+  </div>
+
+  <div class="topic-grid">
+    <a class="topic-card" href="topics1/number.html">
+      <h2>1. Number <span class="weight-pct">33.2%</span></h2>
+      <div class="count">126 entries tagged &middot; 292 of 880 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:33.2%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics1/algebra.html">
+      <h2>2. Algebra and graphs <span class="weight-pct">25.3%</span></h2>
+      <div class="count">59 entries tagged &middot; 223 of 880 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:25.3%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics1/coordinate-geometry.html">
+      <h2>3. Coordinate geometry <span class="weight-pct">1.9%</span></h2>
+      <div class="count">6 entries tagged &middot; 17 of 880 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:1.9%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics1/geometry.html">
+      <h2>4. Geometry <span class="weight-pct">15.1%</span></h2>
+      <div class="count">50 entries tagged &middot; 133 of 880 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:15.1%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics1/mensuration.html">
+      <h2>5. Mensuration <span class="weight-pct">6.4%</span></h2>
+      <div class="count">29 entries tagged &middot; 56 of 880 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:6.4%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics1/trigonometry.html">
+      <h2>6. Trigonometry <span class="weight-pct">0.2%</span></h2>
+      <div class="count">1 entries tagged &middot; 2 of 880 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:0.2%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics1/transformations-vectors.html">
+      <h2>7. Transformations and vectors <span class="weight-pct">7.0%</span></h2>
+      <div class="count">9 entries tagged &middot; 62 of 880 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:7.0%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics1/probability.html">
+      <h2>8. Probability <span class="weight-pct">3.4%</span></h2>
+      <div class="count">10 entries tagged &middot; 30 of 880 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:3.4%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics1/statistics.html">
+      <h2>9. Statistics <span class="weight-pct">7.4%</span></h2>
+      <div class="count">17 entries tagged &middot; 65 of 880 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:7.4%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:10px;">Weight = topic's marks &divide; 880 total marks tagged so far (11 Core Paper 1 papers). Click any card to see the full list of questions under that topic.</p>
+
+  <h2 class="paper-section-title" style="margin-top:40px;">Paper 3 &mdash; Calculator (Core)</h2>
+  <div class="intake">
+    <strong>11 papers tagged.</strong> 1 from Feb/March 2025, 3 from May/June 2025, 3 from Oct/Nov 2025, 1 from Feb/March 2026, 3 from May/June 2026 &mdash; 874 marks worth of questions sorted by topic below (Core papers are worth 80 marks each, except where Cambridge removed a question: 0580/33 Oct/Nov 2025 has 74). Send another Core Paper 3 any time and I will tag it and fold it into these totals.
+    <ul>
+      <li>Works from PDFs, images, or pasted question text</li>
+      <li>Each tagged question gets logged under its topic card below, with its approximate Core syllabus code</li>
+      <li>Years are added one at a time &mdash; no need to re-send old ones</li>
+    </ul>
+  </div>
+
+  <div class="papers-log">
+    <h3>Papers tagged &mdash; 11</h3>
+    <ul>
+      <li style="list-style:none;margin-left:-20px;margin-top:8px;"><b>2025</b></li>
+      <li><a href="m25-32.html">0580/32 &mdash; Feb/March 2025</a> (Calculator, Core) &mdash; 21 questions tagged</li>
+      <li><a href="s25-31.html">0580/31 &mdash; May/June 2025</a> (Calculator, Core) &mdash; 30 questions tagged</li>
+      <li><a href="s25-32.html">0580/32 &mdash; May/June 2025</a> (Calculator, Core) &mdash; 24 questions tagged</li>
+      <li><a href="s25-33.html">0580/33 &mdash; May/June 2025</a> (Calculator, Core) &mdash; 24 questions tagged</li>
+      <li><a href="w25-31.html">0580/31 &mdash; Oct/Nov 2025</a> (Calculator, Core) &mdash; 24 questions tagged</li>
+      <li><a href="w25-32.html">0580/32 &mdash; Oct/Nov 2025</a> (Calculator, Core) &mdash; 28 questions tagged</li>
+      <li><a href="w25-33.html">0580/33 &mdash; Oct/Nov 2025</a> (Calculator, Core) &mdash; 27 questions tagged</li>
+      <li style="list-style:none;margin-left:-20px;margin-top:8px;"><b>2026</b></li>
+      <li><a href="m26-32.html">0580/32 &mdash; Feb/March 2026</a> (Calculator, Core) &mdash; 25 questions tagged</li>
+      <li><a href="s26-31.html">0580/31 &mdash; May/June 2026</a> (Calculator, Core) &mdash; 28 questions tagged</li>
+      <li><a href="s26-32.html">0580/32 &mdash; May/June 2026</a> (Calculator, Core) &mdash; 26 questions tagged</li>
+      <li><a href="s26-33.html">0580/33 &mdash; May/June 2026</a> (Calculator, Core) &mdash; 26 questions tagged</li>
+    </ul>
+  </div>
+
+  <div class="topic-grid">
+    <a class="topic-card" href="topics3/number.html">
+      <h2>1. Number <span class="weight-pct">32.0%</span></h2>
+      <div class="count">114 entries tagged &middot; 280 of 874 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:32.0%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics3/algebra.html">
+      <h2>2. Algebra and graphs <span class="weight-pct">22.1%</span></h2>
+      <div class="count">51 entries tagged &middot; 193 of 874 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:22.1%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics3/coordinate-geometry.html">
+      <h2>3. Coordinate geometry <span class="weight-pct">3.0%</span></h2>
+      <div class="count">10 entries tagged &middot; 26 of 874 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:3.0%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics3/geometry.html">
+      <h2>4. Geometry <span class="weight-pct">12.1%</span></h2>
+      <div class="count">43 entries tagged &middot; 106 of 874 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:12.1%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics3/mensuration.html">
+      <h2>5. Mensuration <span class="weight-pct">10.5%</span></h2>
+      <div class="count">29 entries tagged &middot; 92 of 874 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:10.5%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics3/trigonometry.html">
+      <h2>6. Trigonometry <span class="weight-pct">4.9%</span></h2>
+      <div class="count">16 entries tagged &middot; 43 of 874 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:4.9%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics3/transformations-vectors.html">
+      <h2>7. Transformations and vectors <span class="weight-pct">2.6%</span></h2>
+      <div class="count">4 entries tagged &middot; 23 of 874 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:2.6%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics3/probability.html">
+      <h2>8. Probability <span class="weight-pct">3.1%</span></h2>
+      <div class="count">9 entries tagged &middot; 27 of 874 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:3.1%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+    <a class="topic-card" href="topics3/statistics.html">
+      <h2>9. Statistics <span class="weight-pct">9.6%</span></h2>
+      <div class="count">22 entries tagged &middot; 84 of 874 marks</div>
+      <div class="weight-bar"><div class="weight-bar-fill" style="width:9.6%;"></div></div>
+      <div class="click-hint">See every question &rarr;</div>
+    </a>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:10px;">Weight = topic's marks &divide; 874 total marks tagged so far (11 Core Paper 3 papers). Click any card to see the full list of questions under that topic.</p>
+</main>
+
+<footer>
+  Personal reference tool &mdash; separate from all student trackers and from the Extended 0580 Paper Breakdown dashboards.
+</footer>
+
+</body>
+</html>

@@ -28,6 +28,10 @@
   .hub-card.fees { border-top: 3px solid var(--amber); }
   @media (max-width: 700px) { .hub-grid { grid-template-columns: 1fr; } }
   footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
+  .hub-grid.two { grid-template-columns: repeat(2, 1fr); }
+  .group-label { font-size: 13px; font-weight: 700; color: #5c6b63; text-transform: uppercase; letter-spacing: 0.06em; margin: 30px 0 12px; }
+  .group-label.first { margin-top: 0; }
+  @media (max-width: 720px) { .hub-grid.two { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -40,21 +44,26 @@
     <div class="meta">Lanna International School, Chiang Mai &middot; Year 9 (learning the Year 10 IGCSE content) &middot; converted from free trial on Sun 11 Oct 2026 &middot; <a href="../Trials/ninnie-1011.html" style="color:var(--tip);">trial feedback</a></div>
   </header>
 
-  <div class="hub-grid">
+  <div class="group-label first">Classes &amp; fees</div>
+  <div class="hub-grid two">
     <a class="hub-card schedule" href="sched.html">
       <div class="icon">🗓️</div>
       <div class="title">Class Schedule</div>
       <div class="desc">First session after the trial Sun 18 Oct 15:00&ndash;16:00; regular weekly time to be confirmed.</div>
     </a>
-    <a class="hub-card" href="dash.html" style="border-top:3px solid var(--accent);">
-      <div class="icon">📈</div>
-      <div class="title">Progress Tracker</div>
-      <div class="desc">Chapters of the Cambridge IGCSE Mathematics coursebook; chapter 6 onwards tracked from class feedback.</div>
-    </a>
     <a class="hub-card fees" href="mo/index.html">
       <div class="icon">💵</div>
       <div class="title">Fee Summary</div>
       <div class="desc">฿800 / hour &middot; monthly session log and totals.</div>
+    </a>
+  </div>
+
+  <div class="group-label">Progress</div>
+  <div class="hub-grid two">
+    <a class="hub-card" href="dash.html" style="border-top:3px solid var(--accent);">
+      <div class="icon">📈</div>
+      <div class="title">Progress Tracker</div>
+      <div class="desc">Chapters of the Cambridge IGCSE Mathematics coursebook; chapter 6 onwards tracked from class feedback.</div>
     </a>
   </div>
 

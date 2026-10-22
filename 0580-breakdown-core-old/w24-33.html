@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0580/33 &mdash; Oct/Nov 2024 (Core)</title>
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --card-bg: #ffffff;
+    --border: #e2e5ec;
+    --text: #1f2430;
+    --muted: #6b7280;
+    --accent: #5a4fc2;
+    --num: #2f7d5c; --num-bg: #e7f5ee;
+    --alg: #b8590a; --alg-bg: #fdf0e2;
+    --cog: #1c6fb0; --cog-bg: #e6f2fb;
+    --geo: #a8317a; --geo-bg: #fbe8f3;
+    --men: #6d5bd0; --men-bg: #eeecfb;
+    --trig: #c0392b; --trig-bg: #fbeae8;
+    --vec: #0e8a8a; --vec-bg: #e3f6f6;
+    --prob: #8a7315; --prob-bg: #f7f2df;
+    --stat: #5c6b1f; --stat-bg: #eef2df;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    padding: 32px 24px 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  header .back {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  header .back:hover { text-decoration: underline; }
+  header h1 {
+    margin: 10px 0 4px;
+    font-size: 24px;
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 8px 24px 48px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 13.5px;
+    margin-top: 16px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: #f0f1f7;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+  }
+  tr:last-child td { border-bottom: none; }
+  td.q { font-weight: 700; width: 42px; }
+  td.marks { width: 60px; color: var(--muted); }
+  .tag {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .tag-num { color: var(--num); background: var(--num-bg); }
+  .tag-alg { color: var(--alg); background: var(--alg-bg); }
+  .tag-cog { color: var(--cog); background: var(--cog-bg); }
+  .tag-geo { color: var(--geo); background: var(--geo-bg); }
+  .tag-men { color: var(--men); background: var(--men-bg); }
+  .tag-trig { color: var(--trig); background: var(--trig-bg); }
+  .tag-vec { color: var(--vec); background: var(--vec-bg); }
+  .tag-prob { color: var(--prob); background: var(--prob-bg); }
+  .tag-stat { color: var(--stat); background: var(--stat-bg); }
+  .note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .summary {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-top: 20px;
+    font-size: 13.5px;
+  }
+  .summary h3 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px 16px; }
+  footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="index.html">&larr; 0580 Paper Breakdown &mdash; Core Papers (Pre-2025)</a> <a class="back" href="../teacher-hub.html" style="margin-left:10px;">🏠 Teacher Hub</a>
+  <h1>0580/33 &mdash; Oct/Nov 2024</h1>
+  <p>Paper 3, Calculator (Core) &middot; 104 marks &middot; 9 questions</p>
+</header>
+
+<main>
+  <table>
+    <thead>
+      <tr><th>Q</th><th>Marks</th><th>Topic</th><th>What it tests</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="q">1</td><td class="marks">13</td><td><span class="tag tag-num">Number</span></td>
+        <td>(a)(i) Maximum number of cereal boxes that can be bought [2]<div class="note">(a)(ii) Total mass of five boxes in kilograms &mdash; <span class="tag tag-men" style="margin-top:2px;">Mensuration</span> [2] (a)(iii) Volume of a cuboid &mdash; <span class="tag tag-men" style="margin-top:2px;">Mensuration</span> [1] (b) Completing the net of a cuboid on a grid &mdash; <span class="tag tag-geo" style="margin-top:2px;">Geometry</span> [3] (c)(i) Percentage from a pie chart angle &mdash; <span class="tag tag-stat" style="margin-top:2px;">Statistics</span> [1] (c)(ii) Completing the pie chart &mdash; <span class="tag tag-stat" style="margin-top:2px;">Statistics</span> [2] (c)(iii) Mass of protein from a percentage [2]</div></td>
+      </tr>
+      <tr>
+        <td class="q">2</td><td class="marks">15</td><td><span class="tag tag-num">Number</span></td>
+        <td>(a) Writing a number in words [1]<div class="note">(b) Ordering fractions, a percentage and a decimal [2] (c)(i) Value of a root [1] (c)(ii) Value of a second root [1] (c)(iii) Value of a product of roots [1] (d) Solving a two-step equation &mdash; <span class="tag tag-alg" style="margin-top:2px;">Algebra &amp; graphs</span> [2] (e) Estimating a calculation by rounding to 1 significant figure [2] (f) Finding a missing power when multiplying [1] (g) Simplifying a power of a power &mdash; <span class="tag tag-alg" style="margin-top:2px;">Algebra &amp; graphs</span> [1] (h) Next time two boats leave a port together [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">3</td><td class="marks">9</td><td><span class="tag tag-num">Number</span></td>
+        <td>(a) Drawing the lines of symmetry of a rectangle &mdash; <span class="tag tag-geo" style="margin-top:2px;">Geometry</span> [2]<div class="note">(b) Fraction of people who are children [2] (c) Time a meal ends [1] (d) Probability it will not rain &mdash; <span class="tag tag-prob" style="margin-top:2px;">Probability</span> [1] (e)(i) Completing a stem-and-leaf diagram &mdash; <span class="tag tag-stat" style="margin-top:2px;">Statistics</span> [2] (e)(ii) Range &mdash; <span class="tag tag-stat" style="margin-top:2px;">Statistics</span> [1]</div></td>
+      </tr>
+      <tr>
+        <td class="q">4</td><td class="marks">10</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
+        <td>(a) Finding r by substitution into a formula [2]<div class="note">(b) Factorising 20p&sup2;q &minus; 5p completely [2] (c) Expression for the total cost of apples and bananas [2] (d) Solving simultaneous equations [4]</div></td>
+      </tr>
+      <tr>
+        <td class="q">5</td><td class="marks">11</td><td><span class="tag tag-num">Number</span></td>
+        <td>(a)(i) Reading the most common colour from a pictogram &mdash; <span class="tag tag-stat" style="margin-top:2px;">Statistics</span> [1]<div class="note">(a)(ii) Number of one colour from a pictogram &mdash; <span class="tag tag-stat" style="margin-top:2px;">Statistics</span> [1] (a)(iii) Difference between two colours &mdash; <span class="tag tag-stat" style="margin-top:2px;">Statistics</span> [1] (b) Difference in a price between two currencies [3] (c) Ratio of three groups in simplest form [2] (d)(i) Missing side of a triangle from its area &mdash; <span class="tag tag-men" style="margin-top:2px;">Mensuration</span> [2] (d)(ii) Converting metres to centimetres &mdash; <span class="tag tag-men" style="margin-top:2px;">Mensuration</span> [1]</div></td>
+      </tr>
+      <tr>
+        <td class="q">6</td><td class="marks">13</td><td><span class="tag tag-num">Number</span></td>
+        <td>(a) Perimeter of a garden plan &mdash; <span class="tag tag-men" style="margin-top:2px;">Mensuration</span> [2]<div class="note">(b)(i) Coldest night from temperatures [1] (b)(ii) Difference between two temperatures [1] (c) Showing the total number of plants from a ratio [2] (d) Percentage decrease in water [2] (e) Distance from time and average speed [2] (f) Number of days of hire from a first-day and extra-day charge &mdash; <span class="tag tag-alg" style="margin-top:2px;">Algebra &amp; graphs</span> [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">7</td><td class="marks">12</td><td><span class="tag tag-men">Mensuration</span></td>
+        <td>(a) Naming a solid &mdash; <span class="tag tag-geo" style="margin-top:2px;">Geometry</span> [1]<div class="note">(b)(i) Measuring an angle &mdash; <span class="tag tag-geo" style="margin-top:2px;">Geometry</span> [1] (b)(ii) Naming the type of angle &mdash; <span class="tag tag-geo" style="margin-top:2px;">Geometry</span> [1] (c)(i) Reason for a right angle in a semicircle &mdash; <span class="tag tag-geo" style="margin-top:2px;">Geometry</span> [1] (c)(ii) Circumference of a circle from a diameter [2] (c)(iii) Showing a length using Pythagoras &mdash; <span class="tag tag-trig" style="margin-top:2px;">Trigonometry</span> [3] (d) Radius of a sphere from its surface area [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">8</td><td class="marks">11</td><td><span class="tag tag-alg">Algebra &amp; graphs</span></td>
+        <td>(a)(i) Completing a table of values for a quadratic [2]<div class="note">(a)(ii) Drawing the quadratic graph [4] (a)(iii) Solving an equation from the graph [2] (b) Equation of a line from a graph &mdash; <span class="tag tag-cog" style="margin-top:2px;">Coordinate geometry</span> [3]</div></td>
+      </tr>
+      <tr>
+        <td class="q">9</td><td class="marks">10</td><td><span class="tag tag-vec">Transformations &amp; vectors</span></td>
+        <td>(a) Naming a shape &mdash; <span class="tag tag-geo" style="margin-top:2px;">Geometry</span> [1]<div class="note">(b) Describing a transformation fully [3] (c) Describing a second transformation fully [2] (d) Rotating a shape 90&deg; clockwise [2] (e) Reflecting a shape in x = 1 [2]</div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="summary">
+    <h3>Marks by topic</h3>
+    <div class="summary-grid">
+      <div><span class="tag tag-num">Number</span> 32</div>
+      <div><span class="tag tag-alg">Algebra &amp; graphs</span> 24</div>
+      <div><span class="tag tag-men">Mensuration</span> 13</div>
+      <div><span class="tag tag-geo">Geometry</span> 10</div>
+      <div><span class="tag tag-stat">Statistics</span> 9</div>
+      <div><span class="tag tag-vec">Transformations &amp; vectors</span> 9</div>
+      <div><span class="tag tag-trig">Trigonometry</span> 3</div>
+      <div><span class="tag tag-cog">Coordinate geometry</span> 3</div>
+      <div><span class="tag tag-prob">Probability</span> 1</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Core papers &mdash; 0580 Paper 3. Personal reference &mdash; not linked to any student tracker. Topic codes are approximate Core stand-ins from the current 2025&ndash;2027 syllabus (see dashboard note).
+</footer>
+
+</body>
+</html>

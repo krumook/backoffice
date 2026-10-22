@@ -77,6 +77,17 @@
   .note .emoji { font-size: 18px; }
   .note b { display: block; margin-bottom: 3px; color: var(--ink); }
 
+  .term-head { display: flex; align-items: center; gap: 14px; padding: 12px 20px; background: var(--accent-light); border-top: 1px solid var(--line); }
+  .term-head:first-child { border-top: none; }
+  .term-head .term-name { font-size: 13px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.02em; }
+  .term-head .term-dates { font-size: 13px; color: var(--ink); font-weight: 600; flex: 1; }
+  .term-head .term-wk { font-size: 12.5px; color: var(--muted); }
+  .topic-row { display: flex; align-items: center; gap: 14px; padding: 12px 20px; border-top: 1px solid var(--line); }
+  .topic-row .unit { min-width: 52px; text-align: center; font-size: 12.5px; font-weight: 700; color: var(--accent); background: var(--accent-light); padding: 4px 10px; border-radius: 8px; }
+  .topic-row .topic { font-size: 15px; font-weight: 600; flex: 1; }
+  .topic-row .lessons { font-size: 12.5px; color: var(--muted); }
+  .break-row { padding: 9px 20px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--muted); text-align: center; background: #f4f5f2; }
+
   footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
 </style>
 </head>
@@ -103,6 +114,41 @@
   <div class="note">
     <span class="emoji">🎒</span>
     <div><b>Regular term starts 19 August</b>Four sessions already ran in July ahead of term (mostly Mondays, with one reschedule to Friday 17 Jul). Weekly classes become the settled routine once Rugby International School opens for the year on 19 August 2026 &mdash; tell me each week how the session went and I'll log it in the fee summary and update the progress tracker.</div>
+  </div>
+
+  <div class="section-label">School topics this year &middot; Year 10 &middot; DrFrost course (E block)</div>
+  <div class="schedule-list">
+    <div class="term-head"><span class="term-name">Term 1a</span><span class="term-dates">25 Aug &ndash; 16 Oct 2026</span><span class="term-wk">7 weeks &middot; <a href="y10.html" style="color:var(--tip);font-weight:600;">objectives &rarr;</a></span></div>
+    <div class="topic-row"><span class="unit">Unit 1</span><span class="topic">Algebraic Manipulation</span><span class="lessons">3 lessons</span></div>
+    <div class="topic-row"><span class="unit">Unit 2</span><span class="topic">Solving Quadratics</span><span class="lessons">6 lessons</span></div>
+    <div class="topic-row"><span class="unit">Unit 3</span><span class="topic">Percentages</span><span class="lessons">4 lessons</span></div>
+    <div class="topic-row"><span class="unit">Unit 4</span><span class="topic">Volume and Surface Area</span><span class="lessons">5 lessons</span></div>
+    <div class="topic-row"><span class="unit">Unit 5</span><span class="topic">Compound Measures</span><span class="lessons">3 lessons</span></div>
+    <div class="break-row">Half term</div>
+    <div class="term-head"><span class="term-name">Term 1b</span><span class="term-dates">26 Oct &ndash; 10 Dec 2026</span><span class="term-wk">7 weeks &middot; <a href="y10.html#u6" style="color:var(--tip);font-weight:600;">objectives &rarr;</a></span></div>
+    <div class="topic-row"><span class="unit">Unit 6</span><span class="topic">Probability</span><span class="lessons">5 lessons</span></div>
+    <div class="topic-row"><span class="unit">Unit 7</span><span class="topic">Graphs</span><span class="lessons">6 lessons</span></div>
+    <div class="topic-row"><span class="unit">Unit 8</span><span class="topic">Sine and Cosine Rule</span><span class="lessons">5 lessons</span></div>
+    <div class="break-row">End of Term 1</div>
+    <div class="term-head"><span class="term-name">Term 2a</span><span class="term-dates">5 Jan &ndash; 12 Feb 2027</span><span class="term-wk">5 weeks &middot; <a href="y10.html#u9" style="color:var(--tip);font-weight:600;">objectives &rarr;</a></span></div>
+    <div class="topic-row"><span class="unit">Unit 9</span><span class="topic">Bounds</span><span class="lessons">3 lessons</span></div>
+    <div class="topic-row"><span class="unit">Unit 10</span><span class="topic">Inequalities</span><span class="lessons">5 lessons</span></div>
+    <div class="topic-row"><span class="unit">Unit 11</span><span class="topic">Geometrical Reasoning</span><span class="lessons">3 lessons</span></div>
+    <div class="break-row">Half term</div>
+    <div class="term-head"><span class="term-name">Term 2b</span><span class="term-dates">22 Feb &ndash; 2 Apr 2027</span><span class="term-wk">6 weeks &middot; <a href="y10.html#u12" style="color:var(--tip);font-weight:600;">objectives &rarr;</a></span></div>
+    <div class="topic-row"><span class="unit">Unit 12</span><span class="topic">Surds</span><span class="lessons">4 lessons</span></div>
+    <div class="topic-row"><span class="unit">Unit 13</span><span class="topic">Algebraic Proportion</span><span class="lessons">3 lessons</span></div>
+    <div class="topic-row"><span class="unit">Unit 14</span><span class="topic">Circle Theorems</span><span class="lessons">6 lessons</span></div>
+    <div class="break-row">End of Term 2</div>
+    <div class="term-head"><span class="term-name">Term 3a</span><span class="term-dates">20 Apr &ndash; 1 Jun 2027</span><span class="term-wk">6 weeks &middot; <a href="y10.html#u15" style="color:var(--tip);font-weight:600;">objectives &rarr;</a></span></div>
+    <div class="topic-row"><span class="unit">Unit 15</span><span class="topic">Set Notation</span><span class="lessons">4 lessons</span></div>
+    <div class="topic-row"><span class="unit">Unit 16</span><span class="topic">Algebraic Fractions</span><span class="lessons">6 lessons</span></div>
+    <div class="topic-row"><span class="unit">Unit 17</span><span class="topic">Cumulative Frequency</span><span class="lessons">3 lessons</span></div>
+    <div class="break-row">Revision &middot; topic list &middot; End of Year Test &middot; then half term</div>
+    <div class="term-head"><span class="term-name">Term 3b</span><span class="term-dates">7 Jun &ndash; 25 Jun 2027</span><span class="term-wk">3 weeks &middot; <a href="y10.html#u18" style="color:var(--tip);font-weight:600;">objectives &rarr;</a></span></div>
+    <div class="break-row" style="background:#fff;">Intervention and follow-up from the End of Year Test</div>
+    <div class="topic-row"><span class="unit">Unit 18</span><span class="topic">Transformations of Shapes</span><span class="lessons">6 lessons</span></div>
+    <div class="break-row">End of year</div>
   </div>
 
   <footer>Imboon &middot; class schedule &middot; update this page whenever a session is added, moved, or cancelled</footer>

@@ -28,6 +28,10 @@
   .hub-card.fees { border-top: 3px solid var(--amber); }
   @media (max-width: 700px) { .hub-grid { grid-template-columns: 1fr; } }
   footer { margin-top: 30px; font-size: 12px; color: var(--muted); text-align: center; }
+  .hub-grid.two { grid-template-columns: repeat(2, 1fr); }
+  .group-label { font-size: 13px; font-weight: 700; color: #5c6b63; text-transform: uppercase; letter-spacing: 0.06em; margin: 30px 0 12px; }
+  .group-label.first { margin-top: 0; }
+  @media (max-width: 720px) { .hub-grid.two { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -40,7 +44,8 @@
     <div class="meta">Harrow International School Bangkok &middot; Cambridge IGCSE Mathematics 0580 (Core only) &middot; Year 11 &middot; Mildy&rsquo;s friend &middot; first session Mon 12 Oct 2026</div>
   </header>
 
-  <div class="hub-grid">
+  <div class="group-label first">Classes &amp; fees</div>
+  <div class="hub-grid two">
     <a class="hub-card schedule" href="sched.html">
       <div class="icon">🗓️</div>
       <div class="title">Class Schedule</div>
@@ -53,20 +58,16 @@
     </a>
   </div>
 
-  <div class="hub-grid" style="margin-top:14px;">
-    <a class="hub-card" href="fb1012.html" style="border-top:3px solid var(--accent);">
-      <div class="icon">📝</div>
-      <div class="title">Class Feedback</div>
-      <div class="desc">Mon 12 Oct 2026 &mdash; first session: differentiation and percentages.</div>
-    </a>
-    <a class="hub-card" href="fb1014.html" style="border-top:3px solid var(--accent);">
-      <div class="icon">📝</div>
-      <div class="title">Class Feedback</div>
-      <div class="desc">Wed 14 Oct 2026 &mdash; fractions, decimals &amp; percentages; long division.</div>
+  <div class="group-label">Progress</div>
+  <div class="hub-grid two">
+    <a class="hub-card" href="dash.html" style="border-top:3px solid var(--accent);">
+      <div class="icon">📈</div>
+      <div class="title">Progress Tracker</div>
+      <div class="desc">School Year 11 scheme of work to the May 2027 Core Paper 1 and Paper 3, with Core fit for each topic and links to the class feedback.</div>
     </a>
   </div>
 
-  <footer>Sunye &middot; new student &middot; Core-tier progress tracker not built yet</footer>
+  <footer>Sunye &middot; new student &middot; Core-tier tracker built from the school SOW; topic scores to follow</footer>
 
 </div>
 </body>

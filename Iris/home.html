@@ -42,6 +42,10 @@
   footer { margin-top: 46px; font-size: 12px; color: var(--muted); text-align: center; }
 
   @media (max-width: 720px) { .hub-grid { grid-template-columns: 1fr; } }
+  .hub-grid.two { grid-template-columns: repeat(2, 1fr); }
+  .group-label { font-size: 13px; font-weight: 700; color: #5c6b63; text-transform: uppercase; letter-spacing: 0.06em; margin: 30px 0 12px; }
+  .group-label.first { margin-top: 0; }
+  @media (max-width: 720px) { .hub-grid.two { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -55,21 +59,24 @@
     <div class="meta">Class schedule, session fees, and คณิตศาสตร์ ม.3 syllabus progress &mdash; all in one place.</div>
   </header>
 
-  <div class="hub-grid">
+  <div class="group-label first">Classes &amp; fees</div>
+  <div class="hub-grid two">
     <a class="hub-card c1" href="sched.html">
       <div class="hub-icon">&#128197;</div>
       <h2>View class schedule</h2>
       <p>Recurring weekly session times and how long the current pattern holds.</p>
       <div class="hub-goto">Open schedule &rarr;</div>
     </a>
-
     <a class="hub-card c2" href="fees.html">
       <div class="hub-icon">&#129534;</div>
       <h2>Monthly fees</h2>
       <p>Session log and running total by month, at ฿275/hour.</p>
       <div class="hub-goto">Open fees &rarr;</div>
     </a>
+  </div>
 
+  <div class="group-label">Progress</div>
+  <div class="hub-grid two">
     <a class="hub-card c3" href="dash.html">
       <div class="hub-icon">&#128208;</div>
       <h2>คณิตศาสตร์ ม.3 progress</h2>

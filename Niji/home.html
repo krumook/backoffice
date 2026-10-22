@@ -63,6 +63,10 @@
   @media (max-width: 720px) {
     .hub-grid { grid-template-columns: 1fr; }
   }
+  .hub-grid.two { grid-template-columns: repeat(2, 1fr); }
+  .group-label { font-size: 13px; font-weight: 700; color: #5c6b63; text-transform: uppercase; letter-spacing: 0.06em; margin: 30px 0 12px; }
+  .group-label.first { margin-top: 0; }
+  @media (max-width: 720px) { .hub-grid.two { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -76,21 +80,28 @@
     <div class="meta">Everything in one place &mdash; fees and class sessions. Taught by Kru Chertam.</div>
   </header>
 
-  <div class="hub-grid">
+  <div class="group-label first">Classes &amp; fees</div>
+  <div class="hub-grid two">
     <a class="hub-card fees" href="mo/index.html">
       <div class="hub-icon">🧾</div>
       <h2>This month's fee summary</h2>
       <p>Every session held this month with dates and fees, and the running total for collecting payment.</p>
       <div class="hub-goto">Open this month &rarr;</div>
     </a>
+  </div>
 
+  <div class="group-label">Class feedback</div>
+  <div class="hub-grid two">
     <a class="hub-card sessions" href="sessions.html">
       <div class="hub-icon">📝</div>
       <h2>Class feedback log</h2>
       <p>Feedback from Kru Chertam after each class. No topic tracker yet &mdash; too new a student.</p>
       <div class="hub-goto">Open session log &rarr;</div>
     </a>
+  </div>
 
+  <div class="group-label">Ledger</div>
+  <div class="hub-grid two">
     <a class="hub-card other" href="ledger/index.html">
       <div class="hub-icon">🤝</div>
       <h2>Kru Chertam ledger</h2>

@@ -54,6 +54,9 @@
   .hub-card p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
   .hub-goto { margin-top: auto; padding-top: 10px; font-size: 12.5px; font-weight: 600; color: var(--hub-color, var(--accent)); }
 
+  .hub-grid.two { grid-template-columns: repeat(2, 1fr); }
+  .group-label { font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 30px 0 12px; }
+  .group-label:first-of-type { margin-top: 0; }
   .hub-card.schedule { --hub-color: var(--tip); }
   .hub-card.fees { --hub-color: var(--amber); }
   .hub-card.progress { --hub-color: var(--grade-a); }
@@ -61,7 +64,7 @@
   footer { margin-top: 46px; font-size: 12px; color: var(--muted); text-align: center; }
 
   @media (max-width: 720px) {
-    .hub-grid { grid-template-columns: 1fr; }
+    .hub-grid, .hub-grid.two { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -73,24 +76,43 @@
   <header>
     <div class="eyebrow">Imboon &middot; Tutoring hub</div>
     <h1>What would you like to check?</h1>
-    <div class="meta">Everything in one place &mdash; schedule, fees, and 4MA1 progress.</div>
+    <div class="meta">Everything in one place &mdash; schedule, fees, Year 10 school maths, and 4MA1 progress.</div>
   </header>
 
-  <div class="hub-grid">
+  <div class="group-label">Classes &amp; fees</div>
+  <div class="hub-grid two">
     <a class="hub-card schedule" href="schedule.html">
       <div class="hub-icon">🗓️</div>
-      <h2>View class schedule</h2>
-      <p>The recurring weekly class times, and how long the current schedule runs before it changes.</p>
+      <h2>Class schedule</h2>
+      <p>The recurring weekly class time and the school topics planned for each term.</p>
       <div class="hub-goto">Open schedule &rarr;</div>
     </a>
-
     <a class="hub-card fees" href="mo/index.html">
       <div class="hub-icon">🧾</div>
-      <h2>This month's schedule conclusion</h2>
+      <h2>This month&rsquo;s schedule conclusion</h2>
       <p>Every session held this month with dates and fees, and the running total for collecting payment.</p>
       <div class="hub-goto">Open this month &rarr;</div>
     </a>
+  </div>
 
+  <div class="group-label">Year 10 school maths</div>
+  <div class="hub-grid two">
+    <a class="hub-card progress" href="y10.html" style="--hub-color: var(--accent);">
+      <div class="hub-icon">🏫</div>
+      <h2>Year 10 school topics</h2>
+      <p>All 18 units with learning objectives and DrFrost codes, and a status for each objective.</p>
+      <div class="hub-goto">Open Year 10 page &rarr;</div>
+    </a>
+    <a class="hub-card progress" href="y10-checks.html" style="--hub-color: var(--tip);">
+      <div class="hub-icon">✅</div>
+      <h2>End-of-class checks</h2>
+      <p>Key learning and check questions with answers for every subtopic in all 18 units.</p>
+      <div class="hub-goto">Open checks &rarr;</div>
+    </a>
+  </div>
+
+  <div class="group-label">IGCSE 4MA1</div>
+  <div class="hub-grid two">
     <a class="hub-card progress" href="dash.html">
       <div class="hub-icon">📐</div>
       <h2>4MA1 progress</h2>

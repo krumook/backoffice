@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mildy &mdash; Further Maths progress</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#1f2a24; --muted:#5c6b63; --line:#dfe6e1; --bg:#fbfaf7; --card:#fff; --accent:#0f6e56; --accent-light:#e1f5ee; --tip:#185fa5; --tip-light:#e6f1fb;
+    --all:#e3f1e6; --all-ink:#2f6b3a; --most:#fdf1d3; --most-ink:#8a6414; --some:#f8dcdc; --some-ink:#9a3b3b; --grey:#eef0ee; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:40px 24px 64px; background:var(--bg); color:var(--ink); font-family:'Space Grotesk',-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; line-height:1.5; }
+  .wrap { max-width:960px; margin:0 auto; }
+  .back-link { display:inline-block; font-size:13px; font-weight:600; color:var(--tip); text-decoration:none; background:var(--tip-light); padding:7px 14px; border-radius:20px; margin-bottom:18px; }
+  .back-link:hover { background:var(--tip); color:#fff; }
+  header { padding-bottom:18px; border-bottom:2px solid var(--ink); margin-bottom:22px; }
+  header h1 { margin:0 0 6px; font-size:24px; font-weight:700; }
+  header .meta { color:var(--muted); font-size:14px; }
+  .section-label { font-size:13px; font-weight:600; color:var(--muted); margin:26px 0 12px; text-transform:uppercase; letter-spacing:.04em; }
+  .overview { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+  .ov { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 14px 12px; text-decoration:none; color:inherit; border-top:4px solid var(--accent); }
+  .ov:hover { box-shadow:0 4px 16px rgba(31,42,36,.12); }
+  .ov .u { font-size:11.5px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:.04em; }
+  .ov .t { font-size:14.5px; font-weight:700; margin:2px 0 4px; line-height:1.3; }
+  .ov .l { font-size:12px; color:var(--muted); }
+  .note { background:var(--accent-light); border:1px solid var(--line); border-radius:10px; padding:14px 18px; font-size:13.5px; margin:18px 0; }
+  .note b { color:var(--ink); }
+  .legend { font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  .unit { background:var(--card); border:1px solid var(--line); border-radius:14px; margin-bottom:26px; overflow:hidden; }
+  .unit-head { padding:16px 22px; border-bottom:1px solid var(--line); background:var(--accent-light); display:flex; gap:12px; align-items:baseline; flex-wrap:wrap; }
+  .unit-head h2 { margin:0; font-size:19px; font-weight:700; }
+  .unit-head .pill { font-size:12px; font-weight:700; color:var(--accent); background:#fff; border:1px solid var(--line); padding:3px 10px; border-radius:14px; }
+  .unit-body { padding:6px 22px 18px; }
+  .kv { font-size:13px; color:var(--muted); margin:10px 0 0; }
+  .kv b { color:var(--ink); }
+  table { width:100%; border-collapse:collapse; margin-top:14px; font-size:13.5px; }
+  th { text-align:left; font-size:11.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); padding:6px 10px; border-bottom:1px solid var(--line); }
+  td { padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  td.lvl { width:70px; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.03em; border-radius:6px; text-align:center; }
+  .lv-all td.lvl { background:var(--all); color:var(--all-ink); }
+  .lv-most td.lvl { background:var(--most); color:var(--most-ink); }
+  .lv-some td.lvl { background:var(--some); color:var(--some-ink); }
+  td.code { width:210px; font-size:12px; color:var(--muted); }
+  td.tier { width:44px; text-align:center; font-weight:700; font-size:12px; color:var(--muted); }
+  td.st { width:120px; }
+  .status { display:inline-block; font-size:11.5px; font-weight:600; background:var(--grey); color:var(--muted); padding:3px 10px; border-radius:12px; white-space:nowrap; }
+  .cols { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:16px; }
+  .box { border:1px solid var(--line); border-radius:10px; padding:12px 16px; font-size:13px; }
+  .box h3 { margin:0 0 6px; font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .box ul { margin:0; padding-left:18px; } .box li { margin-bottom:3px; }
+  footer { margin-top:30px; font-size:12px; color:var(--muted); text-align:center; }
+  @media (max-width:780px){ .overview{grid-template-columns:1fr 1fr;} .cols{grid-template-columns:1fr;} td.code{width:auto;} }
+
+  td.n { width:44px; color:var(--muted); font-weight:700; font-size:12px; }
+  .brk { text-align:center; background:#f4f5f2; border:1px solid var(--line); border-radius:10px; padding:10px; font-size:13px; color:var(--muted); margin:0 0 26px; }
+  .test { text-align:center; background:var(--tip-light); border:1px solid var(--line); border-radius:10px; padding:10px; font-size:13.5px; color:var(--tip); font-weight:600; margin:-8px 0 26px; }
+  @media (max-width:760px){ .overview{grid-template-columns:repeat(2,1fr);} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="home.html">&larr; Back to home</a>
+  <a class="back-link" href="schedule.html" style="margin-left:8px;">&#128197; Class schedule</a>
+  <a class="back-link" href="tracker.html" style="margin-left:8px;">IGCSE 0580 tracker (finished)</a>
+  <header>
+    <h1>Mildy &mdash; Further Maths progress</h1>
+    <div class="meta">Harrow International School Bangkok &middot; AQA Level 2 Further Maths &middot; Oct 2026 &ndash; Mar 2027 &middot; 12 units &middot; 73 objectives</div>
+  </header>
+  <div class="overview"><a class="ov" href="#u1"><div class="u">Unit 1</div><div class="t">Surds</div><div class="l">21–30 Oct 2026 &middot; 7 objectives</div></a><a class="ov" href="#u2"><div class="u">Unit 2</div><div class="t">Differentiation</div><div class="l">3–14 Nov 2026 &middot; 8 objectives</div></a><a class="ov" href="#u3"><div class="u">Unit 3</div><div class="t">Sketching Cubics and Quadratics</div><div class="l">17–21 Nov 2026 &middot; 6 objectives</div></a><a class="ov" href="#u4"><div class="u">Unit 4</div><div class="t">Quadratic Inequalities</div><div class="l">1–5 Dec 2026 &middot; 5 objectives</div></a><a class="ov" href="#u5"><div class="u">Unit 5</div><div class="t">Simultaneous Equations in 3 Unknowns</div><div class="l">8–12 Dec 2026 &middot; 4 objectives</div></a><a class="ov" href="#u6"><div class="u">Unit 6</div><div class="t">Binomial Series</div><div class="l">5–16 Jan 2027 &middot; 6 objectives</div></a><a class="ov" href="#u7"><div class="u">Unit 7</div><div class="t">Product Rule for Counting</div><div class="l">19–23 Jan 2027 &middot; 6 objectives</div></a><a class="ov" href="#u8"><div class="u">Unit 8</div><div class="t">Sequences</div><div class="l">26–27 Jan 2027 &middot; 7 objectives</div></a><a class="ov" href="#u9"><div class="u">Unit 9</div><div class="t">Circle Geometry</div><div class="l">2–6 Feb 2027 &middot; 5 objectives</div></a><a class="ov" href="#u10"><div class="u">Unit 10</div><div class="t">Functions: Domain and Range / Exponential / Piecewise</div><div class="l">9–13 Feb 2027 &middot; 7 objectives</div></a><a class="ov" href="#u11"><div class="u">Unit 11</div><div class="t">Proof</div><div class="l">23 Feb–6 Mar 2027 &middot; 6 objectives</div></a><a class="ov" href="#u12"><div class="u">Unit 12</div><div class="t">Factor Theorem</div><div class="l">9–17 Mar 2027 &middot; 6 objectives</div></a></div>
+  <div class="note"><b>How to use this page.</b> The unit order and dates come from the school&rsquo;s AQA Further Maths schedule on her <a href="schedule.html" style="color:var(--tip);font-weight:600;">schedule page</a>. The &ldquo;I can&hellip;&rdquo; objectives are my outline of what each unit covers in the AQA specification, so please adjust them to match the school&rsquo;s own learning objectives if they differ. The Mildy column is empty for now: tell me how she is doing on an objective (secure, needs work, or not seen) and I&rsquo;ll fill it in.</div>
+  <section class="unit" id="u1">
+  <div class="unit-head"><h2>Unit 1 &middot; Surds</h2><span class="pill">21–30 Oct 2026</span></div>
+  <div class="unit-body"><table><thead><tr><th></th><th>I can&hellip;</th><th>Mildy</th></tr></thead><tbody><tr class="lv-all"><td class="n">1.1</td><td>I can simplify surds, e.g. √72 = 6√2</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">1.2</td><td>I can add and subtract surds after simplifying</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">1.3</td><td>I can multiply and divide surds</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">1.4</td><td>I can expand brackets containing surds, including (a + √b)²</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">1.5</td><td>I can rationalise a denominator with a single surd</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">1.6</td><td>I can rationalise a denominator with two terms (use the conjugate)</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">1.7</td><td>I can solve problems that need exact answers with surds (area, Pythagoras, equations)</td><td class="st"><span class="status">Not yet rated</span></td></tr></tbody></table></div>
+</section>
+<section class="unit" id="u2">
+  <div class="unit-head"><h2>Unit 2 &middot; Differentiation</h2><span class="pill">3–14 Nov 2026</span></div>
+  <div class="unit-body"><table><thead><tr><th></th><th>I can&hellip;</th><th>Mildy</th></tr></thead><tbody><tr class="lv-all"><td class="n">2.1</td><td>I can explain that dy/dx is the gradient of the curve at a point</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">2.2</td><td>I can differentiate xⁿ and polynomials, including negative and fractional powers</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">2.3</td><td>I can find the gradient of a curve at a given point</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">2.4</td><td>I can find the equation of a tangent at a point</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">2.5</td><td>I can find the equation of a normal at a point</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">2.6</td><td>I can find stationary points by solving dy/dx = 0</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">2.7</td><td>I can decide whether a stationary point is a maximum or minimum (second derivative or sign change)</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">2.8</td><td>I can solve simple optimisation problems</td><td class="st"><span class="status">Not yet rated</span></td></tr></tbody></table></div>
+</section>
+<section class="unit" id="u3">
+  <div class="unit-head"><h2>Unit 3 &middot; Sketching Cubics and Quadratics</h2><span class="pill">17–21 Nov 2026</span></div>
+  <div class="unit-body"><table><thead><tr><th></th><th>I can&hellip;</th><th>Mildy</th></tr></thead><tbody><tr class="lv-all"><td class="n">3.1</td><td>I can sketch a quadratic showing roots, y-intercept and turning point</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">3.2</td><td>I can use completing the square to find the turning point</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">3.3</td><td>I can sketch a cubic from its factorised form</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">3.4</td><td>I can sketch a cubic with a repeated root</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">3.5</td><td>I can read an equation from a sketch</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">3.6</td><td>I can use a sketch to solve equations and inequalities</td><td class="st"><span class="status">Not yet rated</span></td></tr></tbody></table></div>
+</section>
+<div class="brk">Practice exam week &middot; 24&ndash;28 Nov 2026 (no Further Maths assessment that week)</div>
+<section class="unit" id="u4">
+  <div class="unit-head"><h2>Unit 4 &middot; Quadratic Inequalities</h2><span class="pill">1–5 Dec 2026</span></div>
+  <div class="unit-body"><table><thead><tr><th></th><th>I can&hellip;</th><th>Mildy</th></tr></thead><tbody><tr class="lv-all"><td class="n">4.1</td><td>I can solve ax² + bx + c > 0 (or <, ≥, ≤) using a sketch</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">4.2</td><td>I can write solutions as inequalities and on a number line</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">4.3</td><td>I can solve inequalities that need rearranging first</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">4.4</td><td>I can combine a quadratic and a linear inequality</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">4.5</td><td>I can use quadratic inequalities in context (e.g. discriminant conditions)</td><td class="st"><span class="status">Not yet rated</span></td></tr></tbody></table></div>
+</section>
+<section class="unit" id="u5">
+  <div class="unit-head"><h2>Unit 5 &middot; Simultaneous Equations in 3 Unknowns</h2><span class="pill">8–12 Dec 2026</span></div>
+  <div class="unit-body"><table><thead><tr><th></th><th>I can&hellip;</th><th>Mildy</th></tr></thead><tbody><tr class="lv-all"><td class="n">5.1</td><td>I can eliminate one variable to make two equations in two unknowns</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">5.2</td><td>I can solve a system of three linear equations</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">5.3</td><td>I can check the solution in all three equations</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">5.4</td><td>I can set up and solve three-unknown equations from a worded problem</td><td class="st"><span class="status">Not yet rated</span></td></tr></tbody></table></div>
+</section>
+<div class="brk">Winter holiday &middot; 15 Dec 2026 &ndash; 2 Jan 2027</div>
+<section class="unit" id="u6">
+  <div class="unit-head"><h2>Unit 6 &middot; Binomial Series</h2><span class="pill">5–16 Jan 2027</span></div>
+  <div class="unit-body"><table><thead><tr><th></th><th>I can&hellip;</th><th>Mildy</th></tr></thead><tbody><tr class="lv-all"><td class="n">6.1</td><td>I can expand (a + b)ⁿ using Pascal’s triangle</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">6.2</td><td>I can use nCr and factorial notation</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">6.3</td><td>I can find a specific term in an expansion</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">6.4</td><td>I can find the coefficient of xᵏ</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">6.5</td><td>I can expand expressions with coefficients, e.g. (2 + 3x)⁵</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">6.6</td><td>I can use the first few terms of an expansion to approximate a value</td><td class="st"><span class="status">Not yet rated</span></td></tr></tbody></table></div>
+</section>
+<section class="unit" id="u7">
+  <div class="unit-head"><h2>Unit 7 &middot; Product Rule for Counting</h2><span class="pill">19–23 Jan 2027</span></div>
+  <div class="unit-body"><table><thead><tr><th></th><th>I can&hellip;</th><th>Mildy</th></tr></thead><tbody><tr class="lv-all"><td class="n">7.1</td><td>I can use the product rule to count outcomes</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">7.2</td><td>I can count arrangements using factorials</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">7.3</td><td>I can count arrangements when some items are identical</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">7.4</td><td>I can count with restrictions (e.g. must start with…)</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">7.5</td><td>I can use nPr and nCr where appropriate</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">7.6</td><td>I can link counting to probability</td><td class="st"><span class="status">Not yet rated</span></td></tr></tbody></table></div>
+</section>
+<section class="unit" id="u8">
+  <div class="unit-head"><h2>Unit 8 &middot; Sequences</h2><span class="pill">26–27 Jan 2027</span></div>
+  <div class="unit-body"><table><thead><tr><th></th><th>I can&hellip;</th><th>Mildy</th></tr></thead><tbody><tr class="lv-all"><td class="n">8.1</td><td>I can find the nth term of an arithmetic sequence</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">8.2</td><td>I can find the sum of an arithmetic series</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">8.3</td><td>I can find the nth term of a geometric sequence</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">8.4</td><td>I can find the sum of a geometric series</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">8.5</td><td>I can find the nth term of a quadratic sequence</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">8.6</td><td>I can use recurrence relations</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">8.7</td><td>I can use sigma notation</td><td class="st"><span class="status">Not yet rated</span></td></tr></tbody></table></div>
+</section>
+<div class="test">IA1 &middot; 28 Jan 2027 &middot; school-set internal test covering Surds to Sequences (not part of the official AQA grade)</div>
+<section class="unit" id="u9">
+  <div class="unit-head"><h2>Unit 9 &middot; Circle Geometry</h2><span class="pill">2–6 Feb 2027</span></div>
+  <div class="unit-body"><table><thead><tr><th></th><th>I can&hellip;</th><th>Mildy</th></tr></thead><tbody><tr class="lv-all"><td class="n">9.1</td><td>I can write the equation of a circle (x − a)² + (y − b)² = r²</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">9.2</td><td>I can find the centre and radius from an equation, including by completing the square</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">9.3</td><td>I can find the equation of a tangent to a circle at a point</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">9.4</td><td>I can find where a line meets a circle</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">9.5</td><td>I can use circle theorems in coordinate problems</td><td class="st"><span class="status">Not yet rated</span></td></tr></tbody></table></div>
+</section>
+<section class="unit" id="u10">
+  <div class="unit-head"><h2>Unit 10 &middot; Functions: Domain and Range / Exponential / Piecewise</h2><span class="pill">9–13 Feb 2027</span></div>
+  <div class="unit-body"><table><thead><tr><th></th><th>I can&hellip;</th><th>Mildy</th></tr></thead><tbody><tr class="lv-all"><td class="n">10.1</td><td>I can use function notation and evaluate f(x)</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">10.2</td><td>I can find composite functions fg(x)</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">10.3</td><td>I can find an inverse function f⁻¹(x)</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">10.4</td><td>I can state the domain and range of a function</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">10.5</td><td>I can sketch and use exponential functions y = aˣ</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">10.6</td><td>I can work with piecewise-defined functions</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">10.7</td><td>I can solve f(x) = g(x)</td><td class="st"><span class="status">Not yet rated</span></td></tr></tbody></table></div>
+</section>
+<div class="brk">Half term &middot; 16&ndash;20 Feb 2027</div>
+<section class="unit" id="u11">
+  <div class="unit-head"><h2>Unit 11 &middot; Proof</h2><span class="pill">23 Feb–6 Mar 2027</span></div>
+  <div class="unit-body"><table><thead><tr><th></th><th>I can&hellip;</th><th>Mildy</th></tr></thead><tbody><tr class="lv-all"><td class="n">11.1</td><td>I can prove algebraic statements (e.g. the sum of consecutive integers)</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">11.2</td><td>I can prove statements about odd, even and multiples</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">11.3</td><td>I can use proof by deduction with clear steps</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">11.4</td><td>I can disprove a statement with a counter-example</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">11.5</td><td>I can use correct notation (⇒, ⇔) and a conclusion</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">11.6</td><td>I can prove an identity by expanding or factorising</td><td class="st"><span class="status">Not yet rated</span></td></tr></tbody></table></div>
+</section>
+<section class="unit" id="u12">
+  <div class="unit-head"><h2>Unit 12 &middot; Factor Theorem</h2><span class="pill">9–17 Mar 2027</span></div>
+  <div class="unit-body"><table><thead><tr><th></th><th>I can&hellip;</th><th>Mildy</th></tr></thead><tbody><tr class="lv-all"><td class="n">12.1</td><td>I can use the factor theorem: f(a) = 0 means (x − a) is a factor</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">12.2</td><td>I can factorise a cubic fully</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">12.3</td><td>I can solve a cubic equation</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">12.4</td><td>I can use the remainder theorem</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">12.5</td><td>I can find unknown coefficients from given factors or remainders</td><td class="st"><span class="status">Not yet rated</span></td></tr><tr class="lv-all"><td class="n">12.6</td><td>I can sketch a cubic after factorising it</td><td class="st"><span class="status">Not yet rated</span></td></tr></tbody></table></div>
+</section>
+<div class="test">IA2 &middot; 18 Mar 2027 &middot; school-set internal test covering Circle Geometry to Factor Theorem (not part of the official AQA grade)&nbsp;&middot; Revision 19&ndash;27 Mar &middot; Spring holiday 6&ndash;17 Apr 2027</div>
+
+  <footer>Mildy &middot; Further Maths &middot; update as classes happen</footer>
+</div>
+</body>
+</html>

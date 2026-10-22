@@ -40,6 +40,10 @@
   .hub-card.progress { --hub-color: var(--grade-a); }
   footer { margin-top: 46px; font-size: 12px; color: var(--muted); text-align: center; }
   @media (max-width: 720px) { .hub-grid { grid-template-columns: 1fr; } }
+  .hub-grid.two { grid-template-columns: repeat(2, 1fr); }
+  .group-label { font-size: 13px; font-weight: 700; color: #5c6b63; text-transform: uppercase; letter-spacing: 0.06em; margin: 30px 0 12px; }
+  .group-label.first { margin-top: 0; }
+  @media (max-width: 720px) { .hub-grid.two { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -53,7 +57,8 @@
     <div class="meta">Everything in one place &mdash; schedule, fees, and Grade 6 / Year 7 maths progress.</div>
   </header>
 
-  <div class="hub-grid">
+  <div class="group-label first">Classes &amp; fees</div>
+  <div class="hub-grid two">
     <a class="hub-card schedule" href="sched.html">
       <div class="hub-icon">🗓️</div>
       <h2>View class schedule</h2>
@@ -66,6 +71,10 @@
       <p>Session log and running total by month.</p>
       <div class="hub-goto">Open fees &rarr;</div>
     </a>
+  </div>
+
+  <div class="group-label">Progress</div>
+  <div class="hub-grid two">
     <a class="hub-card progress" href="dash.html">
       <div class="hub-icon">📐</div>
       <h2>Maths progress</h2>
